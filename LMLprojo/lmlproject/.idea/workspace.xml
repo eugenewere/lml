@@ -1,7 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a5d33360-66f0-41af-a714-f80d1afb194d" name="Default Changelist" comment="" />
+    <list default="true" id="a5d33360-66f0-41af-a714-f80d1afb194d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/css/colors/green-style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/css/colors/orange.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/LML3filter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/LML4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/LML5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/LMl2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/banner-10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/banner-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/banner-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/banner-5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/banner-6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/blog/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/blog/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/blog/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/bn1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/bn2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/bn3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/can-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/can-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/can-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/can-4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/can-5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/can-5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/client-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/client-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/client-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/client-4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/client-5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/com-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/com-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/com-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/com-4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/com-5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/com-6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/com-7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/debit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/footer-logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/gallery1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/gallery2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/gallery3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/gb.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/geometric-bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/glyphicons-halflings.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/green-banner.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/gtrr.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/hero-banner.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/img-home-dark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/img-home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/logo-white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/microsoft-home-dark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/microsoft-home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/mothercare-home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/page-loader.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/paypal-home-dark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/paypal-home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/search.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/serv-home-dark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/serv-home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/simple-banner.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/step-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/step-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/step-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/wp-iphone.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/xerox-home-dark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/xerox-home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/yahoo-home-dark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/img/yahoo-home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/js/custom.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/js/jQuery.style.switcher.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/js/js.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/css/AjaxLoader.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/css/fonts/et-line.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/css/fonts/et-line.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/css/fonts/themify9f24.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/css/fonts/themify9f24.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/css/fonts/themify9f24.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/css/fonts/themify9f24.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/css/fonts/themifyd41d.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/css/plugins.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/css/src/datedropper.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/css/src/datedropper.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/css/src/datedropperd41d.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/js/bootsnav.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/js/datedropper.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/js/dropzone.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/js/gmap3.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/js/jquery.easy-autocomplete.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/js/loader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/js/owl.carousel.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/js/select2.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/js/slick.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/static/assets/plugins/js/viewportchecker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/Bachelorcourses" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/DiplomaCourses" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/accordion.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/advance-search-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/advance-search.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/blog-detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/blog.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/browse-company.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/browse-jobs-grid.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/browse-jobs.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/browse-resume.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/candidate-detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/candidate-profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/company-detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/contact.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/course_certificate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/create-company.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/create-job.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/create-resume.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/employer-profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/faq.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/freelancing.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/index-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/index-3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/index-4.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/index-5.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/job-apply-detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/job-detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/lost-password.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/manage-candidate.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/manage-company.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/manage-employee.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/manage-resume-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/manage-resume.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/new-job-detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/new-login-signup.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/payment-methode.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/popular-jobs.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/premium-candidate-detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/premium-candidate.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/pricing.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/search-job.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/search-new.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/signin-signup.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/signup.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/tab.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/top-candidate-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/top-candidate-detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/job-stock/top-candidate.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/normal/home/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/normal/layout/homelayout.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lmlapp/templates/normal/signup/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lmlapp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/lmlapp/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lmlapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/lmlapp/views.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,116 +199,41 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lmlproject/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="21" column="15" lean-forward="true" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
-              <folding>
-                <element signature="e#634#666#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/index_glitch.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="569">
-              <caret line="1275" column="34" selection-start-line="1275" selection-start-column="34" selection-end-line="1275" selection-end-column="34" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#7;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#7;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#7;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#7;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#4;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#7;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#5;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#7;n#body#0;n#html#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lmlappadmin/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-957">
-              <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
-              <folding>
-                <element signature="e#0#46#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/js/portfolio-filter.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-    </leaf>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>sites</find>
-      <find>glitch</find>
-      <find>color-opt</find>
-      <find>clients-testi</find>
-      <find>mfp-image</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>site</replace>
-    </replaceStrings>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
       <list>
-        <option value="$PROJECT_DIR$/lmlproject/urls.py" />
-        <option value="$PROJECT_DIR$/lmlappadmin/models.py" />
-        <option value="$PROJECT_DIR$/lmlappadmin/admin.py" />
+        <option value="Python Script" />
+        <option value="CSS File" />
+        <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="24" />
-    <option name="width" value="1382" />
-    <option name="height" value="752" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="lmlproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lmlproject" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lmlproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lmlproject" type="462c0819:PsiDirectoryNode" />
-              <item name="lmlappadmin" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
-  </component>
+  <component name="ProjectId" id="1S7I42zIvY2mcmd6MmdF7azhurI" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="sqlite" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lmlapp/static/assets/img" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\projects\LML\LMLprojo\lmlproject\lmlapp\static\assets\img" />
+      <recent name="C:\projects\LML\LMLprojo\lmlproject\lmlapp\template" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\projects\LML\LMLprojo\lmlproject\lmlapp\static" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -199,241 +282,28 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1570113448223</updated>
-      <workItem from="1570113449380" duration="9082000" />
+      <workItem from="1570113449380" duration="9224000" />
+      <workItem from="1570908014222" duration="13785000" />
+      <workItem from="1571090056048" duration="5947000" />
+      <workItem from="1571218406031" duration="17870000" />
+      <workItem from="1571247693840" duration="10520000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9082000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="24" width="1382" height="752" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.163142" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" weight="0.71794873" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Database Console" weight="0.32852563" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="SciView" />
-      <window_info anchor="right" id="Database" weight="0.19410875" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../../theelite/theeliteproject/theelite/theeliteproject/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-160">
-          <folding>
-            <element signature="e#639#671#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://6816ace1-aab2-484a-a7f0-8406364de03f/schema/main/table/lmlappadmin_customer">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="95ac5eaf-449d-44cc-b09a-9ccf052ae3d4">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://6816ace1-aab2-484a-a7f0-8406364de03f/schema/main/table/auth_user">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="95ac5eaf-449d-44cc-b09a-9ccf052ae3d4">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://6816ace1-aab2-484a-a7f0-8406364de03f/schema/main/table/lmlappadmin_contacts">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="95ac5eaf-449d-44cc-b09a-9ccf052ae3d4">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../theelite/theeliteproject/theelite/theeliteadmin/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="156" column="39" selection-start-line="154" selection-start-column="4" selection-end-line="156" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/6816ace1-aab2-484a-a7f0-8406364de03f/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lmlappadmin/migrations/0001_initial.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="22" column="52" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/django/contrib/admin/sites.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../theelite/theeliteproject/theelite/theeliteadmin/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2">
-          <caret line="6" column="34" lean-forward="true" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lmlappadmin/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lmlproject/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="21" column="15" lean-forward="true" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
-          <folding>
-            <element signature="e#634#666#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4391">
-          <caret line="728" column="15" lean-forward="true" selection-start-line="728" selection-start-column="15" selection-end-line="728" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/js/switcher.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="16" column="11" lean-forward="true" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/js/typed.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-157" />
-      </provider>
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/css/colors/default.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-621" />
-      </provider>
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/js/owl.init.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="4" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="17" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/images/portfolio/02.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/js/contact.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-333" />
-      </provider>
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/css/magnific-popup.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5421" />
-      </provider>
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/js/magnific.init.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="18" column="26" lean-forward="true" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/js/isotope.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/js/scrollspy.min.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/js/portfolio-filter.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/js/mgGlitch.min.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/js/glitch.init.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/aaaaaa/new templates/Programmer website/my website/shreethemes.in/cristino/layouts/index_glitch.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="1275" column="34" selection-start-line="1275" selection-start-column="34" selection-end-line="1275" selection-end-column="34" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#7;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#7;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#7;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#7;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#4;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#7;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#5;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#7;n#body#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lmlappadmin/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-957">
-          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#46#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
