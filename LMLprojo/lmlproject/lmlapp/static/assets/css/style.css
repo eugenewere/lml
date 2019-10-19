@@ -4137,7 +4137,7 @@ border-radius:4px;
 }
 
 .inputfile + label {
-    width: 120px;
+    width: 174px;
     font-size: 1.25rem;
     font-weight: 700;
     text-overflow: ellipsis;
@@ -4146,7 +4146,7 @@ border-radius:4px;
     display: inline-block;
     overflow: hidden;
     padding: 0.625rem 1.25rem;
-    height: 120px;
+    height: 168px;
     background: #3db810;
     border-radius: 50%;
 }
