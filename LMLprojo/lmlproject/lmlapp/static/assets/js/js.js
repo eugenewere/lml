@@ -186,7 +186,7 @@ function readURL(input) {
       outClass: 'fade-out-right',
       inDuration: 900,
       outDuration: 900,
-      linkElement: 'a:not([target="_blank"]):not([href^="#"]):not([class^="chosen-single"])',
+      linkElement: 'a:not([target="_blank"]):not([href^="#"]):not([class^="chosen-single"]):not([class^="not_a_link"])',
       loading: true,
       loadingParentElement: 'html',
       loadingClass: 'Loader',

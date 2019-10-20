@@ -26,8 +26,26 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="left-br">
-                            <a href="javascript:void(0)" data-toggle="modal" data-target="#signup" class="btn ">eugenewere</a>
+                        <li style="position: relative;" class="dropdown megamenu-fw left-br">
+                            <a  href="#" target="_blank" data-toggle="dropdown"  class="">eugenewere</a>
+                            <ul style="position: absolute;" class="dropdown-menu  col-md-2" role="menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-menu col-md-12">
+{#                                            <h6 class="title">Main Pages</h6>#}
+                                            <div class="content">
+                                                <ul class="menu-col" style="text-align: center;padding: 4px;">
+                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #8c6704;"><a href="{% url 'LML:employeeprofile' %}">Account</a></li>
+                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #8c6704;"><a href="{% url 'LML:employersprofile' %}"> Company Profile</a></li>
+                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #8c6704;"><a href="{% url 'LML:signin' %}">Sign In</a></li>
+                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #8c6704;"><a href="{% url 'LML:signup' %}">Sign Up</a></li>
+                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #8c6704;"><a href="index.html">Logout</a></li>
+                                                </ul>
+                                            </div>
+                                        </div><!-- end col-3 -->
+                                    </div><!-- end row -->
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
@@ -111,7 +129,7 @@
 							</li>
 {#                        <li><a href="blog.html">Blog</a></li>#}
                         <li><a href="{% url 'LML:signup' %}"><i class="fa fa-sm fa-pencil-alt" aria-hidden="true"></i>SignUp</a></li>
-{#                        <li><a href="pricing.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Pricing</a></li>#}
+                        <li><a href="{% url 'LML:signin' %}"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a></li>
                     </ul>
                 </div>
             </div>

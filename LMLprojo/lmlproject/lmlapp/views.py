@@ -9,5 +9,29 @@ def home(request):
 
 
 def signup(request):
+    context = {
+        'title': 'Create an account',
+    }
+    return render(request, 'normal/signup/signup.html',context)
 
-    return render(request, 'normal/signup/signup.html')
+
+def signin(request):
+    return render(request, 'normal/login/login.html')
+
+
+def employersprofile(request):
+    context = {
+        'title': 'Company profile',
+    }
+    return render(request, 'normal/account/employer-profile.html',context)
+
+
+def employeeprofile(request):
+    context = {
+        'title': 'Your Profile',
+    }
+    return render(request, 'normal/account/candidate-profile.html', context)
+
+
+def employeedetails(request):
+    return render(request, 'normal/account/candidate-detail.html')

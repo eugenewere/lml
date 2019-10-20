@@ -3170,8 +3170,9 @@ transform: translateY(-50px);
 }
 
 .detail-pic img {
-width: 120px;
-height:120px;
+
+    width: 168px;
+    height: 168px;
 margin:auto;
 border-radius:50%;
 }
@@ -5150,6 +5151,7 @@ body.simple-bg-screen:before {
     position: absolute;
     background: #ffffff;
     height: 100%;
+
     opacity: 0.8;
 }
 .login-screen, .signup-screen, .lost-ps-screen {
