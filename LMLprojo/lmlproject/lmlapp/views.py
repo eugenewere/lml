@@ -35,3 +35,7 @@ def employeeprofile(request):
 
 def employeedetails(request):
     return render(request, 'normal/account/candidate-detail.html')
+
+
+def companysignup(request):
+    return render(request, 'normal/signup/create-company.html')

@@ -358,4 +358,22 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu{
 }
 
 
+.navbar-login
+{
+    width: 100%;
+    padding: 10px;
+    padding-bottom: 0;
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.icon-size
+{
+    font-size: 87px;
+}
 

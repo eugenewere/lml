@@ -132,15 +132,15 @@ All custom js files contents are below
 		});
 		
 		$('.slideshow-container').slick({
-        slidesToShow: 1,
-        autoplay: true,
-        autoplaySpeed:2000,
-        arrows: false,
-        fade: true,
-        cssEase: 'ease-in',
-        infinite: true,
-        speed:2000
-    });
+			slidesToShow: 1,
+			autoplay: true,
+			autoplaySpeed:2000,
+			arrows: false,
+			fade: true,
+			cssEase: 'ease-in',
+			infinite: true,
+			speed:2000
+		});
 	
 	
 	// --------- Job List --------

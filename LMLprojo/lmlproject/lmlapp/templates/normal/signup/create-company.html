@@ -1,0 +1,276 @@
+{% extends 'normal/layout/homelayout.html' %}
+{% load static %}
+{% block links %}
+{% endblock links %}
+{% block content %}
+           <!-- Header Title Start -->
+			<section class="inner-header-title blank">
+				<div class="container">
+					<h1>Create a Company</h1>
+				</div>
+            <p>Create an account as a Personnel<a href="{% url 'LML:signup' %}"> Here </a></p>
+			</section>
+			<div class="clearfix"></div>
+			<!-- Header Title End -->
+
+			<!-- General Detail Start -->
+			<div class="detail-desc section">
+				<div class="container">
+					<div class="ur-detail-wrap create-kit padd-bot-0">
+
+						<div class="row">
+							<div class="detail-pic js">
+								<div class="box companybox">
+									<input required style="position: relative;" onchange="readURL(this)" type="file" name="upload-pic" id="upload-pic" class="inputfile" />
+                                    <label  for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:15px; color: white; text-align: center;">Upload Your Logo</span></label>
+                                    <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% static 'assets/img/client-1.jpg' %}" alt="">
+								</div>
+                                <div id="disclaimer" class="disclaimer disclaimer-animated ">
+                                    Upload Your Logo
+                                </div>
+							</div>
+						</div>
+
+						<div class="row bottom-mrg">
+							<form class="add-feild">
+
+								<div class="col-md-6 col-sm-6">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Company Name">
+									</div>
+								</div>
+
+								<div class="col-md-6 col-sm-6">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Company Motto">
+									</div>
+								</div>
+
+								<div class="col-md-6 col-sm-6">
+									<div class="input-group">
+										<select class="form-control input-lg">
+											<option selected disabled>Company Categories</option>
+											<option>Software</option>
+											<option>Hardware</option>
+											<option>Machanical</option>
+											<option>HR/Manager</option>
+										</select>
+									</div>
+								</div>
+                                <div class="col-md-6 col-sm-6">
+									<div class="input-group">
+										<select class="form-control input-lg">
+											<option selected disabled>Type of Business Entity</option>
+											<option>Limited Liability Company</option>
+											<option>Partnership</option>
+											<option>Corporation</option>
+											<option>Proprietorship</option>
+											<option>Trust</option>
+											<option>other</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-md-6 col-sm-6">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Company CEO Name">
+									</div>
+								</div>
+                                <div class="col-md-6 col-sm-6">
+									<div class="input-group">
+                                       <input style="margin-bottom:0" data-dd-theme="vanilla" placeholder="Company Start Date" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
+									</div>
+								</div>
+								<div class="col-md-12 col-sm-12">
+									<textarea class="form-control" placeholder="Company Description"></textarea>
+								</div>
+							</form>
+						</div>
+
+						<div class="row no-padd">
+							<div class="detail pannel-footer">
+								<div class="col-md-12 col-sm-12">
+									<div class="detail-pannel-footer-btn pull-right">
+										<a href="#" class="footer-btn choose-cover">Choose Cover Image</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- General Detail End -->
+
+			<!-- Basic Full Detail Form Start -->
+			<section class="full-detail">
+				<div class="container">
+					<div class="row bottom-mrg extra-mrg">
+							<h2 class="detail-title">Company Information</h2>
+
+							<div class="col-md-6 col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-flag"></i></span>
+									<input type="text" class="form-control" placeholder="Company Name">
+								</div>
+							</div>
+
+							<div class="col-md-6 col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-pencil-alt"></i></span>
+									<input type="text" class="form-control" placeholder="Company Tagline">
+								</div>
+							</div>
+
+							<div class="col-md-6 col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+									<input type="text" class="form-control" placeholder="Company Email">
+								</div>
+							</div>
+
+{#							<div class="col-md-6 col-sm-6">#}
+{#								<div class="input-group">#}
+{#									<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>#}
+{#									<input type="text" class="form-control" placeholder="Local E.g. It Park New">#}
+{#								</div>#}
+{#							</div>#}
+
+							<div class="col-md-6 col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-globe"></i></span>
+									<input type="text" class="form-control" placeholder="Website">
+								</div>
+							</div>
+
+                            <div class="col-md-6 col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-file-code-o"></i></span>
+									<input type="text" class="form-control" placeholder="KRA Number">
+								</div>
+							</div>
+
+                            <div class="col-md-6 col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-building"></i></span>
+									<input type="text" class="form-control" placeholder="Business Number">
+								</div>
+							</div>
+
+                            <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
+                                    <div class="input-group" style="margin-bottom: 0;" >
+                                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                        <select class="form-control input-lg">
+                                            <option selected>County</option>
+                                            <option value="Nairobi">NAirobi</option>
+                                            <option value="Nairobi">NAirobi</option>
+                                            <option value="Nairobi">NAirobi</option>
+                                            <option>NAirobi</option>
+                                            <option>NAirobi</option>
+                                            <option>NAirobi</option>
+                                            <option>NAirobi</option>
+                                            <option>NAirobi</option>
+                                            <option>NAirobi</option>
+                                        </select>
+                                    </div>
+                                    <small id="lastname" class="form-text text-muted" style="margin-bottom: 8px;">
+                                     eg: Nairobi, Kisumu.
+                                    </small>
+                                </div>
+                            <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
+                                <div class="input-group" style="margin-bottom: 0;">
+                                    <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>
+                                    <select class="form-control input-lg">
+                                        <option selected>Region</option>
+                                        <option>Langata</option>
+                                        <option>Langata</option>
+                                        <option>Langata</option>
+                                        <option>Langata</option>
+                                        <option>Langata</option>
+                                        <option>Langata</option>
+                                    </select>
+                                </div>
+                                <small id="lastname" class="form-text text-muted" >
+                                  eg Langata.
+                                </small>
+                            </div>
+                            <div class="col-md-12 col-sm-12 " style="margin-bottom: 8px;">
+                                    <div class="input-group" style="margin-bottom: 0;">
+                                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                        <input id="landmark" type="text" class="form-control" placeholder="Landmark" >
+                                    </div>
+                                    <small id="phonnumber" class="form-text text-muted">
+                                       eg Nearest road/School/Market/.
+                                    </small>
+                                </div>
+                            </div>
+
+					<div class="row bottom-mrg extra-mrg">
+							<h2 class="detail-title">Social Profile</h2>
+
+							<div class="col-md-6 col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fab fa-facebook-f"></i></span>
+									<input type="text" class="form-control" placeholder="Facebook Link">
+								</div>
+							</div>
+
+							<div class="col-md-6 col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fab fa-google-plus"></i></span>
+									<input type="text" class="form-control" placeholder="Google+ Link">
+								</div>
+							</div>
+
+							<div class="col-md-6 col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fab fa-twitter"></i></span>
+									<input type="text" class="form-control" placeholder="Twitter Link">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fab fa-instagram"></i></span>
+									<input type="text" class="form-control" placeholder="Instagram Link">
+								</div>
+							</div>
+
+							<div class="col-md-6 col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fab fa-linkedin"></i></span>
+									<input type="text" class="form-control" placeholder="Linkedin Link">
+								</div>
+							</div>
+
+					</div>
+
+					<div class="row bottom-mrg extra-mrg">
+							<h2 class="detail-title">A Brief Detail</h2>
+							<div class="col-md-12 col-sm-12">
+								<textarea name="aboutcompany" class="form-control textarea" placeholder="About Company"></textarea>
+							</div>
+                            <div class="row bottom-mrg extra-mrg">
+                             <div class="col-md-12 col-sm-12 mrg-top-25">
+                                 <div class="custom-control custom-radio custom-control-inline" style="margin-right: 20px;">
+                                     <label  class="custom-control-label" for="customRadio"></label>
+                                     <span>
+                                         <input onchange="openSubmit();" type="checkbox" class="custom-control-input customRadio" id="termschecks" name="example" value="">
+                                         Agree to terms and conditions <a href="#">Terms</a>
+                                     </span>
+                                </div>
+                            </div>
+                        </div>
+							<div class="col-md-12 col-sm-12">
+								<button style="visibility: hidden;" id="submitbutton" type="submit" class="btn btn-success btn-primary small-btn">Submit your company</button>
+							</div>
+					</div>
+				</div>
+			</section>
+			<!-- Basic Full Detail Form End -->
+{% endblock content %}
+{% block script %}
+    <script>
+         $('#dob').dateDropper();
+         CKEDITOR.replace( 'aboutcompany' );
+    </script>
+{% endblock script %}

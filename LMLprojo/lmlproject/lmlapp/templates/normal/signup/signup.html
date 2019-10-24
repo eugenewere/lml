@@ -7,185 +7,190 @@
             <!-- Header Title Start -->
 			<section class="inner-header-title blank">
 				<div class="container">
-					<h1>Create Account</h1>
-                    <p class="text-lowercase">Kindly ensure you fill all the inputs</p>
+					<h1>Create Account As Personnel</h1>
+{#                    <p class="text-lowercase">Kindly ensure you fill all the inputs</p>#}
+                     <p>Create an account as a Company<a href="{% url 'LML:companysignup' %}"> Here </a></p>
 				</div>
 			</section>
 			<div class="clearfix"></div>
 			<!-- Header Title End -->
             <form action="" method="POST">
-			<!-- General Detail Start -->
-			<div class="section detail-desc">
-				<div class="container">
-					<div class="ur-detail-wrap create-kit padd-bot-0">
+                <!-- General Detail Start -->
+                <div class="section detail-desc">
+                    <div class="container">
+                        <div class="ur-detail-wrap create-kit padd-bot-0">
 
-						<div class="row">
-							<div class="detail-pic js">
-								<div class="box">
-									<input required style="position: relative;" onchange="readURL(this)" type="file" name="upload-pic" id="upload-pic" class="inputfile" />
-									<label  for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:11px; color: white; text-align: center;">Upload Your Picture</span></label>
-                                    <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% static 'assets/img/client-1.jpg' %}" alt="">
-								</div>
-							</div>
-						</div>
-
-						<div class="row bottom-mrg">
-							<div class="add-feild">
-								<div class="col-md-6 col-sm-6">
-									<div class="input-group " style="margin-bottom: 8px">
-                                        <label for="firstname"></label>
-										<input id="firstname" type="text" class="form-control" placeholder="First Name" style="margin-bottom:0;">
-                                         <small id="passwordHelpBlock" class="form-text text-muted">
-                                          First name as it appears in id.
-                                         </small>
-									</div>
-								</div>
-                                <div class="col-md-6 col-sm-6">
-									<div class="input-group" style="margin-bottom: 8px">
-                                        <label for="lastname"></label>
-										<input id="lastname" type="text" class="form-control" placeholder="Last Name" style="margin-bottom:0;">
-                                         <small id="lastname" class="form-text text-muted">
-                                          Last name as it appears in id.
-                                         </small>
-									</div>
-								</div>
-                                <div class="col-md-6 col-sm-6">
-									<div class="input-group" style="margin-bottom: 8px">
-										<select id="gender" class="form-control input-lg" style="margin-bottom:0">
-											<option selected>Gender</option>
-											<option value="Male">Male</option>
-											<option value="Female">Female</option>
-{#											<option>Machanical</option>#}
-{#											<option>HR/Manager</option>#}
-										</select>
-                                         <small id="gender" class="form-text text-muted">
-                                          Gender.
-                                         </small>
-									</div>
-								</div>
-								<div class="col-md-6 col-sm-6">
-									<div class="input-group" style="margin-bottom: 8px">
-                                        <label for="email"></label>
-										<input id="email" type="email" class="form-control" placeholder="Your Email" style="margin-bottom:0">
-                                        <small id="email" class="form-text text-muted">
-                                           johndoe@example.com .
-                                        </small>
-									</div>
-								</div>
-                                <div class="col-md-6 col-sm-6">
-									<div class="input-group" style="margin-bottom: 8px">
-                                        <label for="usename"></label>
-										<input id="usename" type="text" class="form-control" placeholder="Your Username" style="margin-bottom:0">
-                                         <small id="usename" class="form-text text-muted">
-                                           Username.
-                                        </small>
-									</div>
-								</div>
-                                <div class="col-md-6 col-sm-6">
-									<div class="input-group" style="margin-bottom: 8px">
-                                        <label for="phonnumber"></label>
-										<input id="phonnumber" type="tel" class="form-control" placeholder="Phone Number" style="margin-bottom:0">
-                                         <small id="phonnumber" class="form-text text-muted">
-                                           07xxxxxxxxx.
-                                        </small>
-									</div>
-								</div>
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="input-group" style="margin-bottom: 8px">
-{#                                        <span class="input-group-addon"><i class="fa fa-birthday-cake"></i> Date Of Birth</span>#}
-                                        <input style="margin-bottom:0" data-dd-theme="vanilla" placeholder="Date Of birth" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
-                                        <small id="dob" class="form-text text-muted">
-                                           Date.
-                                        </small>
+                            <div class="row">
+{#                                <p>Create an account as a Company<a href="#"> Here </a></p>#}
+                                <div class="detail-pic js">
+                                    <div class="box companybox">
+                                        <input required style="position: relative;" onchange="readURL(this)" type="file" name="upload-pic" id="upload-pic" class="inputfile" />
+                                        <label  for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:11px; color: white; text-align: center;">Upload Your Picture</span></label>
+                                        <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% static 'assets/img/client-1.jpg' %}" alt="">
+                                    </div>
+                                    <div id="disclaimer" class="disclaimer disclaimer-animated ">
+                                        Upload Profile Pic
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-6">
-									<div class="input-group" style="margin-bottom: 8px">
-										<select id="marital" class="form-control input-lg" style="margin-bottom: 0">
-											<option selected>Marital status</option>
-											<option value="Single">Single</option>
-											<option value="Married">Married</option>
-											<option value="Devorced">Devorced </option>
-{#											<option>Machanical</option>#}
-{#											<option>HR/Manager</option>#}
-										</select>
-                                        <small id="marital" class="form-text text-muted">
-                                           Marital status.
-                                        </small>
-									</div>
-								</div>
-                                <div class="col-md-12 col-sm-12" style="margin-top: 20px;" >
-                                    <h4 class="text-muted">Do you have any disablity</h4>
-                                    <div style="display: flex;">
-                                        <div class="custom-control custom-radio custom-control-inline" style="margin-right: 20px;">
-                                            <input onclick="openDisability()" type="radio" class="custom-control-input" id="customRadio" name="example" value="Yes">
-                                            <label  class="custom-control-label" for="customRadio">Yes</label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input onclick="closeDisability()" type="radio" class="custom-control-input" id="no customRadio2" name="example" value="No">
-                                            <label  class="custom-control-label" for="customRadio2">No</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 col-sm-12" style="padding: 0;">
-                                        <textarea style="display:none;" id="disability" class="form-control" placeholder="What type of disability"></textarea>
-                                    </div>
-                                </div>
-							</div>
-						</div>
-
-						<div class="row no-padd">
-							<div class="detail pannel-footer">
-								<div class="col-md-12 col-sm-12">
-									<div class="detail-pannel-footer-btn pull-right">
-{#										<a href="#" class="footer-btn choose-cover">Choose Cover Image</a>#}
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-			<!-- General Detail End -->
-
-			<!-- full detail SetionStart-->
-			<section class="full-detail">
-				<div class="container">
-					<div class="row bottom-mrg extra-mrg">
-                        <h2 class="detail-title">Location Information</h2>
-                        <div class="row col-sm-12 col-md-12">
-                            <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
-                                <div class="input-group" style="margin-bottom: 0;">
-                                    <span class="input-group-addon"><i class="fa fa-globe"></i></span>
-                                    <input disabled type="text" class="form-control" value="Kenya" >
-                                </div>
-                                <small id="lastname" class="form-text text-muted" style="margin-bottom: 8px;">
-                                  Kenya.
-                                </small>
                             </div>
 
-                            <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
-                                <div class="input-group" style="margin-bottom: 0;" >
-                                    <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                    <select class="form-control input-lg">
-                                        <option selected>County</option>
-                                        <option value="Nairobi">NAirobi</option>
-                                        <option value="Nairobi">NAirobi</option>
-                                        <option value="Nairobi">NAirobi</option>
-                                        <option>NAirobi</option>
-                                        <option>NAirobi</option>
-                                        <option>NAirobi</option>
-                                        <option>NAirobi</option>
-                                        <option>NAirobi</option>
-                                        <option>NAirobi</option>
-                                    </select>
+                            <div class="row bottom-mrg">
+                                <div class="add-feild">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="input-group " style="margin-bottom: 8px">
+                                            <label for="firstname"></label>
+                                            <input id="firstname" type="text" class="form-control" placeholder="First Name" style="margin-bottom:0;">
+                                             <small id="passwordHelpBlock" class="form-text text-muted">
+                                              First name as it appears in id.
+                                             </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="input-group" style="margin-bottom: 8px">
+                                            <label for="lastname"></label>
+                                            <input id="lastname" type="text" class="form-control" placeholder="Last Name" style="margin-bottom:0;">
+                                             <small id="lastname" class="form-text text-muted">
+                                              Last name as it appears in id.
+                                             </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="input-group" style="margin-bottom: 8px">
+                                            <select id="gender" class="form-control input-lg" style="margin-bottom:0">
+                                                <option selected>Gender</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+    {#											<option>Machanical</option>#}
+    {#											<option>HR/Manager</option>#}
+                                            </select>
+                                             <small id="gender" class="form-text text-muted">
+                                              Gender.
+                                             </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="input-group" style="margin-bottom: 8px">
+                                            <label for="email"></label>
+                                            <input id="email" type="email" class="form-control" placeholder="Your Email" style="margin-bottom:0">
+                                            <small id="email" class="form-text text-muted">
+                                               johndoe@example.com .
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="input-group" style="margin-bottom: 8px">
+                                            <label for="usename"></label>
+                                            <input id="usename" type="text" class="form-control" placeholder="Your Username" style="margin-bottom:0">
+                                             <small id="usename" class="form-text text-muted">
+                                               Username.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="input-group" style="margin-bottom: 8px">
+                                            <label for="phonnumber"></label>
+                                            <input id="phonnumber" type="tel" class="form-control" placeholder="Phone Number" style="margin-bottom:0">
+                                             <small id="phonnumber" class="form-text text-muted">
+                                               07xxxxxxxxx.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="input-group" style="margin-bottom: 8px">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i> Date Of Birth</span>
+                                            <input style="margin-bottom:0" data-dd-theme="vanilla" placeholder="Date Of birth" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
+                                            <small id="dob" class="form-text text-muted">
+                                               Date.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="input-group" style="margin-bottom: 8px">
+                                            <select id="marital" class="form-control input-lg" style="margin-bottom: 0">
+                                                <option selected>Marital status</option>
+                                                <option value="Single">Single</option>
+                                                <option value="Married">Married</option>
+                                                <option value="Devorced">Devorced </option>
+    {#											<option>Machanical</option>#}
+    {#											<option>HR/Manager</option>#}
+                                            </select>
+                                            <small id="marital" class="form-text text-muted">
+                                               Marital status.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12" style="margin-top: 20px;" >
+                                        <h4 class="text-muted">Do you have any disablity</h4>
+                                        <div style="display: flex;">
+                                            <div class="custom-control custom-radio custom-control-inline" style="margin-right: 20px;">
+                                                <input onclick="openDisability()" type="radio" class="custom-control-input" id="customRadio" name="example" value="Yes">
+                                                <label  class="custom-control-label" for="customRadio">Yes</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input onclick="closeDisability()" type="radio" class="custom-control-input" id="no customRadio2" name="example" value="No">
+                                                <label  class="custom-control-label" for="customRadio2">No</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12" style="padding: 0;">
+                                            <textarea style="display:none;" id="disability" class="form-control" placeholder="What type of disability"></textarea>
+                                        </div>
+                                    </div>
                                 </div>
-                                <small id="lastname" class="form-text text-muted" style="margin-bottom: 8px;">
-                                 eg: Nairobi, Kisumu.
-                                </small>
                             </div>
+
+                            <div class="row no-padd">
+                                <div class="detail pannel-footer">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="detail-pannel-footer-btn pull-right">
+    {#										<a href="#" class="footer-btn choose-cover">Choose Cover Image</a>#}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="row col-sm-12 col-md-12">
+                    </div>
+                </div>
+                <!-- General Detail End -->
+
+                <!-- full detail SetionStart-->
+                <section class="full-detail">
+                    <div class="container">
+                        <div class="row bottom-mrg extra-mrg">
+                            <h2 class="detail-title">Location Information</h2>
+                            <div class="row col-sm-12 col-md-12">
+                                <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
+                                    <div class="input-group" style="margin-bottom: 0;">
+                                        <span class="input-group-addon"><i class="fa fa-globe"></i></span>
+                                        <input disabled type="text" class="form-control" value="Kenya" >
+                                    </div>
+                                    <small id="lastname" class="form-text text-muted" style="margin-bottom: 8px;">
+                                      Kenya.
+                                    </small>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
+                                    <div class="input-group" style="margin-bottom: 0;" >
+                                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                        <select class="form-control input-lg">
+                                            <option selected>County</option>
+                                            <option value="Nairobi">NAirobi</option>
+                                            <option value="Nairobi">NAirobi</option>
+                                            <option value="Nairobi">NAirobi</option>
+                                            <option>NAirobi</option>
+                                            <option>NAirobi</option>
+                                            <option>NAirobi</option>
+                                            <option>NAirobi</option>
+                                            <option>NAirobi</option>
+                                            <option>NAirobi</option>
+                                        </select>
+                                    </div>
+                                    <small id="lastname" class="form-text text-muted" style="margin-bottom: 8px;">
+                                     eg: Nairobi, Kisumu.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="row col-sm-12 col-md-12">
                                 <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
                                     <div class="input-group" style="margin-bottom: 0;">
                                         <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>
@@ -214,284 +219,303 @@
                                     </small>
                                 </div>
                             </div>
-					</div>
-					<div class="row bottom-mrg extra-mrg">
-                        <h2 class="detail-title">Add Education</h2>
-                        <div class="extra-field-box">
-								<div class="multi-box">
-									<div class="dublicat-box">
-
-{#                                        university ,course,regno#}
-                                        <div class="col-md-12 col-sm-12">
-                                             <h4 style="margin: 20px 0;" class="text-muted">Choose your qualification</h4>
-                                              <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                                                <select onchange="showItems(this);" id="" class="uniselect form-control input-lg">
-                                                    <option selected>Qualifications</option>
-                                                    <option value="Phd">Phd</option>
-                                                    <option value="Masters">Masters</option>
-                                                    <option value="Masters">Bachelor</option>
-                                                    <option value="Diploma">Diploma</option>
-                                                    <option value="Certificate">Certificate</option>
-                                                </select>
-                                              </div>
-                                        </div>
-                                        <div  class="col-md-12 col-sm-12 row">
-                                            <div style="display: none; margin-bottom: 20px;" id="" class="uni col-md-12 col-sm-12">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                                                    <select class="form-control input-lg">
-                                                        <option selected>University</option>
-                                                        <option>Nairobi</option>
-                                                        <option>Etc</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div style="display: none; margin-bottom: 20px;" id=""  class="phd col-md-12 col-sm-12">
-                                                <div class="input-group col-md-4 col-sm-12">
-                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select class="form-control input-lg">
-                                                        <option>Qualification, e.g. Phd in Arts</option>
-                                                        <option>Phd in Arts</option>
-                                                        <option>Phd in Arts</option>
-                                                        <option>Phd in Arts</option>
-                                                        <option>Phd in Arts</option>
-                                                        <option>Phd in Arts</option>
-                                                        <option>Phd in Arts</option>
-                                                        <option>Etc</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div style="display: none; margin-bottom: 20px;" id="" class="masters col-md-12 col-sm-12">
-                                                <div class="input-group col-md-4 col-sm-12">
-                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select class="form-control input-lg">
-                                                        <option>Qualification, e.g. Masters in Arts</option>
-                                                        <option>Masters Of Arts</option>
-                                                        <option>Masters Of Arts</option>
-                                                        <option>Masters Of Arts</option>
-                                                        <option>Masters Of Arts</option>
-                                                        <option>Masters Of Arts</option>
-                                                        <option>Masters Of Arts</option>
-                                                        <option>Etc</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div style="display: none; margin-bottom: 20px;" id="" class="bachelor col-md-12 col-sm-12">
-                                                <div class="input-group col-md-4 col-sm-12">
-                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select class="form-control input-lg">
-                                                        <option>Qualification, e.g. Bachelor in Arts</option>
-                                                        <option>Bachelor Of Arts</option>
-                                                        <option>Bachelor Of Arts</option>
-                                                        <option>Bachelor Of Arts</option>
-                                                        <option>Bachelor Of Arts</option>
-                                                        <option>Bachelor Of Arts</option>
-                                                        <option>Bachelor Of Arts</option>
-                                                        <option>Etc</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div style="display: none; margin-bottom: 20px;" id="" class="diploma col-md-12 col-sm-12">
-                                                <div class="input-group col-md-4 col-sm-12">
-                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select class="form-control input-lg">
-                                                        <option>Qualification, e.g. Diploma in Arts</option>
-                                                        <option>Diploma Of Arts</option>
-                                                        <option>Diploma Of Arts</option>
-                                                        <option>Diploma Of Arts</option>
-                                                        <option>Diploma Of Arts</option>
-                                                        <option>Diploma Of Arts</option>
-                                                        <option>Diploma Of Arts</option>
-                                                        <option>Diploma Of Arts</option>
-                                                        <option>Etc</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div style="display: none; margin-bottom: 20px;" id="" class="certificate col-md-12 col-sm-12">
-                                                <div class="input-group col-md-4 col-sm-12">
-                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select class="form-control input-lg">
-                                                        <option>Qualification, e.g. Certificate in Arts</option>
-                                                        <option>Certificate Of Arts</option>
-                                                        <option>Certificate Of Arts</option>
-                                                        <option>Certificate Of Arts</option>
-                                                        <option>Certificate Of Arts</option>
-                                                        <option>Certificate Of Arts</option>
-                                                        <option>Certificate Of Arts</option>
-                                                        <option>Certificate Of Arts</option>
-                                                        <option>Etc</option>
-                                                    </select>
-                                                </div>
-                                            Bachelor</div>
-                                            <div style="display: none; margin-bottom: 20px;" id="" class="graduation col-md-12 col-sm-12">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">Year of graduation</span>
-                                                    <input type="text" id="edu-start" data-dd-theme="vanilla" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" class="form-control" readonly="">
-                                                </div>
-                                            </div>
-
-									</div>
-                                        <button type="button" class="btn remove-field">Remove</button>
-								</div>
-
-							</div>
-                            <button type="button" class="add-field">Add field</button>
-					</div>
-                    <div class="row bottom-mrg extra-mrg">
-                        <h2 class="detail-title">Brief description about yourself</h2>
-                        <div class="col-md-12 col-sm-12">
-                            <textarea class="form-control textarea" maxlength="2000" rows="30" placeholder="About Yourself"></textarea>
                         </div>
-					</div>
-
-					<div class="row bottom-mrg extra-mrg">
-                        <h2 class="detail-title">Add Experience</h2>
-                        <div class="extra-field-box">
-                            <div class="multi-box">
-                                <div class="dublicat-box">
-                                    <div class="col-md-12 col-sm-12">
-                                        <label>Have you ever been employed</label>
-                                        <div style="display: flex;">
-                                            <div class="custom-control custom-radio custom-control-inline" style="margin-right: 20px;">
-                                                <input onclick="showEmployment()" type="radio" class="custom-control-input" id="customRadioz" name="example" value="customEx">
-                                                <label class="custom-control-label" for="customRadioz">Yes</label>
+                        <div class="row bottom-mrg extra-mrg">
+                            <h2 class="detail-title">Add Education</h2>
+                            <div class="extra-field-box">
+                                    <div class="multi-box">
+                                        <div class="dublicat-box">
+    {#                                        university ,course,regno#}
+                                            <div class="col-md-12 col-sm-12">
+                                                 <h4 style="margin: 20px 0;" class="text-muted">Choose your qualification</h4>
+                                                  <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                                                    <select onchange="showItem(this);" id="" class="qualifications form-control input-lg">
+                                                        <option selected disabled="disabled">Qualifications</option>
+                                                        <option value="Phd">Phd</option>
+                                                        <option value="Masters">Masters</option>
+                                                        <option value="Masters">Bachelor</option>
+                                                        <option value="Diploma">Diploma</option>
+                                                        <option value="Certificate">Certificate</option>
+                                                    </select>
+                                                  </div>
                                             </div>
-                                            <div class="custom-control custom-radio custom-control-inline">
-                                                <input onclick="hideEmployment()" type="radio" class="custom-control-input" id="customRadiox" name="example" value="customEx">
-                                                <label class="custom-control-label" for="customRadio2x">No</label>
-                                            </div>
-                                        </div>
-                                        <div style="margin-top:8px; display: none;" id="employer" class="employer col-md-12 col-sm-12" >
-                                            <label for="emplo">Company Employer Name</label>
-                                            <input style="margin-bottom: 0;" id="emplo" type="text" class="form-control" placeholder="Employer's Name">
-                                            <small id="lastname" class="form-text text-muted">
-                                              eg John doe.
-                                            </small>
-                                        </div>
-                                        <div style="margin-top: 8px; display: none;" id="employercompany" class=" employer col-md-12 col-sm-12" >
-                                            <label for="emplocomp">Company Name</label>
-                                            <input style="margin-bottom: 0;" id="emplocomp" type="text" class="form-control" placeholder="Employer's Company">
-                                            <small id="lastname" class="form-text text-muted">
-                                              eg abc company.
-                                            </small>
-                                        </div>
-                                        <div style="margin-top: 8px; display: none;" id="employercompany" class=" employer col-md-12 col-sm-12" >
-                                            <label for="emplocompemail">Company email</label>
-                                            <input style="margin-bottom: 0;" id="emplocompemail" type="email" class="form-control" placeholder="Employer's email">
-                                            <small id="lastname" class="form-text text-muted">
-                                              eg abc.example.org abc.example.com .
-                                            </small>
-                                        </div>
-
-
-                                        <div style="margin-top: 8px; display: none;" id="employercompany" class=" employer col-md-12 col-sm-12" >
-                                            <label for="emplocomp4n">Company Phone</label>
-                                            <input style="margin-bottom: 0;" id="emplocomp4n" type="text" class="form-control" placeholder="Employer's Phonenumber">
-                                            <small id="lastname" class="form-text text-muted">
-                                              eg 07********.
-                                            </small>
-                                        </div>
-
-                                        <div class="employer col-md-12 col-sm-12" style="margin-top:8px; display: none;">
-                                            <label for="kke">Position Held</label>
-                                            <input id="kke" type="text" class="form-control" placeholder="Position, e.g. Web Designer">
-                                        </div>
-
-                                        <div class="employer col-md-12 col-sm-12" style="margin-top:8px; display: none;">
-                                            <h4>Date</h4>
-                                            <div class="col-md-6 col-sm-6" >
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">Date From</span>
-                                                    <input type="text" id="exp-start" data-lang="en" data-dd-theme="vanilla" data-large-mode="true" data-min-year="1950" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
+                                            <div  class="col-md-12 col-sm-12 row">
+                                                <div style="display: none; margin-bottom: 20px;" id="" class="uni col-md-12 col-sm-12">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                                                        <select class="form-control input-lg">
+                                                            <option selected disabled="disabled">University</option>
+                                                            <option>Nairobi</option>
+                                                            <option>Etc</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="employer col-md-6 col-sm-6" style="margin-top:8px; display: none;">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">Date To</span>
-                                                    <input type="text" id="exp-end" data-lang="en" data-dd-theme="vanilla"  data-large-mode="true" data-min-year="2017" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
+                                                <div style="display: none; margin-bottom: 20px;" id=""  class="phd col-md-12 col-sm-12">
+                                                    <div class="input-group col-md-4 col-sm-12">
+                                                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                                        <select class="form-control input-lg">
+                                                            <option selected disabled="disabled">Qualification, e.g. Phd in Arts</option>
+                                                            <option>Phd in Arts</option>
+                                                            <option>Phd in Arts</option>
+                                                            <option>Phd in Arts</option>
+                                                            <option>Phd in Arts</option>
+                                                            <option>Phd in Arts</option>
+                                                            <option>Phd in Arts</option>
+                                                            <option>Etc</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                <div style="display: none; margin-bottom: 20px;" id="" class="masters col-md-12 col-sm-12">
+                                                    <div class="input-group col-md-4 col-sm-12">
+                                                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                                        <select class="form-control input-lg">
+                                                            <option selected disabled="disabled">Qualification, e.g. Masters in Arts</option>
+                                                            <option>Masters Of Arts</option>
+                                                            <option>Masters Of Arts</option>
+                                                            <option>Masters Of Arts</option>
+                                                            <option>Masters Of Arts</option>
+                                                            <option>Masters Of Arts</option>
+                                                            <option>Masters Of Arts</option>
+                                                            <option>Etc</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none; margin-bottom: 20px;" id="" class="bachelor col-md-12 col-sm-12">
+                                                    <div class="input-group col-md-4 col-sm-12">
+                                                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                                        <select class="form-control input-lg">
+                                                            <option selected disabled="disabled">Qualification, e.g. Bachelor in Arts</option>
+                                                            <option>Bachelor Of Arts</option>
+                                                            <option>Bachelor Of Arts</option>
+                                                            <option>Bachelor Of Arts</option>
+                                                            <option>Bachelor Of Arts</option>
+                                                            <option>Bachelor Of Arts</option>
+                                                            <option>Bachelor Of Arts</option>
+                                                            <option>Etc</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none; margin-bottom: 20px;" id="" class="diploma col-md-12 col-sm-12">
+                                                    <div class="input-group col-md-4 col-sm-12">
+                                                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                                        <select class="form-control input-lg">
+                                                            <option selected disabled="disabled">Qualification, e.g. Diploma in Arts</option>
+                                                            <option>Diploma Of Arts</option>
+                                                            <option>Diploma Of Arts</option>
+                                                            <option>Diploma Of Arts</option>
+                                                            <option>Diploma Of Arts</option>
+                                                            <option>Diploma Of Arts</option>
+                                                            <option>Diploma Of Arts</option>
+                                                            <option>Diploma Of Arts</option>
+                                                            <option>Etc</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none; margin-bottom: 20px;" id="" class="certificate col-md-12 col-sm-12">
+                                                    <div class="input-group col-md-4 col-sm-12">
+                                                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                                        <select class="form-control input-lg">
+                                                            <option selected disabled="disabled">Qualification, e.g. Certificate in Arts</option>
+                                                            <option>Certificate Of Arts</option>
+                                                            <option>Certificate Of Arts</option>
+                                                            <option>Certificate Of Arts</option>
+                                                            <option>Certificate Of Arts</option>
+                                                            <option>Certificate Of Arts</option>
+                                                            <option>Certificate Of Arts</option>
+                                                            <option>Certificate Of Arts</option>
+                                                            <option>Etc</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none; margin-bottom: 20px;" id="" class="graduation col-md-12 col-sm-12">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">Year of graduation</span>
+                                                        <input type="text" id="edu-start" data-dd-theme="vanilla" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" class="form-control" readonly="">
+                                                    </div>
+                                                </div>
+{#                                                <div style=" margin-bottom: 20px;" id="" class="graduation col-md-12 col-sm-12">#}
+{#                                                    <div class="input-group">#}
+{#                                                        <span class="input-group-addon">Registration number</span>#}
+{#                                                        <input type="text" id="" class="form-control regno" >#}
+{#                                                    </div>#}
+{#                                                </div>#}
 
-                                        <div class="employer col-md-12 col-sm-12" style="margin-top:8px; display: none;">
-                                            <label for="emplomsg"></label>
-                                            <textarea id="emplomsg" class="form-control textarea" placeholder="Optional notes on the experience"></textarea>
                                         </div>
-                                        <button type="button" class="btn remove-field">Remove</button>
+                                            <button type="button" class="btn remove-field">Remove</button>
                                     </div>
+                                </div>
+                                <button type="button" class="add-field">Add field</button>
+                        </div>
+                        <div class="row bottom-mrg extra-mrg">
+                            <h2 class="detail-title">Brief description about yourself</h2>
+                            <div class="col-md-12 col-sm-12">
+                                <textarea class="form-control textarea" maxlength="2000" rows="30" placeholder="About Yourself"></textarea>
+                            </div>
+                        </div>
 
+                        <div class="row bottom-mrg extra-mrg">
+                            <h2 class="detail-title">Add Experience</h2>
+                            <div class="extra-field-box">
+                                <div class="multi-box">
+                                    <div class="dublicat-box">
+                                        <div class="col-md-12 col-sm-12">
+                                            <label>Have you ever been employed</label>
+                                            <div style="display: flex;">
+                                                <div class="custom-control custom-radio custom-control-inline" style="margin-right: 20px;">
+                                                    <input onclick="showEmployment()" type="radio" class="custom-control-input" id="customRadioz" name="example" value="customEx">
+                                                    <label class="custom-control-label" for="customRadioz">Yes</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input onclick="hideEmployment()" type="radio" class="custom-control-input" id="customRadiox" name="example" value="customEx">
+                                                    <label class="custom-control-label" for="customRadio2x">No</label>
+                                                </div>
+                                            </div>
+                                            <div style="margin-top:8px; display: none;" id="employer" class="employer col-md-12 col-sm-12" >
+                                                <label for="emplo">Company Employer Name</label>
+                                                <input style="margin-bottom: 0;" id="emplo" type="text" class="form-control" placeholder="Employer's Name">
+                                                <small id="lastname" class="form-text text-muted">
+                                                  eg John doe.
+                                                </small>
+                                            </div>
+                                            <div style="margin-top: 8px; display: none;" id="employercompany" class=" employer col-md-12 col-sm-12" >
+                                                <label for="emplocomp">Company Name</label>
+                                                <input style="margin-bottom: 0;" id="emplocomp" type="text" class="form-control" placeholder="Employer's Company">
+                                                <small id="lastname" class="form-text text-muted">
+                                                  eg abc company.
+                                                </small>
+                                            </div>
+                                            <div style="margin-top: 8px; display: none;" id="employercompany" class=" employer col-md-12 col-sm-12" >
+                                                <label for="emplocompemail">Company email</label>
+                                                <input style="margin-bottom: 0;" id="emplocompemail" type="email" class="form-control" placeholder="Employer's email">
+                                                <small id="lastname" class="form-text text-muted">
+                                                  eg abc.example.org abc.example.com .
+                                                </small>
+                                            </div>
+
+
+                                            <div style="margin-top: 8px; display: none;" id="employercompany" class=" employer col-md-12 col-sm-12" >
+                                                <label for="emplocomp4n">Company Phone</label>
+                                                <input style="margin-bottom: 0;" id="emplocomp4n" type="text" class="form-control" placeholder="Employer's Phonenumber">
+                                                <small id="lastname" class="form-text text-muted">
+                                                  eg 07********.
+                                                </small>
+                                            </div>
+
+                                            <div class="employer col-md-12 col-sm-12" style="margin-top:8px; display: none;">
+                                                <label for="kke">Position Held</label>
+                                                <input id="kke" type="text" class="form-control" placeholder="Position, e.g. Web Designer">
+                                            </div>
+
+                                            <div class="employer col-md-12 col-sm-12" style="margin-top:8px; display: none;">
+                                                <h4>Date</h4>
+                                                <div class="col-md-6 col-sm-6" >
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">Date From</span>
+                                                        <input type="text" id="exp-start" data-lang="en" data-dd-theme="vanilla" data-large-mode="true" data-min-year="1950" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="employer col-md-6 col-sm-6" style="margin-top:8px; display: none;">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">Date To</span>
+                                                        <input type="text" id="exp-end" data-lang="en" data-dd-theme="vanilla"  data-large-mode="true" data-min-year="2017" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="employer col-md-12 col-sm-12" style="margin-top:8px; display: none;">
+                                                <label for="emplomsg"></label>
+                                                <textarea id="emplomsg" class="form-control textarea" placeholder="Optional notes on the experience"></textarea>
+                                            </div>
+                                        </div>
+                                        <button style="display: none;" id="clonebutton1" type="button" class="employer btn remove-field">Remove</button>
+                                    </div>
+                                    <button style="display: none;" id="clonebutton2" type="button" class="employer add-field">Add field</button>
                                 </div>
 
                             </div>
-                            <button type="button" class="add-field">Add field</button>
                         </div>
-					</div>
 
-					<div class="row bottom-mrg extra-mrg">
-                        <h2 class="detail-title">Add Skills</h2>
-                        <div class="extra-field-box">
-								<div class="multi-box">
-									<div class="dublicat-box">
+                        <div class="row bottom-mrg extra-mrg">
+                            <h2 class="detail-title">Add Skills</h2>
+                            <div class="extra-field-box">
+                                    <div class="multi-box">
+                                        <div class="dublicat-box">
 
-										<div class="col-md-12 col-sm-12 " style="margin-bottom: 8px;">
-                                            <div class="input-group"style="margin-bottom: 0px;">
-                                                <span class="input-group-addon"><i class="fas fa-hand-paper"></i></span>
-                                                <input type="text" class="form-control" placeholder="Skills, e.g. Css, Html...">
+                                            <div class="col-md-12 col-sm-12 " style="margin-bottom: 8px;">
+                                                <div class="input-group"style="margin-bottom: 0px;">
+                                                    <span class="input-group-addon"><i class="fas fa-hand-paper"></i></span>
+                                                    <input type="text" class="form-control" placeholder="Skills, e.g. Css, Html...">
+                                                </div>
+                                                <small id="lastname" class="form-text text-muted">
+                                                  eg Art and craft.
+                                                </small>
                                             </div>
-                                            <small id="lastname" class="form-text text-muted">
-                                              eg Art and craft.
-                                            </small>
-										</div>
-                                        <div class="col-md-12 col-sm-12 " style="margin-bottom: 8px;">
-                                            <div class="input-group"style="margin-bottom: 0px;">
-                                                <label for="skillref">Referee</label>
-                                                <textarea class="form-control textarea" placeholder="eg JohnDoe 07*********" name="skillreference[]" id="skillref" ></textarea>
-{#											    <input type="text" class="form-control" placeholder="Skills, e.g. Css, Html...">#}
+                                            <div class="col-md-12 col-sm-12 " style="margin-bottom: 8px;">
+                                                <div class="input-group"style="margin-bottom: 0px;">
+                                                    <label for="skillref">Referee</label>
+                                                    <textarea class="form-control textarea" placeholder="eg JohnDoe 07*********" name="skillreference[]" id="skillref" ></textarea>
+    {#											    <input type="text" class="form-control" placeholder="Skills, e.g. Css, Html...">#}
+                                                </div>
+                                                <small id="lastname" class="form-text text-muted">
+                                                  Your referee eg eg JohnDoe 07********* to support your statment.
+                                                </small>
+
                                             </div>
-                                            <small id="lastname" class="form-text text-muted">
-                                              Your referee eg eg JohnDoe 07********* to support your statment.
-                                            </small>
 
-										</div>
+    {#                                        refrence#}
 
-{#                                        refrence#}
+    {#										<div class="col-md-12 col-sm-12">#}
+    {#											<div class="input-group">#}
+    {#											<span class="input-group-addon">%</span>#}
+    {#												<input type="text" class="form-control" placeholder="85%">#}
+    {#											</div>#}
+    {#										</div>#}
 
-{#										<div class="col-md-12 col-sm-12">#}
-{#											<div class="input-group">#}
-{#											<span class="input-group-addon">%</span>#}
-{#												<input type="text" class="form-control" placeholder="85%">#}
-{#											</div>#}
-{#										</div>#}
-
-										<button type="button" class="btn remove-field">Remove</button>
-									</div>
-								</div>
-								<button type="button" class="add-field">Add field</button>
-							</div>
-					</div>
-                    <div class="row bottom-mrg extra-mrg">
-                        <h2 class="detail-title">Social Profile</h2>
-                        <div class="col-md-12 col-sm-12">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fab fa-linkedin"></i></span>
-                                <input type="text" class="form-control" placeholder="Linkedin Link">
+                                            <button type="button" class="btn remove-field">Remove</button>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="add-field">Add field</button>
+                                </div>
+                        </div>
+                        <div class="row bottom-mrg extra-mrg">
+                            <h2 class="detail-title">Social Profile</h2>
+                            <div class="col-md-12 col-sm-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fab fa-linkedin"></i></span>
+                                    <input type="text" class="form-control" placeholder="Linkedin Link">
+                                </div>
+                                <small id="lastname" class="form-text text-muted">
+                                  Your Linkedin Handle.
+                                </small>
                             </div>
-                            <small id="lastname" class="form-text text-muted">
-                              Your Linkedin Handle.
-                            </small>
                         </div>
-					</div>
-					<div class="row bottom-mrg extra-mrg">
-                        <div class="col-md-12">
-                            <button class="btn btn-success btn-primary small-btn">Submit </button>
-                        </div>
-					</div>
-                    </div>
-                </div>
-			</section>
+                        <div class="row bottom-mrg extra-mrg">
+                             <div class="col-md-12 col-sm-12 mrg-top-25">
+                                 <div class="custom-control custom-radio custom-control-inline" style="margin-right: 20px;">
+                                     <label  class="custom-control-label" for="customRadio"></label>
+                                     <span>
+                                         <input onchange="openSubmit();" type="checkbox" class="custom-control-input customRadio" id="termschecks" name="example" value="">
+                                         Agree to terms and conditions <a href="#">Terms</a>
+                                     </span>
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row bottom-mrg extra-mrg">
+                            <div class="col-md-12">
+                                <button style="visibility: hidden;" id="submitbutton" type="submit" class="btn btn-success btn-primary small-btn">Submit </button>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row text-right" style="">
+                                    <p>Create an account as a Company<a href="{% url 'LML:companysignup' %}"> Here </a></p>
+                                </div>
+                             </div>
+                        </div>
+                        </div>
+                    </div>
+                </section>
             </form>
 			<!-- full detail SetionStart-->
 {% endblock content %}
@@ -513,6 +537,7 @@
 				$('#exp-start').dateDropper(
 
                 );
-			</script>
 
+			</script>
+            <script src="{% static 'assets/js/js.js' %}" type="text/javascript" ></script>
 {% endblock script %}

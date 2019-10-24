@@ -11,35 +11,36 @@
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
     <link href="{% static 'assets/animision/animsition.min.css' %}" rel="stylesheet">
     <link type="text/css" rel="stylesheet" id="jssDefault" href="{% static 'assets/css/colors/orange.css' %}">
-   <script src="https://kit.fontawesome.com/16d33ecbbb.js" ></script>
+    <script src="https://kit.fontawesome.com/16d33ecbbb.js" ></script>
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     {% block links %}{% endblock links %}
 </head>
 
-<body class="animsition">
+<body class="animsition" style="scroll-behavior: smooth;">
     <div class="Loader"></div>
     <div class="wrapper">
         <nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav">
             <div class="container">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"><i class="fa fa-bars"></i></button>
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html"><img style="width: 115px;height: 47px;" src="{% static 'assets/img/LML5.png' %}" class="logo logo-display" alt=""><img style="width: 115px;height: 47px;" src="{% static 'assets/img/LML5.png' %}" class="logo logo-scrolled" alt=""></a>
+                    <a class="navbar-brand" href="{% url 'LML:home' %}"><img style="width: 115px;height: 47px;" src="{% static 'assets/img/LML5.png' %}" class="logo logo-display" alt=""><img style="width: 115px;height: 47px;" src="{% static 'assets/img/LML5.png' %}" class="logo logo-scrolled" alt=""></a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                         <li style="position: relative;" class="dropdown megamenu-fw left-br">
-                            <a  href="#" target="_blank" data-toggle="dropdown"  class="">eugenewere</a>
-                            <ul style="position: absolute;" class="dropdown-menu  col-md-2" role="menu">
+                            <a  href="#" target="_blank" data-toggle="dropdown" style="text-transform: none; font-size: 15px;" class="">eugenewere</a>
+                            <ul style="position: absolute;" class="dropdown-menu  col-md-4" role="menu">
                                 <li>
                                     <div class="row">
                                         <div class="col-menu col-md-12">
 {#                                            <h6 class="title">Main Pages</h6>#}
                                             <div class="content">
                                                 <ul class="menu-col" style="text-align: center;padding: 4px;">
-                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #8c6704;"><a href="{% url 'LML:employeeprofile' %}">Account</a></li>
-                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #8c6704;"><a href="{% url 'LML:employersprofile' %}"> Company Profile</a></li>
-                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #8c6704;"><a href="{% url 'LML:signin' %}">Sign In</a></li>
-                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #8c6704;"><a href="{% url 'LML:signup' %}">Sign Up</a></li>
-                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #8c6704;"><a href="index.html">Logout</a></li>
+                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:employeeprofile' %}">Account</a></li>
+                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:employersprofile' %}"> Company Profile</a></li>
+                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:signin' %}">Sign In</a></li>
+                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:signup' %}">Sign Up</a></li>
+                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:signin' %}">Logout</a></li>
                                                 </ul>
                                             </div>
                                         </div><!-- end col-3 -->
@@ -128,8 +129,8 @@
 								</ul>
 							</li>
 {#                        <li><a href="blog.html">Blog</a></li>#}
-                        <li><a href="{% url 'LML:signup' %}"><i class="fa fa-sm fa-pencil-alt" aria-hidden="true"></i>SignUp</a></li>
-                        <li><a href="{% url 'LML:signin' %}"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a></li>
+                        <li><a href="{% url 'LML:signup' %}">SignUp</a></li>
+                        <li><a href="{% url 'LML:signin' %}">Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -151,11 +152,11 @@
                     <div class="col-md-4 col-sm-4"><img style="width: 98px;" src="{% static 'assets/img/LML5.png' %}" class="img-responsive" alt="" /> </div>
                     <div class="col-md-8 co-sm-8 pull-right">
                         <ul>
-                            <li><a href="index.html" title="">Home</a></li>
+                            <li><a href="{% url 'LML:home' %}" title="">Home</a></li>
 {#                            <li><a href="blog.html" title="">Blog</a></li>#}
 {#                            <li><a href="404.html" title="">404</a></li>#}
                             <li><a href="faq.html" title="">FAQ</a></li>
-                            <li><a href="contact.html" title="">Contact Us</a></li>
+                            <li><a href="" title="">Contact Us</a></li>
                         </ul>
                     </div>
                 </div>
@@ -187,12 +188,12 @@
                             <div class="textwidget">
                                 <div class="textwidget">
                                     <ul class="footer-navigation">
-                                        <li><a href="manage-company.html" title="">Front-end Design</a></li>
-                                        <li><a href="manage-company.html" title="">Android Developer</a></li>
-                                        <li><a href="manage-company.html" title="">CMS Development</a></li>
-                                        <li><a href="manage-company.html" title="">PHP Development</a></li>
-                                        <li><a href="manage-company.html" title="">IOS Developer</a></li>
-                                        <li><a href="manage-company.html" title="">Iphone Developer</a></li>
+                                        <li><a href="manage-company.html" title="">Home</a></li>
+                                        <li><a href="manage-company.html" title="">Sign Up</a></li>
+                                        <li><a href="manage-company.html" title="">Categories</a></li>
+                                        <li><a href="manage-company.html" title="">Login</a></li>
+                                        <li><a href="manage-company.html" title="">Account</a></li>
+                                        <li><a href="manage-company.html" title="">Logout</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -203,12 +204,12 @@
                             <h3 class="widgettitle widget-title">All Categories</h3>
                             <div class="textwidget">
                                 <ul class="footer-navigation">
-                                    <li><a href="manage-company.html" title="">Front-end Design</a></li>
-                                    <li><a href="manage-company.html" title="">Android Developer</a></li>
-                                    <li><a href="manage-company.html" title="">CMS Development</a></li>
-                                    <li><a href="manage-company.html" title="">PHP Development</a></li>
-                                    <li><a href="manage-company.html" title="">IOS Developer</a></li>
-                                    <li><a href="manage-company.html" title="">Iphone Developer</a></li>
+                                    <li><a href="manage-company.html" title="">Construction</a></li>
+                                    <li><a href="manage-company.html" title="">Medicine</a></li>
+                                    <li><a href="manage-company.html" title="">IT</a></li>
+                                    <li><a href="manage-company.html" title="">Education</a></li>
+                                    <li><a href="manage-company.html" title="">Accounting</a></li>
+                                    <li><a href="manage-company.html" title="">Entertainment</a></li>
                                 </ul>
                             </div>
                         </div>
