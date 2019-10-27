@@ -1,0 +1,943 @@
+{% extends 'normal/layout/homelayout.html' %}
+{% load static %}
+{% block links %}
+{% endblock links %}
+{% block content %}
+            <!-- Title Header Start -->
+			<section class="inner-header-title" style="background-image:url({% static 'assets/img/blog/banner-12.jpg' %});">
+				<div class="container">
+					<h1>Advance Search</h1>
+				</div>
+			</section>
+			<div class="clearfix"></div>
+			<!-- Title Header End -->
+
+			<section class="advance-search">
+				<div class="container-fluid " style="padding: 0 50px">
+					<div class="row">
+						<div class="col-md-3 col-sm-12">
+							<div class="full-sidebar-wrap">
+								<a href="javascript:void(0)" onclick="openNav()" class="btn btn-dark full-width mrg-bot-20 hidden-lg hidden-md hidden-xl"><i class="ti-filter mrg-r-5"></i>Filter Search</a>
+								<!-- Job Alert -->
+{#								<a href="javascript:void(0)" class="btn btn-info full-width mrg-bot-20" data-toggle="modal" data-target="#job-alert">Get Job Alert!</a>#}
+								<!-- /Job Alert -->
+								<div class="show-hide-sidebar hidden-xs hidden-sm">
+									<!-- Search Job -->
+									<div class="sidebar-widgets">
+										<div class="ur-detail-wrap">
+											<div class="ur-detail-wrap-header">
+												<h4>Search Personnel Here</h4>
+											</div>
+											<div class="ur-detail-wrap-body">
+												<form>
+													<div class="form-group">
+														<label>Category</label>
+														<select id="choose-category" class="form-control">
+															<option>Choose Category</option>
+															<option>Banking Job</option>
+															<option>IT / Software</option>
+															<option>Medical & Hospital</option>
+															<option>Networking</option>
+															<option>Automotive</option>
+															<option>Business Development</option>
+														</select>
+													</div>
+													<button type="submit" class="btn btn-primary full-width">Find Jobs</button>
+												</form>
+											</div>
+										</div>
+
+									</div>
+									<!-- /Search Job -->
+
+
+
+									<!-- Experince -->
+									<div class="sidebar-widgets">
+										<div class="ur-detail-wrap">
+
+											<div class="ur-detail-wrap-header">
+												<h4>Experince</h4>
+											</div>
+											<div class="ur-detail-wrap-body">
+												<ul class="advance-list">
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="uy">
+															<label for="uy"></label>
+														</span>
+														0 - 1 Year
+														<span class="pull-right">0</span>
+													</li>
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="io">
+															<label for="io"></label>
+														</span>
+														1 - 2 Year
+														<span class="pull-right">0</span>
+													</li>
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="lo">
+															<label for="lo"></label>
+														</span>
+														2 - 4 Year
+														<span class="pull-right">0</span>
+													</li>
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="kj">
+															<label for="kj"></label>
+														</span>
+														4 - 6 Year
+														<span class="pull-right">0</span>
+													</li>
+                                                    <li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="kj">
+															<label for="kj"></label>
+														</span>
+														Over 6 Year
+														<span class="pull-right">0</span>
+													</li>
+												</ul>
+											</div>
+
+										</div>
+									</div>
+									<!-- /Experince -->
+
+									<!-- Job Type -->
+									<div class="sidebar-widgets">
+										<div class="ur-detail-wrap">
+
+											<div class="ur-detail-wrap-header">
+												<h4>Job Type</h4>
+											</div>
+											<div class="ur-detail-wrap-body">
+												<ul class="advance-list">
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="1">
+															<label for="1"></label>
+														</span>
+														Full Time
+														<span class="pull-right">0</span>
+													</li>
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="2">
+															<label for="2"></label>
+														</span>
+														Part Time
+														<span class="pull-right">0</span>
+													</li>
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="3">
+															<label for="3"></label>
+														</span>
+														Internship
+														<span class="pull-right">0</span>
+													</li>
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="4">
+															<label for="4"></label>
+														</span>
+														Freelancer
+														<span class="pull-right">0</span>
+													</li>
+												</ul>
+											</div>
+
+										</div>
+									</div>
+									<!-- /Job Type -->
+
+									<!-- Location -->
+									<div class="sidebar-widgets">
+										<div class="ur-detail-wrap">
+
+											<div class="ur-detail-wrap-header">
+												<h4>Popular County</h4>
+											</div>
+											<div class="ur-detail-wrap-body">
+												<ul class="advance-list">
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="1">
+															<label for="1"></label>
+														</span>
+														Nairobi
+														<span class="pull-right">0</span>
+													</li>
+
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="2">
+															<label for="2"></label>
+														</span>
+														Kisumu
+														<span class="pull-right">0</span>
+													</li>
+
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="3">
+															<label for="3"></label>
+														</span>
+														Mombassa
+														<span class="pull-right">0</span>
+													</li>
+
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="4">
+															<label for="4"></label>
+														</span>
+														Nakuru
+														<span class="pull-right">0</span>
+													</li>
+                                                    <li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="4">
+															<label for="4"></label>
+														</span>
+														Eldoret
+														<span class="pull-right">0</span>
+													</li>
+
+												</ul>
+											</div>
+
+										</div>
+									</div>
+									<!-- /Popular Locations -->
+
+									<!-- Compensation -->
+									<div class="sidebar-widgets">
+										<div class="ur-detail-wrap">
+
+											<div class="ur-detail-wrap-header">
+												<h4>Qualifications</h4>
+											</div>
+											<div class="ur-detail-wrap-body">
+												<ul class="advance-list">
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="1">
+															<label for="1"></label>
+														</span>
+														PHD
+														<span class="pull-right">0</span>
+													</li>
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="2">
+															<label for="2"></label>
+														</span>
+														Bachelor's
+														<span class="pull-right">0</span>
+													</li>
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="3">
+															<label for="3"></label>
+														</span>
+														Masters
+														<span class="pull-right">0</span>
+													</li>
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="4">
+															<label for="4"></label>
+														</span>
+														Diploma
+														<span class="pull-right">0</span>
+													</li>
+                                                    <li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="4">
+															<label for="4"></label>
+														</span>
+														Certificate
+														<span class="pull-right">0</span>
+													</li>
+
+												</ul>
+											</div>
+
+										</div>
+									</div>
+									<!-- /Compensation -->
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-9 col-sm-12">
+							<!--Browse Job In Grid-->
+							<div class="row mrg-0">
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        <li>Php</li>
+                                                        <li>Android</li>
+                                                        <li>Html</li>
+                                                        <li class="more-skill bg-primary">+3</li>
+                                                    </ul>
+                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                                </div>
+                                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                    </div>
+							</div>
+							<!--/.Browse Job In Grid-->
+
+							<div class="row mrg-0">
+								<ul class="pagination">
+									<li><a href="#"><i class="ti-arrow-left"></i></a></li>
+									<li class="active"><a href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#"><i class="fa fa-ellipsis-h"></i></a></li>
+									<li><a href="#"><i class="ti-arrow-right"></i></a></li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+            <div id="filter-sidebar" class="filter-sidebar">
+				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="ti-close"></i></a>
+				<div class="show-hide-sidebar">
+
+					<!-- Search Job -->
+					<div class="sidebar-widgets">
+
+						<div class="ur-detail-wrap">
+							<div class="ur-detail-wrap-header">
+								<h4>Search Job Here</h4>
+							</div>
+							<div class="ur-detail-wrap-body">
+								<form>
+									<div class="form-group">
+										<label>Category</label>
+										<select id="choose-category2" class="form-control">
+											<option>Choose Category</option>
+											<option>Banking Job</option>
+											<option>IT / Software</option>
+											<option>Medical & Hospital</option>
+											<option>Networking</option>
+											<option>Automotive</option>
+											<option>Business Development</option>
+										</select>
+									</div>
+									<button type="submit" class="btn btn-primary full-width">Find Jobs</button>
+								</form>
+							</div>
+						</div>
+
+					</div>
+					<!-- /Search Job -->
+
+					<!-- Experince -->
+					<div class="sidebar-widgets">
+						<div class="ur-detail-wrap">
+
+							<div class="ur-detail-wrap-header">
+								<h4>Experince</h4>
+							</div>
+							<div class="ur-detail-wrap-body">
+								<ul class="advance-list">
+									<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="uy">
+															<label for="uy"></label>
+														</span>
+														0 - 1 Year
+														<span class="pull-right">0</span>
+													</li>
+                                    <li>
+                                        <span class="custom-checkbox">
+                                            <input type="checkbox" id="io">
+                                            <label for="io"></label>
+                                        </span>
+                                        1 - 2 Year
+                                        <span class="pull-right">0</span>
+                                    </li>
+                                    <li>
+                                        <span class="custom-checkbox">
+                                            <input type="checkbox" id="lo">
+                                            <label for="lo"></label>
+                                        </span>
+                                        2 - 4 Year
+                                        <span class="pull-right">0</span>
+                                    </li>
+                                    <li>
+                                        <span class="custom-checkbox">
+                                            <input type="checkbox" id="kj">
+                                            <label for="kj"></label>
+                                        </span>
+                                        4 - 6 Year
+                                        <span class="pull-right">0</span>
+                                    </li>
+                                    <li>
+                                        <span class="custom-checkbox">
+                                            <input type="checkbox" id="kj">
+                                            <label for="kj"></label>
+                                        </span>
+                                        Over 6 Year
+                                        <span class="pull-right">0</span>
+                                    </li>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+					<!-- /Experince -->
+
+					<!-- Job Type -->
+					<div class="sidebar-widgets">
+						<div class="ur-detail-wrap">
+
+							<div class="ur-detail-wrap-header">
+								<h4>Job Type</h4>
+							</div>
+							<div class="ur-detail-wrap-body">
+								<ul class="advance-list">
+									<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="1">
+															<label for="1"></label>
+														</span>
+														Full Time
+														<span class="pull-right">0</span>
+													</li>
+                                    <li>
+                                        <span class="custom-checkbox">
+                                            <input type="checkbox" id="2">
+                                            <label for="2"></label>
+                                        </span>
+                                        Part Time
+                                        <span class="pull-right">0</span>
+                                    </li>
+                                    <li>
+                                        <span class="custom-checkbox">
+                                            <input type="checkbox" id="3">
+                                            <label for="3"></label>
+                                        </span>
+                                        Internship
+                                        <span class="pull-right">0</span>
+                                    </li>
+                                    <li>
+                                        <span class="custom-checkbox">
+                                            <input type="checkbox" id="4">
+                                            <label for="4"></label>
+                                        </span>
+                                        Freelancer
+                                        <span class="pull-right">0</span>
+                                    </li>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+					<!-- /Job Type -->
+
+					<!-- Location -->
+					<div class="sidebar-widgets">
+						<div class="ur-detail-wrap">
+
+							<div class="ur-detail-wrap-header">
+                                <h4>Popular County</h4>
+                            </div>
+                            <div class="ur-detail-wrap-body">
+												<ul class="advance-list">
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="1">
+															<label for="1"></label>
+														</span>
+														Nairobi
+														<span class="pull-right">0</span>
+													</li>
+
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="2">
+															<label for="2"></label>
+														</span>
+														Kisumu
+														<span class="pull-right">0</span>
+													</li>
+
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="3">
+															<label for="3"></label>
+														</span>
+														Mombassa
+														<span class="pull-right">0</span>
+													</li>
+
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="4">
+															<label for="4"></label>
+														</span>
+														Nakuru
+														<span class="pull-right">0</span>
+													</li>
+                                                    <li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="4">
+															<label for="4"></label>
+														</span>
+														Eldoret
+														<span class="pull-right">0</span>
+													</li>
+
+												</ul>
+											</div>
+
+						</div>
+					</div>
+					<!-- /Popular Locations -->
+
+					<!-- Compensation -->
+					<div class="sidebar-widgets">
+						<div class="ur-detail-wrap">
+
+							<div class="ur-detail-wrap-header">
+                                <h4>Qualifications</h4>
+                            </div>
+                            <div class="ur-detail-wrap-body">
+												<ul class="advance-list">
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="1">
+															<label for="1"></label>
+														</span>
+														PHD
+														<span class="pull-right">0</span>
+													</li>
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="2">
+															<label for="2"></label>
+														</span>
+														Bachelor's
+														<span class="pull-right">0</span>
+													</li>
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="3">
+															<label for="3"></label>
+														</span>
+														Masters
+														<span class="pull-right">0</span>
+													</li>
+													<li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="4">
+															<label for="4"></label>
+														</span>
+														Diploma
+														<span class="pull-right">0</span>
+													</li>
+                                                    <li>
+														<span class="custom-checkbox">
+															<input type="checkbox" id="4">
+															<label for="4"></label>
+														</span>
+														Certificate
+														<span class="pull-right">0</span>
+													</li>
+
+												</ul>
+											</div>
+
+						</div>
+					</div>
+					<!-- /Compensation -->
+				</div>
+			</div>
+{% endblock content %}
+{% block script %}
+            <script>
+				function openNav() {
+				  document.getElementById("filter-sidebar").style.width = 420+"px";
+				}
+
+				function closeNav() {
+				  document.getElementById("filter-sidebar").style.width = 0+"px";
+				}
+			</script>
+{% endblock script %}

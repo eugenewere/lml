@@ -74,7 +74,7 @@ All custom js files contents are below
 	
 	/*------ Grid Slider ----*/
 	$('.grid-slide-2').slick({
-	  slidesToShow:2,
+	  slidesToShow:3,
 	  arrows:false,
 	  autoplay:true,
 	  infinite: true,
@@ -100,7 +100,23 @@ All custom js files contents are below
 	
 	// City Select
 	$('#choose-city').select2();
-	
+	$('#choose-region').select2();
+	$('#choose-qualification').select2();
+	$('#choose-university').select2();
+	$('#choose-phd').select2();
+	$('#choose-bachelor').select2();
+	$('#choose-diploma').select2();
+	$('#choose-certificate').select2();
+	$('#choose-category').select2();
+	$('#choose-category2').select2();
+	$('#choose-entity').select2();
+	$('#marital').select2();
+	$('#marital2').select2();
+
+
+
+
+
 	// Category Select
 	$('#j-category').select2({
 		placeholder: "Choose Category...",

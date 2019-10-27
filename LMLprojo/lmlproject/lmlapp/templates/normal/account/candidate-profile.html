@@ -220,6 +220,19 @@
                                             <h3>Edit Profile</h3>
                                             <h2 class="detail-title mrg-top-20">Personal Information</h2>
                                             <div class="edit-pro">
+
+                                                <div class="row col-sm-12 col-md-12 mrg-top-20">
+                                                    <div class="detail-pic js">
+                                                        <div class="box companybox">
+                                                            <input required style="position: relative;" onchange="readURL(this)" type="file" name="upload-pic" id="upload-pic" class="inputfile" />
+                                                            <label  for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:15px; color: white; text-align: center;">Upload Your Logo</span></label>
+                                                            <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% static 'assets/img/client-1.jpg' %}" alt="">
+                                                        </div>
+                                                        <div id="disclaimer" class="disclaimer disclaimer-animated ">
+                                                            Upload Logo
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-4 col-sm-6">
                                                     <label>First Name</label>
                                                     <input type="text" class="form-control" placeholder="Eugene">

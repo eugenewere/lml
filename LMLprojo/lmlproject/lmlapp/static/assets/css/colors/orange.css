@@ -3,6 +3,10 @@
     background: #B18335;
     color: #fff;
 }
+.orangebg{
+    background: #B18335;
+    color: #fff;
+}
 a{
 color: #707c88;
 }
@@ -44,7 +48,8 @@ color:#B18335;
 }
 .inner-header-title.blank {
     border-bottom: 4px solid #B18335;
-    background:#B18335;
+    /*background:#B18335;*/
+    background-image: radial-gradient(circle,#b18700, #B18335 );
 }
 .action-btn .dropdown-menu>li>a:hover, .action-btn .dropdown-menu>li>a:focus {
     background: #B18335;

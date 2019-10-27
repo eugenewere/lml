@@ -26,7 +26,7 @@
                                     <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% static 'assets/img/client-1.jpg' %}" alt="">
 								</div>
                                 <div id="disclaimer" class="disclaimer disclaimer-animated ">
-                                    Upload Your Logo
+                                    Upload Logo
                                 </div>
 							</div>
 						</div>
@@ -48,7 +48,7 @@
 
 								<div class="col-md-6 col-sm-6">
 									<div class="input-group">
-										<select class="form-control input-lg">
+										<select id="choose-category" class="form-control input-lg">
 											<option selected disabled>Company Categories</option>
 											<option>Software</option>
 											<option>Hardware</option>
@@ -59,7 +59,7 @@
 								</div>
                                 <div class="col-md-6 col-sm-6">
 									<div class="input-group">
-										<select class="form-control input-lg">
+										<select id="choose-entity" class="form-control input-lg">
 											<option selected disabled>Type of Business Entity</option>
 											<option>Limited Liability Company</option>
 											<option>Partnership</option>
@@ -71,17 +71,30 @@
 									</div>
 								</div>
 
-								<div class="col-md-6 col-sm-6">
+								<div class="col-md-6 col-sm-6" style="margin-top: 8px;">
 									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Company CEO Name">
+										<input type="text" class="form-control" placeholder="Company CEO FIrst Name">
 									</div>
 								</div>
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-6 col-sm-6" style="margin-top: 8px;">
 									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Company CEO Last Name">
+									</div>
+								</div>
+
+                                <div class="col-md-6 col-sm-6" style="margin-top: 8px;">
+									<div class="input-group">
+										<input type="email" class="form-control" placeholder="Company CEO Email">
+									</div>
+								</div>
+
+                                <div class="col-md-6 col-sm-6" style="margin-top: 8px;">
+									<div class="input-group">
+                                        <span class="input-group-addon orangebg"> Date Created</span>
                                        <input style="margin-bottom:0" data-dd-theme="vanilla" placeholder="Company Start Date" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
 									</div>
 								</div>
-								<div class="col-md-12 col-sm-12">
+								<div class="col-md-12 col-sm-12" style="margin-top: 10px;">
 									<textarea class="form-control" placeholder="Company Description"></textarea>
 								</div>
 							</form>
@@ -108,19 +121,19 @@
 					<div class="row bottom-mrg extra-mrg">
 							<h2 class="detail-title">Company Information</h2>
 
-							<div class="col-md-6 col-sm-6">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-flag"></i></span>
-									<input type="text" class="form-control" placeholder="Company Name">
-								</div>
-							</div>
-
-							<div class="col-md-6 col-sm-6">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-pencil-alt"></i></span>
-									<input type="text" class="form-control" placeholder="Company Tagline">
-								</div>
-							</div>
+{#							<div class="col-md-6 col-sm-6">#}
+{#								<div class="input-group">#}
+{#									<span class="input-group-addon"><i class="fa fa-flag"></i></span>#}
+{#									<input type="text" class="form-control" placeholder="Company Name">#}
+{#								</div>#}
+{#							</div>#}
+{##}
+{#							<div class="col-md-6 col-sm-6">#}
+{#								<div class="input-group">#}
+{#									<span class="input-group-addon"><i class="fa fa-pencil-alt"></i></span>#}
+{#									<input type="text" class="form-control" placeholder="Company Tagline">#}
+{#								</div>#}
+{#							</div>#}
 
 							<div class="col-md-6 col-sm-6">
 								<div class="input-group">
@@ -160,7 +173,7 @@
                             <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
                                     <div class="input-group" style="margin-bottom: 0;" >
                                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                        <select class="form-control input-lg">
+                                        <select id="choose-city" class="form-control input-lg">
                                             <option selected>County</option>
                                             <option value="Nairobi">NAirobi</option>
                                             <option value="Nairobi">NAirobi</option>
@@ -180,8 +193,8 @@
                             <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
                                 <div class="input-group" style="margin-bottom: 0;">
                                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>
-                                    <select class="form-control input-lg">
-                                        <option selected>Region</option>
+                                    <select id="choose-region" class="form-control input-lg">
+                                        <option selected disabled>Region</option>
                                         <option>Langata</option>
                                         <option>Langata</option>
                                         <option>Langata</option>
@@ -247,7 +260,7 @@
 					<div class="row bottom-mrg extra-mrg">
 							<h2 class="detail-title">A Brief Detail</h2>
 							<div class="col-md-12 col-sm-12">
-								<textarea name="aboutcompany" class="form-control textarea" placeholder="About Company"></textarea>
+								<textarea name="aboutcompany" class="form-control textarea2" placeholder="About Company"></textarea>
 							</div>
                             <div class="row bottom-mrg extra-mrg">
                              <div class="col-md-12 col-sm-12 mrg-top-25">
@@ -271,6 +284,10 @@
 {% block script %}
     <script>
          $('#dob').dateDropper();
-         CKEDITOR.replace( 'aboutcompany' );
+
+         CKEDITOR.replace( 'aboutcompany',{
+              removePlugins: [  'Image', ],
+         } );
+
     </script>
 {% endblock script %}

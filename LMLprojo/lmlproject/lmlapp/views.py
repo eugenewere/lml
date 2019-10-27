@@ -39,3 +39,15 @@ def employeedetails(request):
 
 def companysignup(request):
     return render(request, 'normal/signup/create-company.html')
+
+
+def advancesearch(request):
+    return render(request, 'normal/advancedsearch/advancedsearch.html')
+
+
+def employerdetails(request):
+    return render(request ,'normal/jobdetails/employerdetails.html')
+
+
+def companypricing(request):
+    return render(request,'normal/companypricing/companypricing.html')

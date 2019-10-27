@@ -29,7 +29,7 @@
                                         <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% static 'assets/img/client-1.jpg' %}" alt="">
                                     </div>
                                     <div id="disclaimer" class="disclaimer disclaimer-animated ">
-                                        Upload Profile Pic
+                                        Upload Profile
                                     </div>
                                 </div>
                             </div>
@@ -96,13 +96,14 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
-                                        <div class="input-group" style="margin-bottom: 8px">
-                                            <span class="input-group-addon"><i class="fa fa-calendar"></i> Date Of Birth</span>
+                                        <div class="input-group" style="margin-bottom: 0">
+{#                                            <span class="input-group-addon">Date From</span>#}
+                                            <span class="input-group-addon orangebg"><i class="fa fa-calendar"></i> Date Of Birth</span>
                                             <input style="margin-bottom:0" data-dd-theme="vanilla" placeholder="Date Of birth" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
-                                            <small id="dob" class="form-text text-muted">
-                                               Date.
-                                            </small>
                                         </div>
+                                        <small id="dob" class="form-text text-muted" style="margin-bottom: 8px">
+                                           Date Of Birth
+                                        </small>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <div class="input-group" style="margin-bottom: 8px">
@@ -119,6 +120,24 @@
                                             </small>
                                         </div>
                                     </div>
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="input-group" style="margin-bottom: 8px">
+                                            <select id="marital2" class="form-control input-lg" style="margin-bottom: 0">
+                                                <option selected>Choose Job Type</option>
+                                                <option value="Single">Full Time</option>
+                                                <option value="Married">Part Time</option>
+                                                <option value="Devorced">Internship</option>
+{#                                                <option value="Devorced">Attachment</option>#}
+                                                <option value="Devorced">Freelancer</option>
+    {#											<option>Machanical</option>#}
+    {#											<option>HR/Manager</option>#}
+                                            </select>
+                                            <small id="marital" class="form-text text-muted">
+                                               Job Type.
+                                            </small>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-12 col-sm-12" style="margin-top: 20px;" >
                                         <h4 class="text-muted">Do you have any disablity</h4>
                                         <div style="display: flex;">
@@ -172,7 +191,7 @@
                                 <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
                                     <div class="input-group" style="margin-bottom: 0;" >
                                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                        <select class="form-control input-lg">
+                                        <select id="choose-city" class="form-control input-lg">
                                             <option selected>County</option>
                                             <option value="Nairobi">NAirobi</option>
                                             <option value="Nairobi">NAirobi</option>
@@ -194,7 +213,7 @@
                                 <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
                                     <div class="input-group" style="margin-bottom: 0;">
                                         <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>
-                                        <select class="form-control input-lg">
+                                        <select id="choose-region" class="form-control input-lg">
                                             <option selected>Region</option>
                                             <option>Langata</option>
                                             <option>Langata</option>
@@ -230,7 +249,7 @@
                                                  <h4 style="margin: 20px 0;" class="text-muted">Choose your qualification</h4>
                                                   <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                                                    <select onchange="showItem(this);" id="" class="qualifications form-control input-lg">
+                                                    <select  onchange="showItem(this);" id="choose-qualification" class="qualifications form-control input-lg">
                                                         <option selected disabled="disabled">Qualifications</option>
                                                         <option value="Phd">Phd</option>
                                                         <option value="Masters">Masters</option>
@@ -244,7 +263,7 @@
                                                 <div style="display: none; margin-bottom: 20px;" id="" class="uni col-md-12 col-sm-12">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                                                        <select class="form-control input-lg">
+                                                        <select id="choose-university" class="form-control input-lg">
                                                             <option selected disabled="disabled">University</option>
                                                             <option>Nairobi</option>
                                                             <option>Etc</option>
@@ -254,7 +273,7 @@
                                                 <div style="display: none; margin-bottom: 20px;" id=""  class="phd col-md-12 col-sm-12">
                                                     <div class="input-group col-md-4 col-sm-12">
                                                         <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                        <select class="form-control input-lg">
+                                                        <select id="choose-phd" class="form-control input-lg">
                                                             <option selected disabled="disabled">Qualification, e.g. Phd in Arts</option>
                                                             <option>Phd in Arts</option>
                                                             <option>Phd in Arts</option>
@@ -269,7 +288,7 @@
                                                 <div style="display: none; margin-bottom: 20px;" id="" class="masters col-md-12 col-sm-12">
                                                     <div class="input-group col-md-4 col-sm-12">
                                                         <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                        <select class="form-control input-lg">
+                                                        <select id="choose-masters" class="form-control input-lg">
                                                             <option selected disabled="disabled">Qualification, e.g. Masters in Arts</option>
                                                             <option>Masters Of Arts</option>
                                                             <option>Masters Of Arts</option>
@@ -284,7 +303,7 @@
                                                 <div style="display: none; margin-bottom: 20px;" id="" class="bachelor col-md-12 col-sm-12">
                                                     <div class="input-group col-md-4 col-sm-12">
                                                         <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                        <select class="form-control input-lg">
+                                                        <select id="choose-bachelor" class="form-control input-lg">
                                                             <option selected disabled="disabled">Qualification, e.g. Bachelor in Arts</option>
                                                             <option>Bachelor Of Arts</option>
                                                             <option>Bachelor Of Arts</option>
@@ -299,7 +318,7 @@
                                                 <div style="display: none; margin-bottom: 20px;" id="" class="diploma col-md-12 col-sm-12">
                                                     <div class="input-group col-md-4 col-sm-12">
                                                         <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                        <select class="form-control input-lg">
+                                                        <select id="choose-diploma" class="form-control input-lg">
                                                             <option selected disabled="disabled">Qualification, e.g. Diploma in Arts</option>
                                                             <option>Diploma Of Arts</option>
                                                             <option>Diploma Of Arts</option>
@@ -315,7 +334,7 @@
                                                 <div style="display: none; margin-bottom: 20px;" id="" class="certificate col-md-12 col-sm-12">
                                                     <div class="input-group col-md-4 col-sm-12">
                                                         <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                        <select class="form-control input-lg">
+                                                        <select id="choose-certificate" class="form-control input-lg">
                                                             <option selected disabled="disabled">Qualification, e.g. Certificate in Arts</option>
                                                             <option>Certificate Of Arts</option>
                                                             <option>Certificate Of Arts</option>

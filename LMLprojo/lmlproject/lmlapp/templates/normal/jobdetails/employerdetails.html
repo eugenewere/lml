@@ -1,0 +1,469 @@
+{% extends 'normal/layout/homelayout.html' %}
+{% load static %}
+{% block links %}
+{% endblock links %}
+{% block content %}
+            <!-- Title Header Start -->
+			<section class="inner-header-title" style="background-image:url({% static 'assets/img/blog/banner-12.jpg' %});">
+				<div class="container">
+					<h1>Company Detail</h1>
+				</div>
+			</section>
+			<div class="clearfix"></div>
+			<!-- Title Header End -->
+
+			<!-- Candidate Detail Start -->
+			<section class="detail-desc">
+				<div class="container">
+
+					<div class="ur-detail-wrap top-lay">
+
+						<div class="ur-detail-box">
+
+							<div class="ur-thumb">
+								<img src="{% static 'assets/img/avatar/company_avatar.jpg' %}" class="img-responsive" alt="" />
+							</div>
+							<div class="ur-caption">
+								<h4 class="ur-title">ABC Co-orporation</h4>
+								<p class="ur-location"><i class="ti-location-pin mrg-r-5"></i>232, Nairobi</p>
+								<span class="ur-designation mrg-top-10">Category: Construction</span><br>
+								<span class="ur-designation mrg-top-10">Entity: Partnership</span>
+                                <div class="rateing " style="margin-top: 12px;">
+									<a href="#"><i style="margin-right: 5px; font-size: 20px;" class="fab fa-linkedin"></i></a>
+									<a href="#"><i style="margin-right: 5px; font-size: 20px;" class="fab fa-facebook"></i></a>
+									<a href="#"><i style="margin-right: 5px; font-size: 20px;" class="fab fa-instagram"></i></a>
+									<a href="#"><i style="margin-right: 5px; font-size: 20px;" class="fab fa-twitter-square"></i></a>
+									<a href="#"><i style="margin-right: 5px; font-size: 20px;" class="fab fa-google-plus-square"></i></a>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="ur-detail-btn">
+							<a href="{% url 'LML:employersprofile' %}" class="btn btn-warning mrg-bot-10 full-width"><i class="ti-thumb-up mrg-r-5"></i>Edit Company</a><br>
+{#							<a href="#" class="btn btn-info full-width"><i class="ti-download mrg-r-5"></i>Download CV</a>#}
+						</div>
+
+
+					</div>
+
+				</div>
+			</section>
+			<!-- Candidate Detail End -->
+
+			<!-- Candidate full detail Start -->
+			<section class="full-detail-description full-detail">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-lg-12 col-md-12">
+
+							<div class="row-bottom">
+								<h2 class="detail-title">Company Description</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							</div>
+
+
+
+						</div>
+
+						<div class="col-lg-12 col-md-12">
+							<div class="full-sidebar-wrap row">
+
+{#								<a href="javascript:void(0)" data-toggle="modal" data-target="#apply-job" class="btn btn-info mrg-bot-15 full-width"><i class="ti-star mrg-r-5"></i>Apply This Job</a>#}
+
+								<!-- Candidate overview -->
+								<div class="col-sm-6 col-md-6 col-lg-6 sidebar-widgets">
+
+									<div class="ur-detail-wrap">
+										<div class="ur-detail-wrap-header">
+											<h4>Company Overview</h4>
+										</div>
+										<div class="ur-detail-wrap-body">
+											<ul class="ove-detail-list">
+
+												<li>
+													<i class="ti-wallet"></i>
+													<h5>Company Name</h5>
+													<span>ABC company</span>
+												</li>
+
+												<li>
+													<i class="ti-user"></i>
+													<h5>Owner</h5>
+													<span>Eugene Were</span>
+												</li>
+
+												<li>
+													<i class="ti-view-grid"></i>
+													<h5>Category</h5>
+													<span>Software Design</span>
+												</li>
+
+												<li>
+													<i class="ti-home"></i>
+													<h5>Business Number</h5>
+													<span>BSA820JJ</span>
+												</li>
+
+												<li>
+													<i class="ti-world"></i>
+													<h5>Website</h5>
+													<span><a href="#">www.abc.co.ke</a></span>
+												</li>
+
+												<li>
+													<i class="ti-book"></i>
+													<h5>Qualification</h5>
+													<span>Master Degree</span>
+												</li>
+
+                                                <li>
+													<i class="ti-location-arrow"></i>
+													<h5>County</h5>
+													<span>Nairobi</span>
+												</li>
+
+                                                <li>
+													<i class="ti-location-pin"></i>
+													<h5>Region</h5>
+													<span>Juja</span>
+												</li>
+											</ul>
+										</div>
+									</div>
+
+								</div>
+								<!-- /Candidate overview -->
+
+								<!-- Say Hello -->
+								<div class="col-sm-6 col-md-6 col-lg-6 sidebar-widgets">
+
+									<div class="ur-detail-wrap">
+										<div class="ur-detail-wrap-header">
+											<h4>Get In Touch</h4>
+										</div>
+										<div class="ur-detail-wrap-body">
+											<form action="#">
+												<div class="form-group">
+													<label>Name</label>
+													<input type="email" class="form-control">
+												</div>
+												<div class="form-group">
+													<label>Email</label>
+													<input type="email" class="form-control">
+												</div>
+												<div class="form-group">
+													<label>Message</label>
+													<textarea rows="9" class="form-control"></textarea>
+												</div>
+												<button type="submit" class="btn btn-primary">Submit</button>
+											</form>
+										</div>
+									</div>
+
+								</div>
+								<!-- /Say Hello -->
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+			<!-- company full detail End -->
+
+
+            <!-- Similar Jobs -->
+            <div class="container container-detail-box padd-top-20">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Similar Companies</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="grid-slide-2">
+
+                        <!-- Single Freelancer & Premium job -->
+                        <div class="freelance-box">
+                            <div class="">
+							<div class="grid-view brows-job-list">
+								<div class="brows-job-company-img">
+									<img src="../../static/assets/img/com-3.jpg" class="img-responsive" alt="" />
+								</div>
+								<div class="brows-job-position">
+									<h3><a href="job-detail.html">Web Developer</a></h3>
+									<p><span>ABC</span></p>
+								</div>
+								<div class="job-position">
+									<span class="job-num">5 Position</span>
+								</div>
+								<div class="brows-job-type">
+									<span class="full-time">Full Time</span>
+								</div>
+								<ul class="grid-view-caption">
+									<li>
+										<div class="brows-job-location">
+											<p><i class="fa fa-map-marker"></i>QBL Juja, C40</p>
+										</div>
+									</li>
+									<li>
+										<p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
+									</li>
+								</ul>
+								<span class="tg-themetag tg-featuretag">Premium</span>
+							</div>
+						</div>
+                        </div>
+                        <div class="freelance-box">
+                           <div class="">
+							<div class="grid-view brows-job-list">
+								<div class="brows-job-company-img">
+									<img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
+								</div>
+								<div class="brows-job-position">
+									<h3><a href="job-detail.html">Web Developer</a></h3>
+									<p><span>Google</span></p>
+								</div>
+								<div class="job-position">
+									<span class="job-num">5 Position</span>
+								</div>
+								<div class="brows-job-type">
+									<span class="part-time">Part Time</span>
+								</div>
+								<ul class="grid-view-caption">
+									<li>
+										<div class="brows-job-location">
+											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
+										</div>
+									</li>
+									<li>
+										<p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
+									</li>
+								</ul>
+							</div>
+						</div>
+                        </div>
+                        <div class="freelance-box">
+                           <div class="">
+							<div class="grid-view brows-job-list">
+								<div class="brows-job-company-img">
+									<img src="../../static/assets/img/com-1.jpg" class="img-responsive" alt="" />
+								</div>
+								<div class="brows-job-position">
+									<h3><a href="job-detail.html">Web Developer</a></h3>
+									<p><span>Google</span></p>
+								</div>
+								<div class="job-position">
+									<span class="job-num">5 Position</span>
+								</div>
+								<div class="brows-job-type">
+									<span class="freelanc">Freelancer</span>
+								</div>
+								<ul class="grid-view-caption">
+									<li>
+										<div class="brows-job-location">
+											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
+										</div>
+									</li>
+									<li>
+										<p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
+									</li>
+								</ul>
+								<span class="tg-themetag tg-featuretag">Premium</span>
+							</div>
+						</div>
+                        </div>
+                        <div class="freelance-box">
+                            <div class="">
+							<div class="grid-view brows-job-list">
+								<div class="brows-job-company-img">
+									<img src="../../static/assets/img/com-3.jpg" class="img-responsive" alt="" />
+								</div>
+								<div class="brows-job-position">
+									<h3><a href="job-detail.html">Web Developer</a></h3>
+									<p><span>ABC</span></p>
+								</div>
+								<div class="job-position">
+									<span class="job-num">5 Position</span>
+								</div>
+								<div class="brows-job-type">
+									<span class="full-time">Full Time</span>
+								</div>
+								<ul class="grid-view-caption">
+									<li>
+										<div class="brows-job-location">
+											<p><i class="fa fa-map-marker"></i>QBL Juja, C40</p>
+										</div>
+									</li>
+									<li>
+										<p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
+									</li>
+								</ul>
+								<span class="tg-themetag tg-featuretag">Premium</span>
+							</div>
+						</div>
+                        </div>
+                        <div class="freelance-box">
+                           <div class="">
+							<div class="grid-view brows-job-list">
+								<div class="brows-job-company-img">
+									<img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
+								</div>
+								<div class="brows-job-position">
+									<h3><a href="job-detail.html">Web Developer</a></h3>
+									<p><span>Google</span></p>
+								</div>
+								<div class="job-position">
+									<span class="job-num">5 Position</span>
+								</div>
+								<div class="brows-job-type">
+									<span class="part-time">Part Time</span>
+								</div>
+								<ul class="grid-view-caption">
+									<li>
+										<div class="brows-job-location">
+											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
+										</div>
+									</li>
+									<li>
+										<p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
+									</li>
+								</ul>
+							</div>
+						</div>
+                        </div>
+                        <div class="freelance-box">
+                           <div class="">
+							<div class="grid-view brows-job-list">
+								<div class="brows-job-company-img">
+									<img src="../../static/assets/img/com-1.jpg" class="img-responsive" alt="" />
+								</div>
+								<div class="brows-job-position">
+									<h3><a href="job-detail.html">Web Developer</a></h3>
+									<p><span>Google</span></p>
+								</div>
+								<div class="job-position">
+									<span class="job-num">5 Position</span>
+								</div>
+								<div class="brows-job-type">
+									<span class="freelanc">Freelancer</span>
+								</div>
+								<ul class="grid-view-caption">
+									<li>
+										<div class="brows-job-location">
+											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
+										</div>
+									</li>
+									<li>
+										<p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
+									</li>
+								</ul>
+								<span class="tg-themetag tg-featuretag">Premium</span>
+							</div>
+						</div>
+                        </div>
+                        <div class="freelance-box">
+                            <div class="">
+							<div class="grid-view brows-job-list">
+								<div class="brows-job-company-img">
+									<img src="../../static/assets/img/com-3.jpg" class="img-responsive" alt="" />
+								</div>
+								<div class="brows-job-position">
+									<h3><a href="job-detail.html">Web Developer</a></h3>
+									<p><span>ABC</span></p>
+								</div>
+								<div class="job-position">
+									<span class="job-num">5 Position</span>
+								</div>
+								<div class="brows-job-type">
+									<span class="full-time">Full Time</span>
+								</div>
+								<ul class="grid-view-caption">
+									<li>
+										<div class="brows-job-location">
+											<p><i class="fa fa-map-marker"></i>QBL Juja, C40</p>
+										</div>
+									</li>
+									<li>
+										<p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
+									</li>
+								</ul>
+								<span class="tg-themetag tg-featuretag">Premium</span>
+							</div>
+						</div>
+                        </div>
+                        <div class="freelance-box">
+                           <div class="">
+							<div class="grid-view brows-job-list">
+								<div class="brows-job-company-img">
+									<img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
+								</div>
+								<div class="brows-job-position">
+									<h3><a href="job-detail.html">Web Developer</a></h3>
+									<p><span>Google</span></p>
+								</div>
+								<div class="job-position">
+									<span class="job-num">5 Position</span>
+								</div>
+								<div class="brows-job-type">
+									<span class="part-time">Part Time</span>
+								</div>
+								<ul class="grid-view-caption">
+									<li>
+										<div class="brows-job-location">
+											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
+										</div>
+									</li>
+									<li>
+										<p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
+									</li>
+								</ul>
+							</div>
+						</div>
+                        </div>
+                        <div class="freelance-box">
+                           <div class="">
+							<div class="grid-view brows-job-list">
+								<div class="brows-job-company-img">
+									<img src="../../static/assets/img/com-1.jpg" class="img-responsive" alt="" />
+								</div>
+								<div class="brows-job-position">
+									<h3><a href="job-detail.html">Web Developer</a></h3>
+									<p><span>Google</span></p>
+								</div>
+								<div class="job-position">
+									<span class="job-num">5 Position</span>
+								</div>
+								<div class="brows-job-type">
+									<span class="freelanc">Freelancer</span>
+								</div>
+								<ul class="grid-view-caption">
+									<li>
+										<div class="brows-job-location">
+											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
+										</div>
+									</li>
+									<li>
+										<p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
+									</li>
+								</ul>
+								<span class="tg-themetag tg-featuretag">Premium</span>
+							</div>
+						</div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+{% endblock content %}
+{% block script %}
+{% endblock script %}
