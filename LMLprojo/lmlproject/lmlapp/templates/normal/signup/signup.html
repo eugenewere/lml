@@ -193,15 +193,10 @@
                                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         <select id="choose-city" class="form-control input-lg">
                                             <option selected>County</option>
-                                            <option value="Nairobi">NAirobi</option>
-                                            <option value="Nairobi">NAirobi</option>
-                                            <option value="Nairobi">NAirobi</option>
-                                            <option>NAirobi</option>
-                                            <option>NAirobi</option>
-                                            <option>NAirobi</option>
-                                            <option>NAirobi</option>
-                                            <option>NAirobi</option>
-                                            <option>NAirobi</option>
+{#                                            <option value="Nairobi">NAirobi</option>#}
+                                            {% for county in counties %}
+                                                <option value="{{ county.properties.COUNTY_NAM }}">{{ county.properties.COUNTY_NAM }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <small id="lastname" class="form-text text-muted" style="margin-bottom: 8px;">
@@ -209,18 +204,17 @@
                                     </small>
                                 </div>
                             </div>
+                        
                             <div class="row col-sm-12 col-md-12">
                                 <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
                                     <div class="input-group" style="margin-bottom: 0;">
                                         <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>
                                         <select id="choose-region" class="form-control input-lg">
-                                            <option selected>Region</option>
-                                            <option>Langata</option>
-                                            <option>Langata</option>
-                                            <option>Langata</option>
-                                            <option>Langata</option>
-                                            <option>Langata</option>
-                                            <option>Langata</option>
+                                            <option selected disabled>Sub-County</option>
+                                            {% for region in regions %}
+
+                                                <option {% if region.properties.CONSTITUEN == "None" %} disabled {% endif %} value="{{ region.properties.CONSTITUEN }}">{{ region.properties.CONSTITUEN }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <small id="lastname" class="form-text text-muted" >
@@ -290,13 +284,10 @@
                                                         <span class="input-group-addon"><i class="fa fa-book"></i></span>
                                                         <select id="choose-masters" class="form-control input-lg">
                                                             <option selected disabled="disabled">Qualification, e.g. Masters in Arts</option>
-                                                            <option>Masters Of Arts</option>
-                                                            <option>Masters Of Arts</option>
-                                                            <option>Masters Of Arts</option>
-                                                            <option>Masters Of Arts</option>
-                                                            <option>Masters Of Arts</option>
-                                                            <option>Masters Of Arts</option>
-                                                            <option>Etc</option>
+                                                             {% for bachelor in bachelors %}
+                                                              <option value="{{ bachelor }}">{{bachelor}}</option>
+                                                            {% endfor %}
+
                                                         </select>
                                                     </div>
                                                 </div>
@@ -305,13 +296,9 @@
                                                         <span class="input-group-addon"><i class="fa fa-book"></i></span>
                                                         <select id="choose-bachelor" class="form-control input-lg">
                                                             <option selected disabled="disabled">Qualification, e.g. Bachelor in Arts</option>
-                                                            <option>Bachelor Of Arts</option>
-                                                            <option>Bachelor Of Arts</option>
-                                                            <option>Bachelor Of Arts</option>
-                                                            <option>Bachelor Of Arts</option>
-                                                            <option>Bachelor Of Arts</option>
-                                                            <option>Bachelor Of Arts</option>
-                                                            <option>Etc</option>
+                                                            {% for bachelor in bachelors %}
+                                                              <option value="{{ bachelor }}">{{bachelor}}</option>
+                                                            {% endfor %}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -320,14 +307,11 @@
                                                         <span class="input-group-addon"><i class="fa fa-book"></i></span>
                                                         <select id="choose-diploma" class="form-control input-lg">
                                                             <option selected disabled="disabled">Qualification, e.g. Diploma in Arts</option>
-                                                            <option>Diploma Of Arts</option>
-                                                            <option>Diploma Of Arts</option>
-                                                            <option>Diploma Of Arts</option>
-                                                            <option>Diploma Of Arts</option>
-                                                            <option>Diploma Of Arts</option>
-                                                            <option>Diploma Of Arts</option>
-                                                            <option>Diploma Of Arts</option>
-                                                            <option>Etc</option>
+                                                            {% for diploma in diplomas %}
+                                                                <option value="{{ diploma }}">{{ diploma }}</option>
+                                                            {% endfor %}
+
+
                                                         </select>
                                                     </div>
                                                 </div>
@@ -336,14 +320,10 @@
                                                         <span class="input-group-addon"><i class="fa fa-book"></i></span>
                                                         <select id="choose-certificate" class="form-control input-lg">
                                                             <option selected disabled="disabled">Qualification, e.g. Certificate in Arts</option>
-                                                            <option>Certificate Of Arts</option>
-                                                            <option>Certificate Of Arts</option>
-                                                            <option>Certificate Of Arts</option>
-                                                            <option>Certificate Of Arts</option>
-                                                            <option>Certificate Of Arts</option>
-                                                            <option>Certificate Of Arts</option>
-                                                            <option>Certificate Of Arts</option>
-                                                            <option>Etc</option>
+
+                                                            {% for cert in certificates %}
+                                                                <option value="{{ cert }}">{{cert}}</option>
+                                                            {% endfor %}
                                                         </select>
                                                     </div>
                                                 </div>

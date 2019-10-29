@@ -105,6 +105,7 @@ All custom js files contents are below
 	$('#choose-university').select2();
 	$('#choose-phd').select2();
 	$('#choose-bachelor').select2();
+	$('#choose-masters').select2();
 	$('#choose-diploma').select2();
 	$('#choose-certificate').select2();
 	$('#choose-category').select2();

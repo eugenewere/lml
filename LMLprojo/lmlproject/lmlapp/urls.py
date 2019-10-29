@@ -6,7 +6,7 @@ from . import views
 app_name = 'LML'
 urlpatterns = [
     path('', views.home, name="home"),
-    path('personellsignup/', views.signup, name="signup"),
+    path('personelsignup/', views.signup, name="signup"),
     path('companysignup/', views.companysignup, name="companysignup"),
     path('signin/', views.signin, name="signin"),
 
@@ -18,4 +18,5 @@ urlpatterns = [
     path('employerdetails/', views.employerdetails, name="employerdetails"),
 
     path('companypricing/', views.companypricing, name="companypricing"),
+    path('contactus/', views.contactus, name="contactus"),
 ]
