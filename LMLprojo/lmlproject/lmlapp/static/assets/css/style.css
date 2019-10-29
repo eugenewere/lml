@@ -3030,7 +3030,7 @@ background-size:cover;
 .inner-header-title.blank h1, .inner-header-title.blank p{
 	color:#ffffff;
 }
-.inner-header-title.blank:brfore{
+.inner-header-title.blank::before{
 	opacity:0;
 }
 .bottom-mrg{
@@ -8338,7 +8338,7 @@ a.cl-box.pink {
     top: 50%;
     left: 113%;
     width: 100%;
-    background:#B18335;
+    /*background:#B18335;*/
     color: #f7f2f7;
     text-align: center;
     padding: 6px;
@@ -8355,7 +8355,7 @@ a.cl-box.pink {
 	position: absolute;
 	width: 10px;
 	height: 10px;
-	background: #B18335;
+	/*background: #B18335;*/
 	top:45%;
 	left: -4%;
 	transform: rotate(45deg) translateY(-50%);
