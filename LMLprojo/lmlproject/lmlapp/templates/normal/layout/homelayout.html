@@ -1,5 +1,6 @@
 <!doctype html>
 {% load static %}
+
 <html lang="en">
 <head>
     <!-- Basic Page Needs==================================================-->
@@ -13,11 +14,14 @@
     <link type="text/css" rel="stylesheet" id="jssDefault" href="{% static 'assets/css/colors/blue.css' %}">
     <script src="https://kit.fontawesome.com/16d33ecbbb.js" ></script>
     <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+    <link rel="stylesheet" href="{% static 'assets/css/preloader/css/style.css' %}">
     {% block links %}{% endblock links %}
 </head>
 
-<body class="animsition" style="scroll-behavior: smooth;">
-    <div class="Loader"></div>
+<body {% comment %}class="animsition" {% endcomment %}style="scroll-behavior: smooth;">
+
+
+    <div class="Loader-bg"><div class="loader"><span></span><span></span><span></span><span></span></div></div>
     <div class="wrapper">
         <nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav" >
             <div class="container">
@@ -331,6 +335,7 @@
         <script type="text/javascript" src="{% static 'assets/plugins/js/slick.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'assets/plugins/js/gmap3.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'assets/plugins/js/jquery.easy-autocomplete.min.js' %}"></script>
+{#        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>#}
         <script type="text/javascript" src="{% static 'assets/animision/animsition.min.js' %}"></script>
         <script src="{% static 'assets/js/custom.js' %}"></script>
         <script src="{% static 'assets/js/jQuery.style.switcher.js' %}"></script>
@@ -348,11 +353,28 @@
             function closeRightMenu() {
                 document.getElementById("rightMenu").style.display = "none";
             }
+
+            $(window).load(function() {
+                // Animate loader off screen
+                setTimeout(function () {
+                     $(".Loader-bg").fadeOut('slow');
+                }, 1000);
+
+            });
+
+
+
         </script>
         {% block script %}
 
         {% endblock script %}
         <script src="{% static 'assets/js/js.js' %}" type="text/javascript" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+        <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+        {% load sweetify %}
+        {% sweetify %}
+
     </div>
+
 </body>
 </html>

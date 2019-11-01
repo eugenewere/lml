@@ -381,6 +381,6 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu{
 {
     font-size: 87px;
 }
-.disclaimer{
+.disclaimer, .disclaimer::before{
  background-color:#244f6d;
 }

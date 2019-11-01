@@ -22,7 +22,6 @@
                         <div class="ur-detail-wrap create-kit padd-bot-0">
 
                             <div class="row">
-{#                                <p>Create an account as a Company<a href="#"> Here </a></p>#}
                                 <div class="detail-pic js">
                                     <div class="box companybox">
                                         <input required style="position: relative;" onchange="readURL(this)" type="file" name="upload-pic" id="upload-pic" class="inputfile" />
@@ -40,10 +39,10 @@
                                     <div class="col-md-6 col-sm-6">
                                         <div class="input-group " style="margin-bottom: 8px">
                                             <label for="firstname"></label>
-                                            <input id="firstname" type="text" class="form-control" placeholder="First Name" style="margin-bottom:0;">
-                                             <small id="passwordHelpBlock" class="form-text text-muted">
+                                            <input  id="firstname" type="text" class="form-control" placeholder="First Name" style="margin-bottom:0;">
+                                            <small id="passwordHelpBlock" class="form-text text-muted">
                                               First name as it appears in id.
-                                             </small>
+                                            </small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
@@ -213,7 +212,6 @@
                                         <select id="choose-region" class="form-control input-lg">
                                             <option selected disabled>Sub-County</option>
                                             {% for region in regions %}
-
                                                 <option {% if region.properties.CONSTITUEN == "None" %} disabled {% endif %} value="{{ region.properties.CONSTITUEN }}">{{ region.properties.CONSTITUEN }}</option>
                                             {% endfor %}
                                         </select>
@@ -237,115 +235,111 @@
                         <div class="row bottom-mrg extra-mrg">
                             <h2 class="detail-title">Add Education</h2>
                             <div class="extra-field-box">
-                                    <div class="multi-box">
-                                        <div class="dublicat-box">
-    {#                                        university ,course,regno#}
-                                            <div class="col-md-12 col-sm-12">
-                                                 <h4 style="margin: 20px 0;" class="text-muted">Choose your qualification</h4>
-                                                  <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                                                    <select  onchange="showItem(this);" id="choose-qualification" class="qualifications form-control input-lg">
-                                                        <option selected disabled="disabled">Qualifications</option>
-                                                        <option value="Phd">Phd</option>
-                                                        <option value="Masters">Masters</option>
-                                                        <option value="Masters">Bachelor</option>
-                                                        <option value="Diploma">Diploma</option>
-                                                        <option value="Certificate">Certificate</option>
-                                                    </select>
-                                                  </div>
-                                            </div>
-                                            <div  class="col-md-12 col-sm-12 row">
-                                                <div style="display: none; margin-bottom: 20px;" id="" class="uni col-md-12 col-sm-12">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                                                        <select id="choose-university" class="form-control input-lg">
-                                                            <option selected disabled="disabled">University</option>
-                                                            <option>Nairobi</option>
-                                                            <option>Etc</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div style="display: none; margin-bottom: 20px;" id=""  class="phd col-md-12 col-sm-12">
-                                                    <div class="input-group col-md-4 col-sm-12">
-                                                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                        <select id="choose-phd" class="form-control input-lg">
-                                                            <option selected disabled="disabled">Qualification, e.g. Phd in Arts</option>
-                                                            <option>Phd in Arts</option>
-                                                            <option>Phd in Arts</option>
-                                                            <option>Phd in Arts</option>
-                                                            <option>Phd in Arts</option>
-                                                            <option>Phd in Arts</option>
-                                                            <option>Phd in Arts</option>
-                                                            <option>Etc</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div style="display: none; margin-bottom: 20px;" id="" class="masters col-md-12 col-sm-12">
-                                                    <div class="input-group col-md-4 col-sm-12">
-                                                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                        <select id="choose-masters" class="form-control input-lg">
-                                                            <option selected disabled="disabled">Qualification, e.g. Masters in Arts</option>
-                                                             {% for bachelor in bachelors %}
-                                                              <option value="{{ bachelor }}">{{bachelor}}</option>
-                                                            {% endfor %}
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div style="display: none; margin-bottom: 20px;" id="" class="bachelor col-md-12 col-sm-12">
-                                                    <div class="input-group col-md-4 col-sm-12">
-                                                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                        <select id="choose-bachelor" class="form-control input-lg">
-                                                            <option selected disabled="disabled">Qualification, e.g. Bachelor in Arts</option>
-                                                            {% for bachelor in bachelors %}
-                                                              <option value="{{ bachelor }}">{{bachelor}}</option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div style="display: none; margin-bottom: 20px;" id="" class="diploma col-md-12 col-sm-12">
-                                                    <div class="input-group col-md-4 col-sm-12">
-                                                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                        <select id="choose-diploma" class="form-control input-lg">
-                                                            <option selected disabled="disabled">Qualification, e.g. Diploma in Arts</option>
-                                                            {% for diploma in diplomas %}
-                                                                <option value="{{ diploma }}">{{ diploma }}</option>
-                                                            {% endfor %}
-
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div style="display: none; margin-bottom: 20px;" id="" class="certificate col-md-12 col-sm-12">
-                                                    <div class="input-group col-md-4 col-sm-12">
-                                                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                        <select id="choose-certificate" class="form-control input-lg">
-                                                            <option selected disabled="disabled">Qualification, e.g. Certificate in Arts</option>
-
-                                                            {% for cert in certificates %}
-                                                                <option value="{{ cert }}">{{cert}}</option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div style="display: none; margin-bottom: 20px;" id="" class="graduation col-md-12 col-sm-12">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">Year of graduation</span>
-                                                        <input type="text" id="edu-start" data-dd-theme="vanilla" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" class="form-control" readonly="">
-                                                    </div>
-                                                </div>
-{#                                                <div style=" margin-bottom: 20px;" id="" class="graduation col-md-12 col-sm-12">#}
-{#                                                    <div class="input-group">#}
-{#                                                        <span class="input-group-addon">Registration number</span>#}
-{#                                                        <input type="text" id="" class="form-control regno" >#}
-{#                                                    </div>#}
-{#                                                </div>#}
-
+                                <div class="multi-box">
+                                    <div class="dublicat-box">
+{#                                        university ,course,regno#}
+                                        <div class="col-md-12 col-sm-12">
+                                             <h4 style="margin: 20px 0;" class="text-muted">Choose your qualification</h4>
+                                              <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                                                <select  onchange="showItem(this);" id="choose-qualification" class="qualifications form-control input-lg">
+                                                    <option selected disabled="disabled">Qualifications</option>
+                                                    <option value="Phd">Phd</option>
+                                                    <option value="Masters">Masters</option>
+                                                    <option value="Masters">Bachelor</option>
+                                                    <option value="Diploma">Diploma</option>
+                                                    <option value="Certificate">Certificate</option>
+                                                </select>
+                                              </div>
                                         </div>
-                                            <button type="button" class="btn remove-field">Remove</button>
+                                        <div  class="col-md-12 col-sm-12 row">
+                                            <div style="display: none; margin-bottom: 20px;" id="" class="uni col-md-12 col-sm-12">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                                                    <select id="choose-university" class="form-control input-lg">
+                                                        <option selected disabled="disabled">University</option>
+                                                        <option>Nairobi</option>
+                                                        <option>Etc</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div style="display: none; margin-bottom: 20px;" id=""  class="phd col-md-12 col-sm-12">
+                                                <div class="input-group col-md-4 col-sm-12">
+                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                                    <select id="choose-phd" class="form-control input-lg">
+                                                        <option selected disabled="disabled">Qualification, e.g. Phd in Arts</option>
+                                                        <option>Phd in Arts</option>
+                                                        <option>Phd in Arts</option>
+                                                        <option>Phd in Arts</option>
+                                                        <option>Phd in Arts</option>
+                                                        <option>Phd in Arts</option>
+                                                        <option>Phd in Arts</option>
+                                                        <option>Etc</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div style="display: none; margin-bottom: 20px;" id="" class="masters col-md-12 col-sm-12">
+                                                <div class="input-group col-md-4 col-sm-12">
+                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                                    <select id="choose-masters" class="form-control input-lg">
+                                                        <option selected disabled="disabled">Qualification, e.g. Masters in Arts</option>
+                                                         {% for bachelor in bachelors %}
+                                                          <option value="{{ bachelor }}">{{bachelor}}</option>
+                                                         {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div style="display: none; margin-bottom: 20px;" id="" class="bachelor col-md-12 col-sm-12">
+                                                <div class="input-group col-md-4 col-sm-12">
+                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                                    <select id="choose-bachelor" class="form-control input-lg">
+                                                        <option selected disabled="disabled">Qualification, e.g. Bachelor in Arts</option>
+                                                        {% for bachelor in bachelors %}
+                                                          <option value="{{ bachelor }}">{{bachelor}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div style="display: none; margin-bottom: 20px;" id="" class="diploma col-md-12 col-sm-12">
+                                                <div class="input-group col-md-4 col-sm-12">
+                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                                    <select id="choose-diploma" class="form-control input-lg">
+                                                        <option selected disabled="disabled">Qualification, e.g. Diploma in Arts</option>
+                                                        {% for diploma in diplomas %}
+                                                            <option value="{{ diploma }}">{{ diploma }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div style="display: none; margin-bottom: 20px;" id="" class="certificate col-md-12 col-sm-12">
+                                                <div class="input-group col-md-4 col-sm-12">
+                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                                    <select id="choose-certificate" class="form-control input-lg">
+                                                        <option selected disabled="disabled">Qualification, e.g. Certificate in Arts</option>
+
+                                                        {% for cert in certificates %}
+                                                            <option value="{{ cert }}">{{cert}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div style="display: none; margin-bottom: 20px;" id="" class="graduation col-md-12 col-sm-12">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Year of graduation</span>
+                                                    <input type="text" id="edu-start" data-dd-theme="vanilla" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" class="form-control" readonly="">
+                                                </div>
+                                            </div>
+                                            <div style="display: none; margin-bottom: 20px;" id="" class="graduation col-md-12 col-sm-12">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Registration number</span>
+                                                    <input type="text" id="" class="form-control regno" >
+                                                </div>
+                                            </div>
                                     </div>
+                                        <button type="button" class="btn remove-field">Remove</button>
                                 </div>
-                                <button type="button" class="add-field">Add field</button>
+                                </div>
+                            <button type="button" class="add-field">Add field</button>
                         </div>
                         <div class="row bottom-mrg extra-mrg">
                             <h2 class="detail-title">Brief description about yourself</h2>
@@ -452,27 +446,25 @@
                                                   eg Art and craft.
                                                 </small>
                                             </div>
-                                            <div class="col-md-12 col-sm-12 " style="margin-bottom: 8px;">
-                                                <div class="input-group"style="margin-bottom: 0px;">
-                                                    <label for="skillref">Referee</label>
-                                                    <textarea class="form-control textarea" placeholder="eg JohnDoe 07*********" name="skillreference[]" id="skillref" ></textarea>
-    {#											    <input type="text" class="form-control" placeholder="Skills, e.g. Css, Html...">#}
-                                                </div>
-                                                <small id="lastname" class="form-text text-muted">
-                                                  Your referee eg eg JohnDoe 07********* to support your statment.
+
+                                             <div class="col-md-12 col-sm-12 ">
+                                                 <div class="input-group"style="margin-bottom: 8px;">
+                                                     <span class="input-group-addon"><i class="fas fa-user"></i></span>
+                                                     <input id="ref" type="text" class="form-control" placeholder="Referee Name">
+                                                 </div>
+                                                 <small id="lastname" class="form-text text-muted">
+                                                  eg Referee Name.
                                                 </small>
-
-                                            </div>
-
-    {#                                        refrence#}
-
-    {#										<div class="col-md-12 col-sm-12">#}
-    {#											<div class="input-group">#}
-    {#											<span class="input-group-addon">%</span>#}
-    {#												<input type="text" class="form-control" placeholder="85%">#}
-    {#											</div>#}
-    {#										</div>#}
-
+                                             </div>
+                                             <div class="col-md-12 col-sm-12 ">
+                                                 <div class="input-group"style="margin-bottom: 8px;">
+                                                     <span class="input-group-addon"><i class="fas fa-mobile-phone"></i></span>
+                                                     <input id="ref" type="text" class="form-control" placeholder="Referee Phone Number">
+                                                 </div>
+                                                 <small id="lastname" class="form-text text-muted">
+                                                  eg Referee Phone Number.
+                                                </small>
+                                             </div>
                                             <button type="button" class="btn remove-field">Remove</button>
                                         </div>
                                     </div>
@@ -491,21 +483,20 @@
                                 </small>
                             </div>
                         </div>
-                        <div class="row bottom-mrg extra-mrg">
+                        <div class="row bottom-mrg extra-mrg text-center">
                              <div class="col-md-12 col-sm-12 mrg-top-25">
                                  <div class="custom-control custom-radio custom-control-inline" style="margin-right: 20px;">
                                      <label  class="custom-control-label" for="customRadio"></label>
                                      <span>
-                                         <input onchange="openSubmit();" type="checkbox" class="custom-control-input customRadio" id="termschecks" name="example" value="">
+                                         <input  onchange="openSubmit(); " type="checkbox" class="custom-control-input customRadio" id="termschecks" name="example" value="">
                                          Agree to terms and conditions <a href="#">Terms</a>
                                      </span>
-
                                 </div>
                             </div>
                         </div>
                         <div class="row bottom-mrg extra-mrg">
                             <div class="col-md-12">
-                                <button style="visibility: hidden;" id="submitbutton" type="submit" class="btn btn-success btn-primary small-btn">Submit </button>
+                                <button id="submitbutton" type="submit" class="btn btn-success btn-primary small-btn">Submit </button>
                             </div>
                             <div class="col-md-12">
                                 <div class="row text-right" style="">

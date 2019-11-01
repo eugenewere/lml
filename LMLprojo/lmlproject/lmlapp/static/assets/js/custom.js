@@ -134,7 +134,7 @@ All custom js files contents are below
 	$('.extra-field-box').each(function() {
     var $wrapp = $('.multi-box', this);
     $(".add-field", $(this)).on('click', function() {
-        $('.dublicat-box:first-child', $wrapp).clone(true).appendTo($wrapp).find('input').val('').focus();
+        $('.dublicat-box:first-child', $wrapp).clone(true).appendTo($wrapp).find('input').val('').find('select').val('') .focus();
     });
     $('.dublicat-box .remove-field', $wrapp).on('click', function() {
         if ($('.dublicat-box', $wrapp).length > 1)

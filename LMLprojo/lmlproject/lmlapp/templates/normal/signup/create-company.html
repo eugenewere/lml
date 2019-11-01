@@ -1,189 +1,186 @@
 {% extends 'normal/layout/homelayout.html' %}
 {% load static %}
 {% block links %}
+
 {% endblock links %}
 {% block content %}
+
            <!-- Header Title Start -->
 			<section class="inner-header-title blank">
 				<div class="container">
 					<h1>Create a Company</h1>
 				</div>
-            <p>Create an account as a Personnel<a href="{% url 'LML:signup' %}"> Here </a></p>
+                <p>Create an account as a Personnel<a href="{% url 'LML:signup' %}"> Here </a></p>
 			</section>
 			<div class="clearfix"></div>
 			<!-- Header Title End -->
-
-			<!-- General Detail Start -->
-			<div class="detail-desc section">
-				<div class="container">
-					<div class="ur-detail-wrap create-kit padd-bot-0">
-
-						<div class="row">
-							<div class="detail-pic js">
-								<div class="box companybox">
-									<input required style="position: relative;" onchange="readURL(this)" type="file" name="upload-pic" id="upload-pic" class="inputfile" />
-                                    <label  for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:15px; color: white; text-align: center;">Upload Your Logo</span></label>
-                                    <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% static 'assets/img/client-1.jpg' %}" alt="">
-								</div>
-                                <div id="disclaimer" class="disclaimer disclaimer-animated ">
-                                    Upload Logo
+        <form action="{% url 'LML:company_signup_formhandling' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                <div>
+                <!-- General Detail Start -->
+                <div class="section detail-desc">
+                    <div class="container">
+                        <div class="ur-detail-wrap create-kit padd-bot-0">
+                            <div class="row">
+                                <div class="detail-pic js">
+                                    <div class="box companybox">
+                                        <input value="{{ logo }}"  required  style="position: relative;" onchange="readURL(this)" type="file" name="logo" id="upload-pic" class="inputfile" />
+                                        <label   for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:15px; color: white; text-align: center;">Upload Your Logo</span></label>
+                                        <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% static 'assets/img/client-1.jpg' %}" alt="">
+                                    </div>
+                                    <div id="disclaimer" class="disclaimer disclaimer-animated ">
+                                        Upload Logo
+                                    </div>
                                 </div>
-							</div>
-						</div>
+                            </div>
 
-						<div class="row bottom-mrg">
-							<form class="add-feild">
+                            <div class="row bottom-mrg">
+                                <form class="add-feild">
+                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                        <div style=" margin-bottom:0px;display: block !important;" class="input-group" >
+                                            <label for="firstname"></label>
+                                            <input required value="{{ company_name }}" name="company_name" type="text" class="form-control" id="firstname" placeholder="Company Name" >
+                                        </div >
+                                        <small id="passwordHelpBlock" class="form-text text-muted">
+                                          Company Name.
 
-								<div class="col-md-6 col-sm-6">
-									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Company Name">
-									</div>
-								</div>
+                                        </small>
+                                    </div>
 
-								<div class="col-md-6 col-sm-6">
-									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Company Motto">
-									</div>
-								</div>
+                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                        <div style=" margin-bottom:0px;display: block !important;" class="input-group">
+                                            <label for="firstname2"></label>
+                                            <input required value="{{ company_motto }}" name="company_motto" id="firstname2" type="text" class="form-control" placeholder="Company Motto" >
+                                        </div >
+                                        <small id="passwordHelpBlock" class="form-text text-muted">
+                                          Company Motto.
+                                        </small>
+                                    </div>
 
-								<div class="col-md-6 col-sm-6">
-									<div class="input-group">
-										<select id="choose-category" class="form-control input-lg">
-											<option selected disabled>Company Categories</option>
-											<option>Software</option>
-											<option>Hardware</option>
-											<option>Machanical</option>
-											<option>HR/Manager</option>
-										</select>
-									</div>
-								</div>
-                                <div class="col-md-6 col-sm-6">
-									<div class="input-group">
-										<select id="choose-entity" class="form-control input-lg">
-											<option selected disabled>Type of Business Entity</option>
-											<option>Limited Liability Company</option>
-											<option>Partnership</option>
-											<option>Corporation</option>
-											<option>Proprietorship</option>
-											<option>Trust</option>
-											<option>other</option>
-										</select>
-									</div>
-								</div>
+                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                        <div style=" display: block !important;" class="input-group">
+                                            <select required  name="category" id="choose-category" class="form-control input-lg">
+                                                <option {% if category %} selected {% else %}selected disabled{% endif %} >{% if category %} {{category}} {% else %}Company Categories{% endif %}</option>
+                                                <option value="1">Software</option>
+                                                <option value="2">Hardware</option>
+                                                <option value="3">Machanical</option>
+                                                <option value="4">HR/Manager</option>
+                                            </select>
+                                        </div >
+                                        <small id="passwordHelpBlock" class="form-text text-muted">
+                                          Company Category.
+                                        </small>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                        <div style="margin-top: 0px; display: block !important;" class="input-group" >
+                                            <select required name="bizness_entity_type" id="choose-entity" class="form-control input-lg">
+                                                <option {% if bizness_entity_type %} selected {% else %} selected disabled{% endif %}>{% if bizness_entity_type %} {{ bizness_entity_type }} {% else %}Type of Business Entity{% endif %}</option>
+                                                <option>Limited Liability Company</option>
+                                                <option>Partnership</option>
+                                                <option>Corporation</option>
+                                                <option>Proprietorship</option>
+                                                <option>Trust</option>
+                                                <option>other</option>
+                                            </select>
+                                        </div>
+                                        <small id="passwordHelpBlock" class="form-text text-muted">
+                                          Company Business Entity.
+                                        </small>
+                                    </div>
 
-								<div class="col-md-6 col-sm-6" style="margin-top: 8px;">
-									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Company CEO FIrst Name">
-									</div>
-								</div>
-                                <div class="col-md-6 col-sm-6" style="margin-top: 8px;">
-									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Company CEO Last Name">
-									</div>
-								</div>
+                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                        <div style="margin-top: 0px; display: block !important;" class="input-group">
+                                            <label for="kk1"></label>
+                                            <input required value="{{ first_name }}" name="first_name" id="kk1" type="text" class="form-control" placeholder="Company CEO FIrst Name">
+                                        </div>
+                                        <small id="passwordHelpBlock" class="form-text text-muted">
+                                          Company CEO First Name.
+                                        </small>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                        <div style="margin-top: 0px; display: block !important;" class="input-group">
+                                            <label for="kk2"></label>
+                                            <input required value="{{ last_name }}" name="last_name" id="kk2" type="text" class="form-control" placeholder="Company CEO Last Name">
+                                        </div>
+                                        <small id="passwordHelpBlock" class="form-text text-muted">
+                                          Company CEO Last Name.
+                                        </small>
+                                    </div>
 
-                                <div class="col-md-6 col-sm-6" style="margin-top: 8px;">
-									<div class="input-group">
-										<input type="email" class="form-control" placeholder="Company CEO Email">
-									</div>
-								</div>
+                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                        <div style="margin-top: 0px; display: block !important;" class="input-group">
+                                            <input required value="{{ email }}" name="email" type="email" class="form-control" placeholder="Company CEO Email">
+                                        </div><small id="passwordHelpBlock" class="form-text text-muted">
+                                          Company CEO Email.
+                                        </small>
+                                    </div>
 
-                                <div class="col-md-6 col-sm-6" style="margin-top: 8px;">
-									<div class="input-group">
-                                        <span class="input-group-addon orangebg"> Date Created</span>
-                                       <input style="margin-bottom:0" data-dd-theme="vanilla" placeholder="Company Start Date" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
-									</div>
-								</div>
-								<div class="col-md-12 col-sm-12" style="margin-top: 10px;">
-									<textarea class="form-control" placeholder="Company Description"></textarea>
-								</div>
-							</form>
-						</div>
+                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                        <div style="margin-top: 0px; " class="input-group">
+                                            <span class="input-group-addon orangebg"> Date Created</span>
+                                           <input required value="{{ date_created|date:'Y-m-d' }}" name="date_created" style="margin-bottom:0" data-dd-theme="vanilla" placeholder="Company Start Date" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
+                                        </div><small id="passwordHelpBlock" class="form-text text-muted">
+                                          Date Created.
+                                        </small>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12" style="margin-top: 10px;">
+                                        <input value="{{ description }}" name="description" type="text" class="form-control" placeholder="Company Description eg.Construction Company">
+                                    </div>
+                                </form>
+                            </div>
 
-						<div class="row no-padd">
-							<div class="detail pannel-footer">
-								<div class="col-md-12 col-sm-12">
-									<div class="detail-pannel-footer-btn pull-right">
-										<a href="#" class="footer-btn choose-cover">Choose Cover Image</a>
-									</div>
-								</div>
-							</div>
-						</div>
+{#                            <div class="row no-padd">#}
+{#                                <div class="detail pannel-footer">#}
+{#                                    <div class="col-md-12 col-sm-12">#}
+{#                                        <div class="detail-pannel-footer-btn pull-right">#}
+{#                                            <a href="#" class="footer-btn choose-cover">Choose Cover Image</a>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
 
-					</div>
-				</div>
-			</div>
-			<!-- General Detail End -->
+                        </div>
+                    </div>
+                </div>
+                <!-- General Detail End -->
 
-			<!-- Basic Full Detail Form Start -->
-			<section class="full-detail">
-				<div class="container">
-					<div class="row bottom-mrg extra-mrg">
-							<h2 class="detail-title">Company Information</h2>
-
-{#							<div class="col-md-6 col-sm-6">#}
-{#								<div class="input-group">#}
-{#									<span class="input-group-addon"><i class="fa fa-flag"></i></span>#}
-{#									<input type="text" class="form-control" placeholder="Company Name">#}
-{#								</div>#}
-{#							</div>#}
-{##}
-{#							<div class="col-md-6 col-sm-6">#}
-{#								<div class="input-group">#}
-{#									<span class="input-group-addon"><i class="fa fa-pencil-alt"></i></span>#}
-{#									<input type="text" class="form-control" placeholder="Company Tagline">#}
-{#								</div>#}
-{#							</div>#}
-
-							<div class="col-md-6 col-sm-6">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-									<input type="text" class="form-control" placeholder="Company Email">
-								</div>
-							</div>
-
-{#							<div class="col-md-6 col-sm-6">#}
-{#								<div class="input-group">#}
-{#									<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>#}
-{#									<input type="text" class="form-control" placeholder="Local E.g. It Park New">#}
-{#								</div>#}
-{#							</div>#}
-
-							<div class="col-md-6 col-sm-6">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-globe"></i></span>
-									<input type="text" class="form-control" placeholder="Website">
-								</div>
-							</div>
-
+                <!-- Basic Full Detail Form Start -->
+                <section class="full-detail">
+                    <div class="container">
+                        <div class="row bottom-mrg extra-mrg">
+                            <h2 class="detail-title">Company Information</h2>
                             <div class="col-md-6 col-sm-6">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-file-code-o"></i></span>
-									<input type="text" class="form-control" placeholder="KRA Number">
-								</div>
-							</div>
-
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                    <input value="{{ company_email }}" name="company_email" type="text" class="form-control" placeholder="Company Email">
+                                </div>
+                            </div>
                             <div class="col-md-6 col-sm-6">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-building"></i></span>
-									<input type="text" class="form-control" placeholder="Business Number">
-								</div>
-							</div>
-
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-globe"></i></span>
+                                    <input value="{{ website }}" name="website" type="text" class="form-control" placeholder="Website">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-file-code-o"></i></span>
+                                    <input value="{{ kra_number }}" name="kra_number" type="text" class="form-control" placeholder="KRA Number">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-building"></i></span>
+                                    <input value="{{ bussiness_reg_no }}" name="bussiness_reg_no" type="text" class="form-control" placeholder="Business Regestration Number">
+                                </div>
+                            </div>
                             <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
                                     <div class="input-group" style="margin-bottom: 0;" >
                                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                        <select id="choose-city" class="form-control input-lg">
-                                            <option selected>County</option>
-                                            <option value="Nairobi">NAirobi</option>
-                                            <option value="Nairobi">NAirobi</option>
-                                            <option value="Nairobi">NAirobi</option>
-                                            <option>NAirobi</option>
-                                            <option>NAirobi</option>
-                                            <option>NAirobi</option>
-                                            <option>NAirobi</option>
-                                            <option>NAirobi</option>
-                                            <option>NAirobi</option>
+                                        <select name="county" id="choose-city" class="form-control input-lg">
+                                            <option {% if county %} {% else %}selected disabled{% endif %}>County</option>
+                                            {% for county in counties %}
+                                                <option {% if county %} selected {% endif %} value="{{ county.properties.COUNTY_NAM }}">{{ county.properties.COUNTY_NAM }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <small id="lastname" class="form-text text-muted" style="margin-bottom: 8px;">
@@ -193,14 +190,11 @@
                             <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
                                 <div class="input-group" style="margin-bottom: 0;">
                                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>
-                                    <select id="choose-region" class="form-control input-lg">
-                                        <option selected disabled>Region</option>
-                                        <option>Langata</option>
-                                        <option>Langata</option>
-                                        <option>Langata</option>
-                                        <option>Langata</option>
-                                        <option>Langata</option>
-                                        <option>Langata</option>
+                                    <select name="region" id="choose-region" class="form-control input-lg">
+                                     <option {% if county %} {% else %}selected disabled{% endif %}>Sub-County</option>
+                                        {% for region in regions %}
+                                            <option {% if county %} selected {% endif %} {% if region.properties.CONSTITUEN == "None" %} disabled {% endif %} value="{{ region.properties.CONSTITUEN }}">{{ region.properties.CONSTITUEN }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                                 <small id="lastname" class="form-text text-muted" >
@@ -208,84 +202,103 @@
                                 </small>
                             </div>
                             <div class="col-md-12 col-sm-12 " style="margin-bottom: 8px;">
-                                    <div class="input-group" style="margin-bottom: 0;">
-                                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                        <input id="landmark" type="text" class="form-control" placeholder="Landmark" >
+                                        <div class="input-group" style="margin-bottom: 0;">
+                                            <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                            <input value="{{ landmark }}" name="landmark" id="landmark" type="text" class="form-control" placeholder="Landmark" >
+                                        </div>
+                                        <small id="phonnumber" class="form-text text-muted">
+                                           eg Nearest road/School/Market/.
+                                        </small>
                                     </div>
-                                    <small id="phonnumber" class="form-text text-muted">
-                                       eg Nearest road/School/Market/.
-                                    </small>
+                        </div>
+                        <div class="row bottom-mrg extra-mrg">
+                            <h2 class="detail-title">Social Profile</h2>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fab fa-facebook-f"></i></span>
+                                    <input value="{{ facebook }}" name="facebook" type="text" class="form-control" placeholder="Facebook Link">
                                 </div>
                             </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fab fa-google-plus"></i></span>
+                                    <input value="{{ googlr_plus }}" name="googlr_plus" type="text" class="form-control" placeholder="Google+ Link">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fab fa-twitter"></i></span>
+                                    <input value="{{ twitter }}" name="twitter" type="text" class="form-control" placeholder="Twitter Link">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fab fa-instagram"></i></span>
+                                    <input value="{{ instagram }}" name="instagram" type="text" class="form-control" placeholder="Instagram Link">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fab fa-linkedin"></i></span>
+                                        <input value="{{ linkedin }}" name="linkedin" type="text" class="form-control" placeholder="Linkedin Link">
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row bottom-mrg extra-mrg">
+                            <h2 class="detail-title">A Brief Detail</h2>
+                            <div class="col-md-12 col-sm-12">
+                                <textarea name="brief_details" class="form-control textarea2" placeholder="About Company">{% if brief_details %} {{brief_details}}{% endif %}</textarea>
+                            </div>
+                        </div>
 
-					<div class="row bottom-mrg extra-mrg">
-							<h2 class="detail-title">Social Profile</h2>
-
-							<div class="col-md-6 col-sm-6">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fab fa-facebook-f"></i></span>
-									<input type="text" class="form-control" placeholder="Facebook Link">
-								</div>
-							</div>
-
-							<div class="col-md-6 col-sm-6">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fab fa-google-plus"></i></span>
-									<input type="text" class="form-control" placeholder="Google+ Link">
-								</div>
-							</div>
-
-							<div class="col-md-6 col-sm-6">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fab fa-twitter"></i></span>
-									<input type="text" class="form-control" placeholder="Twitter Link">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fab fa-instagram"></i></span>
-									<input type="text" class="form-control" placeholder="Instagram Link">
-								</div>
-							</div>
-
-							<div class="col-md-6 col-sm-6">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fab fa-linkedin"></i></span>
-									<input type="text" class="form-control" placeholder="Linkedin Link">
-								</div>
-							</div>
-
-					</div>
-
-					<div class="row bottom-mrg extra-mrg">
-							<h2 class="detail-title">A Brief Detail</h2>
-							<div class="col-md-12 col-sm-12">
-								<textarea name="aboutcompany" class="form-control textarea2" placeholder="About Company"></textarea>
-							</div>
+                        <div class="row bottom-mrg extra-mrg">
+                            <h2 class="detail-title">Password</h2>
+                            <div class="col-md-12 col-sm-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fas fa-key"></i></span>
+                                    <input name="password1" type="password" class="form-control" autocomplete="off" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fas fa-key"></i></span>
+                                    <input name="password2" type="password" class="form-control" placeholder="Confirm Password">
+                                </div>
+                            </div>
                             <div class="row bottom-mrg extra-mrg">
                              <div class="col-md-12 col-sm-12 mrg-top-25">
                                  <div class="custom-control custom-radio custom-control-inline" style="margin-right: 20px;">
                                      <label  class="custom-control-label" for="customRadio"></label>
                                      <span>
-                                         <input onchange="openSubmit();" type="checkbox" class="custom-control-input customRadio" id="termschecks" name="example" value="">
+                                         <input  onchange="openSubmit2();" type="checkbox" class="custom-control-input customRadio" id="termschecks2" name="example" value="">
                                          Agree to terms and conditions <a href="#">Terms</a>
                                      </span>
                                 </div>
                             </div>
                         </div>
-							<div class="col-md-12 col-sm-12">
-								<button style="visibility: hidden;" id="submitbutton" type="submit" class="btn btn-success btn-primary small-btn">Submit your company</button>
-							</div>
-					</div>
-				</div>
-			</section>
-			<!-- Basic Full Detail Form End -->
+                        </div>
+                        <div class="col-md-12 col-sm-12 row">
+        {#                                <input id="submitbutton" type="submit" class="btn btn-success btn-primary small-btn" value="Submit">#}
+                            <button id="submitbutton2" type="submit"  class="btn btn-success btn-primary small-btn">Submit your company</button>
+        {#                    <button type="submit" class="btn btn-success btn-primary small-btn">go1</button>#}
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row text-right" style="">
+                                <p>Create an account as a Personel<a href="{% url 'LML:signup' %}"> Here </a></p>
+                            </div>
+                        </div>
+                        <!-- Basic Full Detail Form End -->
+                    </div>
+                </section>
+                </div>
+        </form>
+
 {% endblock content %}
 {% block script %}
     <script>
          $('#dob').dateDropper();
 
-         CKEDITOR.replace( 'aboutcompany',{
+         CKEDITOR.replace( 'brief_details',{
               removePlugins: [  'Image', ],
          } );
 

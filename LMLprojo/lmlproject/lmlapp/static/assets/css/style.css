@@ -1630,9 +1630,9 @@ color:#ffffff;
 ========================================================================== */
 .navbar-default {
 background-image: none;
-background-image: none;
-background-image: none;
-background-image: none;
+/*background-image: none;*/
+/*background-image: none;*/
+/*background-image: none;*/
 filter: none;
 background-repeat: repeat-x;
 border-radius: 0;
@@ -1640,9 +1640,9 @@ border-radius: 0;
 box-shadow: none;
 }
 nav.navbar.bootsnav ul.nav > li > a {
-color: #ffffff;
-text-transform: uppercase;
-background-color: transparent !important;
+	color: #000000;
+	text-transform: uppercase;
+	background-color: transparent !important;
 }
 .navbar .form-control {
 font-weight: 400;
@@ -1693,8 +1693,8 @@ color: #fff !important;
 padding: 10px 15px;
 }
 nav.navbar.bootsnav {
-background-color: #343f4b;
-border-bottom: 1px solid #35434E;
+	background-color: #fff;
+	border-bottom: 1px solid #35434E;
 }
 @media only screen  and (min-width : 768px) {
 /*------------Navigation------*/

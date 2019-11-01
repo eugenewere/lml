@@ -6,8 +6,12 @@ from . import views
 app_name = 'LML'
 urlpatterns = [
     path('', views.home, name="home"),
+    path('signup/', views.signup_initial, name="signup_initial"),
+
     path('personelsignup/', views.signup, name="signup"),
     path('companysignup/', views.companysignup, name="companysignup"),
+    path('companysignup/formhandling/', views.company_signupform_handling, name="company_signup_formhandling"),
+
     path('signin/', views.signin, name="signin"),
 
     path('employeeprofile/', views.employeeprofile, name="employeeprofile"),

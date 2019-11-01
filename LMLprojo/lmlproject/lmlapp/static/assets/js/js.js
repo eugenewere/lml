@@ -1,17 +1,39 @@
 
-
+var submit_button= document.getElementById('submitbutton').setAttribute('disabled', 'disabled');
+var submit_button2= document.getElementById('submitbutton2').setAttribute('disabled', 'disabled');
+// function onloadd() {
+//     if (submit_button.hasAttribute('disabled')){
+//         alert("Please agree to the terms and conditions to proceed");
+//     }
+// }
 
 function openSubmit() {
     var submitbutton = document.getElementById('submitbutton');
     var termscheck = document.getElementById("termschecks");
+    var attr = submitbutton.getAttributeNode("disabled");
+
 
     if(termscheck.checked === true){
-        submitbutton.style.visibility = "visible";
+        submitbutton.removeAttribute("disabled");
     }else {
-        submitbutton.style.visibility = "hidden";
-    }
+        submitbutton.setAttribute("disabled", "disabled");
 
+    }
 }
+function openSubmit2() {
+    var submitbutton2 = document.getElementById('submitbutton2');
+    var termscheck2 = document.getElementById("termschecks2");
+    var attr = submitbutton.getAttributeNode("disabled");
+
+
+    if(termscheck2.checked === true){
+        submitbutton2.removeAttribute("disabled");
+    }else {
+        submitbutton2.setAttribute("disabled", "disabled");
+
+    }
+}
+
 
 // var yesscheckbox = document.getElementById('yes');
 // var nocheckbox = document.getElementById('no');
@@ -176,15 +198,21 @@ function readURL(input) {
       linkElement: 'a:not([target="_blank"]):not([href^="#"]):not([class^="chosen-single"]):not([class^="not_a_link"]) textarea:not([class^="form-control"])',
       loading: true,
       loadingParentElement: 'html',
-      loadingClass: 'Loader',
-      loadingInner: '<div class="page-loader__spin"></div>',
+      loadingClass: 'Loader-bg',
+      loadingInner: '<div class="loader">' +
+                          '<span></span>' +
+                          '<span></span>' +
+                          '<span></span>' +
+                          '<span></span>' +
+                      '</div>',
       timeout: false,
+      touchSupport  :   true,
       timeoutCountdown: 5000,
       onLoadEvent: true,
       browser: ['animation-duration', '-webkit-animation-duration'],
       overlay: false,
       overlayClass: 'animsition-overlay-slide',
-      overlayParentElement: 'html',
+      overlayParentElement: 'body',
       transition: function (url) {
         window.location.href = url;
       }
@@ -192,7 +220,6 @@ function readURL(input) {
 
 
   })(jQuery);
-
 
 
 
