@@ -1,3 +1,12 @@
+var disability = document.getElementsByClassName('des')[0];
+    function openDisability() {
+        disability.style.display="block";
+    }
+    function closeDisability() {
+        disability.style.display="none";
+    }
+
+
 
 var submit_button= document.getElementById('submitbutton').setAttribute('disabled', 'disabled');
 var submit_button2= document.getElementById('submitbutton2').setAttribute('disabled', 'disabled');
@@ -37,13 +46,6 @@ function openSubmit2() {
 
 // var yesscheckbox = document.getElementById('yes');
 // var nocheckbox = document.getElementById('no');
-var disability = document.getElementById('disability');
-    function openDisability() {
-        disability.style.display="block";
-    }
-    function closeDisability() {
-        disability.style.display="none";
-    }
 
 
 var phd = document.getElementsByClassName("phd");
@@ -151,7 +153,7 @@ var graduationdate = document.getElementsByClassName("graduation");
 
 
 
-var employer = document.getElementsByClassName('employer');
+var employer = document.getElementsByClassName('employerwrapper');
 var clonebutton1 = document.getElementById('clonebutton1');
 var clonebutton2 = document.getElementById('clonebutton2');
 

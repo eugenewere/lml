@@ -151,7 +151,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12 col-sm-12" style="padding: 0;">
-                                            <textarea style="display:none;" id="disability" class="form-control" placeholder="What type of disability"></textarea>
+                                            <label for="disability"></label>
+                                            <textarea style="display:none;" id="disability" class="des form-control" placeholder="What type of disability"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -365,43 +366,39 @@
                                                     <label class="custom-control-label" for="customRadio2x">No</label>
                                                 </div>
                                             </div>
-                                            <div style="margin-top:8px; display: none;" id="employer" class="employer col-md-12 col-sm-12" >
+                                            <div style="margin-top:8px; display: none;" id="employer" class="employerwrapper col-md-12 col-sm-12" >
                                                 <label for="emplo">Company Employer Name</label>
                                                 <input style="margin-bottom: 0;" id="emplo" type="text" class="form-control" placeholder="Employer's Name">
                                                 <small id="lastname" class="form-text text-muted">
                                                   eg John doe.
                                                 </small>
                                             </div>
-                                            <div style="margin-top: 8px; display: none;" id="employercompany" class=" employer col-md-12 col-sm-12" >
+                                            <div style="margin-top: 8px; display: none;" id="employercompany" class="employerwrapper col-md-12 col-sm-12" >
                                                 <label for="emplocomp">Company Name</label>
                                                 <input style="margin-bottom: 0;" id="emplocomp" type="text" class="form-control" placeholder="Employer's Company">
                                                 <small id="lastname" class="form-text text-muted">
                                                   eg abc company.
                                                 </small>
                                             </div>
-                                            <div style="margin-top: 8px; display: none;" id="employercompany" class=" employer col-md-12 col-sm-12" >
+                                            <div style="margin-top: 8px; display: none;" id="employercompany" class="employerwrapper col-md-12 col-sm-12" >
                                                 <label for="emplocompemail">Company email</label>
                                                 <input style="margin-bottom: 0;" id="emplocompemail" type="email" class="form-control" placeholder="Employer's email">
                                                 <small id="lastname" class="form-text text-muted">
                                                   eg abc.example.org abc.example.com .
                                                 </small>
                                             </div>
-
-
-                                            <div style="margin-top: 8px; display: none;" id="employercompany" class=" employer col-md-12 col-sm-12" >
+                                            <div style="margin-top: 8px; display: none;" id="employercompany" class="employerwrapper col-md-12 col-sm-12" >
                                                 <label for="emplocomp4n">Company Phone</label>
                                                 <input style="margin-bottom: 0;" id="emplocomp4n" type="text" class="form-control" placeholder="Employer's Phonenumber">
                                                 <small id="lastname" class="form-text text-muted">
                                                   eg 07********.
                                                 </small>
                                             </div>
-
-                                            <div class="employer col-md-12 col-sm-12" style="margin-top:8px; display: none;">
+                                            <div class="employerwrapper col-md-12 col-sm-12" style="margin-top:8px; display: none;">
                                                 <label for="kke">Position Held</label>
                                                 <input id="kke" type="text" class="form-control" placeholder="Position, e.g. Web Designer">
                                             </div>
-
-                                            <div class="employer col-md-12 col-sm-12" style="margin-top:8px; display: none;">
+                                            <div class="employerwrapper col-md-12 col-sm-12" style="margin-top:8px; display: none;">
                                                 <h4>Date</h4>
                                                 <div class="col-md-6 col-sm-6" >
                                                     <div class="input-group">
@@ -417,8 +414,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="employer col-md-12 col-sm-12" style="margin-top:8px; display: none;">
+                                            <div class="employerwrapper col-md-12 col-sm-12" style="margin-top:8px; display: none;">
                                                 <label for="emplomsg"></label>
                                                 <textarea id="emplomsg" class="form-control textarea" placeholder="Optional notes on the experience"></textarea>
                                             </div>
@@ -448,7 +444,7 @@
                                             </div>
 
                                              <div class="col-md-12 col-sm-12 ">
-                                                 <div class="input-group"style="margin-bottom: 8px;">
+                                                 <div class="input-group" style="margin-bottom: 8px;">
                                                      <span class="input-group-addon"><i class="fas fa-user"></i></span>
                                                      <input id="ref" type="text" class="form-control" placeholder="Referee Name">
                                                  </div>
@@ -457,11 +453,11 @@
                                                 </small>
                                              </div>
                                              <div class="col-md-12 col-sm-12 ">
-                                                 <div class="input-group"style="margin-bottom: 8px;">
+                                                 <div class="input-group" style="margin-bottom: 8px;">
                                                      <span class="input-group-addon"><i class="fas fa-mobile-phone"></i></span>
-                                                     <input id="ref" type="text" class="form-control" placeholder="Referee Phone Number">
+                                                     <input id="refh" type="text" class="form-control" placeholder="Referee Phone Number">
                                                  </div>
-                                                 <small id="lastname" class="form-text text-muted">
+                                                 <small id="lastnamehh" class="form-text text-muted">
                                                   eg Referee Phone Number.
                                                 </small>
                                              </div>
@@ -530,5 +526,5 @@
                 );
 
 			</script>
-            <script src="{% static 'assets/js/js.js' %}" type="text/javascript" ></script>
+{#            <script src="{% static 'assets/js/js.js' %}" type="text/javascript" ></script>#}
 {% endblock script %}

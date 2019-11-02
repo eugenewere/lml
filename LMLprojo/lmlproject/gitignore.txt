@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 .idea
 lml
+=======
+.idea
+>>>>>>> 9b29764fe1cabffda57936b49de5c4fa08aa279e

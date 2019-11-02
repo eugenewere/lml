@@ -64,102 +64,95 @@ def signup(request):
         'regions':data2['features'],
 
 
+
     }
     return render(request, 'normal/signup/signup.html',context)
 
 def company_signupform_handling(request):
-    logo = request.FILES['upload-pic']
-    company_name = request.POST['company_name']
-    company_email = request.POST['company_email']
-    company_motto = request.POST['company_motto']
-    category = request.POST['category']
-    bizness_entity_type = request.POST['bizness_entity_type']
-    website = request.POST['website']
-    bussiness_reg_no = request.POST['bussiness_reg_no']
-    county = request.POST['county']
-    description = request.POST['description']
-    region = request.POST['region']
-    landmark = request.POST['landmark']
-    brief_details = request.POST['brief_details']
-    kra_number = request.POST['kra_number']
-    date_created = request.POST['date_created']
 
-    first_name = request.POST['first_name']
-    last_name = request.POST['last_name']
-    email = request.POST['email']
+    company_name = request.POST.get('company_name')
+    company_email = request.POST.get('company_email')
+    company_motto = request.POST.get('company_motto')
+    category = request.POST.get('category')
+    bizness_entity_type = request.POST.get('bizness_entity_type')
+    website = request.POST.get('website')
+    bussiness_reg_no = request.POST.get('bussiness_reg_no')
+    county = request.POST.get('county')
+    description = request.POST.get('description')
+    region = request.POST.get('region')
+    landmark = request.POST.get('landmark')
+    brief_details = request.POST.get('brief_details')
+    kra_number = request.POST.get('kra_number')
+    date_created = request.POST.get('date_created')
+    logo = request.FILES.get('logo')
 
-    facebook = request.POST['facebook']
-    googlr_plus = request.POST['googlr_plus']
-    twitter = request.POST['twitter']
-    instagram = request.POST['instagram']
-    linkedin = request.POST['linkedin']
+    first_name = request.POST.get('first_name')
+    last_name = request.POST.get('last_name')
+    email = request.POST.get('email')
+    username = request.POST.get('username')
+
+    facebook = request.POST.get('facebook')
+    googlr_plus = request.POST.get('googlr_plus')
+    twitter = request.POST.get('twitter')
+    instagram = request.POST.get('instagram')
+    linkedin = request.POST.get('linkedin')
+
+
     if request.method == 'POST':
-        form = CompanyUserSignUpForm(request.POST)
-        socialform = CompanySocialsForm(request.POST)
-        company_other_details = CompanyOtherDetailForm(request.POST, request.FILES)
-        if form.is_valid() :
-            company_id = form.save()
-            form.er
+        # form = CompanyUserSignUpForm(request.POST)
+        form = CompanyRegisterForm(request.POST, request.FILES)
+        # form2 = CompanyOtherDetailForm(request.POST, request.FILES)
+        print(form)
+        if form.is_valid():
+            new_user = form.save()
             CompanySocialAccount.objects.create(
-                company=company_id,
+                company=new_user,
                 facebook=facebook,
                 googlr_plus=googlr_plus,
                 twitter=twitter,
                 instagram=instagram,
                 linkedin=linkedin,
             )
-            Company.objects.create(
-                logo=logo,
-                company_name=company_name,
-                company_email=company_email,
-                company_motto=company_motto,
-                category=category,
-                bizness_entity_type=bizness_entity_type,
-                website=website,
-                bussiness_reg_no=bussiness_reg_no,
-                county=county,
-                description=description,
-                region=region,
-                landmark=landmark,
-                brief_details = brief_details,
-                kra_number=kra_number,
-                date_created=date_created,
-            )
-
-            sweetify.success(request, 'You did it', text='Good job! You successfully registered', persistent='Hell yeah')
+            sweetify.success(request, 'You did it', text='Good job! You successfully registered', persistent='Ok')
+            return redirect('LML:companysignup')
         else:
+            formr = CompanyRegisterForm()
+            print(formr.errors)
             sweetify.error(request, 'Error', text='Ensure you fill all fields correctly', persistent='Retry')
-            args={'form':form, 'socialform':socialform ,}
-            return redirect('LML:companysignup', args)
+            return render(request, 'normal/signup/create-company.html', {'form':formr, 'categories': Category.objects.all(),})
+            # return redirect('LML:companysignup',{'form':formr})
+    else:
+        formr = CompanyRegisterForm()
+        return redirect('LML:companysignup')
+
+    # context = {
+    #     'logo': logo,
+    #     'company_name': company_name,
+    #     'company_email': company_email,
+    #     'company_motto': company_motto,
+    #     'categoryy': category,
+    #     'bizness_entity_type': bizness_entity_type,
+    #     'website': website,
+    #     'bussiness_reg_no': bussiness_reg_no,
+    #     'county': county,
+    #     'regiont': region,
+    #     'landmark': landmark,
+    #     'brief_details': brief_details,
+    #     'date_created': date_created,
+    #     'first_name': first_name,
+    #     'last_name': last_name,
+    #     'email': email,
+    #     'facebook': facebook,
+    #     'googlr_plus': googlr_plus,
+    #     'twitter': twitter,
+    #     'instagram': instagram,
+    #     'linkedin': linkedin,
+    #     'description': description,
+    #     'kra_number': kra_number,
+    #     'username': username,
+    # }
 
 
-
-    context = {
-       'logo':logo,
-       'company_name':company_name,
-       'company_email':company_email,
-       'company_motto':company_motto,
-       'category':category,
-       'bizness_entity_type':bizness_entity_type,
-       'website':website,
-       'bussiness_reg_no':bussiness_reg_no,
-       'county':county,
-       'region':region,
-       'landmark':landmark,
-       'brief_details':brief_details,
-       'date_created':date_created,
-       'first_name':first_name,
-       'last_name':last_name,
-       'email':email,
-       'facebook':facebook,
-       'googlr_plus':googlr_plus,
-       'twitter':twitter,
-       'instagram':instagram,
-       'linkedin':linkedin,
-       'description':description,
-       'kra_number':kra_number,
-    }
-    return redirect('LML:companysignup',context)
 
 
 
@@ -200,6 +193,7 @@ def companysignup(request):
         'title': 'Create an account',
         'counties': data['features'],
         'regions': data2['features'],
+        'categories': Category.objects.all(),
 
 
     }
