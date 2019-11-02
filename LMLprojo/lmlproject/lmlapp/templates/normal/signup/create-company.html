@@ -24,8 +24,8 @@
                             <div class="row">
                                 <div class="detail-pic js">
                                     <div class="box companybox">
-                                        <input value="{{ logo }}"  required  style="position: relative;" onchange="readURL(this)" type="file" name="logo" id="upload-pic" class="inputfile" />
-                                        <label   for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:15px; color: white; text-align: center;">Upload Your Logo</span></label>
+                                        <input autofocus value="{{ logo }}" required style="position: relative;" onchange="readURL(this)" type="file" name="logo" id="upload-pic" class="inputfile" />
+                                        <label  for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:15px; color: white; text-align: center;">Upload Your Logo</span></label>
                                         <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% static 'assets/img/client-1.jpg' %}" alt="">
                                     </div>
                                     <div id="disclaimer" class="disclaimer disclaimer-animated ">
@@ -33,17 +33,20 @@
                                     </div>
                                 </div>
                             </div>
-
+                                {% if  form.non_field_errors  %}
+                                    <div class="row">
+                                        <span class="alert alert-danger text-info errorlist">{{ form.non_field_errors }}</span>
+                                    </div>
+                                {% endif %}
                             <div class="row bottom-mrg">
                                 <form class="add-feild">
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style=" margin-bottom:0px;display: block !important;" class="input-group" >
                                             <label for="firstname"></label>
-                                            <input required value="{{ company_name }}" name="company_name" type="text" class="form-control" id="firstname" placeholder="Company Name" >
+                                            <input autofocus required value="{{ company_name }}" name="company_name" type="text" class="form-control" id="firstname" placeholder="Company Name" >
                                         </div >
                                         <small id="passwordHelpBlock" class="form-text text-muted">
                                           Company Name.
-
                                         </small>
                                     </div>
 
@@ -60,11 +63,10 @@
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style=" display: block !important;" class="input-group">
                                             <select required  name="category" id="choose-category" class="form-control input-lg">
-                                                <option {% if category %} selected {% else %}selected disabled{% endif %} >{% if category %} {{category}} {% else %}Company Categories{% endif %}</option>
-                                                <option value="1">Software</option>
-                                                <option value="2">Hardware</option>
-                                                <option value="3">Machanical</option>
-                                                <option value="4">HR/Manager</option>
+                                                <option {% if not categoryy %} selected  {% else %}selected disabled{% endif %} >Company Categories</option>
+                                                {% for category in categories %}
+                                                    <option {% if categoryy %} selected {% endif %} value="{{ category.id }}">{{ category.category }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div >
                                         <small id="passwordHelpBlock" class="form-text text-muted">
@@ -96,6 +98,7 @@
                                         <small id="passwordHelpBlock" class="form-text text-muted">
                                           Company CEO First Name.
                                         </small>
+
                                     </div>
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style="margin-top: 0px; display: block !important;" class="input-group">
@@ -113,6 +116,21 @@
                                         </div><small id="passwordHelpBlock" class="form-text text-muted">
                                           Company CEO Email.
                                         </small>
+                                        {% if form.email.errors %}
+                                            <div class="alert alert-danger">{{form.email.errors}}</div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                        <div style=" margin-bottom:0px;display: block !important;" class="input-group">
+                                            <label for="firstname3"></label>
+                                            <input required value="{{ username }}" name="username" id="firstname3" type="text" class="form-control" placeholder="Username" >
+                                        </div >
+                                        <small id="passwordHelpBlock" class="form-text text-muted">
+                                            Username.
+                                        </small>
+                                        {% if form.username.errors %}
+                                            <div class="alert alert-danger">{{form.username.errors}}</div>
+                                        {% endif %}
                                     </div>
 
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
@@ -123,9 +141,10 @@
                                           Date Created.
                                         </small>
                                     </div>
-                                    <div class="col-md-12 col-sm-12" style="margin-top: 10px;">
+                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <input value="{{ description }}" name="description" type="text" class="form-control" placeholder="Company Description eg.Construction Company">
                                     </div>
+
                                 </form>
                             </div>
 
@@ -152,32 +171,38 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                    <input value="{{ company_email }}" name="company_email" type="text" class="form-control" placeholder="Company Email">
+                                    <input required value="{{ company_email }}" name="company_email" type="text" class="form-control" placeholder="Company Email">
                                 </div>
+                                {% if form.company_email.errors %}
+                                    <div class="alert alert-danger">{{form.company_email.errors}}</div>
+                                {% endif %}
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-globe"></i></span>
-                                    <input value="{{ website }}" name="website" type="text" class="form-control" placeholder="Website">
+                                    <input  value="{{ website }}" name="website" type="text" class="form-control" placeholder="Website">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-file-code-o"></i></span>
-                                    <input value="{{ kra_number }}" name="kra_number" type="text" class="form-control" placeholder="KRA Number">
+                                    <span  class="input-group-addon"><i class="fa fa-file-code-o"></i></span>
+                                    <input required value="{{ kra_number }}" name="kra_number" type="text" class="form-control" placeholder="KRA Number">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-building"></i></span>
-                                    <input value="{{ bussiness_reg_no }}" name="bussiness_reg_no" type="text" class="form-control" placeholder="Business Regestration Number">
+                                    <input required value="{{ bussiness_reg_no }}" name="bussiness_reg_no" type="text" class="form-control" placeholder="Business Regestration Number">
+                                    {% if form.business_reg_no.errors %}
+                                        <div class="alert alert-danger errorlist">{{form.business_reg_no.errors}}</div>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
                                     <div class="input-group" style="margin-bottom: 0;" >
                                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                        <select name="county" id="choose-city" class="form-control input-lg">
-                                            <option {% if county %} {% else %}selected disabled{% endif %}>County</option>
+                                        <select required name="county" id="choose-city" class="form-control input-lg">
+                                            <option  {% if county %} {% else %}selected disabled{% endif %}>County</option>
                                             {% for county in counties %}
                                                 <option {% if county %} selected {% endif %} value="{{ county.properties.COUNTY_NAM }}">{{ county.properties.COUNTY_NAM }}</option>
                                             {% endfor %}
@@ -190,10 +215,10 @@
                             <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
                                 <div class="input-group" style="margin-bottom: 0;">
                                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>
-                                    <select name="region" id="choose-region" class="form-control input-lg">
-                                     <option {% if county %} {% else %}selected disabled{% endif %}>Sub-County</option>
+                                    <select required name="region" id="choose-region" class="form-control input-lg">
+                                     <option {% if region %} {% else %}selected disabled{% endif %}>Sub-County</option>
                                         {% for region in regions %}
-                                            <option {% if county %} selected {% endif %} {% if region.properties.CONSTITUEN == "None" %} disabled {% endif %} value="{{ region.properties.CONSTITUEN }}">{{ region.properties.CONSTITUEN }}</option>
+                                            <option {% if regiont %} selected {% endif %} {% if region.properties.CONSTITUEN == "None" %} disabled {% endif %} value="{{ region.properties.CONSTITUEN }}">{{ region.properties.CONSTITUEN }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -247,7 +272,7 @@
                         <div class="row bottom-mrg extra-mrg">
                             <h2 class="detail-title">A Brief Detail</h2>
                             <div class="col-md-12 col-sm-12">
-                                <textarea name="brief_details" class="form-control textarea2" placeholder="About Company">{% if brief_details %} {{brief_details}}{% endif %}</textarea>
+                                <textarea required name="brief_details" class="form-control textarea2" placeholder="About Company">{% if brief_details %} {{brief_details}}{% endif %}</textarea>
                             </div>
                         </div>
 
@@ -256,14 +281,28 @@
                             <div class="col-md-12 col-sm-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fas fa-key"></i></span>
-                                    <input name="password1" type="password" class="form-control" autocomplete="off" placeholder="Password">
+                                    <input required name="password1" type="password" class="form-control" autocomplete="off" placeholder="Password">
                                 </div>
+                                <div class="help-block list-unstyled text-muted">
+                                    {{ form.password1.help_text }}
+                                </div>
+                                {% if form.password1.errors %}
+                                    <div class="alert alert-danger errorlist text-danger">
+                                        {{form.password1.errors}}
+                                    </div>
+                                {% endif %}
                             </div>
                             <div class="col-md-12 col-sm-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fas fa-key"></i></span>
-                                    <input name="password2" type="password" class="form-control" placeholder="Confirm Password">
+                                    <input required name="password2" type="password" class="form-control" placeholder="Confirm Password">
                                 </div>
+                                <div class="help-block list-unstyled text-muted">
+                                    {{ form.password2.help_text }}
+                                </div>
+                                {% if form.password2.errors %}
+                                    <div class="alert alert-danger errorlist">{{form.password2.errors}}</div>
+                                {% endif %}
                             </div>
                             <div class="row bottom-mrg extra-mrg">
                              <div class="col-md-12 col-sm-12 mrg-top-25">
