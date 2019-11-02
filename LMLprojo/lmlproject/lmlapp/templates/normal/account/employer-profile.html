@@ -20,17 +20,24 @@
                 <div class="ur-detail-wrap create-kit padd-bot-0">
 
                     <div class="row">
-                        <div class="detail-pic"><img src="{% static 'assets/img/avatar/avatar2.png' %}" class="img" alt="" />
-                            <a href="#" class="detail-edit" title="edit"><i class="fa fa-user fa-spin"></i></a>
+                        <div class="detail-pic">
+                            {% if request.user.is_authenticated %}
+                                <img src="{{company.logo.url}}" class="img" alt="" />
+                                <a href="#" class="detail-edit" title="edit"><i class="fa fa-user fa-spin"></i></a>
+                            {% else %}
+                                <img src="{% static 'assets/img/avatar/avatar2.png' %}" class="img" alt="" />
+                                <a href="#" class="detail-edit" title="edit"><i class="fa fa-user fa-spin"></i></a>
+                            {% endif %}
                         </div>
-                        <div class="detail-status"><span>Active Now</span></div>
+{#                        <div class="detail-status"><span>Active Now</span></div>#}
                     </div>
 
                     <div class="row bottom-mrg">
                         <div class="col-md-12 col-sm-12">
                             <div class="advance-detail detail-desc-caption">
-                                <h4>Eugene Were</h4>
-                                <span class="designation">CEO & Founder</span>
+                                <h4 class="text-capitalize">{{company.company_name }} </h4>
+                                <span class="designation">CEO:</span>
+                                <span class="designation text-capitalize">{{request.user.first_name}} {{request.user.last_name}}</span>
 {#                                <ul>#}
 {#                                    <li><strong class="j-view">742</strong>Job Post</li>#}
 {#                                    <li><strong class="j-applied">570</strong>Job Like</li>#}
@@ -44,11 +51,21 @@
                         <div class="detail pannel-footer">
                             <div class="col-md-5 col-sm-5">
                                 <ul class="detail-footer-social">
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    {% if social.facebook %}
+                                       <li> <a href="{{social.facebook}}"><i style="margin-right: 5px; font-size: 20px;" class="fab fa-linkedin"></i></a></li>
+                                    {% endif %}
+                                    {% if social.facebook %}
+                                       <li><a href="{{ social.facebook }}"><i style="margin-right: 5px; font-size: 20px;" class="fab fa-facebook"></i></a></li>
+                                    {% endif %}
+                                    {% if social.instagram %}
+                                       <li><a href="{{ social.instagram }}"><i style="margin-right: 5px; font-size: 20px;" class="fab fa-instagram"></i></a></li>
+                                    {% endif %}
+                                    {% if social.twitter %}
+                                       <li><a href="{{ social.twitter }}"><i style="margin-right: 5px; font-size: 20px;" class="fab fa-twitter-square"></i></a></li>
+                                    {% endif %}
+                                    {% if social.googlr_plus %}
+                                       <li><a href="{{ social.googlr_plus }}"><i style="margin-right: 5px; font-size: 20px;" class="fab fa-google-plus-square"></i></a></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                             <div class="col-md-7 col-sm-7">
@@ -81,10 +98,8 @@
 							<div class="tab-content">
 								<!-- Start About Sec -->
 								<div id="about" class="tab-pane fade in active">
-									<h3>About ABC Company</h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla interdum sed diam ac fermentum. Mauris nec pellentesque neque. Cras nec diam euismod, congue sapien eu, fermentum libero. Vestibulum quis sem.</p>
+									<h3>About {{company.comany_name}} Company</h3>
+									{{ company.brief_details|safe|escape }}
 								</div>
 								<!-- End About Sec -->
 
@@ -92,12 +107,13 @@
 								<div id="address" class="tab-pane fade">
 									<h3>Company Info</h3>
 									<ul class="job-detail-des">
-										<li><span>County:</span> Nairobi</li>
-										<li><span>Region:</span> Juja</li>
-										<li><span>Landmark:</span> Uchumi</li>
-										<li><span>Email:</span> example@example.com</li>
-										<li><span>Website:</span> www.abc.co.ke</li>
-
+										<li><span>County:</span> {{company.county|title}}</li>
+										<li><span>Sub county:</span> {{company.region|title}}</li>
+										<li><span>Landmark:</span> {{company.landmark }}</li>
+										<li><span>Email:</span> {{company.company_email}}</li>
+                                        {% if company.website %}
+										    <li><span>Website:</span> {{company.website}}</li>
+                                        {% endif %}
 									</ul>
 								</div>
 								<!-- End Address Sec -->
@@ -105,359 +121,38 @@
 								<!-- Start Friend List -->
 								<div id="friends" class="tab-pane fade">
 									<div class="row">
-										<div class="col-md-4 col-sm-4">
-							<div class="grid-view brows-job-list">
-								<div class="brows-job-company-img">
-									<img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
-								</div>
-								<div class="brows-job-position">
-									<h3><a href="job-detail.html">Web Developer</a></h3>
-									<p><span>Google</span></p>
-								</div>
-								<div class="job-position">
-									<span class="job-num">5 Position</span>
-								</div>
-								<div class="brows-job-type">
-									<span class="part-time">Part Time</span>
-								</div>
-								<ul class="grid-view-caption">
-									<li>
-										<div class="brows-job-location">
-											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-										</div>
-									</li>
-									<li>
-										<p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-									</li>
-								</ul>
-							</div>
-						</div>
-										<div class="col-md-4 col-sm-4">
+                                        {% for companya in scompany %}
+										    <div class="col-md-4 col-sm-4">
                                             <div class="grid-view brows-job-list">
                                                 <div class="brows-job-company-img">
-                                                    <img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
+                                                    <img src="{{ companya.logo.url }}" class="img-responsive" alt="" />
                                                 </div>
                                                 <div class="brows-job-position">
-                                                    <h3><a href="job-detail.html">Web Developer</a></h3>
-                                                    <p><span>Google</span></p>
+                                                    <h3><a href="job-detail.html">{{companya.category}}</a></h3>
+                                                    <p><span>{{companya.company_name}}</span></p>
                                                 </div>
-                                                <div class="job-position">
-                                                    <span class="job-num">5 Position</span>
-                                                </div>
+{#                                                <div class="job-position">#}
+{#                                                    <span class="job-num">5 Position</span>#}
+{#                                                </div>#}
                                                 <div class="brows-job-type">
-                                                    <span class="part-time">Part Time</span>
+                                                    <span class="part-time">{{ companya.status }}</span>
                                                 </div>
                                                 <ul class="grid-view-caption">
                                                     <li>
                                                         <div class="brows-job-location">
-                                                            <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
+                                                            <p><i class="fa fa-map-marker"></i>{{companya.county|title }}</p>
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
+                                                        <p><i class="fa fa-map-marker"></i> {{ companya.region|title }}</p>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="grid-view brows-job-list">
-                                                <div class="brows-job-company-img">
-                                                    <img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
-                                                </div>
-                                                <div class="brows-job-position">
-                                                    <h3><a href="job-detail.html">Web Developer</a></h3>
-                                                    <p><span>Google</span></p>
-                                                </div>
-                                                <div class="job-position">
-                                                    <span class="job-num">5 Position</span>
-                                                </div>
-                                                <div class="brows-job-type">
-                                                    <span class="part-time">Part Time</span>
-                                                </div>
-                                                <ul class="grid-view-caption">
-                                                    <li>
-                                                        <div class="brows-job-location">
-                                                            <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="grid-view brows-job-list">
-                                                <div class="brows-job-company-img">
-                                                    <img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
-                                                </div>
-                                                <div class="brows-job-position">
-                                                    <h3><a href="job-detail.html">Web Developer</a></h3>
-                                                    <p><span>Google</span></p>
-                                                </div>
-                                                <div class="job-position">
-                                                    <span class="job-num">5 Position</span>
-                                                </div>
-                                                <div class="brows-job-type">
-                                                    <span class="part-time">Part Time</span>
-                                                </div>
-                                                <ul class="grid-view-caption">
-                                                    <li>
-                                                        <div class="brows-job-location">
-                                                            <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="grid-view brows-job-list">
-                                                <div class="brows-job-company-img">
-                                                    <img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
-                                                </div>
-                                                <div class="brows-job-position">
-                                                    <h3><a href="job-detail.html">Web Developer</a></h3>
-                                                    <p><span>Google</span></p>
-                                                </div>
-                                                <div class="job-position">
-                                                    <span class="job-num">5 Position</span>
-                                                </div>
-                                                <div class="brows-job-type">
-                                                    <span class="part-time">Part Time</span>
-                                                </div>
-                                                <ul class="grid-view-caption">
-                                                    <li>
-                                                        <div class="brows-job-location">
-                                                            <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="grid-view brows-job-list">
-                                                <div class="brows-job-company-img">
-                                                    <img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
-                                                </div>
-                                                <div class="brows-job-position">
-                                                    <h3><a href="job-detail.html">Web Developer</a></h3>
-                                                    <p><span>Google</span></p>
-                                                </div>
-                                                <div class="job-position">
-                                                    <span class="job-num">5 Position</span>
-                                                </div>
-                                                <div class="brows-job-type">
-                                                    <span class="part-time">Part Time</span>
-                                                </div>
-                                                <ul class="grid-view-caption">
-                                                    <li>
-                                                        <div class="brows-job-location">
-                                                            <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="grid-view brows-job-list">
-                                                <div class="brows-job-company-img">
-                                                    <img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
-                                                </div>
-                                                <div class="brows-job-position">
-                                                    <h3><a href="job-detail.html">Web Developer</a></h3>
-                                                    <p><span>Google</span></p>
-                                                </div>
-                                                <div class="job-position">
-                                                    <span class="job-num">5 Position</span>
-                                                </div>
-                                                <div class="brows-job-type">
-                                                    <span class="part-time">Part Time</span>
-                                                </div>
-                                                <ul class="grid-view-caption">
-                                                    <li>
-                                                        <div class="brows-job-location">
-                                                            <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="grid-view brows-job-list">
-                                                <div class="brows-job-company-img">
-                                                    <img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
-                                                </div>
-                                                <div class="brows-job-position">
-                                                    <h3><a href="job-detail.html">Web Developer</a></h3>
-                                                    <p><span>Google</span></p>
-                                                </div>
-                                                <div class="job-position">
-                                                    <span class="job-num">5 Position</span>
-                                                </div>
-                                                <div class="brows-job-type">
-                                                    <span class="part-time">Part Time</span>
-                                                </div>
-                                                <ul class="grid-view-caption">
-                                                    <li>
-                                                        <div class="brows-job-location">
-                                                            <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="grid-view brows-job-list">
-                                                <div class="brows-job-company-img">
-                                                    <img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
-                                                </div>
-                                                <div class="brows-job-position">
-                                                    <h3><a href="job-detail.html">Web Developer</a></h3>
-                                                    <p><span>Google</span></p>
-                                                </div>
-                                                <div class="job-position">
-                                                    <span class="job-num">5 Position</span>
-                                                </div>
-                                                <div class="brows-job-type">
-                                                    <span class="part-time">Part Time</span>
-                                                </div>
-                                                <ul class="grid-view-caption">
-                                                    <li>
-                                                        <div class="brows-job-location">
-                                                            <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="grid-view brows-job-list">
-                                                <div class="brows-job-company-img">
-                                                    <img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
-                                                </div>
-                                                <div class="brows-job-position">
-                                                    <h3><a href="job-detail.html">Web Developer</a></h3>
-                                                    <p><span>Google</span></p>
-                                                </div>
-                                                <div class="job-position">
-                                                    <span class="job-num">5 Position</span>
-                                                </div>
-                                                <div class="brows-job-type">
-                                                    <span class="part-time">Part Time</span>
-                                                </div>
-                                                <ul class="grid-view-caption">
-                                                    <li>
-                                                        <div class="brows-job-location">
-                                                            <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="grid-view brows-job-list">
-                                                <div class="brows-job-company-img">
-                                                    <img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
-                                                </div>
-                                                <div class="brows-job-position">
-                                                    <h3><a href="job-detail.html">Web Developer</a></h3>
-                                                    <p><span>Google</span></p>
-                                                </div>
-                                                <div class="job-position">
-                                                    <span class="job-num">5 Position</span>
-                                                </div>
-                                                <div class="brows-job-type">
-                                                    <span class="part-time">Part Time</span>
-                                                </div>
-                                                <ul class="grid-view-caption">
-                                                    <li>
-                                                        <div class="brows-job-location">
-                                                            <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="grid-view brows-job-list">
-                                                <div class="brows-job-company-img">
-                                                    <img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
-                                                </div>
-                                                <div class="brows-job-position">
-                                                    <h3><a href="job-detail.html">Web Developer</a></h3>
-                                                    <p><span>Google</span></p>
-                                                </div>
-                                                <div class="job-position">
-                                                    <span class="job-num">5 Position</span>
-                                                </div>
-                                                <div class="brows-job-type">
-                                                    <span class="part-time">Part Time</span>
-                                                </div>
-                                                <ul class="grid-view-caption">
-                                                    <li>
-                                                        <div class="brows-job-location">
-                                                            <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="grid-view brows-job-list">
-                                                <div class="brows-job-company-img">
-                                                    <img src="../../static/assets/img/com-2.jpg" class="img-responsive" alt="" />
-                                                </div>
-                                                <div class="brows-job-position">
-                                                    <h3><a href="job-detail.html">Web Developer</a></h3>
-                                                    <p><span>Google</span></p>
-                                                </div>
-                                                <div class="job-position">
-                                                    <span class="job-num">5 Position</span>
-                                                </div>
-                                                <div class="brows-job-type">
-                                                    <span class="part-time">Part Time</span>
-                                                </div>
-                                                <ul class="grid-view-caption">
-                                                    <li>
-                                                        <div class="brows-job-location">
-                                                            <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        {% endfor %}
                                     </div>
 
+                                    {% if scompany.count > 10 %}
                                     <div class="row">
                                         <ul class="pagination">
                                             <li><a href="#">«</a></li>
@@ -469,9 +164,10 @@
                                             <li><a href="#">»</a></li>
                                         </ul>
                                     </div>
+                                    {% endif %}
 
-								</div>
-								<!-- End Friend List -->
+                                </div>
+                                <!-- End Friend List -->
 
 								<!-- Start Settings -->
 								<div id="settings" class="tab-pane fade">
@@ -481,9 +177,9 @@
                                             <div class="row col-sm-12 col-md-12 mrg-top-20">
                                                 <div class="detail-pic js">
                                                     <div class="box companybox">
-                                                        <input required style="position: relative;" onchange="readURL(this)" type="file" name="upload-pic" id="upload-pic" class="inputfile" />
+                                                        <input value="{{ company.logo }}" required style="position: relative;" onchange="readURL(this)" type="file" name="upload-pic" id="upload-pic" class="inputfile" />
                                                         <label  for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:15px; color: white; text-align: center;">Upload Your Logo</span></label>
-                                                        <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% static 'assets/img/client-1.jpg' %}" alt="">
+                                                        <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{{company.logo.url}}" alt="">
                                                     </div>
                                                     <div id="disclaimer" class="disclaimer disclaimer-animated ">
                                                         Upload Logo
@@ -492,44 +188,43 @@
                                             </div>
 											<div class="col-md-4 col-sm-6">
 												<label>Ceo First Name</label>
-												<input type="text" class="form-control" placeholder="Matthew">
+												<input value="{{ company.first_name }}" name="first_name" type="text" class="form-control" placeholder="First name">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Ceo Last Name</label>
-												<input type="text" class="form-control" placeholder="Dana">
+												<input value="{{ company.last_name }}" name="last_name" type="text" class="form-control" placeholder="Last Name">
 											</div>
                                             <div class="col-md-4 col-sm-6">
 												<label>Company Name</label>
-												<input type="text" class="form-control" placeholder="Else">
+												<input value="{{ company.company_name }}" name="company_name" type="text" class="form-control" placeholder="Comapany name">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Company Email</label>
-												<input type="email" class="form-control" placeholder="dana.mathew@gmail.com">
+												<input value="{{ company.company_email }}" name="company_email" type="email" class="form-control" placeholder="Company Email">
 											</div>
 											<div class="col-md-4 col-sm-6">
-												<label>Company Phone</label>
-												<input type="text" class="form-control" placeholder="+91 258 475 6859">
+												<label>Company Description</label>
+												<input value="{{ company.description }}" name="description" type="text" class="form-control" placeholder="Company Description">
 											</div>
                                             <div class="col-md-4 col-sm-6">
                                                 <label>Company Category</label>
-                                                <select id="choose-category" class="form-control input-lg">
-                                                    <option disabled>Company Categories</option>
-                                                    <option selected >Software</option>
-                                                    <option>Hardware</option>
-                                                    <option>Machanical</option>
-                                                    <option>HR/Manager</option>
+                                                <select name="category" id="choose-category" class="form-control input-lg">
+                                                    <option>Company Categories</option>
+                                                    {% for category in categories %}
+                                                        <option {% if category.id == company.category.id %} selected {% endif %} value="{{ category.id }}">{{ category.category }}</option>
+                                                    {% endfor %}
                                                 </select>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <label>Business Entity</label>
-                                               <select id="choose-entity" class="form-control input-lg ">
+                                               <select  name="bizness_entity_type" id="choose-entity" class="form-control input-lg ">
                                                     <option disabled>Type of Business Entity</option>
-                                                    <option>Limited Liability Company</option>
-                                                    <option>Partnership</option>
-                                                    <option selected >Corporation</option>
-                                                    <option>Proprietorship</option>
-                                                    <option>Trust</option>
-                                                    <option>other</option>
+                                                    <option {% if company.bizness_entity_type == 'Limited Liability Company' %} selected {% endif %} >Limited Liability Company</option>
+                                                    <option {% if company.bizness_entity_type == 'Partnership' %} selected {% endif %}>Partnership</option>
+                                                    <option {% if company.bizness_entity_type == 'Corporation' %} selected {% endif %}>Corporation</option>
+                                                    <option {% if company.bizness_entity_type == 'Proprietorship' %} selected {% endif %}>Proprietorship</option>
+                                                    <option {% if company.bizness_entity_type == 'Trust' %} selected {% endif %}>Trust</option>
+                                                    <option {% if company.bizness_entity_type == 'other' %} selected {% endif %}>other</option>
                                                 </select>
                                             </div>
 
@@ -538,58 +233,49 @@
                                                 <label>Date Created</label>
 												<div class="input-group">
                                                     <span class="input-group-addon orangebg font-12"> Date Created</span>
-                                                   <input style="margin-bottom:0" data-dd-theme="vanilla" placeholder="Company Start Date" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
+                                                   <input name="date_created" value="{{ company.date_created|date:'Y-m-d' }}" style="margin-bottom:0" data-dd-theme="vanilla" placeholder="Company Start Date" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
                                                 </div>
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Website</label>
-												<input type="text" class="form-control" placeholder="www.abc.co.ke">
+												<input value="{{ company.website }}" name="website" type="text" class="form-control" placeholder="Website">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>KRA pin</label>
-												<input type="text" class="form-control" placeholder="KKH244">
+												<input value="{{ company.kra_number }}" name="kra_number" type="text" class="form-control" placeholder="KRA Number">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Business No</label>
-												<input type="text" class="form-control" placeholder="HKK9123">
+												<input value="{{ company.bussiness_reg_no }}" name="bussiness_reg_no" type="text" class="form-control" placeholder="Business Registration Number">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>County</label>
-												 <select id="choose-city" class="form-control input-lg">
-                                                    <option selected>County</option>
-                                                    <option selected value="Nairobi">NAirobi</option>
-                                                    <option value="Nairobi">NAirobi</option>
-                                                    <option value="Nairobi">NAirobi</option>
-                                                    <option>NAirobi</option>
-                                                    <option>NAirobi</option>
-                                                    <option>NAirobi</option>
-                                                    <option>NAirobi</option>
-                                                    <option>NAirobi</option>
-                                                    <option>NAirobi</option>
+												 <select name="county" required id="choose-city" class="form-control input-lg">
+                                                    <option  {% if county.properties.COUNTY_NAM == company.county %} {% else %}selected disabled{% endif %}>County</option>
+                                                    {% for county in counties %}
+                                                        <option {% if county.properties.COUNTY_NAM == company.county %} selected {% endif %} value="{{ county.properties.COUNTY_NAM }}">{{ county.properties.COUNTY_NAM }}</option>
+                                                    {% endfor %}
                                                 </select>
                                             </div>
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Region</label>
-												<select id="choose-region" class="form-control input-lg">
-                                                    <option disabled >Region</option>
-                                                    <option selected>Langata</option>
-                                                    <option>Langata</option>
-                                                    <option>Langata</option>
-                                                    <option>Langata</option>
-                                                    <option>Langata</option>
-                                                    <option>Langata</option>
+												<select name="county" required id="choose-region" class="form-control input-lg">
+                                                    <option {% if region.properties.CONSTITUEN == company.region %} {% else %}selected disabled{% endif %}>Sub-County</option>
+                                                    {% for region in regions %}
+                                                        <option {% if region.properties.CONSTITUEN == company.region %} selected {% endif %} {% if region.properties.CONSTITUEN == "None" %} disabled {% endif %} value="{{ region.properties.CONSTITUEN }}">{{ region.properties.CONSTITUEN }}</option>
+                                                    {% endfor %}
                                                 </select>
 											</div>
 											<div class="col-md-12 col-sm-12">
 												<label>Landmark</label>
-												<input type="text" class="form-control" placeholder="Near Uchumi">
+												<input value="{{ company.landmark }}" type="text" class="form-control" placeholder="Landmark">
 											</div>
 											<div class="col-md-4 col-sm-6">
                                                 <label>Facebook</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fab fa-facebook-f"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Facebook Link">
+                                                    <input name="facebook" value="{{ social.facebook }}" type="text" class="form-control" placeholder="Facebook Link">
                                                 </div>
                                             </div>
 
@@ -597,7 +283,7 @@
                                                 <label>Google+</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fab fa-google-plus"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Google+ Link">
+                                                    <input name="googlr_plus" value="{{ social.googlr_plus }}" type="text" class="form-control" placeholder="Google+ Link">
                                                 </div>
                                             </div>
 
@@ -605,14 +291,14 @@
                                                 <label>Twitter</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fab fa-twitter"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Twitter Link">
+                                                    <input name="twitter" value="{{ social.twitter }}" type="text" class="form-control" placeholder="Twitter Link">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-sm-6">
                                                 <label>Instagram</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fab fa-instagram"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Instagram Link">
+                                                    <input name="instagram" value="{{ social.instagram }}" type="text" class="form-control" placeholder="Instagram Link">
                                                 </div>
                                             </div>
 
@@ -620,12 +306,12 @@
                                                 <label>Linkedin</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fab fa-linkedin"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Linkedin Link">
+                                                    <input name="linkedin" value="{{ social.linkedin }}" type="text" class="form-control" placeholder="Linkedin Link">
                                                 </div>
                                             </div>
 											<div class="col-md-12 col-sm-12">
 												<label>Brief Description</label>
-												<textarea name="aboutcompany" class="form-control" placeholder="Write Something"></textarea>
+												<textarea  name="brief_detail" class="form-control" placeholder="Write Something">{{ company.brief_details }}</textarea>
 											</div>
 
 											<div class="col-sm-12">
@@ -645,7 +331,7 @@
 {% endblock content %}
 {% block script %}
     <script>
-         CKEDITOR.replace( 'aboutcompany',{
+         CKEDITOR.replace( 'brief_detail',{
               removePlugins: [  'Image', ],
          } );
     </script>

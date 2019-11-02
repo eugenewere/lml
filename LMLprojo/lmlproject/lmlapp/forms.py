@@ -22,6 +22,16 @@ class CompanySocialsForm(forms.ModelForm):
 
 
 class CompanyRegisterForm(forms.Form, UserCreationForm):
+    first_name =forms.CharField(
+                    max_length=30,
+                    widget=forms.TextInput(
+                        attrs={
+                            'placeholder': 'Company Name',
+                            'class':'form-control',
+
+                        }
+                    )
+                )
     class Meta:
         model = Company
         fields = ['email','first_name','last_name','password2', 'password1','username','logo','company_name', 'company_email', 'company_motto', 'category', 'bizness_entity_type', 'website','bussiness_reg_no','county', 'region','landmark','brief_details', 'date_created', 'description', 'kra_number',]

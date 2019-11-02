@@ -133,6 +133,8 @@ class Company(get_user_model()):
         verbose_name = 'Employer'
         verbose_name_plural = 'Employers'
 
+
+
 class CompanyRegistrationPayment(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     recipt_no = models.CharField(max_length=200, null=False, blank=False)

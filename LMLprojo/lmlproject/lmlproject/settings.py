@@ -145,3 +145,5 @@ sweetify.DEFAULT_OPTS = {
         'popup': 'animated tada',
     }
 }
+
+LOGIN_REDIRECT_URL = 'LML:singin'

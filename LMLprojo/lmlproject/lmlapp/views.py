@@ -3,6 +3,8 @@ import urllib
 
 import requests
 import urllib3
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 import os
 import sweetify
@@ -65,6 +67,7 @@ def signup(request):
 
 
 
+
     }
     return render(request, 'normal/signup/signup.html',context)
 
@@ -119,10 +122,10 @@ def company_signupform_handling(request):
             formr = CompanyRegisterForm()
             print(formr.errors)
             sweetify.error(request, 'Error', text='Ensure you fill all fields correctly', persistent='Retry')
-            return render(request, 'normal/signup/create-company.html', {'form':formr, 'categories': Category.objects.all(),})
+            return render(request, 'normal/signup/create-company.html', {'form':formr})
             # return redirect('LML:companysignup',{'form':formr})
     else:
-        formr = CompanyRegisterForm()
+
         return redirect('LML:companysignup')
 
     # context = {
@@ -155,18 +158,95 @@ def company_signupform_handling(request):
 
 
 
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
 
+
+        def usernamel(email):
+            uz = User.objects.filter(email__exact=email).first()
+            us = User.objects.filter(email=uz).values('username').first()
+
+            if uz:
+                return us
+            return None
+
+        if User.objects.filter(username__exact=username).first() or User.objects.filter(email__exact=username).first():
+            if User.objects.filter(username__exact=username).first():
+
+                user=authenticate(request, username=username, password=password)
+                if user is not None:
+                    if user.is_active:
+                        login(request, user)
+                        sweetify.success(request, title='Welcome to Labour Market Link', text='You successfully Logged in.',
+                                         persistent='Continue')
+                        return redirect('LML:employerdetails')
+                else:
+                    sweetify.error(request, 'Error', text='Invalid Username and Password', persistent='Retry')
+                    return redirect('LML:signin')
+                    # return render(request, 'normal/login/login.html', {'username': username, })
+
+            if User.objects.filter(email__exact=username).first():
+
+                user = authenticate(request, username=usernamel(username), password=password)
+                if user is not None:
+                    if user.is_active:
+                        login(request, user)
+                        sweetify.success(request, title='Welcome to Labour Market Link', text='You successfully Logged in.', persistent='Continue' )
+                        return redirect('LML:employerdetails')
+                else:
+                    sweetify.error(request, 'Error', text='Invalid Email and Password', persistent='Retry')
+                    return redirect('LML:signin')
+                    # return render(request, 'normal/login/login.html', {'username': username, })
+        else:
+            sweetify.error(request, 'Error', text='Invalid Credentials dont exist', persistent='Retry')
+            return redirect('LML:signin')
+    return render(request, 'normal/login/login.html')
 
 
 def signin(request):
     return render(request, 'normal/login/login.html')
 
+def log_out_user(request):
+    logout(request)
+    return redirect('LML:signin')
 
+@login_required()
+def employerdetails(request):
+    user = request.user
+    company = Company.objects.filter(id=user.id).first()
+    social = CompanySocialAccount.objects.filter(company=company.id).first()
+    similar_company = Company.objects.filter(category=company.category)
+    context = {
+       'company':company,
+       'social': social,
+       'scompany': similar_company,
+    }
+    return render(request ,'normal/jobdetails/employerdetails.html', context)
+
+@login_required()
 def employersprofile(request):
-    sweetify.success(request, 'You did it', text='Good job! You successfully showed a SweetAlert message', persistent='Hell yeah')
+    user = request.user
+    company = Company.objects.filter(id=user.id).first()
+    social = CompanySocialAccount.objects.filter(company=company.id).first()
+    similar_company = Company.objects.filter(category=company.category).exclude(id=user.id)
+    categories = Category.objects.all()
+    # social = CompanySocialAccount.objects.filter(company=company.id).first()
+    kenyan_county_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/counties.geojson"
+    kenyan_constituencies_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/constituencies.geojson"
 
+    data = requests.get(kenyan_county_api_url).json()
+    data2 = requests.get(kenyan_constituencies_api_url).json()
     context = {
         'title': 'Company profile',
+        'user': request.user,
+        'company':company,
+        'social':social,
+        'scompany':similar_company,
+        'categories':categories,
+        'counties': data['features'],
+        'regions': data2['features'],
     }
     return render(request, 'normal/account/employer-profile.html',context)
 
@@ -194,6 +274,7 @@ def companysignup(request):
         'counties': data['features'],
         'regions': data2['features'],
         'categories': Category.objects.all(),
+        'form': CompanyRegisterForm(),
 
 
     }
@@ -205,8 +286,6 @@ def advancesearch(request):
     return render(request, 'normal/advancedsearch/advancedsearch.html')
 
 
-def employerdetails(request):
-    return render(request ,'normal/jobdetails/employerdetails.html')
 
 
 def companypricing(request):

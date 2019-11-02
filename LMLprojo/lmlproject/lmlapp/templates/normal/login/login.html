@@ -10,14 +10,15 @@
     <link rel="stylesheet" href="{% static 'assets/plugins/css/plugins.css' %}">
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
     <link href="{% static 'assets/animision/animsition.min.css' %}" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" id="jssDefault" href="{% static 'assets/css/colors/orange.css' %}">
+    <link type="text/css" rel="stylesheet" id="jssDefault" href="{% static 'assets/css/colors/blue.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/preloader/css/style.css' %}">
    <script src="https://kit.fontawesome.com/16d33ecbbb.js" ></script>
     {% block links %}{% endblock links %}
 </head>
 
 	<body class="simple-bg-screen " style="background-image:url({% static 'assets/img/blog/banner-10.jpg' %});">
 
-            <div class="Loader"></div>
+             <div class="Loader-bg"><div class="loader"><span></span><span></span><span></span><span></span></div></div>
             <div class="wrapper">
 
 			<!-- Title Header Start -->
@@ -25,9 +26,12 @@
 				<div class="container">
 					<div class="login-screen">
 						<a href="{% url 'LML:home' %}"><img src="{% static 'assets/img/LML4.png' %}" class="img-responsive" alt=""></a>
-						<form>
-							<input type="text" class="form-control" placeholder="Useraname">
-							<input type="password" class="form-control" placeholder="Password">
+						<form action="{% url 'LML:login_user' %}" method="post">
+                            {% csrf_token %}
+                            <label for="email">Email or Username</label>
+							<input id="email" autocomplete="off" value="{{ username }}" name="username" type="text" class="form-control" placeholder="Useraname or Email">
+                            <label for="pswd">Password</label>
+                            <input id="pswd" autocomplete="off" name="password" type="password" class="form-control" placeholder="Password">
 							<button class="btn btn-login" type="submit">Login</button>
 							<span>You Have No Account? <a href="{% url 'LML:signup' %}"> Create An Account</a></span>
 							<span><a href="lost-password.html"> Forget Password</a></span>
@@ -68,10 +72,21 @@
                 function closeRightMenu() {
                     document.getElementById("rightMenu").style.display = "none";
                 }
+                $(window).load(function() {
+                    // Animate loader off screen
+                    setTimeout(function () {
+                         $(".Loader-bg").fadeOut('slow');
+                    }, 1000);
+
+                });
             </script>
             {% block script %}
 
             {% endblock script %}
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+            <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+            {% load sweetify %}
+            {% sweetify %}
             <script src="{% static 'assets/js/js.js' %}" type="text/javascript" ></script>
 		</div>
 	</body>
