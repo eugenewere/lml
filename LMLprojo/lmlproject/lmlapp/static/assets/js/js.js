@@ -8,8 +8,8 @@ var disability = document.getElementsByClassName('des')[0];
 
 
 
-var submit_button= document.getElementById('submitbutton').setAttribute('disabled', 'disabled');
-var submit_button2= document.getElementById('submitbutton2').setAttribute('disabled', 'disabled');
+var submit_button = document.getElementsByClassName('submitbutton')[0].setAttribute('disabled', 'disabled');
+var submit_button2= document.getElementsByClassName('submitbutton2')[0].setAttribute('disabled', 'disabled');
 // function onloadd() {
 //     if (submit_button.hasAttribute('disabled')){
 //         alert("Please agree to the terms and conditions to proceed");
@@ -17,8 +17,8 @@ var submit_button2= document.getElementById('submitbutton2').setAttribute('disab
 // }
 
 function openSubmit() {
-    var submitbutton = document.getElementById('submitbutton');
-    var termscheck = document.getElementById("termschecks");
+    var submitbutton = document.getElementsByClassName('submitbutton')[0];
+    var termscheck = document.getElementsByClassName('termscheck')[0];
     var attr = submitbutton.getAttributeNode("disabled");
 
 
@@ -30,8 +30,8 @@ function openSubmit() {
     }
 }
 function openSubmit2() {
-    var submitbutton2 = document.getElementById('submitbutton2');
-    var termscheck2 = document.getElementById("termschecks2");
+    var submitbutton2 = document.getElementsByClassName('submitbutton2')[0];
+    var termscheck2 = document.getElementsByClassName("termschecks2")[0];
     var attr = submitbutton.getAttributeNode("disabled");
 
 

@@ -346,7 +346,7 @@
 
                                 <div id="password" class="tab-pane fade">
                                     <h2 class=" page-header py-4">Password Reset</h2>
-                                    <form class="needs-validation" novalidate action="" method="POST">
+                                    <form  action="{% url 'LML:employer_change_password' %}" method="POST">
                                         {% csrf_token %}
                                         <div class="col-sm-12 py-5 d-flex flex-column">
                                             <div class="col-md-12 mb-3">
@@ -354,6 +354,8 @@
                                               <input type="password" name="old_password" class="form-control" id="validationCustom04" placeholder=" Current Password" required>
                                                 <small id="passwordHelpBlock" class="form-text text-muted">
                                                   Your password must be 8-20 characters long, contain letters and numbers.
+                                                    <br>
+                                                    {{ form.old_password.errors }}
                                                 </small>
 
                                             </div>
@@ -363,6 +365,8 @@
                                               <input name="new_password1" type="password" class="form-control" id="validationCustom05" placeholder="New Password" required>
                                                 <small id="passwordHelpBlock" class="form-text text-muted">
                                                   Your password must be 8-20 characters long, contain letters and numbers.
+                                                     <br>
+                                                    {{ form.new_password1.errors }}
                                                 </small>
 
                                             </div>
@@ -372,6 +376,8 @@
                                               <input name="new_password2" type="password" class="form-control" id="validationCustom05" placeholder="Retype Your Password" required>
                                                 <small id="passwordHelpBlock" class="form-text text-muted">
                                                   Your password must be 8-20 characters long, contain letters and numbers.
+                                                     <br>
+                                                    {{ form.new_password2.errors }}
                                                 </small>
 
                                             </div>

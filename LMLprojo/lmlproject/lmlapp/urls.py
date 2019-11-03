@@ -25,6 +25,8 @@ urlpatterns = [
     path('updateemployersprofile/', views.update_employers_profile, name="update_employers_profile"),
     path('employerdetails/', views.employerdetails, name="employerdetails"),
 
+    path('employer/user_account/change_password', views.employer_change_password, name='employer_change_password'),
+
     path('companypricing/', views.companypricing, name="companypricing"),
     path('contactus/', views.contactus, name="contactus"),
 ]

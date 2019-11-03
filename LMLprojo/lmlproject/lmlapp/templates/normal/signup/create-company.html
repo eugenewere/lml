@@ -24,18 +24,32 @@
                             <div class="row">
                                 <div class="detail-pic js">
                                     <div class="box companybox">
-                                        <input autofocus value="{{ logo }}" required style="position: relative;" onchange="readURL(this)" type="file" name="logo" id="upload-pic" class="inputfile" />
+                                        <input autofocus value="{% if form.logo.value %}{{ form.logo.value }}{% endif %}" required style="position: relative;" onchange="readURL(this)" type="file" name="logo" id="upload-pic" class="inputfile" />
                                         <label  for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:15px; color: white; text-align: center;">Upload Your Logo</span></label>
-                                        <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% static 'assets/img/client-1.jpg' %}" alt="">
+                                        <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% if form.logo.value %}{{ form.logo.value }}{% else %}{% static 'assets/img/client-1.jpg' %}{% endif %}" alt="">
                                     </div>
                                     <div id="disclaimer" class="disclaimer disclaimer-animated ">
                                         Upload Logo
                                     </div>
                                 </div>
                             </div>
-                                {% if  form.non_field_errors  %}
-                                    <div class="row">
-                                        <span class="alert alert-danger text-info errorlist">{{ form.non_field_errors }}</span>
+
+
+                                {% if form.errors %}
+                                    <div class="alert alert-danger alert-dismissable">
+                                      <h4>Please fix the following errors</h4>
+                                      <ul>
+                                        {% for field in form %}
+                                          {% if field.errors %}
+                                            {% for error in field.errors %}
+                                              <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+                                            {% endfor %}
+                                          {% endif %}
+                                        {% endfor %}
+                                      </ul>
+                                      {% if form.non_field_errors %}
+                                        {{ form.non_field_errors }}
+                                      {% endif %}
                                     </div>
                                 {% endif %}
                             <div class="row bottom-mrg">
@@ -43,18 +57,19 @@
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style=" margin-bottom:0px;display: block !important;" class="input-group" >
                                             <label for="firstname"></label>
-                                            <input autofocus required value="{{ company_name }}" name="company_name" type="text" class="form-control" id="firstname" placeholder="Company Name" >
+                                            <input autofocus required value="{% if form.logo.value %}{{ form.company_name.value }}{% endif %}" name="company_name" type="text" class="form-control" id="firstname" placeholder="Company Name" >
 {#                                            {{ form.first_name }}#}
                                         </div >
                                         <small id="passwordHelpBlock" class="form-text text-muted">
                                           Company Name.
+
                                         </small>
                                     </div>
 
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style=" margin-bottom:0px;display: block !important;" class="input-group">
                                             <label for="firstname2"></label>
-                                            <input required value="{{ company_motto }}" name="company_motto" id="firstname2" type="text" class="form-control" placeholder="Company Motto" >
+                                            <input required value="{% if form.logo.value %}{{ form.company_motto.value }}{% endif %}" name="company_motto" id="firstname2" type="text" class="form-control" placeholder="Company Motto" >
                                         </div >
                                         <small id="passwordHelpBlock" class="form-text text-muted">
                                           Company Motto.
@@ -64,9 +79,9 @@
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style=" display: block !important;" class="input-group">
                                             <select required  name="category" id="choose-category" class="form-control input-lg">
-                                                <option {% if not categoryy %} selected  {% else %}selected disabled{% endif %} >Company Categories</option>
+                                                <option {% if not form.category.value %} selected  {% else %}selected disabled{% endif %} >Company Categories</option>
                                                 {% for category in categories %}
-                                                    <option {% if categoryy %} selected {% endif %} value="{{ category.id }}">{{ category.category }}</option>
+                                                    <option {% if form.category.value == category.category %} selected {% endif %} value="{{ category.id }}">{{ category.category }}</option>
                                                 {% endfor %}
                                             </select>
                                         </div >
@@ -77,13 +92,13 @@
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style="margin-top: 0px; display: block !important;" class="input-group" >
                                             <select required name="bizness_entity_type" id="choose-entity" class="form-control input-lg">
-                                                <option {% if bizness_entity_type %} selected {% else %} selected disabled{% endif %}>{% if bizness_entity_type %} {{ bizness_entity_type }} {% else %}Type of Business Entity{% endif %}</option>
-                                                <option>Limited Liability Company</option>
-                                                <option>Partnership</option>
-                                                <option>Corporation</option>
-                                                <option>Proprietorship</option>
-                                                <option>Trust</option>
-                                                <option>other</option>
+                                                <option {% if form.bizness_entity_type.value %} disabled {% else %} selected disabled{% endif %}>Type of Business Entity</option>
+                                                <option{% if form.buzness_entity_type.value == 'Limited Liability Company' %} selected {% endif %}>Limited Liability Company</option>
+                                                <option{% if form.buzness_entity_type.value == 'Partnership' %} selected {% endif %}>Partnership</option>
+                                                <option{% if form.buzness_entity_type.value == 'Corporation' %} selected {% endif %}>Corporation</option>
+                                                <option{% if form.buzness_entity_type.value == 'Proprietorship' %} selected {% endif %}>Proprietorship</option>
+                                                <option{% if form.buzness_entity_type.value == 'Trust' %} selected {% endif %}>Trust</option>
+                                                <option{% if form.buzness_entity_type.value == 'other' %} selected {% endif %}>other</option>
                                             </select>
                                         </div>
                                         <small id="passwordHelpBlock" class="form-text text-muted">
@@ -94,26 +109,29 @@
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style="margin-top: 0px; display: block !important;" class="input-group">
                                             <label for="kk1"></label>
-                                            <input required value="{{ first_name }}" name="first_name" id="kk1" type="text" class="form-control" placeholder="Company CEO FIrst Name">
+                                            <input required value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" name="first_name" id="kk1" type="text" class="form-control" placeholder="Company CEO FIrst Name">
                                         </div>
                                         <small id="passwordHelpBlock" class="form-text text-muted">
                                           Company CEO First Name.
+                                          <br>
+                                            {{ form.first_name.errors }}
                                         </small>
 
                                     </div>
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style="margin-top: 0px; display: block !important;" class="input-group">
                                             <label for="kk2"></label>
-                                            <input required value="{{ last_name }}" name="last_name" id="kk2" type="text" class="form-control" placeholder="Company CEO Last Name">
+                                            <input required value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}" name="last_name" id="kk2" type="text" class="form-control" placeholder="Company CEO Last Name">
                                         </div>
                                         <small id="passwordHelpBlock" class="form-text text-muted">
                                           Company CEO Last Name.
+
                                         </small>
                                     </div>
 
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style="margin-top: 0px; display: block !important;" class="input-group">
-                                            <input required value="{{ email }}" name="email" type="email" class="form-control" placeholder="Company CEO Email">
+                                            <input required value="{% if form.email.value %}{{ form.email.value }}{% endif %}" name="email" type="email" class="form-control" placeholder="Company CEO Email">
                                         </div><small id="passwordHelpBlock" class="form-text text-muted">
                                           Company CEO Email.
                                         </small>
@@ -124,7 +142,7 @@
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style=" margin-bottom:0px;display: block !important;" class="input-group">
                                             <label for="firstname3"></label>
-                                            <input required value="{{ username }}" name="username" id="firstname3" type="text" class="form-control" placeholder="Username" >
+                                            <input required value="{% if form.username.value %}{{ form.username.value }}{% endif %}" name="username" id="firstname3" type="text" class="form-control" placeholder="Username" >
                                         </div >
                                         <small id="passwordHelpBlock" class="form-text text-muted">
                                             Username.
@@ -137,13 +155,13 @@
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style="margin-top: 0px; " class="input-group">
                                             <span class="input-group-addon orangebg"> Date Created</span>
-                                           <input required value="{{ date_created|date:'Y-m-d' }}" name="date_created" style="margin-bottom:0" data-dd-theme="vanilla" placeholder="Company Start Date" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
+                                           <input required value="{% if form.form.date_created.value %}{{ form.date_created.value|date:'Y-m-d' }}{% endif %}" name="date_created" style="margin-bottom:0" data-dd-theme="vanilla" placeholder="Company Start Date" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
                                         </div><small id="passwordHelpBlock" class="form-text text-muted">
                                           Date Created.
                                         </small>
                                     </div>
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
-                                        <input value="{{ description }}" name="description" type="text" class="form-control" placeholder="Company Description eg.Construction Company">
+                                        <input value="{% if form.description.value %}{{ form.description.value }}{% endif %}" name="description" type="text" class="form-control" placeholder="Company Description eg.Construction Company">
                                     </div>
 
                                 </form>
@@ -172,7 +190,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                    <input required value="{{ company_email }}" name="company_email" type="text" class="form-control" placeholder="Company Email">
+                                    <input required value="{% if form.company_email.value %}{{ form.company_email.value }}{% endif %}" name="company_email" type="text" class="form-control" placeholder="Company Email">
                                 </div>
                                 {% if form.company_email.errors %}
                                     <div class="alert alert-danger">{{form.company_email.errors}}</div>
@@ -181,19 +199,20 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-globe"></i></span>
-                                    <input  value="{{ website }}" name="website" type="text" class="form-control" placeholder="Website">
+                                    <input  value="{% if form.website.value %}{{ form.website.value }}{% endif %}" name="website" type="text" class="form-control" placeholder="Website">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <span  class="input-group-addon"><i class="fa fa-file-code-o"></i></span>
-                                    <input required value="{{ kra_number }}" name="kra_number" type="text" class="form-control" placeholder="KRA Number">
+                                    <input required value="{% if form.kra_number.value %}{{ form.kra_number.value }}{% endif %}" name="kra_number" type="text" class="form-control" placeholder="KRA Number">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-building"></i></span>
-                                    <input required value="{{ bussiness_reg_no }}" name="bussiness_reg_no" type="text" class="form-control" placeholder="Business Regestration Number">
+                                    <input required value="{% if form.bussiness_reg_no.value %}{{ form.bussiness_reg_no.value }}{% endif %}" name="bussiness_reg_no" type="text" class="form-control" placeholder="Business Regestration Number">
+                                    <span>{{ form.business_reg_no.help_text }}</span>
                                     {% if form.business_reg_no.errors %}
                                         <div class="alert alert-danger errorlist">{{form.business_reg_no.errors}}</div>
                                     {% endif %}
@@ -203,9 +222,9 @@
                                     <div class="input-group" style="margin-bottom: 0;" >
                                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         <select required name="county" id="choose-city" class="form-control input-lg">
-                                            <option  {% if county %} {% else %}selected disabled{% endif %}>County</option>
+                                            <option  {% if form.county.value == county.properties.COUNTY_NAM %} {% else %}selected disabled{% endif %}>County</option>
                                             {% for county in counties %}
-                                                <option {% if county %} selected {% endif %} value="{{ county.properties.COUNTY_NAM }}">{{ county.properties.COUNTY_NAM }}</option>
+                                                <option {% if form.county.value %} {% if form.county.value == county.properties.COUNTY_NAM  %} selected {% endif %} {% endif %} value="{{ county.properties.COUNTY_NAM }}">{{ county.properties.COUNTY_NAM }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -217,9 +236,9 @@
                                 <div class="input-group" style="margin-bottom: 0;">
                                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>
                                     <select required name="region" id="choose-region" class="form-control input-lg">
-                                     <option {% if region %} {% else %}selected disabled{% endif %}>Sub-County</option>
+                                     <option {% if form.region.value == region.properties.CONSTITUEN %} {% else %}selected disabled{% endif %}>Sub-County</option>
                                         {% for region in regions %}
-                                            <option {% if regiont %} selected {% endif %} {% if region.properties.CONSTITUEN == "None" %} disabled {% endif %} value="{{ region.properties.CONSTITUEN }}">{{ region.properties.CONSTITUEN }}</option>
+                                            <option {% if form.region.value %} {% if form.region.value == region.properties.CONSTITUEN %} selected {% endif %}{% endif %}  value="{{ region.properties.CONSTITUEN }}">{{ region.properties.CONSTITUEN }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -228,52 +247,52 @@
                                 </small>
                             </div>
                             <div class="col-md-12 col-sm-12 " style="margin-bottom: 8px;">
-                                        <div class="input-group" style="margin-bottom: 0;">
-                                            <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                            <input value="{{ landmark }}" name="landmark" id="landmark" type="text" class="form-control" placeholder="Landmark" >
-                                        </div>
-                                        <small id="phonnumber" class="form-text text-muted">
-                                           eg Nearest road/School/Market/.
-                                        </small>
-                                    </div>
+                                <div class="input-group" style="margin-bottom: 0;">
+                                    <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                    <input value="{% if form.landmark.value %}{{ form.landmark.value }}{% endif %}" name="landmark" id="landmark" type="text" class="form-control" placeholder="Landmark" >
+                                </div>
+                                <small id="phonnumber" class="form-text text-muted">
+                                   eg Nearest road/School/Market/.
+                                </small>
+                            </div>
                         </div>
                         <div class="row bottom-mrg extra-mrg">
                             <h2 class="detail-title">Social Profile</h2>
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fab fa-facebook-f"></i></span>
-                                    <input value="{{ facebook }}" name="facebook" type="text" class="form-control" placeholder="Facebook Link">
+                                    <input value="{% if social.facebook.value %}{{ social.facebook.value }}{% endif %}" name="facebook" type="text" class="form-control" placeholder="Facebook Link">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fab fa-google-plus"></i></span>
-                                    <input value="{{ googlr_plus }}" name="googlr_plus" type="text" class="form-control" placeholder="Google+ Link">
+                                    <input value="{% if social.googlr_plus.value %}{{ social.googlr_plus.value }}{% endif %}" name="googlr_plus" type="text" class="form-control" placeholder="Google+ Link">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fab fa-twitter"></i></span>
-                                    <input value="{{ twitter }}" name="twitter" type="text" class="form-control" placeholder="Twitter Link">
+                                    <input value="{% if social.twitter.value %}{{ social.twitter.value }}{% endif %}" name="twitter" type="text" class="form-control" placeholder="Twitter Link">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fab fa-instagram"></i></span>
-                                    <input value="{{ instagram }}" name="instagram" type="text" class="form-control" placeholder="Instagram Link">
+                                    <input value="{% if social.instagram.value %}{{ social.instagram.value }}{% endif %}" name="instagram" type="text" class="form-control" placeholder="Instagram Link">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fab fa-linkedin"></i></span>
-                                        <input value="{{ linkedin }}" name="linkedin" type="text" class="form-control" placeholder="Linkedin Link">
+                                        <input value="{% if social.linkedin.value %}{{ social.linkedin.value }}{% endif %}" name="linkedin" type="text" class="form-control" placeholder="Linkedin Link">
                                     </div>
                                 </div>
                         </div>
                         <div class="row bottom-mrg extra-mrg">
                             <h2 class="detail-title">A Brief Detail</h2>
                             <div class="col-md-12 col-sm-12">
-                                <textarea required name="brief_details" class="form-control textarea2" placeholder="About Company">{% if brief_details %} {{brief_details}}{% endif %}</textarea>
+                                <textarea required name="brief_details" class="form-control textarea2" placeholder="About Company">{% if form.brief_details.value %}{{ form.brief_details.value }}{% endif %}</textarea>
                             </div>
                         </div>
 
@@ -305,7 +324,7 @@
                                     <div class="alert alert-danger errorlist">{{form.password2.errors}}</div>
                                 {% endif %}
                             </div>
-                            <div class="row bottom-mrg extra-mrg">
+                            <div class="row bottom-mrg extra-mrg text-center">
                              <div class="col-md-12 col-sm-12 mrg-top-25">
                                  <div class="custom-control custom-radio custom-control-inline" style="margin-right: 20px;">
                                      <label  class="custom-control-label" for="customRadio"></label>
@@ -319,7 +338,7 @@
                         </div>
                         <div class="col-md-12 col-sm-12 row">
         {#                                <input id="submitbutton" type="submit" class="btn btn-success btn-primary small-btn" value="Submit">#}
-                            <button id="submitbutton2" type="submit"  class="btn btn-success btn-primary small-btn">Submit your company</button>
+                            <button id="submitbutton2" type="submit"  class="submitbutton2 btn btn-success btn-primary small-btn">Submit your company</button>
         {#                    <button type="submit" class="btn btn-success btn-primary small-btn">go1</button>#}
                         </div>
                         <div class="col-md-12">
@@ -343,4 +362,5 @@
          } );
 
     </script>
+    <script src="{% static 'assets/js/js.js' %}" type="text/javascript" ></script>
 {% endblock script %}

@@ -1,10 +1,14 @@
-import csv,io
+import csv
+import io
 import requests
 import urllib3
-from django.contrib.auth import authenticate, login, logout
+import json
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 import os
+
 import sweetify
 
 from lmlapp.forms import *
@@ -24,9 +28,22 @@ from .models import *
 
 
 def home(request):
-    mod =os.path.dirname(__file__)
-    file = os.path.join(mod,'counties.csv')
-    csv_file = open(file, 'r')
+    # if request.method == 'GET':
+    #     mod =os.path.dirname(__file__)
+    #     file = os.path.join(mod,'counties.csv')
+    #     csv_file = open(file, 'r')
+    #         # open(file, 'r')
+    #     # csv_decode = csv_file.decode()
+    #     file_data = csv_file.read()
+    #
+    #     io_string = io.StringIO(file_data)
+    #     next(io_string)
+    #
+    #     for column in csv.read
+    #         county = County.objects.create(
+    #             county_number=column[0],
+    #             county=column[1]
+    #         )
 
     context = {
         'title': 'home',
@@ -105,6 +122,8 @@ def company_signupform_handling(request):
     if request.method == 'POST':
         # form = CompanyUserSignUpForm(request.POST)
         form = CompanyRegisterForm(request.POST, request.FILES)
+        form2 = CompanySocialsForm(request.POST)
+
         # form2 = CompanyOtherDetailForm(request.POST, request.FILES)
         print(form)
         if form.is_valid():
@@ -120,14 +139,31 @@ def company_signupform_handling(request):
             sweetify.success(request, 'You did it', text='Good job! You successfully registered', persistent='Ok')
             return redirect('LML:companysignup')
         else:
-            formr = CompanyRegisterForm()
-            print(formr.errors)
+            # formr = CompanyRegisterForm()
+            # print(formr.errors)
             sweetify.error(request, 'Error', text='Ensure you fill all fields correctly', persistent='Retry')
-            return render(request, 'normal/signup/create-company.html', {'form':formr})
-            # return redirect('LML:companysignup',{'form':formr})
-    else:
+            return render(request, 'normal/signup/create-company.html' ,{'form':form, 'social':form2})
+            # return redirect('LML:companysignup',{'form':form, 'social':form2}, permanent=False)
 
-        return redirect('LML:companysignup')
+    else:
+        form = CompanyRegisterForm()
+        form2 = CompanySocialsForm()
+        kenyan_county_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/counties.geojson"
+        kenyan_constituencies_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/constituencies.geojson"
+
+        data = requests.get(kenyan_county_api_url).json()
+        data2 = requests.get(kenyan_constituencies_api_url).json()
+        categories = Category.objects.all()
+        context = {
+            'form': form,
+            'social': form2,
+            'counties': data['features'],
+            'regions': data2['features'],
+            'categories': categories,
+        }
+
+        return redirect('LML:companysignup', context )
+        # return redirect('LML:companysignup')
 
 def update_employers_profile(request):
     user= request.user.id
@@ -143,20 +179,20 @@ def update_employers_profile(request):
         twitter = request.POST.get('twitter')
         instagram = request.POST.get('instagram')
         linkedin = request.POST.get('linkedin')
-        company = Company.objects.filter(id=user).first()
+        company = Company.objects.filter(id=request.user.id).first()
         form = CompanyUserupdateForm(request.POST, request.FILES, instance=company)
         print(form)
         if form.is_valid():
-            updated_user = form.save()
-            CompanySocialAccount.objects.update_or_create(
-                company=updated_user,
+            updated=form.save()
+            CompanySocialAccount.objects.filter(company=company.id).update(
+                company=updated,
                 facebook=facebook,
                 googlr_plus=googlr_plus,
                 twitter=twitter,
                 instagram=instagram,
                 linkedin=linkedin,
             )
-            User.objects.filter(pk=request.user.id).update_or_create(
+            User.objects.filter(pk=request.user.id).update(
                 first_name=first_name,
                 last_name=last_name,
                 email=email,
@@ -211,10 +247,12 @@ def login_user(request):
 
         def usernamel(email):
             uz = User.objects.filter(email__exact=email).first()
-            us = User.objects.filter(email=uz).values('username').first()
+            # us = User.objects.filter(email=uz.email).values('username').first()
+            print(uz.email)
+            print(uz.username)
 
-            if uz:
-                return us
+            if uz.email:
+                return uz.username
             return None
 
         if User.objects.filter(username__exact=username).first() or User.objects.filter(email__exact=username).first():
@@ -256,6 +294,23 @@ def signin(request):
 def log_out_user(request):
     logout(request)
     return redirect('LML:signin')
+
+def employer_change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            sweetify.success(request, title='Success', text='Password Changed.', persistent='Continue')
+            return redirect("LML:employersprofile")
+        else:
+            form = PasswordChangeForm(request.user)
+            sweetify.error(request, 'Error', text='Password not Changed', persistent='Retry')
+            return render(request, 'normal/account/employer-profile.html', {'form':form})
+    else:
+        form = PasswordChangeForm(request.user)
+        return redirect("LML:employersprofile")
+
 
 @login_required()
 def employerdetails(request):
