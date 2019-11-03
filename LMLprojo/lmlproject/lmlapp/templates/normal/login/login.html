@@ -28,11 +28,11 @@
 						<a href="{% url 'LML:home' %}"><img src="{% static 'assets/img/LML4.png' %}" class="img-responsive" alt=""></a>
 						<form action="{% url 'LML:login_user' %}" method="post">
                             {% csrf_token %}
-                            <label for="email">Email or Username</label>
-							<input id="email" autocomplete="off" value="{{ username }}" name="username" type="text" class="form-control" placeholder="Useraname or Email">
+                            <label for="email">Username</label>
+							    <input id="email" autocomplete="off" value="{{ username }}" name="username" type="text" class="form-control" placeholder="Useraname or Email">
                             <label for="pswd">Password</label>
-                            <input id="pswd" autocomplete="off" name="password" type="password" class="form-control" placeholder="Password">
-							<button class="btn btn-login" type="submit">Login</button>
+                                <input id="pswd" autocomplete="off" name="password" type="password" class="form-control" placeholder="Password">
+							    <button class="btn btn-login" type="submit">Login</button>
 							<span>You Have No Account? <a href="{% url 'LML:signup' %}"> Create An Account</a></span>
 							<span><a href="lost-password.html"> Forget Password</a></span>
 						</form>

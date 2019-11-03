@@ -22,6 +22,7 @@ urlpatterns = [
     path('advancesearch/', views.advancesearch, name="advancesearch"),
 
     path('employersprofile/', views.employersprofile, name="employersprofile"),
+    path('updateemployersprofile/', views.update_employers_profile, name="update_employers_profile"),
     path('employerdetails/', views.employerdetails, name="employerdetails"),
 
     path('companypricing/', views.companypricing, name="companypricing"),

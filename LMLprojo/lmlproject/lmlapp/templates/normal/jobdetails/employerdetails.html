@@ -175,11 +175,11 @@
 											<form action="#">
 												<div class="form-group">
 													<label>Name</label>
-													<input type="email" class="form-control">
+													<input value="{{ company.first_name }} {{ company.last_name }}" type="email" class="form-control">
 												</div>
 												<div class="form-group">
 													<label>Email</label>
-													<input type="email" class="form-control">
+													<input value="{{ company.email }}" type="email" class="form-control">
 												</div>
 												<div class="form-group">
 													<label>Message</label>

@@ -1,6 +1,4 @@
-import json
-import urllib
-
+import csv,io
 import requests
 import urllib3
 from django.contrib.auth import authenticate, login, logout
@@ -26,7 +24,10 @@ from .models import *
 
 
 def home(request):
-    # sweetify.success(request, 'You did it', text='Good job! You successfully showed a SweetAlert message', persistent='Hell yeah')
+    mod =os.path.dirname(__file__)
+    file = os.path.join(mod,'counties.csv')
+    csv_file = open(file, 'r')
+
     context = {
         'title': 'home',
     }
@@ -127,6 +128,50 @@ def company_signupform_handling(request):
     else:
 
         return redirect('LML:companysignup')
+
+def update_employers_profile(request):
+    user= request.user.id
+
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+
+        facebook = request.POST.get('facebook')
+        googlr_plus = request.POST.get('googlr_plus')
+        twitter = request.POST.get('twitter')
+        instagram = request.POST.get('instagram')
+        linkedin = request.POST.get('linkedin')
+        company = Company.objects.filter(id=user).first()
+        form = CompanyUserupdateForm(request.POST, request.FILES, instance=company)
+        print(form)
+        if form.is_valid():
+            updated_user = form.save()
+            CompanySocialAccount.objects.update_or_create(
+                company=updated_user,
+                facebook=facebook,
+                googlr_plus=googlr_plus,
+                twitter=twitter,
+                instagram=instagram,
+                linkedin=linkedin,
+            )
+            User.objects.filter(pk=request.user.id).update_or_create(
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                username=username
+            )
+            sweetify.success(request, 'Success', text='Good job! You successfully Updated Your Account', persistent='Ok')
+            return redirect('LML:employerdetails')
+        else:
+
+            sweetify.error(request, 'Error', text='Error updating your account', persistent='Retry')
+            return redirect('LML:employersprofile')
+            # return redirect('LML:companysignup',{'form':formr})
+    else:
+        return redirect('LML:employersprofile')
+
 
     # context = {
     #     'logo': logo,

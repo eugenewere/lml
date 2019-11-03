@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 from lmlappadmin.models import *
 from django import forms
 
-class CompanyUserSignUpForm(UserCreationForm):
+class CompanyUserupdateForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ['email','first_name','last_name','password2', 'password1','username']
+        model = Company
+        fields = ['email','first_name','last_name','username','logo','company_name', 'company_email', 'company_motto', 'category', 'bizness_entity_type', 'website','bussiness_reg_no','county', 'region','landmark','brief_details', 'date_created', 'description', 'kra_number']
 
 class CompanyOtherDetailForm(forms.ModelForm):
     class Meta:
