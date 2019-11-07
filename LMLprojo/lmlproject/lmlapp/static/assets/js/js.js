@@ -8,8 +8,10 @@ var disability = document.getElementsByClassName('des')[0];
 
 
 
-var submit_button = document.getElementsByClassName('submitbutton')[0].setAttribute('disabled', 'disabled');
-var submit_button2= document.getElementsByClassName('submitbutton2')[0].setAttribute('disabled', 'disabled');
+var submit_button = document.getElementsByClassName('submitbutton')[0];
+var submit_button2= document.getElementsByClassName('submitbutton2')[0];
+submit_button.setAttribute('disabled', 'disabled');
+submit_button2.setAttribute('disabled', 'disabled');
 // function onloadd() {
 //     if (submit_button.hasAttribute('disabled')){
 //         alert("Please agree to the terms and conditions to proceed");

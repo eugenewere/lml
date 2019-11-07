@@ -1,4 +1,5 @@
 import csv
+
 import io
 import requests
 import urllib3
@@ -6,14 +7,16 @@ import json
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import render, redirect,HttpResponseRedirect
 import os
 
 import sweetify
+from django.utils.crypto import get_random_string
 
 from lmlapp.forms import *
 from .models import *
-
+import base64
 
 # Create your views here.
 
@@ -91,78 +94,29 @@ def signup(request):
 
 def company_signupform_handling(request):
 
-    company_name = request.POST.get('company_name')
-    company_email = request.POST.get('company_email')
-    company_motto = request.POST.get('company_motto')
-    category = request.POST.get('category')
-    bizness_entity_type = request.POST.get('bizness_entity_type')
-    website = request.POST.get('website')
-    bussiness_reg_no = request.POST.get('bussiness_reg_no')
-    county = request.POST.get('county')
-    description = request.POST.get('description')
-    region = request.POST.get('region')
-    landmark = request.POST.get('landmark')
-    brief_details = request.POST.get('brief_details')
-    kra_number = request.POST.get('kra_number')
-    date_created = request.POST.get('date_created')
-    logo = request.FILES.get('logo')
-
-    first_name = request.POST.get('first_name')
-    last_name = request.POST.get('last_name')
-    email = request.POST.get('email')
-    username = request.POST.get('username')
-
-    facebook = request.POST.get('facebook')
-    googlr_plus = request.POST.get('googlr_plus')
-    twitter = request.POST.get('twitter')
-    instagram = request.POST.get('instagram')
-    linkedin = request.POST.get('linkedin')
+    # company_name = request.POST.get('company_name')
+    # company_email = request.POST.get('company_email')
+    # company_motto = request.POST.get('company_motto')
+    # category = request.POST.get('category')
+    # bizness_entity_type = request.POST.get('bizness_entity_type')
+    # website = request.POST.get('website')
+    # bussiness_reg_no = request.POST.get('bussiness_reg_no')
+    # county = request.POST.get('county')
+    # description = request.POST.get('description')
+    # region = request.POST.get('region')
+    # landmark = request.POST.get('landmark')
+    # brief_details = request.POST.get('brief_details')
+    # kra_number = request.POST.get('kra_number')
+    # date_created = request.POST.get('date_created')
+    # logo = request.FILES.get('logo')
+    #
+    # first_name = request.POST.get('first_name')
+    # last_name = request.POST.get('last_name')
+    # email = request.POST.get('email')
+    # username = request.POST.get('username')
 
 
-    if request.method == 'POST':
-        # form = CompanyUserSignUpForm(request.POST)
-        form = CompanyRegisterForm(request.POST, request.FILES)
-        form2 = CompanySocialsForm(request.POST)
-
-        # form2 = CompanyOtherDetailForm(request.POST, request.FILES)
-        print(form)
-        if form.is_valid():
-            new_user = form.save()
-            CompanySocialAccount.objects.create(
-                company=new_user,
-                facebook=facebook,
-                googlr_plus=googlr_plus,
-                twitter=twitter,
-                instagram=instagram,
-                linkedin=linkedin,
-            )
-            sweetify.success(request, 'You did it', text='Good job! You successfully registered', persistent='Ok')
-            return redirect('LML:companysignup')
-        else:
-            # formr = CompanyRegisterForm()
-            # print(formr.errors)
-            sweetify.error(request, 'Error', text='Ensure you fill all fields correctly', persistent='Retry')
-            return render(request, 'normal/signup/create-company.html' ,{'form':form, 'social':form2})
-            # return redirect('LML:companysignup',{'form':form, 'social':form2}, permanent=False)
-
-    else:
-        form = CompanyRegisterForm()
-        form2 = CompanySocialsForm()
-        kenyan_county_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/counties.geojson"
-        kenyan_constituencies_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/constituencies.geojson"
-
-        data = requests.get(kenyan_county_api_url).json()
-        data2 = requests.get(kenyan_constituencies_api_url).json()
-        categories = Category.objects.all()
-        context = {
-            'form': form,
-            'social': form2,
-            'counties': data['features'],
-            'regions': data2['features'],
-            'categories': categories,
-        }
-
-        return redirect('LML:companysignup', context )
+        return redirect('LML:companysignup' )
         # return redirect('LML:companysignup')
 
 def update_employers_profile(request):
@@ -289,7 +243,7 @@ def login_user(request):
 
 
 def signin(request):
-    return render(request, 'normal/login/login.html')
+    return render(request, 'normal/login/loginstyled.html')
 
 def log_out_user(request):
     logout(request)
@@ -363,18 +317,64 @@ def employeedetails(request):
 
 
 def companysignup(request):
-    kenyan_county_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/counties.geojson"
-    kenyan_constituencies_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/constituencies.geojson"
+    facebook = request.POST.get('facebook')
+    googlr_plus = request.POST.get('googlr_plus')
+    twitter = request.POST.get('twitter')
+    instagram = request.POST.get('instagram')
+    linkedin = request.POST.get('linkedin')
 
-    data = requests.get(kenyan_county_api_url).json()
-    data2 = requests.get(kenyan_constituencies_api_url).json()
+    if request.method == 'POST':
+        # form = CompanyUserSignUpForm(request.POST)
+        form = CompanyRegisterForm(request.POST, request.FILES)
+        form2 = CompanySocialsForm(request.POST)
+
+        # print(form)
+        if form.is_valid():
+            new_user = form.save()
+            CompanySocialAccount.objects.create(
+                company=new_user,
+                facebook=facebook,
+                googlr_plus=googlr_plus,
+                twitter=twitter,
+                instagram=instagram,
+                linkedin=linkedin,
+            )
+            CompanyRegNo.objects.create(
+                company=new_user,
+                company_reg_no=get_random_string(length=7, allowed_chars='COMP123456789'),
+            )
+            sweetify.success(request, 'You did it', text='Good job! You successfully registered', persistent='Ok')
+            return redirect('LML:companysignup')
+        else:
+            # formr = CompanyRegisterForm()
+            # print(formr.errors)
+            sweetify.error(request, 'Error', text='Ensure you fill all fields correctly', persistent='Retry')
+            return render(request, 'normal/signup/create-company.html', {'form': form, 'social': form2})
+            # return redirect('LML:companysignup',{'form':form, 'social':form2})
+
+    else:
+        kenyan_county_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/counties.geojson"
+        kenyan_constituencies_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/constituencies.geojson"
+        form = CompanyRegisterForm()
+        form2 = CompanySocialsForm()
+        categories = Category.objects.all()
+        data = requests.get(kenyan_county_api_url).json()
+        data2 = requests.get(kenyan_constituencies_api_url).json()
+
+
+    # kenyan_county_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/counties.geojson"
+    # kenyan_constituencies_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/constituencies.geojson"
+    # categories = Category.objects.all()
+    # data = requests.get(kenyan_county_api_url).json()
+    # data2 = requests.get(kenyan_constituencies_api_url).json()
 
     context = {
         'title': 'Create an account',
         'counties': data['features'],
         'regions': data2['features'],
-        'categories': Category.objects.all(),
-        'form': CompanyRegisterForm(),
+        'categories': categories,
+        'form': form,
+        'social': form2,
 
 
     }
@@ -400,3 +400,19 @@ def signup_initial(request):
     return render(request, 'normal/signup/signupdecision.html')
 
 
+def ddddddddddddd(request):
+    if request.method == "GET":
+        module_dir = os.path.dirname(__file__)  # get current directory
+        file_path = os.path.join(module_dir, 'counties.csv')
+        reader = csv.DictReader(open(file_path))
+        for raw in reader:
+            print(raw.values())
+
+
+        Category.objects.create(
+
+        )
+
+
+
+    return HttpResponse("this csv")

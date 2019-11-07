@@ -16,6 +16,7 @@
         <list>
           <option value="lmlapp.courses.Bachelor" />
           <option value="lmlapp.courses.Technology" />
+          <option value="list.split" />
         </list>
       </option>
     </inspection_tool>

@@ -15,7 +15,7 @@ class County(models.Model):
         return '%s' % (self.county)
 
 class Region(models.Model):
-    county_number = models.IntegerField(max_length=200,null=False,blank=False)
+    county_number = models.IntegerField(null=False,blank=False)
     region = models.CharField(max_length=200,null=False,blank=False)
     ward = models.CharField(max_length=200,null=False,blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -44,8 +44,6 @@ class Customer(get_user_model()):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, max_length=200, null=False, blank=False)
     skils =  models.CharField(max_length=100,null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
-    # years_of_experience = models.CharField(max_length=100,null=False, blank=False)
-    personel_reg_no = models.CharField(max_length=100, null=False, blank=False, unique=True)
     date_of_birth = models.DateField(default=datetime.datetime.now())
     landmark = models.CharField(max_length=100,null=False, blank=False)
     huduma_no = models.CharField(max_length=100,null=True, blank=True)
@@ -56,6 +54,14 @@ class Customer(get_user_model()):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     biography = models.TextField()
+    PERSONNEL_STATUS = {
+        ('NEWBIE', 'Newbie'),
+        ('REGISTERED_CONFIRMED', 'Registerd_confirmed'),
+        ('PREMIUM', 'Premium'),
+        ('DEACTIVATED', 'Deactivated'),
+
+    }
+    status = models.CharField(choices=PERSONNEL_STATUS, default='NEWBIE', max_length=200, null=False, blank=False)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
@@ -63,6 +69,16 @@ class Customer(get_user_model()):
     class Meta:
         verbose_name = 'Customer'
         verbose_name_plural = 'Customers'
+
+
+class CustomerRegNo(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    personel_reg_no = models.CharField(max_length=100, null=False, blank=False, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '%s %s' % (self.customer.first_name, self.personel_reg_no)
 
 class Education(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=False, blank=False)
@@ -118,10 +134,12 @@ class Company(get_user_model()):
     bussiness_reg_no = models.CharField(max_length=100,null=True, blank=True,unique=True, validators=[alphanumeric])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     COMPANY_STATUS ={
         ('NEWBIE','Newbie'),
         ('REGISTERED_CONFIRMED','Registerd_confirmed'),
         ('PREMIUM','Premium'),
+        ('DEACTIVATED','Deactivated'),
 
     }
     status = models.CharField( choices=COMPANY_STATUS, default='NEWBIE', max_length=200, null=False, blank=False)
@@ -133,13 +151,23 @@ class Company(get_user_model()):
         verbose_name = 'Employer'
         verbose_name_plural = 'Employers'
 
+class CompanyRegNo(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company_reg_no = models.CharField(max_length=100, null=False, blank=False, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '%s %s' % (self.company.company_name,self.company_reg_no)
+
 
 
 class CompanyRegistrationPayment(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     recipt_no = models.CharField(max_length=200, null=False, blank=False)
     amount = models.CharField(max_length=200, null=False, blank=False)
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
         return '%s' % (self.company.company_name)
 

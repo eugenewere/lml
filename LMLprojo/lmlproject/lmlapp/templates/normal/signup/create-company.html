@@ -14,7 +14,7 @@
 			</section>
 			<div class="clearfix"></div>
 			<!-- Header Title End -->
-        <form action="{% url 'LML:company_signup_formhandling' %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'LML:companysignup' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
                 <div>
                 <!-- General Detail Start -->
@@ -26,10 +26,12 @@
                                     <div class="box companybox">
                                         <input autofocus value="{% if form.logo.value %}{{ form.logo.value }}{% endif %}" required style="position: relative;" onchange="readURL(this)" type="file" name="logo" id="upload-pic" class="inputfile" />
                                         <label  for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:15px; color: white; text-align: center;">Upload Your Logo</span></label>
-                                        <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% if form.logo.value %}{{ form.logo.value }}{% else %}{% static 'assets/img/client-1.jpg' %}{% endif %}" alt="">
+                                        <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% if form.logo.value %}{{ form.logo.value.url }}{% else %}{% static 'assets/img/client-1.jpg' %}{% endif %}" alt="">
                                     </div>
                                     <div id="disclaimer" class="disclaimer disclaimer-animated ">
                                         Upload Logo
+                                        {% if form.logo.value %}{{ form.logo.value.url }}{% endif %}<br>
+                                        {% if form.logo.value %}{{ form.logo.value }}{% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -42,7 +44,7 @@
                                         {% for field in form %}
                                           {% if field.errors %}
                                             {% for error in field.errors %}
-                                              <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+                                              <li><a href="{{ field.name }}" class="error">{{ error|escape }}</a></li>
                                             {% endfor %}
                                           {% endif %}
                                         {% endfor %}
@@ -76,12 +78,14 @@
                                         </small>
                                     </div>
 
+{#                                    <input hidden name="company_reg_no" type="text">#}
+
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style=" display: block !important;" class="input-group">
                                             <select required  name="category" id="choose-category" class="form-control input-lg">
-                                                <option {% if not form.category.value %} selected  {% else %}selected disabled{% endif %} >Company Categories</option>
+                                                <option {% if not form.category.value %} selected {% else %}disabled{% endif %} >Company Categories</option>
                                                 {% for category in categories %}
-                                                    <option {% if form.category.value == category.category %} selected {% endif %} value="{{ category.id }}">{{ category.category }}</option>
+                                                    <option {% if form.category.value == category.id %} selected {% endif %} value="{{ category.id }}">{{ category.category }}</option>
                                                 {% endfor %}
                                             </select>
                                         </div >
@@ -132,7 +136,8 @@
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style="margin-top: 0px; display: block !important;" class="input-group">
                                             <input required value="{% if form.email.value %}{{ form.email.value }}{% endif %}" name="email" type="email" class="form-control" placeholder="Company CEO Email">
-                                        </div><small id="passwordHelpBlock" class="form-text text-muted">
+                                        </div>
+                                        <small id="passwordHelpBlock" class="form-text text-muted">
                                           Company CEO Email.
                                         </small>
                                         {% if form.email.errors %}
@@ -222,7 +227,7 @@
                                     <div class="input-group" style="margin-bottom: 0;" >
                                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         <select required name="county" id="choose-city" class="form-control input-lg">
-                                            <option  {% if form.county.value == county.properties.COUNTY_NAM %} {% else %}selected disabled{% endif %}>County</option>
+                                            <option  {% if form.county.value == county.properties.COUNTY_NAM %} {% else %} selected disabled {% endif %}>County</option>
                                             {% for county in counties %}
                                                 <option {% if form.county.value %} {% if form.county.value == county.properties.COUNTY_NAM  %} selected {% endif %} {% endif %} value="{{ county.properties.COUNTY_NAM }}">{{ county.properties.COUNTY_NAM }}</option>
                                             {% endfor %}

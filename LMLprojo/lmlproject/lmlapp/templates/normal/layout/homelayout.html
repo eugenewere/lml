@@ -48,7 +48,7 @@
                                                     <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:employeeprofile' %}">Account</a></li>
                                                     <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:employersprofile' %}"> Company Profile</a></li>
                                                     <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:signin' %}">Sign In</a></li>
-                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:signup' %}">Sign Up</a></li>
+                                                    <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:signup_initial' %}">Sign Up</a></li>
                                                     {% if request.user.is_authenticated %}
                                                         <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:log_out_user' %}">Logout</a></li>
                                                     {% else %}
@@ -64,6 +64,7 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li><a href="{% url 'LML:home' %}">Home</a></li>
                         <li class="dropdown megamenu-fw">
                             <a href="#" class="" data-toggle="dropdown">Browse <i class="fas fa-caret-down mrg-l-5"></i></a>
 								<ul class="dropdown-menu megamenu-content" role="menu">
@@ -142,12 +143,10 @@
 									</li>
 								</ul>
 							</li>
-{#                        <li><a href="blog.html">Blog</a></li>#}
-                            <li><a href="{% url 'LML:home' %}">Home</a></li>
                             {% if request.user.is_authenticated %}
                                 <li><a href="{% url 'LML:log_out_user' %}">Logout</a></li>
                             {% else %}
-                            <li><a href="{% url 'LML:signup' %}">SignUp</a></li>
+                            <li><a href="{% url 'LML:signup_initial' %}">SignUp</a></li>
                             <li><a href="{% url 'LML:signin' %}">Login</a></li>
                         {% endif %}
                     </ul>
