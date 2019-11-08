@@ -15,7 +15,8 @@
     <script src="https://kit.fontawesome.com/16d33ecbbb.js" ></script>
     <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     <link rel="stylesheet" href="{% static 'assets/css/preloader/css/style.css' %}">
-    {% block links %}{% endblock links %}
+    {% block links %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
 </head>
 
 <body {% comment %}class="animsition" {% endcomment %}style="scroll-behavior: smooth;">
@@ -394,6 +395,6 @@
         {% sweetify %}
 {#        <script src="{% static 'assets/js/js.js' %}" type="text/javascript" ></script>#}
     </div>
-
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script> <script> window.cookieconsent.initialise({ "palette": { "popup": { "background": "#216942", "text": "#b2d192" }, "button": { "background": "#afed71" } } }); </script>
 </body>
 </html>
