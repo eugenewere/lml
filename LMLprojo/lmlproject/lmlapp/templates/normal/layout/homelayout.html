@@ -207,11 +207,12 @@
                             <div class="textwidget">
                                 <div class="textwidget">
                                     <ul class="footer-navigation">
-                                        <li><a href="manage-company.html" title="">Home</a></li>
-                                        <li><a href="manage-company.html" title="">Sign Up</a></li>
+                                        <li><a href="{% url 'LML:home' %}" title="">Home</a></li>
+                                        <li><a href="{% url 'LML:signup_initial' %}" title="">Sign Up</a></li>
                                         <li><a href="manage-company.html" title="">Categories</a></li>
-                                        <li><a href="manage-company.html" title="">Login</a></li>
+                                        <li><a href="{% url 'LML:signin' %}" title="">Login</a></li>
                                         <li><a href="manage-company.html" title="">Account</a></li>
+                                        <li><a href="{% url 'LML:companypricing' %}">Pricing</a></li>
                                         {% if request.user.is_authenticated %}
                                             <li><a href="{% url 'LML:log_out_user' %}">Logout</a></li>
                                         {% else %}
