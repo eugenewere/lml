@@ -8,9 +8,9 @@
            <!-- Header Title Start -->
 			<section class="inner-header-title blank">
 				<div class="container">
-					<h1>Register as an Employer</h1>
+					<h1>SIGN UP</h1>
 				</div>
-                <p>are you looking for employers?<a href="{% url 'LML:signup' %}"> click here </a></p>
+                <p>are you looking for work instead?<a href="{% url 'LML:signup' %}"> click here </a></p>
 			</section>
 			<div class="clearfix"></div>
 			<!-- Header Title End -->
@@ -102,7 +102,9 @@
                                                 <option{% if form.buzness_entity_type.value == 'Corporation' %} selected {% endif %}>Corporation</option>
                                                 <option{% if form.buzness_entity_type.value == 'Proprietorship' %} selected {% endif %}>Proprietorship</option>
                                                 <option{% if form.buzness_entity_type.value == 'Trust' %} selected {% endif %}>Trust</option>
+                                                <option{% if form.buzness_entity_type.value == 'sole' %} selected {% endif %}>sole</option>
                                                 <option{% if form.buzness_entity_type.value == 'other' %} selected {% endif %}>other</option>
+
                                             </select>
                                         </div>
                                         <small id="passwordHelpBlock" class="form-text text-muted">
@@ -113,10 +115,10 @@
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style="margin-top: 0px; display: block !important;" class="input-group">
                                             <label for="kk1"></label>
-                                            <input required value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" name="first_name" id="kk1" type="text" class="form-control" placeholder="Company CEO FIrst Name">
+                                            <input required value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" name="first_name" id="kk1" type="text" class="form-control" placeholder="First Name">
                                         </div>
                                         <small id="passwordHelpBlock" class="form-text text-muted">
-                                          Company CEO First Name.
+                                          Representative First Name.
                                           <br>
                                             {{ form.first_name.errors }}
                                         </small>
@@ -125,20 +127,20 @@
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style="margin-top: 0px; display: block !important;" class="input-group">
                                             <label for="kk2"></label>
-                                            <input required value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}" name="last_name" id="kk2" type="text" class="form-control" placeholder="Company CEO Last Name">
+                                            <input required value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}" name="last_name" id="kk2" type="text" class="form-control" placeholder="Last Name">
                                         </div>
                                         <small id="passwordHelpBlock" class="form-text text-muted">
-                                          Company CEO Last Name.
+                                          Representative Last Name.
 
                                         </small>
                                     </div>
 
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style="margin-top: 0px; display: block !important;" class="input-group">
-                                            <input required value="{% if form.email.value %}{{ form.email.value }}{% endif %}" name="email" type="email" class="form-control" placeholder="Company CEO Email">
+                                            <input required value="{% if form.email.value %}{{ form.email.value }}{% endif %}" name="email" type="email" class="form-control" placeholder="Email">
                                         </div>
                                         <small id="passwordHelpBlock" class="form-text text-muted">
-                                          Company CEO Email.
+                                          Your Email.
                                         </small>
                                         {% if form.email.errors %}
                                             <div class="alert alert-danger">{{form.email.errors}}</div>
@@ -160,9 +162,9 @@
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
                                         <div style="margin-top: 0px; " class="input-group">
                                             <span class="input-group-addon orangebg"> Date Created</span>
-                                           <input required value="{% if form.form.date_created.value %}{{ form.date_created.value|date:'Y-m-d' }}{% endif %}" name="date_created" style="margin-bottom:0" data-dd-theme="vanilla" placeholder="Company Start Date" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
+                                           <input required value="{% if form.form.date_created.value %}{{ form.date_created.value|date:'Y-m-d' }}{% endif %}" name="date_created" style="margin-bottom:0" data-dd-theme="vanilla" placeholder="date of incorporation" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
                                         </div><small id="passwordHelpBlock" class="form-text text-muted">
-                                          Date Created.
+                                          Date created.
                                         </small>
                                     </div>
                                     <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
@@ -210,7 +212,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <span  class="input-group-addon"><i class="fa fa-file-code-o"></i></span>
-                                    <input required value="{% if form.kra_number.value %}{{ form.kra_number.value }}{% endif %}" name="kra_number" type="text" class="form-control" placeholder="KRA Number">
+                                    <input required value="{% if form.kra_number.value %}{{ form.kra_number.value }}{% endif %}" name="kra_number" type="text" class="form-control" placeholder="KRA Pin">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
@@ -272,7 +274,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fab fa-google-plus"></i></span>
-                                    <input value="{% if social.googlr_plus.value %}{{ social.googlr_plus.value }}{% endif %}" name="googlr_plus" type="text" class="form-control" placeholder="Google+ Link">
+                                    <input value="{% if social.google_plus.value %}{{ social.google_plus.value }}{% endif %}" name="google_plus" type="text" class="form-control" placeholder="Google+ Link">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
@@ -335,7 +337,7 @@
                                      <label  class="custom-control-label" for="customRadio"></label>
                                      <span>
                                          <input  onchange="openSubmit2();" type="checkbox" class="custom-control-input customRadio" id="termschecks2" name="example" value="">
-                                         Agree to terms and conditions <a href="#">Terms</a>
+                                         by checking this box you agree to our <a href="#">Terms and conditions</a>
                                      </span>
                                 </div>
                             </div>
@@ -343,12 +345,12 @@
                         </div>
                         <div class="col-md-12 col-sm-12 row">
         {#                                <input id="submitbutton" type="submit" class="btn btn-success btn-primary small-btn" value="Submit">#}
-                            <button id="submitbutton2" type="submit"  class="submitbutton2 btn btn-success btn-primary small-btn">Submit your company</button>
+                            <button id="submitbutton2" type="submit"  class="submitbutton2 btn btn-success btn-primary small-btn">Submit</button>
         {#                    <button type="submit" class="btn btn-success btn-primary small-btn">go1</button>#}
                         </div>
                         <div class="col-md-12">
                             <div class="row text-right" style="">
-                                <p>Create an account as a Personel<a href="{% url 'LML:signup' %}"> Here </a></p>
+                                <p>sign up as an employee instead<a href="{% url 'LML:signup' %}"> click here</a></p>
                             </div>
                         </div>
                         <!-- Basic Full Detail Form End -->
