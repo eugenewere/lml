@@ -28,10 +28,10 @@
             <div class="container">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"><i class="fa fa-bars"></i></button>
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{% url 'LML:home' %}"><img style="width: 115px;height: 47px;" src="{% static 'assets/img/LML5.png' %}" class="logo logo-display" alt=""><img style="width: 115px;height: 47px;" src="{% static 'assets/img/LML5.png' %}" class="logo logo-scrolled" alt=""></a>
+                    <a class="navbar-brand" href="{% url 'LML:home' %}"><img style="width: 115px;height: 47px;" src="{% static 'assets/img/LML5.png' %}" class="logo logo-display" alt=""><img style="width: 115px;height: 47px;" src="{% static 'assets/img/LML5.png' %}" class="logo logo-scrolled" alt="" class="img-responsive"></a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-menu">
-                    <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                    <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp" >
                         <li style="position: relative;" class="dropdown megamenu-fw left-br">
                             {% if request.user.is_authenticated %}
                                 <a  href="#" target="_blank" data-toggle="dropdown" style="text-transform: none; font-size: 15px;" class="">Welcome {{ request.user.username }}</a>
