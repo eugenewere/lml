@@ -1,3 +1,4 @@
+
 var disability = document.getElementsByClassName('des')[0];
     function openDisability() {
         disability.style.display="block";
@@ -8,130 +9,155 @@ var disability = document.getElementsByClassName('des')[0];
 
 
 
-var submit_button = document.getElementsByClassName('submitbutton')[0];
-var submit_button2= document.getElementsByClassName('submitbutton2')[0];
-submit_button.setAttribute('disabled', 'disabled');
-submit_button2.setAttribute('disabled', 'disabled');
-// function onloadd() {
-//     if (submit_button.hasAttribute('disabled')){
-//         alert("Please agree to the terms and conditions to proceed");
+
+
+    $(document).ready(function() {
+        $("#submitbutton").attr('disabled',function () {
+             $(this).on("click", function () {
+                alert("Accept to terms and conditions to proceed");
+            });
+
+             $('#termscheck:first-child').on('click', function () {
+                if($(this).checked === true){
+                    $('#submitbutton').removeAttr("disabled");
+                }else if($(this).checked === false){
+                    $("#submitbutton").attr('disabled','disabled');
+                    alert("Accept to terms and conditions to proceed");
+                }
+
+             })
+            // if (typeof attr !== typeof undefined && attr !== false) {
+            //     // ...
+            // }
+        });
+    });
+
+// function openSubmit() {
+//     var submitbutton = document.getElementsByClassName('submitbutton')[0];
+//     var termscheck = document.getElementsByClassName('termscheck')[0];
+//     var attr = submitbutton.getAttributeNode("disabled");
+//
+//
+//     if(termscheck.checked === true){
+//         submitbutton.removeAttribute("disabled");
+//     }else {
+//         submitbutton.setAttribute("disabled", "disabled");
+//
 //     }
 // }
 
-function openSubmit() {
-    var submitbutton = document.getElementsByClassName('submitbutton')[0];
-    var termscheck = document.getElementsByClassName('termscheck')[0];
-    var attr = submitbutton.getAttributeNode("disabled");
+// $('.extra-field-box').each(function() {
+//     var $wrapp = $('.multi-box', this);
+// 		$(".add-field", $(this)).click(function() {
+//
+// 			$('.dublicat-box:first-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').val('').focus();
+// 			// alert($('.dublicat-box:first-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').val('').focus());
+// 			// console.log($('.dublicat-box:first-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').val('').focus())
+// 		});
+//     	$('.dublicat-box .remove-field', $wrapp).on('click', function() {
+//         if ($('.dublicat-box', $wrapp).length > 1)
+//             $(this).parent('.dublicat-box').remove();
+// 		});
+// 	});
 
+    function showItem(qualifications) {
+    console.log(qualifications);
+    console.log(qualifications[3]);
+    console.log(qualifications.value);
+    console.log(qualifications[3].value);
 
-    if(termscheck.checked === true){
-        submitbutton.removeAttribute("disabled");
-    }else {
-        submitbutton.setAttribute("disabled", "disabled");
-
-    }
-}
-function openSubmit2() {
-    var submitbutton2 = document.getElementsByClassName('submitbutton2')[0];
-    var termscheck2 = document.getElementsByClassName("termschecks2")[0];
-    var attr = submitbutton.getAttributeNode("disabled");
-
-
-    if(termscheck2.checked === true){
-        submitbutton2.removeAttribute("disabled");
-    }else {
-        submitbutton2.setAttribute("disabled", "disabled");
-
-    }
-}
-
-
-// var yesscheckbox = document.getElementById('yes');
-// var nocheckbox = document.getElementById('no');
-
-
-var phd = document.getElementsByClassName("phd");
-var masters = document.getElementsByClassName("masters");
-var diploma = document.getElementsByClassName("diploma");
-var certificate = document.getElementsByClassName("certificate");
-var bachelor = document.getElementsByClassName("bachelor");
-// var regno = document.getElementsByClassName("regno");
-
-var university = document.getElementsByClassName("uni");
-var qualifications = document.getElementsByClassName("qualifications");
-var graduationdate = document.getElementsByClassName("graduation");
+        // var qualifications = document.getElementsByClassName("qualifications");
 
 
 
-    function showItem(select) {
 
-       // var i,p,m,d,c,b,u,g;
+
+
         for(i=0; i<qualifications.length; i++){
+
+            let phd = document.getElementsByClassName("phd");
             for(p=0; p<phd.length; p++){
+
+                let masters = document.getElementsByClassName("masters");
                 for(m=0; m<masters.length; m++){
+
+                    let diploma = document.getElementsByClassName("diploma");
                     for(d=0; d<diploma.length; d++){
+
+                        let certificate = document.getElementsByClassName("certificate");
                         for(c=0; c<certificate.length; c++){
+
+                            let bachelor = document.getElementsByClassName("bachelor");
                             for(b=0; b<bachelor.length; b++){
+
+                               let university = document.getElementsByClassName("uni");
                                 for(u=0; u<university.length; u++){
-                                    for(g=0; g<graduationdate.length; g++){
-                                        // if(qualifications[i].options[qualifications[i].selectedIndex[i]][i].value[i] === 'Phd'){
-                                        if(qualifications[i].value === 'Phd'){
-                                            phd[p].style.display="block";
-                                            graduationdate[g].style.display="block";
-                                            university[u].style.display="block";
-                                            if(masters[m].style.display==="block" ||  diploma[d].style.display==="block" || certificate[c].style.display==="block" || bachelor[b].style.display ==="block"){
-                                                    masters[m].style.display="none";
-                                                    diploma[d].style.display="none";
-                                                    certificate[c].style.display="none";
-                                                    bachelor[b].style.display="none";
+
+                                     let date = document.getElementsByClassName("date");
+                                    for(g=0; g<date.length; g++){
+
+                                        let reg_no = document.getElementsByClassName("reg_no");
+                                        for(r=0; r<reg_no.length; r++) {
+                                            console.log(qualifications[i].value === 'Phd');
+                                            if (qualifications[i].value === 'Phd') {
+                                                phd[p].style.display = "block";
+                                                date[g].style.display = "block";
+                                                university[u].style.display = "block";
+                                                reg_no[r].style.display = "block";
+                                                if (masters[m].style.display === "block" || diploma[d].style.display === "block" || certificate[c].style.display === "block" || bachelor[b].style.display === "block") {
+                                                    masters[m].style.display = "none";
+                                                    diploma[d].style.display = "none";
+                                                    certificate[c].style.display = "none";
+                                                    bachelor[b].style.display = "none";
+                                                }
                                             }
-                                        }
-                                        // if(qualifications[i].options[qualifications[i].selectedIndex[i]][i].value[i] === 'Masters'){
-                                        if(qualifications[i].value  === 'Masters'){
-                                             masters[m].style.display="block";
-                                             graduationdate[g].style.display="block";
-                                             university[u].style.display="block";
-                                             if( phd[p].style.display==="block" ||  diploma[d].style.display==="block" || certificate[c].style.display==="block" || bachelor[b].style.display ==="block"){
-                                                    phd[p].style.display="none";
-                                                    certificate[c].style.display="none";
-                                                    diploma[d].style.display="none";
-                                                    bachelor[b].style.display="none";
+                                            else if (qualifications[i].value === 'Masters') {
+                                                masters[m].style.display = "block";
+                                                date[g].style.display = "block";
+                                                university[u].style.display = "block";
+                                                reg_no[r].style.display = "block";
+                                                if (phd[p].style.display === "block" || diploma[d].style.display === "block" || certificate[c].style.display === "block" || bachelor[b].style.display === "block") {
+                                                    phd[p].style.display = "none";
+                                                    certificate[c].style.display = "none";
+                                                    diploma[d].style.display = "none";
+                                                    bachelor[b].style.display = "none";
+                                                }
                                             }
-                                        }
-                                        // if(qualifications[i].options[qualifications[i].selectedIndex[i]][i].value[i] === "Bachelor"){
-                                        if(qualifications[i].value  === "Bachelor"){
-                                            bachelor[b].style.display = "block";
-                                            graduationdate[g].style.display = "block";
-                                            university[u].style.display="block";
-                                            if( phd[p].style.display==="block" ||  diploma[d].style.display==="block" || certificate[c].style.display==="block" || masters[m].style.display ==="block"){
-                                                    phd[p].style.display="none";
-                                                    certificate[c].style.display="none";
-                                                    diploma[d].style.display="none";
-                                                    masters[m].style.display="none";
+                                            else if (qualifications[i].value === "Bachelor") {
+                                                bachelor[b].style.display = "block";
+                                                date[g].style.display = "block";
+                                                university[u].style.display = "block";
+                                                reg_no[r].style.display = "block";
+                                                if (phd[p].style.display === "block" || diploma[d].style.display === "block" || certificate[c].style.display === "block" || masters[m].style.display === "block") {
+                                                    phd[p].style.display = "none";
+                                                    certificate[c].style.display = "none";
+                                                    diploma[d].style.display = "none";
+                                                    masters[m].style.display = "none";
+                                                }
                                             }
-                                        }
-                                        // if(qualifications[i].options[qualifications[i].selectedIndex[i]][i].value[i] === "Diploma"){
-                                        if(qualifications[i].value  === "Diploma"){
-                                             diploma[d].style.display="block";
-                                             graduationdate[g].style.display="block";
-                                             university[u].style.display="block";
-                                             if( phd[p].style.display==="block" ||  masters[m].style.display==="block" || certificate[c].style.display==="block" || bachelor[b].style.display ==="block"){
-                                                    phd[p].style.display="none";
-                                                    certificate[c].style.display="none";
-                                                     masters[m].style.display="none";
-                                                     bachelor[b].style.display="none";
+                                            else if (qualifications[i].value === "Diploma") {
+                                                diploma[d].style.display = "block";
+                                                date[g].style.display = "block";
+                                                university[u].style.display = "block";
+                                                reg_no[r].style.display = "block";
+                                                if (phd[p].style.display === "block" || masters[m].style.display === "block" || certificate[c].style.display === "block" || bachelor[b].style.display === "block") {
+                                                    phd[p].style.display = "none";
+                                                    certificate[c].style.display = "none";
+                                                    masters[m].style.display = "none";
+                                                    bachelor[b].style.display = "none";
+                                                }
                                             }
-                                        }
-                                        // if(qualifications[i].options[qualifications[i].selectedIndex[i]][i].value[i] === "Certificate"){
-                                        if(qualifications[i].value  === "Certificate"){
-                                            certificate[c].style.display="block";
-                                            graduationdate[g].style.display="block";
-                                            university[u].style.display="block";
-                                            if( phd[p].style.display==="block" ||  masters[m].style.display==="block" || diploma[d].style.display==="block" || bachelor[b].style.display === "block"){
-                                                    phd[p].style.display="none";
-                                                    diploma[d].style.display="none";
-                                                    masters[m].style.display="none";
-                                                    bachelor[b].style.display="none";
+                                            else if (qualifications[i].value === "Certificate") {
+                                                certificate[c].style.display = "block";
+                                                date[g].style.display = "block";
+                                                university[u].style.display = "block";
+                                                reg_no[r].style.display = "block";
+                                                if (phd[p].style.display === "block" || masters[m].style.display === "block" || diploma[d].style.display === "block" || bachelor[b].style.display === "block") {
+                                                    phd[p].style.display = "none";
+                                                    diploma[d].style.display = "none";
+                                                    masters[m].style.display = "none";
+                                                    bachelor[b].style.display = "none";
+                                                }
                                             }
                                         }
                                     }
@@ -144,6 +170,20 @@ var graduationdate = document.getElementsByClassName("graduation");
         }
     }
 
+// for(i=0; i<qualifications.length; i++) {
+//      if (qualifications[i].value === 'Phd') {
+//         phd[p].style.display = "block";
+//         date[g].style.display = "block";
+//         university[u].style.display = "block";
+//         reg_no[r].style.display = "block";
+//         if (masters[m].style.display === "block" || diploma[d].style.display === "block" || certificate[c].style.display === "block" || bachelor[b].style.display === "block") {
+//             masters[m].style.display = "none";
+//             diploma[d].style.display = "none";
+//             certificate[c].style.display = "none";
+//             bachelor[b].style.display = "none";
+//         }
+//     }
+// }
 
 
 
@@ -155,23 +195,32 @@ var graduationdate = document.getElementsByClassName("graduation");
 
 
 
-var employer = document.getElementsByClassName('employerwrapper');
-var clonebutton1 = document.getElementById('clonebutton1');
-var clonebutton2 = document.getElementById('clonebutton2');
+
+// var clonebutton1 = document.getElementById('clonebutton1');
+// var clonebutton2 = document.getElementById('clonebutton2');
 
     function showEmployment() {
-        var i;
-        for(i=0; i<employer.length; i++){
+        var clonebutton1 = document.getElementById('clonebutton1');
+        var clonebutton2 = document.getElementById('clonebutton2');
+        var employer = document.getElementsByClassName('employerwrapper');
+
+         for(i=0; i<employer.length; i++){
             employer[i].style.display="block";
-
         }
-
+        clonebutton1.style.display = "block";
+        clonebutton2.style.display = "block";
     }
     function hideEmployment() {
-        var i;
+        var clonebutton1 = document.getElementById('clonebutton1');
+        var clonebutton2 = document.getElementById('clonebutton2');
+        var employer = document.getElementsByClassName('employerwrapper');
+
         for(i=0; i<employer.length; i++){
             employer[i].style.display="none";
+
         }
+         clonebutton1.style.display = "none";
+         clonebutton2.style.display = "none";
     }
 
 
@@ -224,6 +273,8 @@ function readURL(input) {
 
 
   })(jQuery);
+
+
 
 
 

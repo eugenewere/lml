@@ -98,21 +98,21 @@ All custom js files contents are below
 	  ]
 	});
 	
-	// City Select
-	$('#choose-city').select2();
-	$('#choose-region').select2();
-	$('#choose-qualification').select2();
-	$('#choose-university').select2();
-	$('#choose-phd').select2();
-	$('#choose-bachelor').select2();
-	$('#choose-masters').select2();
-	$('#choose-diploma').select2();
-	$('#choose-certificate').select2();
-	$('#choose-category').select2();
-	$('#choose-category2').select2();
-	$('#choose-entity').select2();
-	$('#marital').select2();
-	$('#marital2').select2();
+	// // City Select
+	// $('.choose-city').select2();
+	// $('.choose-region').select2();
+	// $('.choose-qualification').select2();
+	// $('.choose-university').select2();
+	// $('.choose-phd').select2();
+	// $('.choose-bachelor').select2();
+	// $('.choose-masters').select2();
+	// $('.choose-diploma').select2();
+	// $('.choose-certificate').select2();
+	// $('.choose-category').select2();
+	// $('.choose-category2').select2();
+	// $('.choose-entity').select2();
+	// $('.marital').select2();
+	// $('.marital2').select2();
 
 
 
@@ -133,15 +133,18 @@ All custom js files contents are below
 	/*-----Add field Script------*/
 	$('.extra-field-box').each(function() {
     var $wrapp = $('.multi-box', this);
-    $(".add-field", $(this)).on('click', function() {
-        $('.dublicat-box:first-child', $wrapp).clone(true).appendTo($wrapp).find('input').val('').find('select').val('') .focus();
-    });
-    $('.dublicat-box .remove-field', $wrapp).on('click', function() {
+		$(".add-field", $(this)).click(function() {
+
+			$('.dublicat-box:first-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').val('').focus();
+			// alert($('.dublicat-box:first-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').val('').focus());
+			// console.log($('.dublicat-box:first-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').val('').focus())
+		});
+    	$('.dublicat-box .remove-field', $wrapp).on('click', function() {
         if ($('.dublicat-box', $wrapp).length > 1)
             $(this).parent('.dublicat-box').remove();
 		});
 	});
-	
+
 	//   Background image ------------------
 		var a = $(".bg");
 		a.each(function (a) {
