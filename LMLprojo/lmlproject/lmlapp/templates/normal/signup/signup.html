@@ -1,490 +1,699 @@
-{%  extends 'normal/layout/homelayout.html' %}
+{% extends 'normal/layout/homelayout.html' %}
 {% load static %}
 {% block links %}
 
 {% endblock links %}
 {% block content %}
-            <!-- Header Title Start -->
-			<section class="inner-header-title blank">
-				<div class="container">
-					<h1>Create an account as a job seeker</h1>
-{#                    <p class="text-lowercase">Kindly ensure you fill all the inputs</p>#}
-                     <p>Are you an employer? <a href="{% url 'LML:companysignup' %}">cLick here </a></p>
-				</div>
-			</section>
-			<div class="clearfix"></div>
-			<!-- Header Title End -->
-            <form action="" method="POST">
-            {% csrf_token %}
-                <!-- General Detail Start -->
-                <div class="section detail-desc">
-                    <div class="container">
-                        <div class="ur-detail-wrap create-kit padd-bot-0">
+    <!-- Header Title Start -->
+    <section class="inner-header-title blank">
+        <div class="container">
+            <h1>Create an account as a job seeker</h1>
+            {#                    <p class="text-lowercase">Kindly ensure you fill all the inputs</p>#}
+            <p>Are you an employer? <a href="{% url 'LML:companysignup' %}">cLick here </a></p>
+        </div>
+    </section>
+    <div class="clearfix"></div>
+    <!-- Header Title End -->
+    <form action="{% url 'LML:signup' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- General Detail Start -->
+        <div class="section detail-desc">
+            <div class="container">
+                <div class="ur-detail-wrap create-kit padd-bot-0">
 
-                            <div class="row">
-                                <div class="detail-pic js">
-                                    <div class="box companybox">
-                                        <input required style="position: relative;" onchange="readURL(this)" type="file" name="upload-pic" id="upload-pic" class="inputfile" />
-                                        <label  for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:11px; color: white; text-align: center;">Upload Your Picture</span></label>
-                                        <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% static 'assets/img/client-1.jpg' %}" alt="">
-                                    </div>
-                                    <div id="disclaimer" class="disclaimer disclaimer-animated ">
-                                        Upload Profile
-                                    </div>
+                    <div class="row">
+                        <div class="detail-pic js">
+                            <div class="box companybox">
+                                <input required style="position: relative;" onchange="readURL(this)" type="file"
+                                       name="profile_image" id="upload-pic" class="inputfile"/>
+                                <label for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span
+                                        style="margin-left:11px; color: white; text-align: center;">Upload Your Picture</span></label>
+                                <img class="blah" id="blah"
+                                     style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px"
+                                     src="{% static 'assets/img/client-1.jpg' %}" alt="">
+                            </div>
+                            <div id="disclaimer" class="disclaimer disclaimer-animated ">
+                                Upload Profile
+                            </div>
+                        </div>
+                    </div>
+                    {% if form.errors %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <h4>Please fix the following errors</h4>
+                            <ul>
+                                {% for field in form %}
+                                    {% if field.errors %}
+                                        {% for error in field.errors %}
+                                            <li><a href="{{ field.name }}" class="error">{{ error|escape }}</a></li>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                            {% if form.non_field_errors %}
+                                {{ form.non_field_errors }}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    <div class="row bottom-mrg">
+                        <div class="add-feild">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group " style="margin-bottom: 8px">
+                                    <label for="firstname"></label>
+                                    <input required name="first_name" id="firstname" type="text" class="form-control"
+                                           placeholder="First Name" style="margin-bottom:0;">
+                                    <small id="passwordHelpBlock" class="form-text text-muted">
+                                        First name as it appears in id.
+                                    </small>
                                 </div>
                             </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group" style="margin-bottom: 8px">
+                                    <label for="lastname"></label>
+                                    <input required name="last_name" id="lastname" type="text" class="form-control"
+                                           placeholder="Last Name" style="margin-bottom:0;">
+                                    <small id="lastname" class="form-text text-muted">
+                                        Last name as it appears in id.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group" style="margin-bottom: 8px">
+                                    <select required name="gender" id="gender" class="form-control input-lg"
+                                            style="margin-bottom:0">
+                                        <option selected disabled>Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        {#											<option>Machanical</option>#}
+                                        {#											<option>HR/Manager</option>#}
+                                    </select>
+                                    <small id="gender" class="form-text text-muted">
+                                        Gender.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group" style="margin-bottom: 8px">
+                                    <label for="email"></label>
+                                    <input required name="email" id="email" type="email" class="form-control"
+                                           placeholder="Your Email" style="margin-bottom:0">
+                                    <small id="email" class="form-text text-muted">
+                                        johndoe@example.com .
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group" style="margin-bottom: 8px">
+                                    <label for="usename"></label>
+                                    <input required name="username" id="usename" type="text" class="form-control"
+                                           placeholder="Your Username" style="margin-bottom:0">
+                                    <small id="usename" class="form-text text-muted">
+                                        Username.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group" style="margin-bottom: 8px">
+                                    <label for="phonnumber"></label>
+                                    <input required name="phone_number" id="phonnumber" type="tel" class="form-control"
+                                           placeholder="Phone Number" style="margin-bottom:0">
+                                    <small id="phonnumber" class="form-text text-muted">
+                                        07xxxxxxxxx.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group" style="margin-bottom: 0">
+                                    {#                                            <span class="input-group-addon">Date From</span>#}
+                                    <span class="input-group-addon orangebg"><i class="fa fa-calendar"></i> Date Of Birth</span>
+                                    <input required name="date_of_birth" style="margin-bottom:0" type="date"
+                                           class="form-control">
+                                </div>
+                                <small id="dob" class="dob form-text text-muted" style="margin-bottom: 8px">
+                                    Date Of Birth
+                                </small>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group" style="margin-bottom: 8px">
+                                    <select required name="marital_status" id="marital" class="form-control input-lg"
+                                            style="margin-bottom: 0">
+                                        <option selected>Marital status</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Devorced">Devorced</option>
+                                        {#											<option>Machanical</option>#}
+                                        {#											<option>HR/Manager</option>#}
+                                    </select>
+                                    <small id="marital" class="form-text text-muted">
+                                        Marital status.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <div class="input-group" style="margin-bottom: 8px">
+                                    <select required name="job_type" id="marital2" class="form-control input-lg"
+                                            style="margin-bottom: 0">
+                                        <option selected>Choose Job Type</option>
+                                        <option value="Full Time">Full Time</option>
+                                        <option value="Part Time">Part Time</option>
+                                        <option value="Internship">Internship</option>
+                                        <option value="Freelancer">Freelancer</option>
+                                        {#                                                <option value="Devorced">Attachment</option>#}
+                                        {#											<option>Machanical</option>#}
+                                        {#											<option>HR/Manager</option>#}
+                                    </select>
+                                    <small id="marital" class="form-text text-muted">
+                                        Job Type.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12" style="margin-top: 10px;">
+                                <div style=" display: block !important;" class="input-group">
+                                    <select required name="category" id="choose-category" class="form-control input-lg">
+                                        <option {% if not form.category.value %} selected{% else %}disabled{% endif %} >
+                                            Company Categories
+                                        </option>
+                                        {% for category in categories %}
+                                            <option {% if form.category.value == category.id %} selected {% endif %}
+                                                                                                value="{{ category.id }}">{{ category.category }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <small id="passwordHelpBlock" class="form-text text-muted">
+                                    Work Category.
+                                </small>
+                            </div>
 
-                            <div class="row bottom-mrg">
-                                <div class="add-feild">
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="input-group " style="margin-bottom: 8px">
-                                            <label for="firstname"></label>
-                                            <input  id="firstname" type="text" class="form-control" placeholder="First Name" style="margin-bottom:0;">
-                                            <small id="passwordHelpBlock" class="form-text text-muted">
-                                              First name as it appears in id.
-                                            </small>
-                                        </div>
+                            <div class="col-md-12 col-sm-12" style="margin-top: 20px;">
+                                <h4 class="text-muted">Do you have any disablity</h4>
+                                <div style="display: flex;">
+                                    <div class="custom-control custom-radio custom-control-inline"
+                                         style="margin-right: 20px;">
+                                        <input onclick="openDisability()" type="radio" class="custom-control-input"
+                                               id="customRadio" name="disability_status" value="DISABLED">
+                                        <label class="custom-control-label" for="customRadio">Yes</label>
                                     </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="input-group" style="margin-bottom: 8px">
-                                            <label for="lastname"></label>
-                                            <input id="lastname" type="text" class="form-control" placeholder="Last Name" style="margin-bottom:0;">
-                                             <small id="lastname" class="form-text text-muted">
-                                              Last name as it appears in id.
-                                             </small>
-                                        </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input onclick="closeDisability()" type="radio" class="custom-control-input"
+                                               id="no customRadio2" name="disability_status" value="NOTDISABLED">
+                                        <label class="custom-control-label" for="customRadio2">No</label>
                                     </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="input-group" style="margin-bottom: 8px">
-                                            <select id="gender" class="form-control input-lg" style="margin-bottom:0">
-                                                <option selected>Gender</option>
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-    {#											<option>Machanical</option>#}
-    {#											<option>HR/Manager</option>#}
+                                </div>
+                                <div class="col-md-12 col-sm-12" style="padding: 0;">
+                                    <label for="disability"></label>
+                                    <textarea name="disability" style="display:none;" id="disability"
+                                              class="des form-control" placeholder="What type of disability"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row no-padd">
+                        <div class="detail pannel-footer">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="detail-pannel-footer-btn pull-right">
+                                    {#										<a href="#" class="footer-btn choose-cover">Choose Cover Image</a>#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- General Detail End -->
+
+        <!-- full detail SetionStart-->
+        <section class="full-detail">
+            <div class="container">
+                <div class="row bottom-mrg extra-mrg">
+                    <h2 class="detail-title">Location Information</h2>
+                    <div class="row col-sm-12 col-md-12">
+                        <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
+                            <div class="input-group" style="margin-bottom: 0;">
+                                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                <select required name="country" id="choose-city" class="form-control input-lg">
+                                    <option selected disabled>Country</option>
+                                    {#
+                                    <option value="Kenya">Kenya</option>
+                                </select>
+                            </div>
+                            <small id="lastname" class="form-text text-muted" style="margin-bottom: 8px;">
+                                eg: Kenya
+                            </small>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
+                            <div class="input-group" style="margin-bottom: 0;">
+                                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                <select required name="county" id="choose-city" class="form-control input-lg">
+                                    <option selected>County</option>
+                                    {#                                            <option value="Nairobi">NAirobi</option>#}
+                                    {% for county in counties %}
+                                        <option value="{{ county.county }}">{{ county.county }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <small id="lastname" class="form-text text-muted" style="margin-bottom: 8px;">
+                                eg: Nairobi, Kisumu.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="row col-sm-12 col-md-12">
+                        <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
+                            <div class="input-group" style="margin-bottom: 0;">
+                                <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>
+                                <select required name="region" class="choose-region form-control input-lg">
+                                    <option selected disabled>Sub-County</option>
+                                    {% for region in regions %}
+                                        <option value="{{ region.region }}({{ region.ward }})"><span
+                                                style="font-weight: bold;">Subcounty:</span>{{ region.region }}-><span
+                                                style="font-weight: bold;">Ward:</span>({{ region.ward }})
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <small id="lastname" class="form-text text-muted">
+                                eg Langata.
+                            </small>
+                        </div>
+                        <div class="col-md-6 col-sm-6 " style="margin-bottom: 8px;">
+                            <div class="input-group" style="margin-bottom: 0;">
+                                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                <input name="landmark" id="landmark" type="text" class="form-control"
+                                       placeholder="Landmark">
+
+                            </div>
+                            <small id="phonnumber" class="form-text text-muted">
+                                eg Nearest road/School/Market/.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row bottom-mrg extra-mrg">
+                    <h2 class="detail-title">Education</h2>
+
+                    <div id="cornel">
+                        <div class="qualification_block" id="template">
+                            <select name="" onchange="getCourses(this)">
+                                <option value="">Select </option>
+                                <option value="phd">PHD</option>
+                                <option value="masters">MASTERS</option>
+                                <option value="bachelors">BACHELORS</option>
+                            </select>
+                            <BR>
+                            <select name="uni">
+                                <option value="">Select</option>
+                                <option value="moi">Moi</option>
+                                <option value="moi">mku</option>
+                                <option value="moi">uon</option>
+                            </select>
+                            <br>
+                            <input name="course_selections" id="1" class="course_options">
+                            </input>
+                            <br>
+                        </div>
+                    </div>
+                    <span class="btn-primary btn" onclick="AddBlock()">Add new</span>
+
+                    <script>
+                        var qualifications = {
+                            "phd": ['part', 'pscience', 'pkiswahili'],
+                            "masters": ['mart', 'mscience', 'mkiswahili'],
+                            "bachelors": ['bart', 'bscience', 'bkiswahili'],
+                        };
+                        var container = document.getElementById('cornel');
+
+                        function getCourses(qualification_dom) {
+                            var courses = qualifications[qualification_dom.value];
+                            qualification_dom.parentNode.children[4].value = courses;
+                        }
+
+                        function AddBlock() {
+
+                            var container = document.getElementById('cornel');
+                            var template = document.getElementById('template');
+                            var itm = template;
+                            var cln = itm.cloneNode(true);
+                            cln.getElementsByTagName('input').value = '';
+                            cln.getElementsByTagName('select').value = '';
+                            new_id = container.children.length +1;
+                            var input_course = cln.children[4];
+
+                            console.log(input_course);
+                            input_course.id = new_id;
+                            container.appendChild(cln);
+                        }
+                    </script>
+
+
+                    <div class="extra-field-box">
+                        <div class="multi-box">
+                            <div class="dublicat-box">
+
+                                <div class="col-md-12 col-sm-12">
+                                    <h4 style="margin: 20px 0;" class="text-muted">Choose your qualification</h4>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                                        <select required name="qualifications[]" onchange="showItem(this);"
+                                                id="choose-qualification" class="qualifications form-control input-lg">
+                                            <option selected disabled="disabled">Qualifications</option>
+                                            <option value="Phd">Phd</option>
+                                            <option value="Masters">Masters</option>
+                                            <option value="Masters">Bachelor</option>
+                                            <option value="Diploma">Diploma</option>
+                                            <option value="Certificate">Certificate</option>
+                                        </select>
+                                    </div>
+                                    {#                                                <div style="width: 100%;" id="list1" class="list1 dropdown-check-list " tabindex="100">#}
+                                    {#                                                    <span class="anchor" style="width: 100%;">Select Qualification</span>#}
+                                    {#                                                    <ul class="items" style="width: 100%;">#}
+                                    {#                                                        <li><input value="PHD" onselect="showPHD(this);" type="checkbox" />PHD </li>#}
+                                    {#                                                        <li><input value="Masters" onclick="showMasters(this);" type="checkbox" />Masters</li>#}
+                                    {#                                                        <li><input value="Degree" onclick="showDegree(this);" type="checkbox" />Degree </li>#}
+                                    {#                                                        <li><input value="Diploma" onclick="showDiploma(this);" type="checkbox" />Diploma </li>#}
+                                    {#                                                        <li><input value="Certificate" onclick="showCertificate(this);" type="checkbox" />Certificate </li>#}
+                                    {#                                                    </ul>#}
+                                    {#                                                </div>#}
+
+                                </div>
+                                <div class="col-md-12 col-sm-12 row">
+                                    <div style="display: none; margin-bottom: 20px;" class="uni col-md-12 col-sm-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                                            <select name="school[]" class="choose-university form-control input-lg">
+                                                <option selected disabled="disabled">University</option>
+                                                <option>Nairobi</option>
+                                                <option>Etc</option>
                                             </select>
-                                             <small id="gender" class="form-text text-muted">
-                                              Gender.
-                                             </small>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="input-group" style="margin-bottom: 8px">
-                                            <label for="email"></label>
-                                            <input id="email" type="email" class="form-control" placeholder="Your Email" style="margin-bottom:0">
-                                            <small id="email" class="form-text text-muted">
-                                               johndoe@example.com .
-                                            </small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="input-group" style="margin-bottom: 8px">
-                                            <label for="usename"></label>
-                                            <input id="usename" type="text" class="form-control" placeholder="Your Username" style="margin-bottom:0">
-                                             <small id="usename" class="form-text text-muted">
-                                               Username.
-                                            </small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="input-group" style="margin-bottom: 8px">
-                                            <label for="phonnumber"></label>
-                                            <input id="phonnumber" type="tel" class="form-control" placeholder="Phone Number" style="margin-bottom:0">
-                                             <small id="phonnumber" class="form-text text-muted">
-                                               07xxxxxxxxx.
-                                            </small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="input-group" style="margin-bottom: 0">
-{#                                            <span class="input-group-addon">Date From</span>#}
-                                            <span class="input-group-addon orangebg"><i class="fa fa-calendar"></i> Date Of Birth</span>
-                                            <input style="margin-bottom:0" data-dd-theme="vanilla" placeholder="Date Of birth" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
-                                        </div>
-                                        <small id="dob" class="dob form-text text-muted" style="margin-bottom: 8px">
-                                           Date Of Birth
-                                        </small>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="input-group" style="margin-bottom: 8px">
-                                            <select id="marital" class="form-control input-lg" style="margin-bottom: 0">
-                                                <option selected>Marital status</option>
-                                                <option value="Single">Single</option>
-                                                <option value="Married">Married</option>
-                                                <option value="Devorced">Devorced </option>
-    {#											<option>Machanical</option>#}
-    {#											<option>HR/Manager</option>#}
+                                    <div style="display: none; margin-bottom: 20px;" class="phd col-md-12 col-sm-12">
+                                        <div class="input-group col-md-4 col-sm-12">
+                                            <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                            <select name="course[]" class="choose-phd form-control input-lg">
+                                                <option selected disabled="disabled">Qualification, e.g. Phd in Arts
+                                                </option>
+                                                <option>Phd in Arts</option>
+                                                <option>Phd in Arts</option>
+                                                <option>Phd in Arts</option>
+                                                <option>Phd in Arts</option>
+                                                <option>Phd in Arts</option>
+                                                <option>Phd in Arts</option>
+                                                <option>Etc</option>
                                             </select>
-                                            <small id="marital" class="form-text text-muted">
-                                               Marital status.
-                                            </small>
                                         </div>
                                     </div>
+                                    <div style="display: none; margin-bottom: 20px;"
+                                         class="masters col-md-12 col-sm-12">
+                                        <div class="input-group col-md-4 col-sm-12">
+                                            <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                            <select name="course[]" class="choose-masters form-control input-lg">
+                                                <option selected disabled="disabled">Qualification, e.g. Masters in
+                                                    Arts
+                                                </option>
+                                                {% for bachelor in bachelors %}
+                                                    <option value="{{ bachelor }}">{{ bachelor }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div style="display: none; margin-bottom: 20px;"
+                                         class="bachelor col-md-12 col-sm-12">
+                                        <div class="input-group col-md-4 col-sm-12">
+                                            <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                            <select name="course[]" class="choose-bachelor form-control input-lg">
+                                                <option selected disabled="disabled">Qualification, e.g. Bachelor in
+                                                    Arts
+                                                </option>
+                                                {% for bachelor in bachelors %}
+                                                    <option value="{{ bachelor }}">{{ bachelor }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div style="display: none; margin-bottom: 20px;"
+                                         class="diploma col-md-12 col-sm-12">
+                                        <div class="input-group col-md-4 col-sm-12">
+                                            <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                            <select name="course[]" class="choose-diploma form-control input-lg">
+                                                <option selected disabled="disabled">Qualification, e.g. Diploma in
+                                                    Arts
+                                                </option>
+                                                {% for diploma in diplomas %}
+                                                    <option value="{{ diploma }}">{{ diploma }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div style="display: none; margin-bottom: 20px;"
+                                         class="certificate col-md-12 col-sm-12">
+                                        <div class="input-group col-md-4 col-sm-12">
+                                            <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                            <select name="course[]" class="choose-certificate form-control input-lg">
+                                                <option selected disabled="disabled">Qualification, e.g. Certificate in
+                                                    Arts
+                                                </option>
+
+                                                {% for cert in certificates %}
+                                                    <option value="{{ cert }}">{{ cert }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div style="display: none; margin-bottom: 20px;" class="date col-md-12 col-sm-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Year of graduation</span>
+                                            <input name="graduation_date[]" type="date" id="edu-start"
+                                                   class="form-control edu-start">
+                                        </div>
+                                    </div>
+                                    <div style="display: none; margin-bottom: 20px;" class="reg_no col-md-12 col-sm-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Registration number</span>
+                                            <input name="reg_number[]" type="text" class="form-control regno">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn remove-field">Remove</button>
+                            </div>
+
+                        </div>
+                        <button type="button" class="add-field">Add field</button>
+                    </div>
+                    <div class="row bottom-mrg extra-mrg">
+                        <h2 class="detail-title">Brief description about yourself</h2>
+                        <div class="col-md-12 col-sm-12">
+                            <textarea required name="biography" class="form-control textarea" maxlength="2000" rows="30"
+                                      placeholder="About Yourself"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row bottom-mrg extra-mrg">
+                        <h2 class="detail-title">Add Experience</h2>
+                        <div class="extra-field-box">
+                            <div class="multi-box">
+                                <div class="dublicat-box">
                                     <div class="col-md-12 col-sm-12">
-                                        <div class="input-group" style="margin-bottom: 8px">
-                                            <select id="marital2" class="form-control input-lg" style="margin-bottom: 0">
-                                                <option selected>Choose Job Type</option>
-                                                <option value="Single">Full Time</option>
-                                                <option value="Married">Part Time</option>
-                                                <option value="Devorced">Internship</option>
-{#                                                <option value="Devorced">Attachment</option>#}
-                                                <option value="Devorced">Freelancer</option>
-    {#											<option>Machanical</option>#}
-    {#											<option>HR/Manager</option>#}
-                                            </select>
-                                            <small id="marital" class="form-text text-muted">
-                                               Job Type.
-                                            </small>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12 col-sm-12" style="margin-top: 20px;" >
-                                        <h4 class="text-muted">Do you have any disablity</h4>
+                                        <label>Have you ever been employed</label>
                                         <div style="display: flex;">
-                                            <div class="custom-control custom-radio custom-control-inline" style="margin-right: 20px;">
-                                                <input onclick="openDisability()" type="radio" class="custom-control-input" id="customRadio" name="example" value="Yes">
-                                                <label  class="custom-control-label" for="customRadio">Yes</label>
+                                            <div class="custom-control custom-radio custom-control-inline"
+                                                 style="margin-right: 20px;">
+                                                <input onclick="showEmployment()" type="radio"
+                                                       class="custom-control-input" id="customRadioz" name="example"
+                                                       value="customEx">
+                                                <label class="custom-control-label" for="customRadioz">Yes</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                <input onclick="closeDisability()" type="radio" class="custom-control-input" id="no customRadio2" name="example" value="No">
-                                                <label  class="custom-control-label" for="customRadio2">No</label>
+                                                <input onclick="hideEmployment()" type="radio"
+                                                       class="custom-control-input" id="customRadiox" name="example"
+                                                       value="customEx">
+                                                <label class="custom-control-label" for="customRadio2x">No</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-12 col-sm-12" style="padding: 0;">
-                                            <label for="disability"></label>
-                                            <textarea style="display:none;" id="disability" class="des form-control" placeholder="What type of disability"></textarea>
+                                        <div style="margin-top:8px; display: none;" id="employer"
+                                             class="employerwrapper col-md-12 col-sm-12">
+                                            <label for="emplo">Company Employer Name</label>
+                                            <input name="employer_name[]" style="margin-bottom: 0;" id="emplo"
+                                                   type="text" class="form-control" placeholder="Employer's Name">
+                                            <small id="lastname" class="form-text text-muted">
+                                                eg John doe.
+                                            </small>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
+                                        <div style="margin-top: 8px; display: none;" id="employercompany"
+                                             class="employerwrapper col-md-12 col-sm-12">
+                                            <label for="emplocomp">Company Name</label>
+                                            <input name="company_name[]" style="margin-bottom: 0;" id="emplocomp"
+                                                   type="text" class="form-control" placeholder="Employer's Company">
+                                            <small id="lastname" class="form-text text-muted">
+                                                eg abc company.
+                                            </small>
+                                        </div>
+                                        <div style="margin-top: 8px; display: none;" id="employercompany"
+                                             class="employerwrapper col-md-12 col-sm-12">
+                                            <label for="emplocompemail">Company email</label>
+                                            <input name="company_email[]" style="margin-bottom: 0;" id="emplocompemail"
+                                                   type="email" class="form-control" placeholder="Employer's email">
+                                            <small id="lastname" class="form-text text-muted">
+                                                eg abc.example.org abc.example.com .
+                                            </small>
+                                        </div>
+                                        <div style="margin-top: 8px; display: none;" id="employercompany"
+                                             class="employerwrapper col-md-12 col-sm-12">
+                                            <label for="emplocomp4n">Company Phone</label>
+                                            <input name="company_phone[]" style="margin-bottom: 0;" id="emplocomp4n"
+                                                   type="text" class="form-control"
+                                                   placeholder="Employer's Phonenumber">
+                                            <small id="lastname" class="form-text text-muted">
+                                                eg 07********.
+                                            </small>
+                                        </div>
+                                        <div class="employerwrapper col-md-12 col-sm-12"
+                                             style="margin-top:8px; display: none;">
+                                            <label for="kke">Position Held</label>
+                                            <input name="position_held[]" id="kke" type="text" class="form-control"
+                                                   placeholder="Position, e.g. Web Designer">
+                                        </div>
+                                        <div class="employerwrapper col-md-12 col-sm-12"
+                                             style="margin-top:8px; display: none;">
+                                            <h4>Date</h4>
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Date From</span>
+                                                    <input name="date_from[]" type="date" id="exp-start"
+                                                           class="exp-start form-control">
+                                                </div>
+                                            </div>
 
-                            <div class="row no-padd">
-                                <div class="detail pannel-footer">
-                                    <div class="col-md-12 col-sm-12">
-                                        <div class="detail-pannel-footer-btn pull-right">
-    {#										<a href="#" class="footer-btn choose-cover">Choose Cover Image</a>#}
+                                            <div class="employerwrapper col-md-6 col-sm-6"
+                                                 style="margin-top:8px; display: none;">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Date To</span>
+                                                    <input name="date_to[]" type="date" id="exp-end"
+                                                           class="exp-end form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="employerwrapper col-md-12 col-sm-12"
+                                             style="margin-top:8px; display: none;">
+                                            <label for="emplomsg"></label>
+                                            <textarea name="experience[]" id="emplomsg" class="form-control textarea"
+                                                      placeholder="Optional notes on the experience"></textarea>
                                         </div>
                                     </div>
+                                    <button style="display: none;" id="clonebutton1" type="button"
+                                            class="employer btn remove-field">Remove
+                                    </button>
                                 </div>
+                                <button style="display: none;" id="clonebutton2" type="button"
+                                        class="employer add-field">Add field
+                                </button>
                             </div>
 
                         </div>
                     </div>
-                </div>
-                <!-- General Detail End -->
 
-                <!-- full detail SetionStart-->
-                <section class="full-detail">
-                    <div class="container">
-                        <div class="row bottom-mrg extra-mrg">
-                            <h2 class="detail-title">Location Information</h2>
-                            <div class="row col-sm-12 col-md-12">
-                                <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
-                                    <div class="input-group" style="margin-bottom: 0;">
-                                        <span class="input-group-addon"><i class="fa fa-globe"></i></span>
-                                        <input disabled type="text" class="form-control" value="Kenya" >
-                                    </div>
-                                    <small id="lastname" class="form-text text-muted" style="margin-bottom: 8px;">
-                                      Kenya.
-                                    </small>
-                                </div>
+                    <div class="row bottom-mrg extra-mrg">
+                        <h2 class="detail-title">Add Skills</h2>
+                        <div class="extra-field-box">
+                            <div class="multi-box">
+                                <div class="dublicat-box">
 
-                                <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
-                                    <div class="input-group" style="margin-bottom: 0;" >
-                                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                        <select id="choose-city" class="form-control input-lg">
-                                            <option selected>County</option>
-{#                                            <option value="Nairobi">NAirobi</option>#}
-                                            {% for county in counties %}
-                                                <option value="{{ county.properties.COUNTY_NAM }}">{{ county.properties.COUNTY_NAM }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                    <small id="lastname" class="form-text text-muted" style="margin-bottom: 8px;">
-                                     eg: Nairobi, Kisumu.
-                                    </small>
-                                </div>
-                            </div>
-                        
-                            <div class="row col-sm-12 col-md-12">
-                                <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
-                                    <div class="input-group" style="margin-bottom: 0;">
-                                        <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>
-                                        <select  class="choose-region form-control input-lg">
-                                            <option selected disabled>Sub-County</option>
-                                            {% for region in regions %}
-                                                <option {% if region.properties.CONSTITUEN == "None" %} disabled {% endif %} value="{{ region.properties.CONSTITUEN }}">{{ region.properties.CONSTITUEN }}</option>
-                                            {% endfor %}
-                                        </select >
-                                    </div>
-                                    <small id="lastname" class="form-text text-muted" >
-                                      eg Langata.
-                                    </small>
-                                </div>
-                                <div class="col-md-6 col-sm-6 " style="margin-bottom: 8px;">
-                                    <div class="input-group" style="margin-bottom: 0;">
-                                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                        <input id="landmark" type="text" class="form-control" placeholder="Landmark" >
-
-                                    </div>
-                                    <small id="phonnumber" class="form-text text-muted">
-                                       eg Nearest road/School/Market/.
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row bottom-mrg extra-mrg">
-                            <h2 class="detail-title">Education</h2>
-                            <div class="extra-field-box">
-                                <div class="multi-box">
-                                    <div class="dublicat-box">
-                                        <div class="col-md-12 col-sm-12">
-                                             <h4 style="margin: 20px 0;" class="text-muted">Choose your qualification</h4>
-                                              <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                                                <select  onchange="showItem(this);" class="choose-qualification form-control input-lg qualifications">
-                                                    <option selected disabled="disabled">Qualifications</option>
-                                                    <option value="Phd">Phd</option>
-                                                    <option value="Masters">Masters</option>
-                                                    <option value="Masters">Bachelor</option>
-                                                    <option value="Diploma">Diploma</option>
-                                                    <option value="Certificate">Certificate</option>
-                                                </select>
-                                              </div>
+                                    <div class="col-md-12 col-sm-12 " style="margin-bottom: 8px;">
+                                        <div class="input-group" style="margin-bottom: 0px;">
+                                            <span class="input-group-addon"><i class="fas fa-hand-paper"></i></span>
+                                            <input required name="skill[]" type="text" class="form-control"
+                                                   placeholder="Skills, e.g. Css, Html...">
                                         </div>
-                                        <div  class="col-md-12 col-sm-12 row">
-                                            <div style="display: none; margin-bottom: 20px;"  class="uni col-md-12 col-sm-12">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                                                    <select  class="choose-university form-control input-lg">
-                                                        <option selected disabled="disabled">University</option>
-                                                        <option>Nairobi</option>
-                                                        <option>Etc</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div style="display: none; margin-bottom: 20px;"   class="phd col-md-12 col-sm-12">
-                                                <div class="input-group col-md-4 col-sm-12">
-                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select  class="choose-phd form-control input-lg">
-                                                        <option selected disabled="disabled">Qualification, e.g. Phd in Arts</option>
-                                                        <option>Phd in Arts</option>
-                                                        <option>Phd in Arts</option>
-                                                        <option>Phd in Arts</option>
-                                                        <option>Phd in Arts</option>
-                                                        <option>Phd in Arts</option>
-                                                        <option>Phd in Arts</option>
-                                                        <option>Etc</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div style="display: none; margin-bottom: 20px;"  class="masters col-md-12 col-sm-12">
-                                                <div class="input-group col-md-4 col-sm-12">
-                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select  class="choose-masters form-control input-lg">
-                                                        <option selected disabled="disabled">Qualification, e.g. Masters in Arts</option>
-                                                         {% for bachelor in bachelors %}
-                                                          <option value="{{ bachelor }}">{{bachelor}}</option>
-                                                         {% endfor %}
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div style="display: none; margin-bottom: 20px;"  class="bachelor col-md-12 col-sm-12">
-                                                <div class="input-group col-md-4 col-sm-12">
-                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select  class="choose-bachelor form-control input-lg">
-                                                        <option selected disabled="disabled">Qualification, e.g. Bachelor in Arts</option>
-                                                        {% for bachelor in bachelors %}
-                                                          <option value="{{ bachelor }}">{{bachelor}}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div style="display: none; margin-bottom: 20px;"  class="diploma col-md-12 col-sm-12">
-                                                <div class="input-group col-md-4 col-sm-12">
-                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select  class="choose-diploma form-control input-lg">
-                                                        <option selected disabled="disabled">Qualification, e.g. Diploma in Arts</option>
-                                                        {% for diploma in diplomas %}
-                                                            <option value="{{ diploma }}">{{ diploma }}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div style="display: none; margin-bottom: 20px;"  class="certificate col-md-12 col-sm-12">
-                                                <div class="input-group col-md-4 col-sm-12">
-                                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select  class="choose-certificate form-control input-lg">
-                                                        <option selected disabled="disabled">Qualification, e.g. Certificate in Arts</option>
-
-                                                        {% for cert in certificates %}
-                                                            <option value="{{ cert }}">{{cert}}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div style="display: none; margin-bottom: 20px;"  class="date col-md-12 col-sm-12">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">Year of graduation</span>
-                                                    <input type="text" id="edu-start" data-dd-theme="vanilla" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" class="form-control edu-start" readonly="">
-                                                </div>
-                                            </div>
-                                            <div style="display: none; margin-bottom: 20px;"  class="reg_no col-md-12 col-sm-12">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">Registration number</span>
-                                                    <input type="text"  class="form-control regno" >
-                                                </div>
-                                            </div>
-                                    </div>
-                                        <button type="button" class="btn remove-field">Remove</button>
+                                        <small id="lastname" class="form-text text-muted">
+                                            eg Art and craft.
+                                        </small>
                                     </div>
 
-                                </div>
-                            <button type="button" class="add-field">Add field</button>
-                        </div>
-                        <div class="row bottom-mrg extra-mrg">
-                            <h2 class="detail-title">Brief description about yourself</h2>
-                            <div class="col-md-12 col-sm-12">
-                                <textarea class="form-control textarea" maxlength="2000" rows="30" placeholder="About Yourself"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="row bottom-mrg extra-mrg">
-                            <h2 class="detail-title">Add Experience</h2>
-                            <div class="extra-field-box">
-                                <div class="multi-box">
-                                    <div class="dublicat-box">
-                                        <div class="col-md-12 col-sm-12">
-                                            <label>Have you ever been employed</label>
-                                            <div style="display: flex;">
-                                                <div class="custom-control custom-radio custom-control-inline" style="margin-right: 20px;">
-                                                    <input onclick="showEmployment()" type="radio" class="custom-control-input" id="customRadioz" name="example" value="customEx">
-                                                    <label class="custom-control-label" for="customRadioz">Yes</label>
-                                                </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input onclick="hideEmployment()" type="radio" class="custom-control-input" id="customRadiox" name="example" value="customEx">
-                                                    <label class="custom-control-label" for="customRadio2x">No</label>
-                                                </div>
-                                            </div>
-                                            <div style="margin-top:8px; display: none;" id="employer" class="employerwrapper col-md-12 col-sm-12" >
-                                                <label for="emplo">Company Employer Name</label>
-                                                <input style="margin-bottom: 0;" id="emplo" type="text" class="form-control" placeholder="Employer's Name">
-                                                <small id="lastname" class="form-text text-muted">
-                                                  eg John doe.
-                                                </small>
-                                            </div>
-                                            <div style="margin-top: 8px; display: none;" id="employercompany" class="employerwrapper col-md-12 col-sm-12" >
-                                                <label for="emplocomp">Company Name</label>
-                                                <input style="margin-bottom: 0;" id="emplocomp" type="text" class="form-control" placeholder="Employer's Company">
-                                                <small id="lastname" class="form-text text-muted">
-                                                  eg abc company.
-                                                </small>
-                                            </div>
-                                            <div style="margin-top: 8px; display: none;" id="employercompany" class="employerwrapper col-md-12 col-sm-12" >
-                                                <label for="emplocompemail">Company email</label>
-                                                <input style="margin-bottom: 0;" id="emplocompemail" type="email" class="form-control" placeholder="Employer's email">
-                                                <small id="lastname" class="form-text text-muted">
-                                                  eg abc.example.org abc.example.com .
-                                                </small>
-                                            </div>
-                                            <div style="margin-top: 8px; display: none;" id="employercompany" class="employerwrapper col-md-12 col-sm-12" >
-                                                <label for="emplocomp4n">Company Phone</label>
-                                                <input style="margin-bottom: 0;" id="emplocomp4n" type="text" class="form-control" placeholder="Employer's Phonenumber">
-                                                <small id="lastname" class="form-text text-muted">
-                                                  eg 07********.
-                                                </small>
-                                            </div>
-                                            <div class="employerwrapper col-md-12 col-sm-12" style="margin-top:8px; display: none;">
-                                                <label for="kke">Position Held</label>
-                                                <input id="kke" type="text" class="form-control" placeholder="Position, e.g. Web Designer">
-                                            </div>
-                                            <div class="employerwrapper col-md-12 col-sm-12" style="margin-top:8px; display: none;">
-                                                <h4>Date</h4>
-                                                <div class="col-md-6 col-sm-6" >
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">Date From</span>
-                                                        <input type="text" id="exp-start" data-lang="en" data-dd-theme="vanilla" data-large-mode="true" data-min-year="1950" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="exp-start form-control" readonly="">
-                                                    </div>
-                                                </div>
-
-                                                <div class="employerwrapper col-md-6 col-sm-6" style="margin-top:8px; display: none;">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">Date To</span>
-                                                        <input type="text" id="exp-end" data-lang="en" data-dd-theme="vanilla"  data-large-mode="true" data-min-year="2017" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="exp-end form-control" readonly="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="employerwrapper col-md-12 col-sm-12" style="margin-top:8px; display: none;">
-                                                <label for="emplomsg"></label>
-                                                <textarea id="emplomsg" class="form-control textarea" placeholder="Optional notes on the experience"></textarea>
-                                            </div>
+                                    <div class="col-md-12 col-sm-12 ">
+                                        <div class="input-group" style="margin-bottom: 8px;">
+                                            <span class="input-group-addon"><i class="fas fa-user"></i></span>
+                                            <input required name="referee[]" id="ref" type="text" class="form-control"
+                                                   placeholder="Referee Name">
                                         </div>
-                                        <button style="display: none;" id="clonebutton1" type="button" class="employer btn remove-field">Remove</button>
+                                        <small id="lastname" class="form-text text-muted">
+                                            eg Referee Name.
+                                        </small>
                                     </div>
-                                    <button style="display: none;" id="clonebutton2" type="button" class="employer add-field">Add field</button>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="row bottom-mrg extra-mrg">
-                            <h2 class="detail-title">Add Skills</h2>
-                            <div class="extra-field-box">
-                                    <div class="multi-box">
-                                        <div class="dublicat-box">
-
-                                            <div class="col-md-12 col-sm-12 " style="margin-bottom: 8px;">
-                                                <div class="input-group"style="margin-bottom: 0px;">
-                                                    <span class="input-group-addon"><i class="fas fa-hand-paper"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Skills, e.g. Css, Html...">
-                                                </div>
-                                                <small id="lastname" class="form-text text-muted">
-                                                  eg Art and craft.
-                                                </small>
-                                            </div>
-
-                                             <div class="col-md-12 col-sm-12 ">
-                                                 <div class="input-group" style="margin-bottom: 8px;">
-                                                     <span class="input-group-addon"><i class="fas fa-user"></i></span>
-                                                     <input id="ref" type="text" class="form-control" placeholder="Referee Name">
-                                                 </div>
-                                                 <small id="lastname" class="form-text text-muted">
-                                                  eg Referee Name.
-                                                </small>
-                                             </div>
-                                             <div class="col-md-12 col-sm-12 ">
-                                                 <div class="input-group" style="margin-bottom: 8px;">
-                                                     <span class="input-group-addon"><i class="fas fa-mobile-phone"></i></span>
-                                                     <input id="refh" type="text" class="form-control" placeholder="Referee Phone Number">
-                                                 </div>
-                                                 <small id="lastnamehh" class="form-text text-muted">
-                                                  eg Referee Phone Number.
-                                                </small>
-                                             </div>
-                                            <button type="button" class="btn remove-field">Remove</button>
+                                    <div class="col-md-12 col-sm-12 ">
+                                        <div class="input-group" style="margin-bottom: 8px;">
+                                            <span class="input-group-addon"><i class="fas fa-mobile-phone"></i></span>
+                                            <input required name="referee_phonenumber[]" id="refh" type="text"
+                                                   class="form-control" placeholder="Referee Phone Number">
                                         </div>
+                                        <small id="lastnamehh" class="form-text text-muted">
+                                            eg Referee Phone Number.
+                                        </small>
                                     </div>
-                                    <button type="button" class="add-field">Add field</button>
+                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                        <button type="button" class="btn remove-field"><i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+
                                 </div>
-                        </div>
-                        <div class="row bottom-mrg extra-mrg">
-                            <h2 class="detail-title">Social Profile</h2>
-                            <div class="col-md-12 col-sm-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fab fa-linkedin"></i></span>
-                                    <input type="text" class="form-control" placeholder="Linkedin Link">
-                                </div>
-                                <small id="lastname" class="form-text text-muted">
-                                  Your Linkedin Handle.
-                                </small>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <button type="button" class="add-field">Add field</button>
                             </div>
                         </div>
+                    </div>
+                    <div class="row bottom-mrg extra-mrg">
+                        <h2 class="detail-title">Social Profile</h2>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fab fa-linkedin"></i></span>
+                                <input name="account_url" type="text" class="form-control" placeholder="Linkedin Link">
+                            </div>
+                            <small id="lastname" class="form-text text-muted">
+                                Your Linkedin Handle.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="row bottom-mrg extra-mrg">
+                        <h2 class="detail-title">Password</h2>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fas fa-key"></i></span>
+                                <input required name="password1" type="password" class="form-control" autocomplete="off"
+                                       placeholder="Password">
+                            </div>
+                            <div class="help-block list-unstyled text-muted">
+                                {{ form.password1.help_text }}
+                            </div>
+                            {% if form.password1.errors %}
+                                <div class="alert alert-danger errorlist text-danger">
+                                    {{ form.password1.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fas fa-key"></i></span>
+                                <input required name="password2" type="password" class="form-control"
+                                       placeholder="Confirm Password">
+                            </div>
+                            <div class="help-block list-unstyled text-muted">
+                                {{ form.password2.help_text }}
+                            </div>
+                            {% if form.password2.errors %}
+                                <div class="alert alert-danger errorlist">{{ form.password2.errors }}</div>
+                            {% endif %}
+                        </div>
+
                         <div class="row bottom-mrg extra-mrg text-center">
-                             <div class="col-md-12 col-sm-12 mrg-top-25">
-                                 <div class="custom-control custom-radio custom-control-inline" style="margin-right: 20px;">
-                                     <label  class="custom-control-label" for="customRadio"></label>
-                                     <span>
-                                         <input  type="checkbox" class="custom-control-input customRadio" id="termschecks" name="example" value="">
+                            <div class="col-md-12 col-sm-12 mrg-top-25">
+                                <div class="custom-control custom-radio custom-control-inline"
+                                     style="margin-right: 20px;">
+                                    <label class="custom-control-label" for="customRadio"></label>
+                                    <span>
+                                         <input type="checkbox" class="custom-control-input customRadio"
+                                                id="termschecks" name="example" value="">
                                          Agree to terms and conditions <a href="#">Terms</a>
                                      </span>
                                 </div>
@@ -492,57 +701,93 @@
                         </div>
                         <div class="row bottom-mrg extra-mrg">
                             <div class="col-md-12">
-                                <button id="submitbutton" type="submit" class="submitbutton btn btn-success btn-primary small-btn">Submit </button>
+                                <button id="submitbutton" type="submit"
+                                        class="submitbutton btn btn-success btn-primary small-btn">Submit
+                                </button>
                             </div>
                             <div class="col-md-12">
                                 <div class="row text-right" style="">
-                                    <p>Create as an Employer instead<a href="{% url 'LML:companysignup' %}">click here</a></p>
+                                    <p>Create as an Employer instead<a href="{% url 'LML:companysignup' %}">click
+                                        here</a></p>
                                 </div>
-                             </div>
-                        </div>
+                            </div>
                         </div>
                     </div>
-                </section>
-            </form>
-			<!-- full detail SetionStart-->
+                </div>
+        </section>
+    </form>
+    <!-- full detail SetionStart-->
 {% endblock content %}
 {% block script %}
-{#            <script type="text/javascript" src="{% static 'assets/js/js.js' %}"></script>#}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-            <script>
-                 $('.dob').dateDropper();
-			</script>
-            <script>
-				$('.edu-start').dateDropper(
+    {#            <script type="text/javascript" src="{% static 'assets/js/js.js' %}"></script>#}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        $('#dob').dateDropper();
+    </script>
+    <script>
+        $('#edu-start').dateDropper();
+    </script>
+    <script>
+        $('#exp-end').dateDropper();
+    </script>
+    <script>
+        $('#exp-start').dateDropper();
 
-                );
-			</script>
-            <script>
-				$('.exp-end').dateDropper();
-			</script>
-            <script>
-				$('.exp-start').dateDropper(
+    </script>
+    <script src="{% static 'assets/js/js.js' %}" type="text/javascript"></script>
+    <script>
 
-                );
 
-			</script>
-            <script src="{% static 'assets/js/js.js' %}" type="text/javascript" ></script>
-{#    <script>#}
-{#        // City Select#}
-{#	$('.choose-city').select2();#}
-{#	$('.choose-region').select2();#}
-{#	$('.choose-qualification').select2();#}
-{#	$('.choose-university').select2();#}
-{#	$('.choose-phd').select2();#}
-{#	$('.choose-bachelor').select2();#}
-{#	$('.choose-masters').select2();#}
-{#	$('.choose-diploma').select2();#}
-{#	$('.choose-certificate').select2();#}
-{#	$('.choose-category').select2();#}
-{#	$('.choose-category2').select2();#}
-{#	$('.choose-entity').select2();#}
-{#	$('.marital').select2();#}
-{#	$('.marital2').select2();#}
-{#    </script>#}
+        {#var checkList = document.getElementById('list1');#}
+        {#checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {#}
+        {#    if (checkList.classList.contains('visible'))#}
+        {#        checkList.classList.remove('visible');#}
+        {#    else#}
+        {#        checkList.classList.add('visible');#}
+        //}
+        {##}
+        {#checkList.onblur = function(evt) {#}
+        {#    checkList.classList.remove('visible');#}
+        //}
+
+        var list = document.getElementsByClassName('list1');
+        for (i = 0; i < list.length; i++) {
+            var anchor = list[i].getElementsByClassName('anchor');
+            for (a = 0; a < anchor.length; a++) {
+                $(anchor[i]).on('click', function (e) {
+                    list[i].classList.add('visible');
+                    if (list[i].hasClass('visible')) {
+                        list[i].removeClass('visible');
+                    } else {
+                        list[i].classList.add('visible');
+                    }
+                });
+                $(anchor[i]).on('blur', function (e) {
+                    list[i].removeClass('visible');
+                });
+            }
+
+        }
+        $(document).ready(function () {
+            // City Select
+            $('.choose-city').select2();
+            $('.choose-region').select2();
+            $('.choose-qualification').select2();
+            $('.choose-university').select2();
+            $('.choose-phd').select2();
+            $('.choose-bachelor').select2();
+            $('.choose-masters').select2();
+            $('.choose-diploma').select2();
+            $('.choose-certificate').select2();
+            $('.choose-category').select2();
+            $('.choose-category2').select2();
+            $('.choose-entity').select2();
+            $('.marital').select2();
+            $('.marital2').select2();
+        });
+
+
+    </script>
+
 
 {% endblock script %}

@@ -6,7 +6,7 @@
     <!-- Basic Page Needs==================================================-->
     <title>{{title|title}}</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" onresize="devicePixelRatio">
     <!-- CSS==================================================-->
     <link rel="stylesheet" href="{% static 'assets/plugins/css/plugins.css' %}">
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
@@ -15,7 +15,9 @@
     <script src="https://kit.fontawesome.com/16d33ecbbb.js" ></script>
     <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     <link rel="stylesheet" href="{% static 'assets/css/preloader/css/style.css' %}">
-    {% block links %}{% endblock links %}
+    {% block links %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body {% comment %}class="animsition" {% endcomment %}style="scroll-behavior: smooth;">
@@ -33,7 +35,7 @@
                     <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                         <li style="position: relative;" class="dropdown megamenu-fw left-br">
                             {% if request.user.is_authenticated %}
-                                <a  href="#" target="_blank" data-toggle="dropdown" style="text-transform: none; font-size: 15px;" class="">Hi {{ request.user.username }}</a>
+                                <a  href="#" target="_blank" data-toggle="dropdown" style="text-transform: none; font-size: 15px;" class="">Welcome {{ request.user.username }}</a>
                             {% else %}
                                  <a  href="#" target="_blank" data-toggle="dropdown" style="text-transform: none; font-size: 15px;" class=""> <i class="fa fa-user"></i></a>
                             {% endif %}
@@ -206,11 +208,12 @@
                             <div class="textwidget">
                                 <div class="textwidget">
                                     <ul class="footer-navigation">
-                                        <li><a href="manage-company.html" title="">Home</a></li>
-                                        <li><a href="manage-company.html" title="">Sign Up</a></li>
+                                        <li><a href="{% url 'LML:home' %}" title="">Home</a></li>
+                                        <li><a href="{% url 'LML:signup_initial' %}" title="">Sign Up</a></li>
                                         <li><a href="manage-company.html" title="">Categories</a></li>
-                                        <li><a href="manage-company.html" title="">Login</a></li>
+                                        <li><a href="{% url 'LML:signin' %}" title="">Login</a></li>
                                         <li><a href="manage-company.html" title="">Account</a></li>
+                                        <li><a href="{% url 'LML:companypricing' %}">Pricing</a></li>
                                         {% if request.user.is_authenticated %}
                                             <li><a href="{% url 'LML:log_out_user' %}">Logout</a></li>
                                         {% else %}
@@ -384,6 +387,7 @@
 
 
         </script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
         {% block script %}
 
         {% endblock script %}
@@ -394,6 +398,5 @@
         {% sweetify %}
 {#        <script src="{% static 'assets/js/js.js' %}" type="text/javascript" ></script>#}
     </div>
-
 </body>
 </html>

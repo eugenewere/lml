@@ -28,25 +28,28 @@ import base64
 # sweetify.success(self.request, 'You successfully changed your password')
 # sweetify.error(self.request, 'Some error happened here - reload the site', persistent=':(')
 # sweetify.warning(self.request, 'This is a warning... I guess')
-
+import json
 
 def home(request):
-    # if request.method == 'GET':
-    #     mod =os.path.dirname(__file__)
-    #     file = os.path.join(mod,'counties.csv')
-    #     csv_file = open(file, 'r')
-    #         # open(file, 'r')
-    #     # csv_decode = csv_file.decode()
-    #     file_data = csv_file.read()
+
+    # mod =os.path.dirname(__file__)
+    # file = os.path.join(mod,'subcounties.json')
     #
-    #     io_string = io.StringIO(file_data)
-    #     next(io_string)
+    # with open(file) as f:
+    #     print()
+    #     data = f.read()
+    #     # print(data.split('¿', 1)[1])
+    #     json_data = json.loads(data.split('¿', 1)[1])
     #
-    #     for column in csv.read
-    #         county = County.objects.create(
-    #             county_number=column[0],
-    #             county=column[1]
+    #     for p in json_data:
+    #
+    #         Region.objects.create(
+    #             county_number=p['county'],
+    #             region=p['subcounty'],
+    #             ward=p['ward'],
+    #
     #         )
+    #         # print(p['county_number'], p['county'])
 
     context = {
         'title': 'home',
@@ -55,7 +58,104 @@ def home(request):
 
 
 def signup(request):
-    # sweetify.error(request, 'You did it', text='Good job! You successfully showed a SweetAlert message', persistent='Hell yeah')
+
+    if request.method=='POST':
+        qualifications = request.POST.getlist('qualifications[]')
+        schools = request.POST.getlist('school[]')
+        courses = request.POST.getlist('course[]')
+        graduation_dates = request.POST.getlist('graduation_date[]')
+        regnos = request.POST.getlist('reg_number[]')
+
+
+        employer_names = request.POST.getlist('employer_name[]')
+        company_names = request.POST.getlist('company_name[]')
+        company_emails = request.POST.getlist('company_email[]')
+        company_phones = request.POST.getlist('company_phone[]')
+        position_helds = request.POST.getlist('position_held[]')
+        date_froms = request.POST.getlist('date_from[]')
+        date_tos = request.POST.getlist('date_to[]')
+        experiences = request.POST.getlist('experience[]')
+
+        skills = request.POST.getlist('skill[]')
+        referees = request.POST.getlist('referee[]')
+        referee_phonenumbers= request.POST.getlist('referee_phonenumber[]')
+
+        account_url= request.POST['account_url']
+
+
+
+        form = PersonelRegisterForm(request.POST, request.FILES)
+        # print(form)
+        if form.is_valid():
+            new_user= form.save()
+            CustomerRegNo.objects.create(
+                customer=new_user,
+                personel_reg_no=get_random_string(length=7, allowed_chars='PERS123456789'),
+            )
+            Social_account.objects.create(
+                customer=new_user,
+                account_url=account_url
+            )
+            print(qualifications)
+            print(schools)
+            print(courses)
+            print(regnos)
+            print(graduation_dates)
+            for qualification in qualifications:
+                for school in schools:
+                    for course in courses:
+                        for graduation_date in graduation_dates:
+                            for regno in regnos:
+                                if qualifications.index(qualification) == schools.index(school) and qualifications.index(qualification) == courses.index(course) \
+                                        and qualifications.index(qualification) == graduation_dates.index(graduation_date) and qualifications.index(qualification) == regnos.index(regno):
+                                    Education.objects.create(
+                                        customer=new_user,
+                                        qualifications=qualification,
+                                        school=school,
+                                        course=course,
+                                        graduation_date=graduation_date,
+                                        regno=regno,
+                                    )
+                                    print(qualification)
+
+            for employer_name in employer_names:
+                for company_name in company_names:
+                    for company_email in company_emails:
+                        for company_phone in company_phones:
+                            for position_held in position_helds:
+                                for date_from in date_froms:
+                                    for date_to in date_tos:
+                                        for experience in experiences:
+                                            Experience.objects.create(
+                                                customer=new_user,
+                                                employer_name=employer_name,
+                                                company_name=company_name,
+                                                comapny_email=company_email,
+                                                company_phone=company_phone,
+                                                position_held = position_held,
+                                                date_from=date_from,
+                                                date_to=date_to,
+                                                experience=experience,
+                                            )
+
+            for skill in skills:
+                for referee in referees:
+                    for referee_phonenumber in referee_phonenumbers:
+                        Skills.objects.create(
+                            customer=new_user,
+                            skill= skill,
+                            referee=referee,
+                            referee_phonenumber=referee_phonenumber
+                        )
+            sweetify.success(request, 'You did it', text='Good job! You successfully Registered', persistent='Continue')
+        else:
+            form1 = PersonelRegisterForm(request.POST,request.FILES)
+            sweetify.error(request, 'Error', text='Error Registering your account', persistent='Retry')
+            return render(request, 'normal/signup/signup.html',{'form':form1})
+
+
+
+
     module_dir = os.path.dirname(__file__)  # get current directory
     file_path1 = os.path.join(module_dir, 'Bachelorcourses')
     file_path2 = os.path.join(module_dir, 'course_certificate')
@@ -64,14 +164,6 @@ def signup(request):
     qbfile2 = open(file_path2, "r")
     qbfile3 = open(file_path3, "r")
 
-    # response = requests.get('https://africaopendata.org/dataset/a8f8b195-aafd-449b-9b1a-ab337fd9925f/resource/4fb2e27e-c001-4b7f-b71d-4fee4a96a0f8/download/kenyan-counties.geojson')
-    # geodata = response.json()
-
-    kenyan_county_api_url ="https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/counties.geojson"
-    kenyan_constituencies_api_url ="https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/constituencies.geojson"
-
-    data=requests.get(kenyan_county_api_url).json()
-    data2=requests.get(kenyan_constituencies_api_url).json()
 
     # for county in data['features']:
     # 4db8ff
@@ -83,8 +175,9 @@ def signup(request):
         'bachelors':qbfile.readlines(),
         'certificates':qbfile2.readlines(),
         'diplomas':qbfile3.readlines(),
-        'counties':data['features'],
-        'regions':data2['features'],
+        'counties':County.objects.all(),
+        'regions':Region.objects.all(),
+        'categories':Category.objects.all(),
 
 
 
@@ -353,13 +446,13 @@ def companysignup(request):
             # return redirect('LML:companysignup',{'form':form, 'social':form2})
 
     else:
-        kenyan_county_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/counties.geojson"
-        kenyan_constituencies_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/constituencies.geojson"
+        # kenyan_county_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/counties.geojson"
+        # kenyan_constituencies_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/constituencies.geojson"
         form = CompanyRegisterForm()
         form2 = CompanySocialsForm()
         categories = Category.objects.all()
-        data = requests.get(kenyan_county_api_url).json()
-        data2 = requests.get(kenyan_constituencies_api_url).json()
+        # data = requests.get(kenyan_county_api_url).json()
+        # data2 = requests.get(kenyan_constituencies_api_url).json()
 
 
     # kenyan_county_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/counties.geojson"
@@ -370,8 +463,8 @@ def companysignup(request):
 
     context = {
         'title': 'Create an account',
-        'counties': data['features'],
-        'regions': data2['features'],
+         'counties':County.objects.all(),
+        'regions':Region.objects.all(),
         'categories': categories,
         'form': form,
         'social': form2,

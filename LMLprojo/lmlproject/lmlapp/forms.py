@@ -20,7 +20,54 @@ class CompanySocialsForm(forms.ModelForm):
         model = CompanySocialAccount
         fields = ['facebook','linkedin', 'googlr_plus', 'instagram', 'twitter', 'company', ]
 
+class PersonelRegisterForm(forms.Form, UserCreationForm):
+    class Meta:
+        model = Customer
+        fields = [
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+            'password2',
+            'password1',
+            'profile_image',
+            'county',
+            'region',
+            'country',
+            'gender',
+            'category',
+            'phone_number',
+            'date_of_birth',
+            'landmark',
+            'job_type',
+            'disability',
+            'marital_status',
+            'biography',
+            'disability_status',
 
+        ]
+
+    def clean_username(self):
+        super(PersonelRegisterForm, self).clean()
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username__iexact=username).exists():
+            raise forms.ValidationError('Username already exists')
+        return username
+
+    def clean_email(self):
+        super(PersonelRegisterForm, self).clean()
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email__iexact=email).exists():
+            raise forms.ValidationError('A user has already registered using this email')
+        return email
+
+    def clean_password2(self):
+        super(PersonelRegisterForm, self).clean()
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError('Passwords must match')
+        return password2
 
 class CompanyRegisterForm(forms.Form, UserCreationForm):
 
@@ -48,9 +95,8 @@ class CompanyRegisterForm(forms.Form, UserCreationForm):
             'date_created',
             'description',
             'kra_number',
-
-
         ]
+
     def clean_username(self):
         super(CompanyRegisterForm, self).clean()
         username = self.cleaned_data.get('username')

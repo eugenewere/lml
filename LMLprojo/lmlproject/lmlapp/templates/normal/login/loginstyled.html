@@ -3,7 +3,8 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Animated Login Page | Webdevtrick.com</title>
+  <title>Login!</title>
+    <meta name="viewport" content="width=device-width" initial-scale="1.0">
   <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'assets/login/style.css' %}">
      <script src="https://kit.fontawesome.com/16d33ecbbb.js" ></script>
@@ -36,7 +37,7 @@
 
           <p class="animation a5" style="display: flex; justify-content: space-between; flex-wrap: wrap;">
               <a href="#">Forgot Password</a>
-              <a href="#">Do you have an account?</a>
+              <a href="{% url 'LML:signup_initial' %}">Do you have an account?</a>
           </p>
 
           <button type="submit" style="border-radius: 20px;" class="animation a6">LOGIN</button>

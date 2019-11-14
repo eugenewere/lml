@@ -6,13 +6,14 @@ import datetime
 
 # # Create your models here.
 class County(models.Model):
-    county_number = models.IntegerField(max_length=200,null=False,blank=False)
+    county_number = models.IntegerField(null=False,blank=False)
     county = models.CharField(max_length=200,null=False,blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return '%s' % (self.county)
+
 
 class Region(models.Model):
     county_number = models.IntegerField(null=False,blank=False)
@@ -42,15 +43,16 @@ class Customer(get_user_model()):
     region = models.CharField(max_length=100,null=False, blank=False)
     gender = models.CharField(max_length=100,null=False, blank=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, max_length=200, null=False, blank=False)
-    skils =  models.CharField(max_length=100,null=True, blank=True)
+    # skils =  models.CharField(max_length=100,null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     date_of_birth = models.DateField(default=datetime.datetime.now())
-    landmark = models.CharField(max_length=100,null=False, blank=False)
+    landmark = models.CharField(max_length=100,null=True, blank=True)
     huduma_no = models.CharField(max_length=100,null=True, blank=True)
     job_type = models.CharField(max_length=200, null=False, blank=False)
     disability = models.TextField()
+
     marital_status = models.CharField(max_length=100,null=True, blank=True)
-    driver_licence = models.CharField(max_length=100,null=True, blank=True)
+    # driver_licence = models.CharField(max_length=100,null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     biography = models.TextField()
@@ -62,6 +64,11 @@ class Customer(get_user_model()):
 
     }
     status = models.CharField(choices=PERSONNEL_STATUS, default='NEWBIE', max_length=200, null=False, blank=False)
+    DISABILITY_STATUS=[
+        ('DISABLED','Disabled'),
+        ('NOT_DISABLED','Not_Disabled')
+    ]
+    disability_status =models.CharField(choices=DISABILITY_STATUS, default='NOT_DISABLED', max_length=200, null=False, blank=False)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
@@ -85,30 +92,33 @@ class Education(models.Model):
     qualifications=models.CharField(max_length=200,null=False, blank=False)
     school = models.CharField(max_length=200,null=False, blank=False)
     course = models.CharField(max_length=200,null=False, blank=False)
+    graduation_date = models.DateTimeField(blank=False, null=False,default=datetime.datetime.now())
+    reg_number = models.CharField(max_length=200, null=False,blank=False)
+
     def __str__(self):
         return '%s %s' % (self.customer.first_name, self.qualifications)
 
 
 class Experience(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=False, blank=False)
-    employer_name = models.CharField(max_length=200,null=False, blank=False)
-    company_name =models.CharField(max_length=200,null=False, blank=False)
-    comapny_email = models.CharField(max_length=200,null=False, blank=False)
-    company_phone =models.CharField(max_length=200,null=False, blank=False)
-    position_held = models.CharField(max_length=200,null=False, blank=False)
+    employer_name = models.CharField(max_length=200,null=True, blank=True)
+    company_name =models.CharField(max_length=200,null=True, blank=True)
+    comapny_email = models.CharField(max_length=200,null=True, blank=True)
+    company_phone =models.CharField(max_length=200,null=True, blank=True)
+    position_held = models.CharField(max_length=200,null=True, blank=True)
     date_from = models.DateField(default=datetime.datetime.now())
     date_to = models.DateField(default=datetime.datetime.now())
     experience = models.TextField()
     def __str__(self):
         return '%s %s' % (self.customer.first_name, self.company_name)
 
-class skills(models.Model):
+class Skills(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=False, blank=False)
     skill =  models.CharField(max_length=100,null=False, blank=False)
     referee = models.CharField(max_length=100,null=False, blank=False)
     referee_phonenumber = models.CharField(max_length=100,null=False, blank=False)
 
-class social_account(models.Model):
+class Social_account(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=False, blank=False)
     account_url = models.CharField(max_length=100,null=False, blank=False)
     def __str__(self):

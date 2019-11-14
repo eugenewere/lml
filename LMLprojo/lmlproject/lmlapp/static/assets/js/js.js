@@ -2,6 +2,7 @@
 var disability = document.getElementsByClassName('des')[0];
     function openDisability() {
         disability.style.display="block";
+        disability.setAttribute('required','required');
     }
     function closeDisability() {
         disability.style.display="none";
@@ -11,26 +12,26 @@ var disability = document.getElementsByClassName('des')[0];
 
 
 
-    $(document).ready(function() {
-        $("#submitbutton").attr('disabled',function () {
-             $(this).on("click", function () {
-                alert("Accept to terms and conditions to proceed");
-            });
-
-             $('#termscheck:first-child').on('click', function () {
-                if($(this).checked === true){
-                    $('#submitbutton').removeAttr("disabled");
-                }else if($(this).checked === false){
-                    $("#submitbutton").attr('disabled','disabled');
-                    alert("Accept to terms and conditions to proceed");
-                }
-
-             })
-            // if (typeof attr !== typeof undefined && attr !== false) {
-            //     // ...
-            // }
-        });
-    });
+    // $(document).ready(function() {
+    //     $("#submitbutton").attr('disabled',function () {
+    //          $(this).on("click", function () {
+    //             alert("Accept to terms and conditions to proceed");
+    //         });
+    //
+    //          $('#termscheck:first-child').on('click', function () {
+    //             if($(this).checked === true){
+    //                 $('#submitbutton').removeAttr("disabled");
+    //             }else if($(this).checked === false){
+    //                 $("#submitbutton").attr('disabled','disabled');
+    //                 alert("Accept to terms and conditions to proceed");
+    //             }
+    //
+    //          })
+    //         // if (typeof attr !== typeof undefined && attr !== false) {
+    //         //     // ...
+    //         // }
+    //     });
+    // });
 
 // function openSubmit() {
 //     var submitbutton = document.getElementsByClassName('submitbutton')[0];
@@ -98,8 +99,10 @@ var disability = document.getElementsByClassName('des')[0];
 
                                         let reg_no = document.getElementsByClassName("reg_no");
                                         for(r=0; r<reg_no.length; r++) {
-                                            console.log(qualifications[i].value === 'Phd');
-                                            if (qualifications[i].value === 'Phd') {
+                                            // console.log(qualifications[i].selected=== 'Phd');
+                                            // console.log(qualifications[i].selected);
+                                            // console.log(qualifications[i].value);
+                                            if (qualifications.value === 'Phd') {
                                                 phd[p].style.display = "block";
                                                 date[g].style.display = "block";
                                                 university[u].style.display = "block";
@@ -111,7 +114,7 @@ var disability = document.getElementsByClassName('des')[0];
                                                     bachelor[b].style.display = "none";
                                                 }
                                             }
-                                            else if (qualifications[i].value === 'Masters') {
+                                            else if (qualifications.value === 'Masters') {
                                                 masters[m].style.display = "block";
                                                 date[g].style.display = "block";
                                                 university[u].style.display = "block";
@@ -123,7 +126,7 @@ var disability = document.getElementsByClassName('des')[0];
                                                     bachelor[b].style.display = "none";
                                                 }
                                             }
-                                            else if (qualifications[i].value === "Bachelor") {
+                                            else if (qualifications.value === "Bachelor") {
                                                 bachelor[b].style.display = "block";
                                                 date[g].style.display = "block";
                                                 university[u].style.display = "block";
@@ -135,7 +138,7 @@ var disability = document.getElementsByClassName('des')[0];
                                                     masters[m].style.display = "none";
                                                 }
                                             }
-                                            else if (qualifications[i].value === "Diploma") {
+                                            else if (qualifications.value === "Diploma") {
                                                 diploma[d].style.display = "block";
                                                 date[g].style.display = "block";
                                                 university[u].style.display = "block";
@@ -147,7 +150,7 @@ var disability = document.getElementsByClassName('des')[0];
                                                     bachelor[b].style.display = "none";
                                                 }
                                             }
-                                            else if (qualifications[i].value === "Certificate") {
+                                            else if (qualifications.value === "Certificate") {
                                                 certificate[c].style.display = "block";
                                                 date[g].style.display = "block";
                                                 university[u].style.display = "block";
@@ -186,7 +189,50 @@ var disability = document.getElementsByClassName('des')[0];
 // }
 
 
-
+function showPHD(qualifications) {
+        console.log(qualifications.item().id);
+        for(i=0; i<qualifications.length; i++){
+            let phd = document.getElementsByClassName("phd");
+            for(p=0; p<phd.length; p++){
+                let masters = document.getElementsByClassName("masters");
+                for(m=0; m<masters.length; m++){
+                    let diploma = document.getElementsByClassName("diploma");
+                    for(d=0; d<diploma.length; d++){
+                        let certificate = document.getElementsByClassName("certificate");
+                        for(c=0; c<certificate.length; c++){
+                            let bachelor = document.getElementsByClassName("bachelor");
+                            for(b=0; b<bachelor.length; b++){
+                               let university = document.getElementsByClassName("uni");
+                                for(u=0; u<university.length; u++){
+                                     let date = document.getElementsByClassName("date");
+                                    for(g=0; g<date.length; g++){
+                                        let reg_no = document.getElementsByClassName("reg_no");
+                                        for(r=0; r<reg_no.length; r++) {
+                                            // console.log(qualifications[i].selected=== 'Phd');
+                                            // console.log(qualifications[i].selected);
+                                            // console.log(qualifications[i].value);
+                                            if (qualifications.value === 'Phd') {
+                                                phd[p].style.display = "block";
+                                                date[g].style.display = "block";
+                                                university[u].style.display = "block";
+                                                reg_no[r].style.display = "block";
+                                                if (masters[m].style.display === "block" || diploma[d].style.display === "block" || certificate[c].style.display === "block" || bachelor[b].style.display === "block") {
+                                                    masters[m].style.display = "none";
+                                                    diploma[d].style.display = "none";
+                                                    certificate[c].style.display = "none";
+                                                    bachelor[b].style.display = "none";
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+}
 
 
 
@@ -206,7 +252,14 @@ var disability = document.getElementsByClassName('des')[0];
 
          for(i=0; i<employer.length; i++){
             employer[i].style.display="block";
-        }
+            // employer[i].setAttributeNode('required')[i]
+            // employer[i].getElementsByTagName('textarea')[i].setAttribute('required','required');
+
+         }
+
+         // for(x=0; x<employer.length; x++){
+         //    employer[x].getElementsByTagName('input')[x].setAttribute('required','required');
+         // }
         clonebutton1.style.display = "block";
         clonebutton2.style.display = "block";
     }
@@ -273,7 +326,6 @@ function readURL(input) {
 
 
   })(jQuery);
-
 
 
 
