@@ -1,0 +1,52 @@
+<div id="cornel">
+    <div class="qualification_block" id="template">
+        <select name="" onchange="getCourses(this)">
+            <option value="">Select </option>
+            <option value="phd">PHD</option>
+            <option value="masters">MASTERS</option>
+            <option value="bachelors">BACHELORS</option>
+        </select>
+        <BR>
+        <select name="uni">
+            <option value="">Select</option>
+            <option value="moi">Moi</option>
+            <option value="moi">mku</option>
+            <option value="moi">uon</option>
+        </select>
+        <br>
+        <input name="course_selections" id="1" class="course_options">
+        </input>
+        <br>
+    </div>
+</div>
+<span class="btn-primary btn" onclick="AddBlock()">Add new</span>
+
+<script>
+    var qualifications = {
+        "phd": ['part', 'pscience', 'pkiswahili'],
+        "masters": ['mart', 'mscience', 'mkiswahili'],
+        "bachelors": ['bart', 'bscience', 'bkiswahili'],
+    };
+    var container = document.getElementById('cornel');
+
+    function getCourses(qualification_dom) {
+        var courses = qualifications[qualification_dom.value];
+        qualification_dom.parentNode.children[4].value = courses;
+    }
+
+    function AddBlock() {
+
+        var container = document.getElementById('cornel');
+        var template = document.getElementById('template');
+        var itm = template;
+        var cln = itm.cloneNode(true);
+        cln.getElementsByTagName('input').value = '';
+        cln.getElementsByTagName('select').value = '';
+        new_id = container.children.length +1;
+        var input_course = cln.children[4];
+
+        console.log(input_course);
+        input_course.id = new_id;
+        container.appendChild(cln);
+    }
+</script>

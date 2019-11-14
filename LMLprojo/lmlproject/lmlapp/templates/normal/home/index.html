@@ -43,13 +43,10 @@
                             <div class="col-md-3 no-padd">
                                 <div class="input-group">
                                     <select id="choose-city" class="form-control">
-                                        <option>Choose County</option>
-                                        <option>Chandigarh</option>
-                                        <option>London</option>
-                                        <option>England</option>
-                                        <option>Pratapcity</option>
-                                        <option>Ukrain</option>
-                                        <option>Wilangana</option>
+                                        <option selected disabled> Choose County</option>
+                                        {% for county in counties %}
+                                        <option value="{{ county.county }}">{{ county.county }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -306,7 +303,7 @@
                             </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
                     </div>
                     <div class="col-md-12 col-sm-12">
-                        <div class="text-center"><a href="premium-candidate.html" class="btn btn-primary">Load More</a></div>
+                        <div class="text-center"><a href="{% url 'LML:advancesearch' %}" class="btn btn-primary">Load More</a></div>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@ constantly==15.1.0
 cryptography==2.7
 daphne==2.3.0
 defusedxml==0.6.0
-Django==2.1.7
+Django==2.1.11
 django-allauth==0.39.1
 django-crispy-forms==1.7.2
 django-humanize==0.1.2
@@ -46,7 +46,7 @@ MarkupSafe==1.1.1
 mccabe==0.6.1
 msg==0.7.8
 oauthlib==3.1.0
-Pillow==6.1.0
+Pillow==6.2.0
 pycparser==2.19
 PyHamcrest==1.9.0
 pylint==2.3.1

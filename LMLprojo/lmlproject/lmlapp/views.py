@@ -53,6 +53,7 @@ def home(request):
 
     context = {
         'title': 'home',
+        'counties': County.objects.all()
     }
     return render(request, 'normal/home/index.html', context)
 
