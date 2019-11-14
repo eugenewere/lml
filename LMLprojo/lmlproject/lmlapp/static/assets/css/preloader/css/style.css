@@ -13,7 +13,7 @@
     transform: rotate(0);
   }
   55% {
-    background-color: #77f31d;
+    background-color: #20e894;
   }
   100% {
     transform: rotate(90deg);
@@ -24,7 +24,7 @@
     transform: rotate(0);
   }
   55% {
-    background-color: #77f31d;
+    background-color: #20e894;
   }
   100% {
     transform: rotate(-90deg);
@@ -58,7 +58,7 @@
   display: block;
   width: 40px;
   height: 40px;
-  background-color: #4db8ff;
+  background-color: #07b107;
   animation: loaderBlock 1.2s infinite ease-in-out both;
 }
 .loader span:nth-child(1) {

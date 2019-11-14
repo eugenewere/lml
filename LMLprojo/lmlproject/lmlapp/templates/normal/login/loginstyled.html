@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Login!</title>
-    <meta name="viewport" content="width=device-width" initial-scale="1.0">
+    <meta name="viewport" content="width=device-width">
   <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'assets/login/style.css' %}">
      <script src="https://kit.fontawesome.com/16d33ecbbb.js" ></script>
@@ -13,18 +13,18 @@
 
 <div class="container">
   <div class="right-section" >
-      <a style="display: flex; justify-content: center; margin-bottom: 60px;" href="{% url 'LML:home' %}"><img src="{% static 'assets/img/LML4.png' %}" class="animation a6" alt=""></a>
+      <a style="display: flex; justify-content: right; margin-bottom: 60px;" href="{% url 'LML:home' %}"><img src="{% static 'assets/img/LML4.png' %}" class="animation a6" alt=""></a>
     <div class="header" style="text-align: center">
-      <h1 class="animation a1">Welcome Back!</h1>
+      <h2 class="animation a1">Welcome Back!</h2>
       <h4 class="animation a2">Enter your details to log in</h4>
     </div>
       <form action="{% url 'LML:login_user' %}" method="post">
           {% csrf_token %}
         <div class="form" >
-          <label style="color: #C2C2C2; margin-top: 20px;margin-bottom: 5px" for="id_usernam" class="animation a3">Email or Username</label>
+          <label style="color: #f6fcff; margin-top: 20px;margin-bottom: 5px" for="id_usernam" class="animation a3">Email or Username</label>
           <input id="id_usernam" name="username" type="text" class="form-field animation a3" placeholder="Username">
            <div style="display: flex; flex-direction: column;">
-               <label style="color: #C2C2C2; margin-top: 20px;margin-bottom: 5px" for="pswd" class="animation a4">Password</label>
+               <label style="color: #f3fefe; margin-top: 20px;margin-bottom: 5px" for="pswd" class="animation a4">Password</label>
                 <div style="position: relative;">
                     <input  style="position: relative; width: 100%;" id="pswd"  name="password" type="password" class="password form-field animation a4" placeholder="Password">
                     <div style="position: absolute;top: 13px;right: 11px;" class="password_checker">
