@@ -135,7 +135,7 @@ All custom js files contents are below
     var $wrapp = $('.multi-box', this);
 		$(".add-field", $(this)).click(function() {
 
-			$('.dublicat-box:first-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').val('').focus();
+			$('.dublicat-box:last-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').val('').focus();
 			// alert($('.dublicat-box:first-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').val('').focus());
 			// console.log($('.dublicat-box:first-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').val('').focus())
 		});

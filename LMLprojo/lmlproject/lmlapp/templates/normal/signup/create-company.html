@@ -313,27 +313,30 @@
                         <div class="row bottom-mrg extra-mrg">
                             <h2 class="detail-title">Password</h2>
                             <div class="col-md-12 col-sm-12">
-                                <div class="input-group">
+                                <div class="input-group" style="margin-bottom: 0;">
                                     <span class="input-group-addon"><i class="fas fa-key"></i></span>
                                     <input required name="password1" type="password" class="form-control" autocomplete="off" placeholder="Password">
                                 </div>
-                                <div class="help-block list-unstyled text-muted">
-                                    {{ form.password1.help_text }}
-                                </div>
+                                <small id="phonnumber" class="form-text text-muted">
+                                   Your password must contain at least 8 characters and password can't be too similar to your other personal information or Your password can't be entirely numeric.
+                                </small>
+{#                                <div class="help-block list-unstyled text-muted">#}
+{#                                    {{ form.password1.help_text }}#}
+{#                                </div>#}
                                 {% if form.password1.errors %}
                                     <div class="alert alert-danger errorlist text-danger">
                                         {{form.password1.errors}}
                                     </div>
                                 {% endif %}
                             </div>
-                            <div class="col-md-12 col-sm-12">
-                                <div class="input-group">
+                            <div class="col-md-12 col-sm-12" style="margin-top: 20px; ">
+                                <div class="input-group " style="margin-bottom: 0;">
                                     <span class="input-group-addon"><i class="fas fa-key"></i></span>
                                     <input required name="password2" type="password" class="form-control" placeholder="Confirm Password">
                                 </div>
-                                <div class="help-block list-unstyled text-muted">
-                                    {{ form.password2.help_text }}
-                                </div>
+                                <small id="phonnumber" class="form-text text-muted">
+                                    Enter the same password as before, for verification.
+                                </small>
                                 {% if form.password2.errors %}
                                     <div class="alert alert-danger errorlist">{{form.password2.errors}}</div>
                                 {% endif %}
@@ -343,11 +346,11 @@
                                  <div class="custom-control custom-radio custom-control-inline" style="margin-right: 20px;">
                                      <label  class="custom-control-label" for="customRadio"></label>
                                      <span>
-                                         <input   type="checkbox" class="custom-control-input customRadio" id="termscheck" name="example" value="">
-                                         Agree to terms and conditions <a href="#">Terms</a>
+{#                                         <input   type="checkbox" class="custom-control-input customRadio" id="termscheck" name="example" value="">#}
+{#                                         Agree to terms and conditions <a href="#">Terms</a>#}
 
                                          <input  onchange="openSubmit2();" type="checkbox" class="custom-control-input customRadio" id="termschecks2" name="example" value="">
-                                         by checking this box you agree to our <a href="#">Terms and conditions</a>
+                                         By checking this box you agree to our <a href="#">Terms and conditions</a>
                                      </span>
                                 </div>
                             </div>

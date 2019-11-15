@@ -7,12 +7,15 @@
 
  body {
 	 font-family: 'Muli', sans-serif;
-	 background-image: url("../../../static/assets/img/blog/banner-11.jpg");
+	 /*background-image: url("../../../static/assets/img/blog/banner-11.jpg");*/
 	 /*background-blend-mode: darken;*/
-	 backdrop-filter: grayscale(10%);
-	 background-size: cover;
+	position: relative;
+
+	 /*background-size: cover;*/
 
 }
+
+
 .btn-success-custom{
 	background-color:#1DBF73;
 	color: white;
@@ -52,6 +55,14 @@
 	 align-items: center;
 	 justify-content: center;
 	 height: 100vh;
+	  background-image: url("../../../static/assets/img/blog/banner-11.jpg");
+	background-size: cover;
+	/*height: 100%;*/
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
 }
  .containers .login-container {
 	 width: 70%;

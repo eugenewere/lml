@@ -327,8 +327,29 @@ function readURL(input) {
 
   })(jQuery);
 
+function fixIds(elem, cntr) {
+    $(elem).id.each(function() {
+        this.id = this.id.replace(/\d+$/, "") + cntr;
+        console.log(this.id);
+    })
+}
 
+$('.extra-field-box').each(function() {
+    var $wrapp = $('.multi-box', this);
+		$(".add-field", $(this)).click(function() {
+			$('.dublicat-box:last-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').val('').focus();
 
+            var table=  $('.duplicate:first-child').find('select').id;
+            var new_id = table + 1;
+            table = new_id;
+            // var x =table.id = + "1";
+            // table.attr('id ', table.id+1)
+		});
+    	$('.dublicat-box .remove-field', $wrapp).on('click', function() {
+        if ($('.dublicat-box', $wrapp).length > 1)
+            $(this).parent('.dublicat-box').remove();
+		});
+	});
 
 
 
