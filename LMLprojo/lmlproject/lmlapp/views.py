@@ -438,7 +438,7 @@ def companysignup(request):
                 company_reg_no=get_random_string(length=7, allowed_chars='COMP123456789'),
             )
             sweetify.success(request, 'You did it', text='Good job! You successfully registered', persistent='Ok')
-            return redirect('LML:companysignup')
+            return redirect('LML:signin')
         else:
             # formr = CompanyRegisterForm()
             # print(formr.errors)
@@ -447,20 +447,14 @@ def companysignup(request):
             # return redirect('LML:companysignup',{'form':form, 'social':form2})
 
     else:
-        # kenyan_county_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/counties.geojson"
-        # kenyan_constituencies_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/constituencies.geojson"
+
         form = CompanyRegisterForm()
         form2 = CompanySocialsForm()
         categories = Category.objects.all()
-        # data = requests.get(kenyan_county_api_url).json()
-        # data2 = requests.get(kenyan_constituencies_api_url).json()
 
 
-    # kenyan_county_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/counties.geojson"
-    # kenyan_constituencies_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/constituencies.geojson"
-    # categories = Category.objects.all()
-    # data = requests.get(kenyan_county_api_url).json()
-    # data2 = requests.get(kenyan_constituencies_api_url).json()
+
+
 
     context = {
         'title': 'Create an account',

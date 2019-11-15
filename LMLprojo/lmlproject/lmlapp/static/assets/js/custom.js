@@ -17,7 +17,7 @@ All custom js files contents are below
 	 $(window).on('load', function () {
 	$('.Loader').delay(350).fadeOut('slow');
 	$('body').delay(350).css({ 'overflow': 'visible' });
-})
+});
 
 
 	 /*---Company Brand Carousel --*/
@@ -133,17 +133,29 @@ All custom js files contents are below
 	/*-----Add field Script------*/
 	$('.extra-field-box').each(function() {
     var $wrapp = $('.multi-box', this);
+
 		$(".add-field", $(this)).click(function() {
 
-			$('.dublicat-box:last-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').val('').focus();
-			// alert($('.dublicat-box:first-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').val('').focus());
-			// console.log($('.dublicat-box:first-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').val('').focus())
+			var multibox = document.getElementsByClassName('multi-box')[0];
+			var new_id = multibox.children.length + 1;
+			var duplicatedbox = multibox.getElementsByClassName('dublicat-box');
+			var duplica =duplicatedbox[0].getElementsByClassName('duplicate');
+			var x =duplica[0].getElementsByClassName('me');
+			var select = x[0].getElementsByTagName('select')[0].getAttribute('id');
+			var id = select+new_id;
+			console.log(id);
+			var f= x[0].getElementsByTagName('select')[0].getAttribute('id');
+
+			$('.dublicat-box:last-child', $wrapp).clone(true,true).appendTo($wrapp).find('.qualifications').attr('id', id).find('input').val('').find('select').val('').focus();
 		});
     	$('.dublicat-box .remove-field', $wrapp).on('click', function() {
         if ($('.dublicat-box', $wrapp).length > 1)
             $(this).parent('.dublicat-box').remove();
 		});
 	});
+			// var $wrapp = $('.multi-box');
+			// var new_id = $wrapp.children.length + 1;
+			// $('.dublicat-box:last-child', $wrapp).clone(true,true).appendTo($wrapp).find('input').val('').find('select').attr('id', new_id);
 
 	//   Background image ------------------
 		var a = $(".bg");
