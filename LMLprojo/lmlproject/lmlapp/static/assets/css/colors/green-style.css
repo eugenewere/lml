@@ -25,7 +25,7 @@ color: #a6b8c3;
     background: #07b107;
 }
 .category-box .category-desc i{
-	color:#a6b8c3;
+	color: #b4c6ce;
 }
 a.btn.call-btn {
 color:#07b107;
@@ -120,7 +120,7 @@ a.video-btn i {
     background: #07b107;
 }
 .gr-dark a.btn.bat-call-to-act {
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(235, 255, 242, 0.5);
 }
 .gr-dark .call-to-act-caption h3 {
     color: rgba(255, 255, 255, 0.7);
@@ -145,7 +145,7 @@ a.btn.btn-banner {
     color: #a6b8c3;
 }
 #accordion3 .panel-title>a.collapsed {
-    background: #6b7998;
+    background: #8c9bbc;
     color: #a6b8c3;
 }
 .brows-company:hover {

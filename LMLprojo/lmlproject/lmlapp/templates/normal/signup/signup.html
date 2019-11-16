@@ -5,18 +5,25 @@
 {% endblock links %}
 {% block content %}
     <!-- Header Title Start -->
-    <section class="inner-header-title blank">
-        <div class="container">
-            <h1>Create an account as a job seeker</h1>
+{#    <section class="inner-header-title blank">#}
+{#        <div class="container">#}
+{#            <h1>Create an account as a job seeker</h1>#}
             {#                    <p class="text-lowercase">Kindly ensure you fill all the inputs</p>#}
-            <p>Are you an employer? <a href="{% url 'LML:companysignup' %}">cLick here </a></p>
-        </div>
-    </section>
+{#            <h3> Are you an employer? <a href="{% url 'LML:companysignup' %}">click here </a></h3>#}
+{#        </div>#}
+{#    </section>#}
+           <section class="inner-header-title" style="background-image:url({% static 'assets/img/blog/banner-19.jpg' %});">
+				<div class="container">
+					<h1>Sign up</h1>
+                   <h3> Are you an employer? <a href="{% url 'LML:signup_initial' %}">click here </a></h3>#}
+				</div>
+			</section>
+
     <div class="clearfix"></div>
-    <!-- Header Title End -->
+    <!-- Header Title End --
     <form action="{% url 'LML:signup' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <!-- General Detail Start -->
+        <! -- General Detail Start -->
         <div class="section detail-desc">
             <div class="container">
                 <div class="ur-detail-wrap create-kit padd-bot-0">
@@ -595,7 +602,7 @@
                                     <span>
                                          <input type="checkbox" class="custom-control-input customRadio"
                                                 id="termschecks" name="example" value="">
-                                         Agree to terms and conditions <a href="#">Terms</a>
+                                         Agree to terms and conditions <a href="{% url 'LML:termsandconditons' %}">Terms</a>
                                      </span>
                                 </div>
                             </div>
@@ -608,8 +615,8 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="row text-right" style="">
-                                    <p>Create as an Employer instead<a href="{% url 'LML:companysignup' %}">click
-                                        here</a></p>
+                                       Create as an Employer instead<a href="{% url 'LML:signup_initial' %}">click
+                                       here</a>
                                 </div>
                             </div>
                         </div>

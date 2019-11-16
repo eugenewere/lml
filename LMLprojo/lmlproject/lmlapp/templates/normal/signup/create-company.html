@@ -16,7 +16,7 @@
             <section class="inner-header-title" style="background-image:url({% static 'assets/img/blog/banner-19.jpg' %});">
 				<div class="container">
 					<h1>Sign up</h1>
-                    <p>looking for work instead? <a href="{%  url 'LML:signup' %}">Click here</a></p>
+                    <h3>looking for work instead? <a href="{%  url 'LML:signup_initial' %}">Click here</a></h3>
 				</div>
 			</section>
 			<div class="clearfix"></div>
@@ -350,7 +350,7 @@
 {#                                         Agree to terms and conditions <a href="#">Terms</a>#}
 
                                          <input  onchange="openSubmit2();" type="checkbox" class="custom-control-input customRadio" id="termschecks2" name="example" value="">
-                                         By checking this box you agree to our <a href="#">Terms and conditions</a>
+                                         By checking this box you agree to our <a href="{% url 'LML:termsandconditons' %}">Terms and conditions</a>
                                      </span>
                                 </div>
                             </div>
@@ -361,7 +361,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="row text-right" style="">
-                                <p>sign up as an employee instead<a href="{% url 'LML:signup' %}"> click here</a></p>
+                                sign up as an employee instead<a href="{% url 'LML:signup_initial' %}"> click here</a>
                             </div>
                         </div>
                         <!-- Basic Full Detail Form End -->
