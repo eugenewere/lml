@@ -130,7 +130,7 @@
         type: 'line',
         width: '99.5%',
         height: '100',
-        lineColor: '#5969ff',
+        lineColor: '#06d15b',
         fillColor: '#dbdeff',
         lineWidth: 2,
         spotColor: undefined,
@@ -155,12 +155,42 @@
         maxSpotColor: undefined,
         highlightSpotColor: undefined,
         highlightLineColor: undefined,
-        resize: true
+        resize: true,
+        xAxis: {
+                labels: {
+                    enabled: true
+                },
+                title: {
+                    text: 'month'
+                },
+                startOnTick: true,
+                endOnTick: true,
+                tickPositions: []
+            },
+            yAxis: {
+                endOnTick: true,
+                startOnTick: true,
+                labels: {
+                    enabled: true
+                },
+                title: {
+                    text: true
+                },
+                tickPositions: [0]
+            },
+            legend: {
+                enabled: true
+            },
+            tooltip: {
+                hideDelay: 0,
+                outside: true,
+                shared: true
+            },
     });
 
 
 
-    $("#sparkline-revenue3").sparkline([5, 3, 4, 6, 5, 7, 9, 4, 3, 5, 6, 1], {
+    $("#sparkline-revenue3").sparkline([5, 30, 4, 6, 5, 7, 9, 4, 3, 5, 6, 1,5, 3, 4, 6, 5, 7, 9, 4, 3, 5, 6, 1], {
         type: 'line',
         width: '99.5%',
         height: '100',
@@ -213,7 +243,7 @@
         xkey: 'x',
         ykeys: ['y'],
         labels: ['Y'],
-        lineColors: ['#5969ff'],
+        lineColors: ['#06d15b'],
         resize: true
 
     });

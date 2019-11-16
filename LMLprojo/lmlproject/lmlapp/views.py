@@ -32,24 +32,7 @@ import json
 
 def home(request):
 
-    # mod =os.path.dirname(__file__)
-    # file = os.path.join(mod,'subcounties.json')
-    #
-    # with open(file) as f:
-    #     print()
-    #     data = f.read()
-    #     # print(data.split('¿', 1)[1])
-    #     json_data = json.loads(data.split('¿', 1)[1])
-    #
-    #     for p in json_data:
-    #
-    #         Region.objects.create(
-    #             county_number=p['county'],
-    #             region=p['subcounty'],
-    #             ward=p['ward'],
-    #
-    #         )
-    #         # print(p['county_number'], p['county'])
+
 
     context = {
         'title': 'home',
@@ -97,11 +80,21 @@ def signup(request):
                 customer=new_user,
                 account_url=account_url
             )
-            print(qualifications)
-            print(schools)
-            print(courses)
-            print(regnos)
-            print(graduation_dates)
+            for skill in skills:
+                for referee in referees:
+                    for referee_phonenumber in referee_phonenumbers:
+                        if skills.index(skill) == referees.index(referee) and skills.index(skill) == referee_phonenumbers.index(referee_phonenumber):
+                            Skills.objects.create(
+                                customer=new_user,
+                                skill= skill,
+                                referee=referee,
+                                referee_phonenumber=referee_phonenumber
+                            )
+            # print(qualifications)
+            # print(schools)
+            # print(courses)
+            # print(regnos)
+            # print(graduation_dates)
             for qualification in qualifications:
                 for school in schools:
                     for course in courses:
@@ -115,7 +108,7 @@ def signup(request):
                                         school=school,
                                         course=course,
                                         graduation_date=graduation_date,
-                                        regno=regno,
+                                        reg_number=regno,
                                     )
                                     print(qualification)
 
@@ -127,27 +120,23 @@ def signup(request):
                                 for date_from in date_froms:
                                     for date_to in date_tos:
                                         for experience in experiences:
-                                            Experience.objects.create(
-                                                customer=new_user,
-                                                employer_name=employer_name,
-                                                company_name=company_name,
-                                                comapny_email=company_email,
-                                                company_phone=company_phone,
-                                                position_held = position_held,
-                                                date_from=date_from,
-                                                date_to=date_to,
-                                                experience=experience,
-                                            )
+                                            if employer_names.index(employer_name) == company_names.index(company_name) and employer_names.index(employer_name) == company_emails.index(company_email) \
+                                                and employer_names.index(employer_name) == company_phones.index(company_phone) and employer_names.index(employer_name) == position_helds.index(position_held)\
+                                                and employer_names.index(employer_name) == date_froms.index(date_from) and employer_names.index(employer_name) == date_tos.index(date_to) \
+                                                and employer_names.index(employer_name) == experiences.index(experience):
+                                                Experience.objects.create(
+                                                    customer=new_user,
+                                                    employer_name=employer_name,
+                                                    company_name=company_name,
+                                                    comapny_email=company_email,
+                                                    company_phone=company_phone,
+                                                    position_held = position_held,
+                                                    date_from=date_from,
+                                                    date_to=date_to,
+                                                    experience=experience,
+                                                )
 
-            for skill in skills:
-                for referee in referees:
-                    for referee_phonenumber in referee_phonenumbers:
-                        Skills.objects.create(
-                            customer=new_user,
-                            skill= skill,
-                            referee=referee,
-                            referee_phonenumber=referee_phonenumber
-                        )
+
             sweetify.success(request, 'You did it', text='Good job! You successfully Registered', persistent='Continue')
         else:
             form1 = PersonelRegisterForm(request.POST,request.FILES)
@@ -471,36 +460,44 @@ def companysignup(request):
 
 
 def advancesearch(request):
-    return render(request, 'normal/advancedsearch/advancedsearch.html')
+    context={
+        'title':"Advance search",
+    }
+    return render(request, 'normal/advancedsearch/advancedsearch.html', context)
 
 
 
 
 def companypricing(request):
-    return render(request,'normal/companypricing/companypricing.html')
+    context={
+        'title':'Company Pricing',
+    }
+    return render(request,'normal/companypricing/companypricing.html', context)
 
 
 def contactus(request):
-    return render(request,'normal/contact/contact.html')
+    context={
+        'title':'Contact Us',
+    }
+    return render(request,'normal/contact/contact.html', context)
 
 
 def signup_initial(request):
-    return render(request, 'normal/signup/signupdecision.html')
+    context={
+        'title': "Signup",
+    }
+    return render(request, 'normal/signup/signupdecision.html', context)
 
 
-def ddddddddddddd(request):
-    if request.method == "GET":
-        module_dir = os.path.dirname(__file__)  # get current directory
-        file_path = os.path.join(module_dir, 'counties.csv')
-        reader = csv.DictReader(open(file_path))
-        for raw in reader:
-            print(raw.values())
+def termsandconditons(request):
+    context={
+        'title':'Terms and Conditions',
+    }
+    return render(request, 'normal/termsandconditions/terms.html', context)
 
 
-        Category.objects.create(
-
-        )
-
-
-
-    return HttpResponse("this csv")
+def frequentaskedquestions(request):
+    context={
+        'title':'FAQ',
+    }
+    return render(request, 'normal/faq/faq.html', context)

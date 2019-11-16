@@ -1,6 +1,5 @@
 <!doctype html>
 {% load static %}
-
 <html lang="en">
 <head>
     <!-- Basic Page Needs==================================================-->
@@ -11,14 +10,14 @@
     <!-- CSS==================================================-->
     <link rel="stylesheet" href="{% static 'assets/plugins/css/plugins.css' %}">
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/animision/animsition.min.css' %}" rel="stylesheet">
+{#    <link href="{% static 'assets/animision/animsition.min.css' %}" rel="stylesheet">#}
     <link type="text/css" rel="stylesheet" id="jssDefault" href="{% static 'assets/css/colors/blue.css' %}">
     <script src="https://kit.fontawesome.com/16d33ecbbb.js" ></script>
     <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     <link rel="stylesheet" href="{% static 'assets/css/preloader/css/style.css' %}">
     {% block links %}{% endblock %}
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
-<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+{#    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />#}
+    <link href="{% static 'assets/css/select2.css' %}" rel="stylesheet" />
 </head>
 
 <body {% comment %}class="animsition" {% endcomment %}style="scroll-behavior: smooth;">
@@ -30,7 +29,9 @@
             <div class="container">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"><i class="fa fa-bars"></i></button>
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{% url 'LML:home' %}"><img style="width: 114px;height: 47px;" src="{% static 'assets/img/LML5.png' %}" class="logo logo-display" alt=""><img style="width: 90px;height: 38px;" src="{% static 'assets/img/LML4.png' %}" class="logo logo-scrolled" alt="" class="img-responsive"></a>
+                    <a class="navbar-brand" href="{% url 'LML:home' %}">
+                        <img style="width: 114px;height: 47px;" src="{% static 'assets/img/LML5.png' %}" class="logo logo-display" alt="">
+                        <img style="width: 90px;height: 38px;" src="{% static 'assets/img/LML4.png' %}" class="logo logo-scrolled" alt="" class="img-responsive"></a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp" >
@@ -175,9 +176,8 @@
                     <div class="col-md-8 co-sm-8 pull-right">
                         <ul>
                             <li><a href="{% url 'LML:home' %}" title="">Home</a></li>
-{#                            <li><a href="blog.html" title="">Blog</a></li>#}
-{#                            <li><a href="404.html" title="">404</a></li>#}
-                            <li><a href="faq.html" title="">FAQ</a></li>
+                            <li><a href="{% url 'LML:termsandconditons' %}" title="">Terms</a></li>
+                            <li><a href="{% url 'LML:frequentaskedquestions' %}" title="">FAQ</a></li>
                             <li><a href="{% url 'LML:contactus' %}" title="">Contact Us</a></li>
                         </ul>
                     </div>
@@ -192,7 +192,7 @@
                                 <p>LML is a Location based work platform that links people searching for services and the people who have those skills in the same locality.</p>
                                 <p>Nairobi, Kenya
                                     <br>Karen</p>
-                                <p><strong>Email:</strong> Support@careerdesk</p>
+                                <p><strong>Email:</strong> <a href="mailto:Support@careerdesk">Support@careerdesk</a> </p>
                                 <p><strong>Call:</strong> <a href="tel:+15555555555">0704099676</a></p>
                                 <ul class="footer-social">
                                     <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -213,14 +213,13 @@
                                         <li><a href="{% url 'LML:home' %}" title="">Home</a></li>
                                         <li><a href="{% url 'LML:signup_initial' %}" title="">Sign Up</a></li>
                                         <li><a href="manage-company.html" title="">Categories</a></li>
-                                        <li><a href="{% url 'LML:signin' %}" title="">Login</a></li>
-                                        <li><a href="manage-company.html" title="">Account</a></li>
                                         <li><a href="{% url 'LML:companypricing' %}">Pricing</a></li>
                                         {% if request.user.is_authenticated %}
                                             <li><a href="{% url 'LML:log_out_user' %}">Logout</a></li>
                                         {% else %}
                                             <li><a href="{% url 'LML:signin' %}">Login</a></li>
                                         {% endif %}
+                                        <li><a href="{% url 'LML:termsandconditons' %}" title="">Terms</a></li>
 
                                     </ul>
                                 </div>
@@ -347,6 +346,8 @@
 {#            </ul>#}
 {#        </div>#}
         <!-- Scripts==================================================-->
+        <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="{% static 'assets/plugins/js/jquery.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'assets/plugins/js/viewportchecker.js' %}"></script>
         <script type="text/javascript" src="{% static 'assets/plugins/js/bootstrap.min.js' %}"></script>
@@ -360,15 +361,13 @@
         <script type="text/javascript" src="{% static 'assets/plugins/js/gmap3.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'assets/plugins/js/jquery.easy-autocomplete.min.js' %}"></script>
 {#        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>#}
-        <script type="text/javascript" src="{% static 'assets/animision/animsition.min.js' %}"></script>
+{#        <script type="text/javascript" src="{% static 'assets/animision/animsition.min.js' %}"></script>#}
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+
         <script src="{% static 'assets/js/custom.js' %}"></script>
         <script src="{% static 'assets/js/jQuery.style.switcher.js' %}"></script>
 
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#styleOptions').styleSwitcher();
-            });
-        </script>
+
         <script>
             function openRightMenu() {
                 document.getElementById("rightMenu").style.display = "block";
@@ -389,7 +388,6 @@
 
 
         </script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
         {% block script %}
 
         {% endblock script %}

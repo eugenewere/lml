@@ -49,19 +49,8 @@ var disability = document.getElementsByClassName('des')[0];
 
 function showEducation(data) {
         var y = document.getElementById(data.id);
-        // let phd = document.getElementsByClassName("phd")[0];
-        // let x.children[3] = document.getElementsByClassName("x.children[3]")[0];
-        // let x.children[5] = document.getElementsByClassName("x.children[5]")[0];
-        // let x.children[6] = document.getElementsByClassName("x.children[6]")[0];
-        // let x.children[4] = document.getElementsByClassName("x.children[4]")[0];
-        // let uni = document.getElementsByClassName("uni")[0];
-        // let date = document.getElementsByClassName("x.children[7]")[0];
-        // let x.children[8] = document.getElementsByClassName("x.children[8]")[0];
-
-
         var x = y.parentElement;
-        console.log(y);
-        console.log(x);
+
         if (y.value === 'Phd') {
             x.children[2].style.display = "block";
             x.children[7].style.display = "block";
@@ -176,39 +165,39 @@ function readURL(input) {
 
 
 
-(function ($) {
-    // USE STRICT
-    "use strict";
-    $(".animsition").animsition({
-      inClass: 'fade-in-left',
-      outClass: 'fade-out-right',
-      inDuration: 900,
-      outDuration: 900,
-      linkElement: 'a:not([target="_blank"]):not([href^="#"]):not([class^="chosen-single"]):not([class^="not_a_link"]) textarea:not([class^="form-control"])',
-      loading: true,
-      loadingParentElement: 'html',
-      loadingClass: 'Loader-bg',
-      loadingInner: '<div class="loader">' +
-                          '<span></span>' +
-                          '<span></span>' +
-                          '<span></span>' +
-                          '<span></span>' +
-                      '</div>',
-      timeout: false,
-      touchSupport  :   true,
-      timeoutCountdown: 5000,
-      onLoadEvent: true,
-      browser: ['animation-duration', '-webkit-animation-duration'],
-      overlay: false,
-      overlayClass: 'animsition-overlay-slide',
-      overlayParentElement: 'body',
-      transition: function (url) {
-        window.location.href = url;
-      }
-    });
-
-
-  })(jQuery);
+// (function ($) {
+//     // USE STRICT
+//     "use strict";
+//     $(".animsition").animsition({
+//       inClass: 'fade-in-left',
+//       outClass: 'fade-out-right',
+//       inDuration: 900,
+//       outDuration: 900,
+//       linkElement: 'a:not([target="_blank"]):not([href^="#"]):not([class^="chosen-single"]):not([class^="not_a_link"]) textarea:not([class^="form-control"])',
+//       loading: true,
+//       loadingParentElement: 'html',
+//       loadingClass: 'Loader-bg',
+//       loadingInner: '<div class="loader">' +
+//                           '<span></span>' +
+//                           '<span></span>' +
+//                           '<span></span>' +
+//                           '<span></span>' +
+//                       '</div>',
+//       timeout: false,
+//       touchSupport  :   true,
+//       timeoutCountdown: 5000,
+//       onLoadEvent: true,
+//       browser: ['animation-duration', '-webkit-animation-duration'],
+//       overlay: false,
+//       overlayClass: 'animsition-overlay-slide',
+//       overlayParentElement: 'body',
+//       transition: function (url) {
+//         window.location.href = url;
+//       }
+//     });
+//
+//
+//   })(jQuery);
 
 
 

@@ -384,3 +384,6 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu{
 .disclaimer, .disclaimer::before{
  background-color:#06d15b;
 }
+.selection__rendered{
+    height: 100% !important;
+}
