@@ -36,30 +36,36 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">First</th>
-                                                <th scope="col">Last</th>
-                                                <th scope="col">Handle</th>
+                                                <th scope="col">Image</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Category</th>
+                                                <th scope="col">Business No</th>
+                                                <th scope="col">KRA</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">county</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for company in companies %}
                                             <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
+                                                <th scope="row">{{ forloop.counter }}</th>
+                                                <td>
+                                                    <div style="width: 80px; height: 80px; overflow: hidden;">
+                                                        <img class="w-100 h-100" src="{{ company.logo.url }}" alt="">
+                                                    </div>
+
+                                                </td>
+                                                <td>{{company.company_name}}</td>
+                                                <td><a href="mailto:{{company.email}}">{{company.email}}</a></td>
+                                                <td>{{company.category}}</td>
+                                                <td>{{ company.bussiness_reg_no }}</td>
+                                                <td>{{ company.kra_number }}</td>
+                                                <td>{{ company.bizness_entity_type }}</td>
+                                                <td>{{ company.county }}</td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@twitter</td>
-                                            </tr>
+                                             {% endfor %}
+
                                         </tbody>
                                     </table>
                                 </div>

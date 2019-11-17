@@ -45,7 +45,7 @@ class Customer(get_user_model()):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, max_length=200, null=False, blank=False)
     # skils =  models.CharField(max_length=100,null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
-    date_of_birth = models.DateField(default=datetime.datetime.now())
+    date_of_birth = models.DateField(default=datetime.datetime.now)
     landmark = models.CharField(max_length=100,null=True, blank=True)
     huduma_no = models.CharField(max_length=100,null=True, blank=True)
     job_type = models.CharField(max_length=200, null=False, blank=False)
@@ -106,8 +106,8 @@ class Experience(models.Model):
     comapny_email = models.CharField(max_length=200,null=True, blank=True)
     company_phone =models.CharField(max_length=200,null=True, blank=True)
     position_held = models.CharField(max_length=200,null=True, blank=True)
-    date_from = models.DateField(default=datetime.datetime.now())
-    date_to = models.DateField(default=datetime.datetime.now())
+    date_from = models.DateField(default=datetime.datetime.now)
+    date_to = models.DateField(default=datetime.datetime.now)
     experience = models.TextField()
     def __str__(self):
         return '%s %s' % (self.customer.first_name, self.company_name)
@@ -135,7 +135,7 @@ class Company(get_user_model()):
     company_motto =models.CharField(max_length=100,null=False, blank=False)
     brief_details = models.TextField()
     bizness_entity_type = models.CharField(max_length=100,null=False, blank=False)
-    date_created = models.DateField(default=datetime.datetime.now(), null=False, blank=False )
+    date_created = models.DateField(default=datetime.datetime.now, null=False, blank=False )
     description = models.TextField()
     website = models.CharField(max_length=100,null=True, blank=True)
     company_email = models.CharField(max_length=100,null=False, blank=False)
@@ -148,11 +148,22 @@ class Company(get_user_model()):
     COMPANY_STATUS ={
         ('NEWBIE','Newbie'),
         ('REGISTERED_CONFIRMED','Registerd_confirmed'),
-        ('PREMIUM','Premium'),
         ('DEACTIVATED','Deactivated'),
 
     }
     status = models.CharField( choices=COMPANY_STATUS, default='NEWBIE', max_length=200, null=False, blank=False)
+    RANK_STATUS = {
+        ('UNDEFINED','Undefined'),
+        ('BASIC','Basic'),
+        ('PREMIUM', 'Premium'),
+        ('ULTIMATE', 'Ultimate'),
+        ('PRO_BASIC', 'Pro_basic'),
+        ('PRO_ULTIMATE', 'Pro_ultimate'),
+        ('PLATINUM', 'Platinum'),
+
+
+    }
+    rank_status = models.CharField( choices=RANK_STATUS, default='UNDEFINED', max_length=200, null=False, blank=False)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
@@ -236,7 +247,7 @@ class CustomerPayments(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=False, blank=False)
     amount = models.FloatField()
     paid_to = models.CharField(max_length=200, null=True, blank=True)
-    paid_date = models.DateField(default=datetime.datetime.now())
+    paid_date = models.DateField(default=datetime.datetime.now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -248,10 +259,34 @@ class EmployerPayments(models.Model):
     employer = models.ForeignKey(Company, on_delete=models.CASCADE, null=False, blank=False)
     amount = models.FloatField()
     paid_to = models.CharField(max_length=200, null=True, blank=True)
-    paid_date = models.DateField(default=datetime.datetime.now())
+    paid_date = models.DateField(default=datetime.datetime.now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return '%s (%s) %s' % (self.employer, (self.customer), self.amount)
+
+class ContactUsCompany(models.Model):
+    company = models.ForeignKey(Company,on_delete=models.CASCADE)
+    name = models.CharField(max_length=200,null=False,blank=False)
+    email = models.CharField(max_length=200,null=False,blank=False)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    def _str__(self):
+        return '%s (%s) ' % (self.company.company_name, (self.message))
+
+class ContactUsEmployee(models.Model):
+    company = models.ForeignKey(Company,on_delete=models.CASCADE)
+    name = models.CharField(max_length=200,null=False,blank=False)
+    email = models.CharField(max_length=200,null=False,blank=False)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    def _str__(self):
+        return '%s (%s) ' % (self.company.company_name, (self.message))
 

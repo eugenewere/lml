@@ -306,11 +306,19 @@ def login_user(request):
 
                 user=authenticate(request, username=username, password=password)
                 if user is not None:
-                    if user.is_active:
+                    if user.is_staff and user.is_active:
                         login(request, user)
-                        sweetify.success(request, title='Welcome to Labour Market Link', text='You successfully Logged in.',
-                                         persistent='Continue')
-                        return redirect('LML:employerdetails')
+                        sweetify.success(request, title='Welcome Admin', text='Welcome Back', persistent='Continue')
+                        return redirect('LMLAdmin:home')
+                    if user.is_active:
+                        if Company.objects.filter(user_ptr_id=user.id).exists():
+                            login(request, user)
+                            sweetify.success(request, title='Welcome to Labour Market Link', text='You successfully Logged in.', persistent='Continue')
+                            return redirect('LML:employerdetails')
+                        if Customer.objects.filter(user_ptr_id=user.id).exists():
+                            login(request, user)
+                            sweetify.success(request, title='Welcome to Labour Market Link', text='You successfully Logged in.', persistent='Continue')
+                            return redirect('LML:employeedetails')
                 else:
                     sweetify.error(request, 'Error', text='Invalid Username and Password', persistent='Retry')
                     return redirect('LML:signin')
@@ -320,10 +328,21 @@ def login_user(request):
 
                 user = authenticate(request, username=usernamel(username), password=password)
                 if user is not None:
-                    if user.is_active:
+                    if user.is_staff and user.is_active:
                         login(request, user)
-                        sweetify.success(request, title='Welcome to Labour Market Link', text='You successfully Logged in.', persistent='Continue' )
-                        return redirect('LML:employerdetails')
+                        sweetify.success(request, title='Welcome Admin', text='Welcome Back', persistent='Continue')
+                        return redirect('LMLAdmin:home')
+                    if user.is_active:
+                        if Company.objects.filter(user_ptr_id=user.id).exists():
+                            login(request, user)
+                            sweetify.success(request, title='Welcome to Labour Market Link',
+                                             text='You successfully Logged in.', persistent='Continue')
+                            return redirect('LML:employerdetails')
+                        if Customer.objects.filter(user_ptr_id=user.id).exists():
+                            login(request, user)
+                            sweetify.success(request, title='Welcome to Labour Market Link',
+                                             text='You successfully Logged in.', persistent='Continue')
+                            return redirect('LML:employeedetails')
                 else:
                     sweetify.error(request, 'Error', text='Invalid Email and Password', persistent='Retry')
                     return redirect('LML:signin')
@@ -525,3 +544,23 @@ def signup_company_initial(request):
         'title':'Company Signup',
     }
     return render(request, 'normal/signup/companysignupdecision.html', context)
+
+
+def company_contact_us(request):
+    user = request.user.id
+    company = Company.objects.filter(user_ptr_id = user).first()
+    name = request.POST['name']
+    email = request.POST['email']
+    message = request.POST['message']
+    if request.method =='POST':
+        ContactUsCompany.objects.create(
+          name=name,
+          company=company,
+          email=email,
+          message=message,
+        )
+        sweetify.success(request, 'Success', text='Message sent', persistent='Ok')
+        return redirect('LML:employerdetails')
+    else:
+        sweetify.success(request, 'Error', text='Message not sent', persistent='Ok')
+    return redirect('LML:employerdetails')

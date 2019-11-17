@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
@@ -19,6 +21,11 @@ class CompanySocialsForm(forms.ModelForm):
     class Meta:
         model = CompanySocialAccount
         fields = ['facebook','linkedin', 'googlr_plus', 'instagram', 'twitter', 'company', ]
+
+# class CompanyContactUsForm(forms.ModelForm):
+#     class Meta:
+#         model = ContactUsCompany
+#         fields=['company','email','message','name',]
 
 class PersonelRegisterForm(forms.Form, UserCreationForm):
     class Meta:
@@ -68,6 +75,18 @@ class PersonelRegisterForm(forms.Form, UserCreationForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError('Passwords must match')
         return password2
+
+    def clean_date_of_birth(self):
+        '''
+        Only accept users aged 13 and above
+        '''
+        userAge = 13
+        dob = self.cleaned_data.get('date_of_birth')
+        today = date.today()
+        if (dob.year + userAge, dob.month, dob.day) > (today.year, today.month, today.day):
+            raise forms.ValidationError('Users must be aged 18 years old and above.'.format(userAge))
+        return dob
+
 
 class CompanyRegisterForm(forms.Form, UserCreationForm):
 
@@ -119,13 +138,4 @@ class CompanyRegisterForm(forms.Form, UserCreationForm):
             raise forms.ValidationError('Passwords must match')
         return password2
 
- # def clean_date_of_birth(self):
-    #     '''
-    #     Only accept users aged 13 and above
-    #     '''
-    #     userAge = 13
-    #     dob = self.cleaned_data.get('date_of_birth')
-    #     today = date.today()
-    #     if (dob.year + userAge, dob.month, dob.day) > (today.year, today.month, today.day):
-    #         raise forms.ValidationError('Users must be aged {} years old and above.'.format(userAge))
-    #     return dob
+

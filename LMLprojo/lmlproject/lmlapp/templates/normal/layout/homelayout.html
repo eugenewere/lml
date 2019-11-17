@@ -148,9 +148,10 @@
 									</li>
 								</ul>
 							</li>
-                            {% if request.user.is_authenticated %}
-                                <li><a href="{% url 'LML:log_out_user' %}">Logout</a></li>
-                            {% else %}
+                        <li><a href="{% url 'LML:companypricing' %}">Pricing</a></li>
+                        {% if request.user.is_authenticated %}
+                            <li><a href="{% url 'LML:log_out_user' %}">Logout</a></li>
+                        {% else %}
                             <li><a href="{% url 'LML:signup_initial' %}">SignUp</a></li>
                             <li><a href="{% url 'LML:signin' %}">Login</a></li>
                         {% endif %}
