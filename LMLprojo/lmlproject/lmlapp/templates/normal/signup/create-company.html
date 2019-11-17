@@ -16,7 +16,9 @@
             <section class="inner-header-title" style="background-image:url({% static 'assets/img/blog/banner-19.jpg' %});">
 				<div class="container">
 					<h1>Sign up</h1>
-                    <h3>looking for work instead? <a href="{%  url 'LML:signup_initial' %}">Click here</a></h3>
+                    <h3 style="margin-bottom: 38px; color: white; " >Looking for work instead? <a style="color: white;" href="{% url 'LML:signup' %}">click here </a></h3>
+
+                    <h3> <a href="{%  url 'LML:signup_initial' %}">Click here</a></h3>
 				</div>
 			</section>
 			<div class="clearfix"></div>
@@ -32,13 +34,11 @@
                                 <div class="detail-pic js">
                                     <div class="box companybox">
                                         <input autofocus value="{% if form.logo.value %}{{ form.logo.value }}{% endif %}" required style="position: relative;" onchange="readURL(this)" type="file" name="logo" id="upload-pic" class="inputfile" />
-                                        <label  for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:15px; color: white; text-align: center;">Upload Logo</span></label>
+                                        <label  for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:34px; color: white; text-align: center;">Upload Logo</span></label>
                                         <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% if form.logo.value %}{{ form.logo.value.url }}{% else %}{% static 'assets/img/client-1.jpg' %}{% endif %}" alt="">
                                     </div>
                                     <div id="disclaimer" class="disclaimer disclaimer-animated ">
                                         Upload Logo
-                                        {% if form.logo.value %}{{ form.logo.value.url }}{% endif %}<br>
-                                        {% if form.logo.value %}{{ form.logo.value }}{% endif %}
                                     </div>
                                 </div>
                             </div>

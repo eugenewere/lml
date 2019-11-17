@@ -36,7 +36,8 @@ def home(request):
 
     context = {
         'title': 'home',
-        'counties': County.objects.all()
+        'counties': County.objects.all(),
+        'categories':Category.objects.all(),
     }
     return render(request, 'normal/home/index.html', context)
 
@@ -150,13 +151,17 @@ def signup(request):
     file_path1 = os.path.join(module_dir, 'Bachelorcourses')
     file_path2 = os.path.join(module_dir, 'course_certificate')
     file_path3 = os.path.join(module_dir, 'DiplomaCourses')
+    file_path4 = os.path.join(module_dir, 'phdcourses')
+    file_path5 = os.path.join(module_dir, 'Masterscourses')
+    file_path6 = os.path.join(module_dir, 'university')
+    # file_path6 = os.path.join(module_dir, 'categories')
     qbfile = open(file_path1, "r")
     qbfile2 = open(file_path2, "r")
     qbfile3 = open(file_path3, "r")
+    qbfile4 = open(file_path4, "r")
+    qbfile5 = open(file_path5, "r")
+    qbfile6 = open(file_path6, "r")
 
-
-    # for county in data['features']:
-    # 4db8ff
 
 
 
@@ -165,9 +170,13 @@ def signup(request):
         'bachelors':qbfile.readlines(),
         'certificates':qbfile2.readlines(),
         'diplomas':qbfile3.readlines(),
+        'phds':qbfile4.readlines(),
+        'masters':qbfile5.readlines(),
+        'unis':qbfile6.readlines(),
         'counties':County.objects.all(),
         'regions':Region.objects.all(),
         'categories':Category.objects.all(),
+        # 'universities':qbfile6.readlines(),
 
 
 
@@ -462,6 +471,7 @@ def companysignup(request):
 def advancesearch(request):
     context={
         'title':"Advance search",
+        'categories': Category.objects.all(),
     }
     return render(request, 'normal/advancedsearch/advancedsearch.html', context)
 
@@ -501,3 +511,17 @@ def frequentaskedquestions(request):
         'title':'FAQ',
     }
     return render(request, 'normal/faq/faq.html', context)
+
+
+def signup_employee_initial(request):
+    context={
+        'title':'Employee Signup',
+    }
+    return render(request, 'normal/signup/employeesignupdecision.html', context )
+
+
+def signup_company_initial(request):
+    context={
+        'title':'Company Signup',
+    }
+    return render(request, 'normal/signup/companysignupdecision.html', context)

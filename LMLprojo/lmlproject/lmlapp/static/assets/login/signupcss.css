@@ -55,7 +55,7 @@
 	 align-items: center;
 	 justify-content: center;
 	 height: 100vh;
-	  background-image: url("../../../static/assets/img/blog/banner-11.jpg");
+	  /*background-image: url("../../../static/assets/img/blog/banner-11.jpg");*/
 	background-size: cover;
 	/*height: 100%;*/
 	width: 100%;

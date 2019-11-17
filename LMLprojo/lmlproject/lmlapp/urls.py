@@ -7,6 +7,8 @@ app_name = 'LML'
 urlpatterns = [
     path('', views.home, name="home"),
     path('signup/', views.signup_initial, name="signup_initial"),
+    path('signupcompany/', views.signup_company_initial, name="signup_company_initial"),
+    path('signupemployee/', views.signup_employee_initial, name="signup_employee_initial"),
 
     path('loginauser/', views.login_user, name="login_user"),
     path('logoutuser/', views.log_out_user, name="log_out_user"),

@@ -32,15 +32,12 @@
 												<form>
 													<div class="form-group">
 														<label>Category</label>
-														<select id="choose-category" class="form-control">
-															<option>Choose Category</option>
-															<option>Banking Job</option>
-															<option>IT / Software</option>
-															<option>Medical & Hospital</option>
-															<option>Networking</option>
-															<option>Automotive</option>
-															<option>Business Development</option>
-														</select>
+														<select id="choose-city" class="form-control choose-city">
+                                                            <option selected disabled class="text-muted"> Choose Category</option>
+                                                            {% for category in categories %}
+                                                                <option value="{{ category.id }}">{{ category.category }}</option>
+                                                            {% endfor %}
+                                                        </select>
 													</div>
 													<button type="submit" class="btn btn-primary full-width">search</button>
 												</form>

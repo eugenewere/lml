@@ -6,32 +6,9 @@ var disability = document.getElementsByClassName('des')[0];
     }
     function closeDisability() {
         disability.style.display="none";
+        disability.removeAttribute('required');
     }
 
-
-
-
-
-    // $(document).ready(function() {
-    //     $("#submitbutton").attr('disabled',function () {
-    //          $(this).on("click", function () {
-    //             alert("Accept to terms and conditions to proceed");
-    //         });
-    //
-    //          $('#termscheck:first-child').on('click', function () {
-    //             if($(this).checked === true){
-    //                 $('#submitbutton').removeAttr("disabled");
-    //             }else if($(this).checked === false){
-    //                 $("#submitbutton").attr('disabled','disabled');
-    //                 alert("Accept to terms and conditions to proceed");
-    //             }
-    //
-    //          })
-    //         // if (typeof attr !== typeof undefined && attr !== false) {
-    //         //     // ...
-    //         // }
-    //     });
-    // });
 
 // function openSubmit() {
 //     var submitbutton = document.getElementsByClassName('submitbutton')[0];

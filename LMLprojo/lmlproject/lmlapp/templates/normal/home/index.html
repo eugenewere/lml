@@ -38,14 +38,20 @@
                             </div>
                             <div class="col-md-3 no-padd">
                                 <div class="input-group">
-                                    <input type="text" class="form-control br-1" id="location" placeholder="Search By Location.."> </div>
+                                    <select id="choose-city" class="form-control choose-city">
+                                        <option selected disabled class="text-muted"> Choose Category</option>
+                                        {% for category in categories %}
+                                            <option value="{{ category.id }}">{{ category.category }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-md-3 no-padd">
                                 <div class="input-group">
-                                    <select id="choose-city" class="form-control">
-                                        <option selected disabled> Choose County</option>
+                                    <select id="" class="form-control choose-city">
+                                        <option selected disabled class="text-muted"> Choose County</option>
                                         {% for county in counties %}
-                                        <option value="{{ county.county }}">{{ county.county }}</option>
+                                            <option value="{{ county.county }}">{{ county.county }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
