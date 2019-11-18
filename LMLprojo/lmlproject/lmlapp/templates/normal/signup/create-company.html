@@ -252,7 +252,7 @@
                                     <select required name="region" id="choose-region" class="form-control input-lg">
                                      <option {% if form.region.value == region.properties.CONSTITUEN %} {% else %}selected disabled{% endif %}>Sub-County</option>
                                         {% for region in regions %}
-                                                <option  value="{{ region.id }}"><span style="font-weight: bold;">Subcounty:</span>{{ region.region }}-><span style="font-weight: bold;">Ward:</span>({{ region.ward }})</option>
+                                                <option  value="{{ region.id }}"><span style="font-weight: bold;"></span>{{ region.region }}-><span style="font-weight: bold;"></span>({{ region.ward }})</option>
                                         {% endfor %}
                                     </select>
                                 </div>
