@@ -564,3 +564,11 @@ def company_contact_us(request):
     else:
         sweetify.success(request, 'Error', text='Message not sent', persistent='Ok')
     return redirect('LML:employerdetails')
+
+
+def payment(request):
+    return render(request,'normal/payment/payment-method.html')
+
+
+def employer_dash(request):
+    return render(request,'normal/employer-dash/employer-dash.html')

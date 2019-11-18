@@ -1,6 +1,7 @@
 
 var disability = document.getElementsByClassName('des')[0];
     function openDisability() {
+
         disability.style.display="block";
         disability.setAttribute('required','required');
     }

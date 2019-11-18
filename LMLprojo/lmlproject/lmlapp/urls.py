@@ -35,6 +35,8 @@ urlpatterns = [
     path('termsandconditons/', views.termsandconditons, name="termsandconditons"),
     path('FAQ/', views.frequentaskedquestions, name="frequentaskedquestions"),
 
-    path('companycontactus/',views.company_contact_us, name='company_contact_us')
+    path('companycontactus/',views.company_contact_us, name='company_contact_us'),
 
+    path('payment/',views.payment, name='payment'),
+    path('employerdash/',views.employer_dash, name='employer_dash'),
 ]

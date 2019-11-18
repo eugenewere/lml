@@ -4,14 +4,7 @@
 
 {% endblock links %}
 {% block content %}
-    <!-- Header Title Start -->
-{#    <section class="inner-header-title blank">#}
-{#        <div class="container">#}
-{#            <h1>Create an account as a job seeker</h1>#}
-            {#                    <p class="text-lowercase">Kindly ensure you fill all the inputs</p>#}
-{#            <h3> Are you an employer? <a href="{% url 'LML:companysignup' %}">click here </a></h3>#}
-{#        </div>#}
-{#    </section>#}
+
            <section class="inner-header-title" style="background-image:url({% static 'assets/img/blog/banner-19.jpg' %});">
 				<div class="container">
 					<h1>Sign up</h1>
@@ -253,7 +246,7 @@
                                 <select required name="county"  class="choose-city form-control input-lg">
                                     <option selected>County</option>
                                     {% for county in counties %}
-                                        <option value="{{ county.county }}">{{ county.county }}</option>
+                                        <option value="{{ county.id}}">{{ county.county }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -270,7 +263,7 @@
                                 <select required name="region" class="choose-region form-control input-lg">
                                     <option selected disabled>Sub-County And Respective Ward</option>
                                     {% for region in regions %}
-                                        <option value="{{ region.region }}({{ region.ward }})">{{ region.region }}->({{ region.ward }})
+                                        <option value="{{ region.id }}">{{ region.region }}->({{ region.ward }})
                                         </option>
                                     {% endfor %}
                                 </select>

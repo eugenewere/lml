@@ -1,5 +1,6 @@
 {% extends 'normal/layout/homelayout.html' %}
 {% load static %}
+{% load call_method %}
 {% block content %}
         <section class="slide-banner scroll-con-sec hero-section" data-scrollax-parent="true" id="sec1">
             <div class="slideshow-container">
@@ -163,8 +164,10 @@
                             <div class="paid-candidate-box">
                                 <div class="dropdown">
                                     <div class="btn-group fl-right">
+                                        {% if request.user|logged_in_company %}
                                         <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
                                         <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="paid-candidate-inner--box">
@@ -371,7 +374,322 @@
             </div>
         </section>
         <div class="clearfix"></div>
-        <section class="call-to-act">
+        <section class="gray-bg">
+				<div class="container">
+
+					<div class="row" data-aos="fade-up">
+						<div class="col-md-12">
+							<div class="main-heading">
+								<p>Hire Experts</p>
+								<h2>Hire Experts <span>Personnel</span></h2>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="grid-slide">
+
+							<!-- Single Freelancer -->
+							<div class="grid-slide-box">
+                                <div class="top-candidate-wrap style-2">
+                                    <div style="margin-bottom: 0;" class="paid-candidate-container">
+                                        <div class="paid-candidate-box">
+                                            <div class="dropdown">
+                                                <div class="btn-group fl-right">
+                                                    <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                    <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="paid-candidate-inner--box">
+                                                <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                <div class="paid-candidate-box-detail">
+                                                    <h4>Nancy D. Walker</h4><span class="desination">PHP Developer</span></div>
+                                            </div>
+                                            <div class="paid-candidate-box-extra">
+                                                <ul>
+                                                    <li>Php</li>
+                                                    <li>Android</li>
+                                                    <li>Html</li>
+                                                    <li class="more-skill bg-primary">+3</li>
+                                                </ul>
+                                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                            </div>
+                                        </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                </div>
+							</div>
+
+                            <!-- Single Freelancer -->
+							<div class="grid-slide-box">
+                                <div class="top-candidate-wrap style-2">
+                                    <div style="margin-bottom: 0;" class="paid-candidate-container">
+                                        <div class="paid-candidate-box">
+                                            <div class="dropdown">
+                                                <div class="btn-group fl-right">
+                                                    <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                    <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="paid-candidate-inner--box">
+                                                <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                <div class="paid-candidate-box-detail">
+                                                    <h4>Nancy D. Walker</h4><span class="desination">PHP Developer</span></div>
+                                            </div>
+                                            <div class="paid-candidate-box-extra">
+                                                <ul>
+                                                    <li>Php</li>
+                                                    <li>Android</li>
+                                                    <li>Html</li>
+                                                    <li class="more-skill bg-primary">+3</li>
+                                                </ul>
+                                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                            </div>
+                                        </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                </div>
+							</div>
+
+                            <!-- Single Freelancer -->
+							<div class="grid-slide-box">
+                                <div class="top-candidate-wrap style-2">
+                                    <div style="margin-bottom: 0;" class="paid-candidate-container">
+                                        <div class="paid-candidate-box">
+                                            <div class="dropdown">
+                                                <div class="btn-group fl-right">
+                                                    <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                    <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="paid-candidate-inner--box">
+                                                <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                <div class="paid-candidate-box-detail">
+                                                    <h4>Nancy D. Walker</h4><span class="desination">PHP Developer</span></div>
+                                            </div>
+                                            <div class="paid-candidate-box-extra">
+                                                <ul>
+                                                    <li>Php</li>
+                                                    <li>Android</li>
+                                                    <li>Html</li>
+                                                    <li class="more-skill bg-primary">+3</li>
+                                                </ul>
+                                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                            </div>
+                                        </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                </div>
+							</div>
+
+                            <!-- Single Freelancer -->
+							<div class="grid-slide-box">
+                                <div class="top-candidate-wrap style-2">
+                                    <div style="margin-bottom: 0;" class="paid-candidate-container">
+                                        <div class="paid-candidate-box">
+                                            <div class="dropdown">
+                                                <div class="btn-group fl-right">
+                                                    <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                    <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="paid-candidate-inner--box">
+                                                <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                <div class="paid-candidate-box-detail">
+                                                    <h4>Nancy D. Walker</h4><span class="desination">PHP Developer</span></div>
+                                            </div>
+                                            <div class="paid-candidate-box-extra">
+                                                <ul>
+                                                    <li>Php</li>
+                                                    <li>Android</li>
+                                                    <li>Html</li>
+                                                    <li class="more-skill bg-primary">+3</li>
+                                                </ul>
+                                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                            </div>
+                                        </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                </div>
+							</div>
+
+                            <!-- Single Freelancer -->
+							<div class="grid-slide-box">
+                                <div class="top-candidate-wrap style-2">
+                                    <div style="margin-bottom: 0;" class="paid-candidate-container">
+                                        <div class="paid-candidate-box">
+                                            <div class="dropdown">
+                                                <div class="btn-group fl-right">
+                                                    <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                    <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="paid-candidate-inner--box">
+                                                <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                <div class="paid-candidate-box-detail">
+                                                    <h4>Nancy D. Walker</h4><span class="desination">PHP Developer</span></div>
+                                            </div>
+                                            <div class="paid-candidate-box-extra">
+                                                <ul>
+                                                    <li>Php</li>
+                                                    <li>Android</li>
+                                                    <li>Html</li>
+                                                    <li class="more-skill bg-primary">+3</li>
+                                                </ul>
+                                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                            </div>
+                                        </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                </div>
+							</div>
+
+                            <!-- Single Freelancer -->
+							<div class="grid-slide-box">
+                                <div class="top-candidate-wrap style-2">
+                                    <div style="margin-bottom: 0;" class="paid-candidate-container">
+                                        <div class="paid-candidate-box">
+                                            <div class="dropdown">
+                                                <div class="btn-group fl-right">
+                                                    <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                    <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="paid-candidate-inner--box">
+                                                <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                <div class="paid-candidate-box-detail">
+                                                    <h4>Nancy D. Walker</h4><span class="desination">PHP Developer</span></div>
+                                            </div>
+                                            <div class="paid-candidate-box-extra">
+                                                <ul>
+                                                    <li>Php</li>
+                                                    <li>Android</li>
+                                                    <li>Html</li>
+                                                    <li class="more-skill bg-primary">+3</li>
+                                                </ul>
+                                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                            </div>
+                                        </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                </div>
+							</div>
+
+                            <!-- Single Freelancer -->
+							<div class="grid-slide-box">
+                                <div class="top-candidate-wrap style-2">
+                                    <div style="margin-bottom: 0;" class="paid-candidate-container">
+                                        <div class="paid-candidate-box">
+                                            <div class="dropdown">
+                                                <div class="btn-group fl-right">
+                                                    <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                    <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="paid-candidate-inner--box">
+                                                <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                <div class="paid-candidate-box-detail">
+                                                    <h4>Nancy D. Walker</h4><span class="desination">PHP Developer</span></div>
+                                            </div>
+                                            <div class="paid-candidate-box-extra">
+                                                <ul>
+                                                    <li>Php</li>
+                                                    <li>Android</li>
+                                                    <li>Html</li>
+                                                    <li class="more-skill bg-primary">+3</li>
+                                                </ul>
+                                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                            </div>
+                                        </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                </div>
+							</div>
+
+                            <!-- Single Freelancer -->
+							<div class="grid-slide-box">
+                                <div class="top-candidate-wrap style-2">
+                                    <div style="margin-bottom: 0;" class="paid-candidate-container">
+                                        <div class="paid-candidate-box">
+                                            <div class="dropdown">
+                                                <div class="btn-group fl-right">
+                                                    <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                    <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="paid-candidate-inner--box">
+                                                <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                <div class="paid-candidate-box-detail">
+                                                    <h4>Nancy D. Walker</h4><span class="desination">PHP Developer</span></div>
+                                            </div>
+                                            <div class="paid-candidate-box-extra">
+                                                <ul>
+                                                    <li>Php</li>
+                                                    <li>Android</li>
+                                                    <li>Html</li>
+                                                    <li class="more-skill bg-primary">+3</li>
+                                                </ul>
+                                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                            </div>
+                                        </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                </div>
+							</div>
+
+                            <!-- Single Freelancer -->
+							<div class="grid-slide-box">
+                                <div class="top-candidate-wrap style-2">
+                                    <div style="margin-bottom: 0;" class="paid-candidate-container">
+                                        <div class="paid-candidate-box">
+                                            <div class="dropdown">
+                                                <div class="btn-group fl-right">
+                                                    <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                    <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="paid-candidate-inner--box">
+                                                <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                <div class="paid-candidate-box-detail">
+                                                    <h4>Nancy D. Walker</h4><span class="desination">PHP Developer</span></div>
+                                            </div>
+                                            <div class="paid-candidate-box-extra">
+                                                <ul>
+                                                    <li>Php</li>
+                                                    <li>Android</li>
+                                                    <li>Html</li>
+                                                    <li class="more-skill bg-primary">+3</li>
+                                                </ul>
+                                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                            </div>
+                                        </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                </div>
+							</div>
+
+                            <!-- Single Freelancer -->
+							<div class="grid-slide-box">
+                                <div class="top-candidate-wrap style-2">
+                                    <div style="margin-bottom: 0;" class="paid-candidate-container">
+                                        <div class="paid-candidate-box">
+                                            <div class="dropdown">
+                                                <div class="btn-group fl-right">
+                                                    <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                    <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="paid-candidate-inner--box">
+                                                <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                                <div class="paid-candidate-box-detail">
+                                                    <h4>Nancy D. Walker</h4><span class="desination">PHP Developer</span></div>
+                                            </div>
+                                            <div class="paid-candidate-box-extra">
+                                                <ul>
+                                                    <li>Php</li>
+                                                    <li>Android</li>
+                                                    <li>Html</li>
+                                                    <li class="more-skill bg-primary">+3</li>
+                                                </ul>
+                                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                            </div>
+                                        </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                                </div>
+							</div>
+
+
+
+
+
+						</div>
+					</div>
+
+				</div>
+			</section>
+        <div class="clearfix"></div>
+        <section class="call-to-act" style="padding: 100px 0;">
             <div class="" style="margin-bottom: 20px;">
                 <div style="display: flex; flex-wrap: wrap; justify-content:space-evenly;">
                    <meta name="viewport" content="width=device-width" initial-scale="1">
@@ -379,7 +697,9 @@
                     <div class="call-to-act-caption">
                         <h2>LET EMPLOYERS VIEW YOUR PROFILE ANYWHERE ANYTIME</h2>
                         <h3>you might just find your next employer here today</h3>
-                        <a href="{% url 'LML:signup' %}" class="btn bat-call-to-act" >Sign up with us</a>
+                        {% if not request.user.is_authenticated %}
+                        <a href="{% url 'LML:signup' %}" class="btn bat-call-to-act">Sign up with us</a>
+                        {% endif %}
                     </div>
                 </div>
                     <div class="col-md-1 "></div>
@@ -387,7 +707,8 @@
                     <div class="call-to-act-caption" >
                         <h2>NO NEED TO CARRY YOUR RESUME FROM ONE OFFICE TO ANOTHER</h2>
                         <h3>you have the skills...let them find you with ease</h3>
-                        <a href="{% url 'LML:signup' %}" class="btn bat-call-to-act">Sign up with us</a>
+                        {% if not request.user.is_authenticated %}
+                        <a href="{% url 'LML:signup' %}" class="btn bat-call-to-act">Sign up with us</a>{% endif %}
                     </div>
                 </div>
                 </div>
