@@ -25,3 +25,8 @@ def logged_in_customer(user):
         return customer
     else:
         return False
+
+@register.filter(name='make_safe')
+def make_safe(source):
+    source = source.replace('/', '____')
+    return "%s" %source

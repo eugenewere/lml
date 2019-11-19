@@ -10,7 +10,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect,HttpResponseRedirect
 import os
-
+# import datetime from datetime
+from datetime import datetime
 import sweetify
 from django.utils.crypto import get_random_string
 
@@ -285,7 +286,7 @@ def update_employers_profile(request):
 
 
 
-def login_user(request):
+def login_user(request, source):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -321,7 +322,8 @@ def login_user(request):
                             return redirect('LML:employeedetails')
                 else:
                     sweetify.error(request, 'Error', text='Invalid Username and Password', persistent='Retry')
-                    return redirect('LML:signin')
+                    source = source.replace('____', '/')
+                    return redirect(source)
                     # return render(request, 'normal/login/login.html', {'username': username, })
 
             if User.objects.filter(email__exact=username).first():
@@ -345,12 +347,15 @@ def login_user(request):
                             return redirect('LML:employeedetails')
                 else:
                     sweetify.error(request, 'Error', text='Invalid Email and Password', persistent='Retry')
-                    return redirect('LML:signin')
+                    source = source.replace('____', '/')
+                    return redirect(source)
                     # return render(request, 'normal/login/login.html', {'username': username, })
         else:
             sweetify.error(request, 'Error', text='Invalid Credentials dont exist', persistent='Retry')
-            return redirect('LML:signin')
-    return render(request, 'normal/login/login.html')
+            source = source.replace('____', '/')
+            return redirect(source)
+    source = source.replace('____', '/')
+    return render(request, source)
 
 
 def signin(request):
@@ -574,6 +579,9 @@ def employer_dash(request):
     user = request.user
     company = Company.objects.filter(id=user.id).first()
     social = CompanySocialAccount.objects.filter(company=company.id).first()
+    # start_yr = Company.objects.filter(id=user.id).first()
+    # current_year = datetime.now().year
+    # print(current_year)
     context={
         'company': company,
         'social': social,

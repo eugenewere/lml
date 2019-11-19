@@ -63,7 +63,7 @@
                                                              <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:employeedetails' %}">Account</a></li>
                                                              <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:employeeprofile' %}"> Profile</a></li>
                                                              <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;" >####<a href="{% url 'LML:companypricing' %}">Pricing</a></li>
-                                                             <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a class="signin" href="{% url 'LML:log_out_user' %}">Logout</a></li>
+                                                             <li style="margin-top: 10px; border-bottom: 1px solid #fff;"><a class="signin" href="{% url 'LML:log_out_user' %}">Logout</a></li>
 
                                                          {% endif %}
                                                     {% else %}
@@ -81,90 +81,89 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="active" style="margin-right: 21px;" >
-                            <input style="background-color: white; padding: 15px; border-radius: 20px;" type="text" class="form-control custom-button whitee" placeholder="Search">
-                        </li>
+                    {% block search %}{% endblock %}
                         <li><a href="{% url 'LML:home' %}">Home</a></li>
+                    {% if request.user.is_authenticated %}
+                        {% if request.user|logged_in_company %}
+                            <li><a href="{% url 'LML:employer_dash' %}">Dashboard</a></li>
+                        {% endif %}
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
+                        {% if request.user|logged_in_customer %}
+                            <li><a href="">Dashboard</a></li>
+                        {% endif %}
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
                         <li class="dropdown megamenu-fw ">
                             <a href="#" class="" data-toggle="dropdown">Browse <i class="fas fa-caret-down mrg-l-5"></i></a>
-								<ul class="dropdown-menu megamenu-content " role="menu">
+                            <ul class="dropdown-menu megamenu-content " role="menu">
 
-									<li>
-										<div class="row">
-{#											<div class="col-menu col-md-3">#}
-{#												<h6 class="title">Main Pages</h6>#}
-{#												<div class="content">#}
-{#													<ul class="menu-col">#}
-{#														<li><a href="index.html">Home Page 1</a></li>#}
-{#														<li><a href="index-2.html">Home Page 2</a></li>#}
-{#														<li><a href="index-3.html">Home Page 3</a></li>#}
-{#														<li><a href="index-4.html">Home Page 4</a></li>#}
-{#														<li><a href="index-5.html">Home Page 5</a></li>#}
-{#														<li><a href="freelancing.html">Freelancing</a></li>#}
-{#														<li><a href="signin-signup.html">Sign In / Sign Up</a></li>#}
-{#														<li><a href="search-job.html">Search Job</a></li>#}
-{#														<li><a href="accordion.html">Accordion</a></li>#}
-{#														<li><a href="tab.html">Tab Style</a></li>#}
-{#													</ul>#}
-{#												</div>#}
-{#											</div><!-- end col-3 -->#}
-                                            {% if request.user|logged_in_customer %}
-											<div class="col-menu col-md-3">
+                                <li>
+                                    <div class="row">
+
+                                        {% if request.user|logged_in_customer %}
+                                        <div class="col-menu col-md-3">
 {#												<h6 class="title">For Candidate</h6>#}
-												<div class="content">
-													<ul class="menu-col">
-														<li>#<a href="browse-jobs.html">Pricing</a></li>
-														<li><a href="browse-jobs.html">View profile</a></li>
-														<li>#<a href="browse-jobs.html">Messages</a></li>
-														<li><a href="browse-jobs.html">Settings</a></li>
-														<li>#<a href="browse-jobs.html">Subscription</a></li>
-														<li>#<a href="browse-jobs.html">Dashboard</a></li>
-														<li><a href="browse-jobs.html">Logout</a></li>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li>#<a href="browse-jobs.html">Pricing</a></li>
+                                                    <li><a href="browse-jobs.html">View profile</a></li>
+                                                    <li>#<a href="browse-jobs.html">Messages</a></li>
+                                                    <li><a href="browse-jobs.html">Settings</a></li>
+                                                    <li>#<a href="browse-jobs.html">Subscription</a></li>
+                                                    <li>#<a href="browse-jobs.html">Dashboard</a></li>
+                                                    <li><a href="browse-jobs.html">Logout</a></li>
 
-													</ul>
-												</div>
-											</div><!-- end col-3 -->
-                                            {% endif %}
-                                            {% if request.user|logged_in_company %}
-											<div class="col-menu col-md-3">
-												<h6 class="title">For Employer</h6>
-												<div class="content">
-													<ul class="menu-col">
-														<li><a href="{% url 'LML:companypricing' %}">Pricing</a></li>
-														<li><a href="create-company.html">Create Company</a></li>
-														<li><a href="manage-company.html">Manage Company</a></li>
-														<li><a href="manage-candidate.html">Browse Candidate</a></li>
-														<li><a href="manage-employee.html">Manage Employee</a></li>
-														<li><a href="browse-resume.html">Browse Resume</a></li>
-														<li><a href="candidate-profile.html">Candidate Profile</a></li>
-														<li><a href="candidate-detail.html">New Candidate Detail</a></li>
-														<li><a href="employer-profile.html">Employer Profile</a></li>
-														<li><a href="manage-resume.html">Manage Resume</a></li>
-													</ul>
-												</div>
-											</div>
-                                            {% endif %}
-											<div class="col-menu col-md-3">
-												<h6 class="title">Extra Pages <span class="new-offer">New</span></h6>
-												<div class="content">
-													<ul class="menu-col">
-														<li><a href="top-candidate-detail.html">Top Candidate detail</a></li>
-														<li><a href="job-apply-detail.html">New Apply Job</a></li>
-														<li><a href="payment-methode.html">Payment Methode</a></li>
-														<li><a href="new-login-signup.html">New LogIn / SignUp</a></li>
-														<li><a href="popular-jobs.html">Popular Jobs</a></li>
-														<li><a href="top-candidate.html">Top candidate</a></li>
-														<li><a href="top-candidate-2.html">Top candidate 2</a></li>
-														<li><a href="premium-candidate.html">Premium Candidate</a></li>
-														<li><a href="premium-candidate-detail.html">Premium Candidate Detail</a></li>
-														<li><a href="blog-detail.html">Blog detail</a></li>
-													</ul>
-												</div>
-											</div><!-- end col-3 -->
-										</div><!-- end row -->
-									</li>
-								</ul>
-							</li>
+                                                </ul>
+                                            </div>
+                                        </div><!-- end col-3 -->
+                                        {% endif %}
+                                        {% if request.user|logged_in_company %}
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title"> Employer Pages</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="{% url 'LML:companypricing' %}">Pricing</a></li>
+                                                    <li><a href="create-company.html">Dashboard</a></li>
+                                                    <li><a href="create-company.html">Contact Us</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title"> Account </h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="create-company.html">Account</a></li>
+                                                    <li><a href="manage-company.html">View Profile</a></li>
+                                                    <li><a href="manage-company.html">Edit Profile</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title"> Terms and Conditions </h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="create-company.html">Terms</a></li>
+                                                    <li><a href="manage-company.html">Conditions</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title"> Subscription </h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="create-company.html">Manage Subscription</a></li>
+{#                                                    <li><a href="manage-company.html">Conditions</a></li>#}
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        {% endif %}
+                                    </div><!-- end row -->
+                                </li>
+                            </ul>
+                        </li>
+                    {% endif %}
                         <li><a href="{% url 'LML:companypricing' %}">Pricing</a></li>
                         {% if request.user.is_authenticated %}
                             <li><a href="{% url 'LML:log_out_user' %}">Logout</a></li>
@@ -305,7 +304,7 @@
                                   <h1 class="animation a1">Welcome Back!</h1>
                                   <h4 class="animation a2">Enter your details to log in</h4>
                                 </div>
-                                  <form action="{% url 'LML:login_user' %}" method="post">
+                                  <form action="{% url 'LML:login_user' request.path|make_safe %}" method="post">
                                       {% csrf_token %}
                                     <div class="form" >
                                       <label style="color: #C2C2C2; margin-top: 20px;margin-bottom: 5px" for="id_usernam" class="animation a3">Email or Username</label>
