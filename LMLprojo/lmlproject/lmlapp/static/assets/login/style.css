@@ -29,11 +29,11 @@
           animation-delay: 1s;
 }
 .color{
-  color: #1DBF73;
+  color: #07b107;
 }
 .right-section {
   flex: 1;
-  /*background: linear-gradient(to right, #1DBF73 0%, #12673b 100%);*/
+  /*background: linear-gradient(to right, #07b107 0%, #12673b 100%);*/
   transition: 1s;
   background-image: url('../../../static/assets/img/blog/nairobi-4422720_1920.jpg');
   background-size: cover;
@@ -45,7 +45,7 @@
 }
 .header > h1 {
   margin: 0;
-  color: #1DBF73;
+  color: #07b107;
   font-size: 34px;
 }
 .header > h4 {
@@ -82,7 +82,7 @@
 .form > button {
   padding: 12px 10px;
   border: 0;
-  background: linear-gradient(to right, #1DBF73 0%, #0f603a 100%);
+  background: linear-gradient(to right, #07b107 0%, #0f603a 100%);
   border-radius: 3px;
   margin-top: 10px;
   color: #fff;
@@ -91,7 +91,7 @@
   transition: all 1s;
 }
 .form > button:hover{
-  background: linear-gradient(to left, #1DBF73 0%, #0f603a 100%);
+  background: linear-gradient(to left, #07b107 0%, #0f603a 100%);
   box-shadow: 2px 2px 14px black;
   color: white;
   transition: 1s;

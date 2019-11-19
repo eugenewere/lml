@@ -358,7 +358,7 @@ def signin(request):
 
 def log_out_user(request):
     logout(request)
-    return redirect('LML:signin')
+    return redirect('LML:home')
 
 def employer_change_password(request):
     if request.method == 'POST':
@@ -395,7 +395,7 @@ def employersprofile(request):
     user = request.user
     company = Company.objects.filter(id=user.id).first()
     social = CompanySocialAccount.objects.filter(company=company.id).first()
-    similar_company = Company.objects.filter(category=company.category).exclude(id=user.id)
+    # similar_company = Company.objects.filter(category=company.category).exclude(id=user.id)
     categories = Category.objects.all()
     # social = CompanySocialAccount.objects.filter(company=company.id).first()
     kenyan_county_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/counties.geojson"
@@ -408,7 +408,7 @@ def employersprofile(request):
         'user': request.user,
         'company':company,
         'social':social,
-        'scompany':similar_company,
+        # 'scompany':similar_company,
         'categories':categories,
         'counties': data['features'],
         'regions': data2['features'],
@@ -571,4 +571,11 @@ def payment(request):
 
 
 def employer_dash(request):
-    return render(request,'normal/employer-dash/employer-dash.html')
+    user = request.user
+    company = Company.objects.filter(id=user.id).first()
+    social = CompanySocialAccount.objects.filter(company=company.id).first()
+    context={
+        'company': company,
+        'social': social,
+    }
+    return render(request,'normal/employer-dash/employer-dash.html', context)

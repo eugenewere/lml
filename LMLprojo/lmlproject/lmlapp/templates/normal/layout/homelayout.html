@@ -62,8 +62,8 @@
                                                          {% if request.user|logged_in_customer %}
                                                              <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:employeedetails' %}">Account</a></li>
                                                              <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:employeeprofile' %}"> Profile</a></li>
-                                                             <li>####<a href="{% url 'LML:companypricing' %}">Pricing</a></li>
-                                                             <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:log_out_user' %}">Logout</a></li>
+                                                             <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;" >####<a href="{% url 'LML:companypricing' %}">Pricing</a></li>
+                                                             <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a class="signin" href="{% url 'LML:log_out_user' %}">Logout</a></li>
 
                                                          {% endif %}
                                                     {% else %}
@@ -81,10 +81,14 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li class="active" style="margin-right: 21px;" >
+                            <input style="background-color: white; padding: 15px; border-radius: 20px;" type="text" class="form-control custom-button whitee" placeholder="Search">
+                        </li>
                         <li><a href="{% url 'LML:home' %}">Home</a></li>
                         <li class="dropdown megamenu-fw ">
                             <a href="#" class="" data-toggle="dropdown">Browse <i class="fas fa-caret-down mrg-l-5"></i></a>
 								<ul class="dropdown-menu megamenu-content " role="menu">
+
 									<li>
 										<div class="row">
 {#											<div class="col-menu col-md-3">#}
@@ -166,7 +170,7 @@
                             <li><a href="{% url 'LML:log_out_user' %}">Logout</a></li>
                         {% else %}
                             <li><a href="{% url 'LML:signup_initial' %}">SignUp</a></li>
-                            <li><a href="javascript:void(0)" data-toggle="modal" data-target="#signup" class="signin">Login</a></li>
+                            <li><a href="javascript:void(0)" data-toggle="modal" data-target="#signup" class="signin custom-button">Login</a></li>
                         {% endif %}
                     </ul>
                 </div>
@@ -208,13 +212,15 @@
                                 <p>Nairobi, Kenya
                                     <br>Karen</p>
                                 <p><strong>Email:</strong> <a href="mailto:Support@careerdesk">Support@careerdesk</a> </p>
-                                <p><strong>Call:</strong> <a href="tel:+15555555555">0704099676</a></p>
+                                <p><strong>Call:</strong> <a href="tel:+254704099676">0704099676</a></p>
                                 <ul class="footer-social">
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                    <li><a target="_blank" rel="noopener noreferrer" href="https://fb.me/officiallabourmarketlink"><i class="fab fa-facebook-f"></i></a></li>
+{#                                    <li><a href="#"><i class="fab fa-google-plus"></i></a></li>#}
+                                    <li><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/LML_KENYA"><i class="fab fa-twitter-square"></i></a></li>
+                                    <li><a target="_blank" rel="noopener noreferrer" href="https://api.whatsapp.com/send?phone=+254704099676"><i class="fab fa-whatsapp"></i></a></li>
+{#                                    <li><a href="https://twitter.com/LML_KENYA"><i class="fab fa-twitter-square"></i></a></li>#}
+{#                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>#}
+{#                                    <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>#}
                                 </ul>
                             </div>
                         </div>
@@ -264,7 +270,7 @@
                                     <input type="text" class="form-control" placeholder="Your Name">
                                     <input type="text" class="form-control" placeholder="Email">
                                     <textarea class="form-control" placeholder="Message"></textarea>
-                                    <button type="submit" class="btn btn-primary" style="border-radius: 140px;">Submit message</button>
+                                    <button type="submit" class="btn btn-primary custom-button" style="margin-top: 10px;border-radius: 140px;">Submit message</button>
                                 </form>
                             </div>
                         </div>
@@ -321,7 +327,7 @@
                                           <a href="{% url 'LML:signup_initial' %}">Do you have an account?</a>
                                       </p>
 
-                                      <button type="submit" style="border-radius: 20px;" class="animation a6">LOGIN</button>
+                                      <button type="submit" style="border-radius: 20px;" class="animation a6 ">LOGIN</button>
                                     </div>
                                   </form>
                               </div>

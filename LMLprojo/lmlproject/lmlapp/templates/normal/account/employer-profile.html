@@ -23,10 +23,10 @@
                         <div class="detail-pic">
                             {% if request.user.is_authenticated %}
                                 <img src="{{company.logo.url}}" class="img" alt="" />
-                                <a href="#" class="detail-edit" title="edit"><i class="fa fa-user fa-spin"></i></a>
+                                <a href="#" class="detail-edit custom-button" title="edit"><i class="fa fa-user fa-spin"></i></a>
                             {% else %}
                                 <img src="{% static 'assets/img/avatar/avatar2.png' %}" class="img" alt="" />
-                                <a href="#" class="detail-edit" title="edit"><i class="fa fa-user fa-spin"></i></a>
+                                <a href="#" class="detail-edit custom-button" title="edit"><i class="fa fa-user fa-spin"></i></a>
                             {% endif %}
                         </div>
 {#                        <div class="detail-status"><span>Active Now</span></div>#}
@@ -70,7 +70,7 @@
                             </div>
                             <div class="col-md-7 col-sm-7">
                                 <div class="detail-pannel-footer-btn pull-right">
-                                    <a href="{% url 'LML:employerdetails' %}" data-toggle="tooltip"  class="footer-btn grn-btn" style=border-radius:140px;" title="">View Details</a>
+                                    <a href="{% url 'LML:employerdetails' %}" data-toggle="tooltip"  class="footer-btn grn-btn custom-button" style=border-radius:140px;" title="">View Details</a>
 {#                                    <a href="#" class="footer-btn blu-btn" title="">Save Draft</a>#}
                                 </div>
                             </div>
@@ -333,7 +333,7 @@
                                                 </div>
 
                                                 <div class="col-sm-12">
-                                                    <button type="submit" class="update-btn" style="border-radius:140px;">Save</button>
+                                                    <button type="submit" class="update-btn custom-button" style="border-radius:140px;">Save</button>
                                                 </div>
 
                                         </form>
@@ -380,7 +380,7 @@
                                             </div>
                                         </div>
                                        <div class="col-sm-12">
-                                            <button type="submit" class="update-btn" style="border-radius:140px;">Save</button>
+                                            <button type="submit" class="update-btn custom-button" style="border-radius:140px;">Save</button>
                                        </div>
                                     </form>
                                 </div>

@@ -5726,6 +5726,7 @@ a.btn.applied.advance-search{
     text-align: center;
 }
 /*---Sidebar Style----*/
+
 .side-widget {
     background: #ffffff;
     border-radius: 4px;
@@ -6743,7 +6744,7 @@ span.process-num {
     margin-right: 5px;
     cursor: default;
 }
-.verified-action{
+.verified-action-success{
     position: relative;
     height: 26px;
     display: flex;
@@ -6762,7 +6763,7 @@ span.process-num {
     padding-left: 34px;
     line-height: 27px;
 }
-.verified-action:before {
+.verified-action-success:before {
     content: "\f00c";
     font-family:FontAwesome;
     font-size: 16px;
@@ -6776,6 +6777,172 @@ span.process-num {
     display: inline-block;
     background-color: #38b653;
 }
+.verified-action-error{
+    position: relative;
+    height: 26px;
+    display: flex;
+    top: -1px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    background-color: #ab0a15;
+    text-align: center;
+    z-index: 10;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 0 8px 0 0;
+    margin: 0;
+    overflow: hidden;
+    padding-left: 34px;
+    line-height: 27px;
+}
+.verified-action-error:before {
+    content: "\f00c";
+    font-family:FontAwesome;
+    font-size: 16px;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 26px;
+    height: 26px;
+    width: 26px;
+    display: inline-block;
+    background-color: #ab0a15;
+}
+.verified-action-info{
+    position: relative;
+    height: 26px;
+    display: flex;
+    top: -1px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    background-color:#07a2ab;
+    text-align: center;
+    z-index: 10;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 0 8px 0 0;
+    margin: 0;
+    overflow: hidden;
+    padding-left: 34px;
+    line-height: 27px;
+}
+.verified-action-info:before {
+    content: "\f00c";
+    font-family:FontAwesome;
+    font-size: 16px;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 26px;
+    height: 26px;
+    width: 26px;
+    display: inline-block;
+    background-color: #07a2ab;
+}
+.verified-action-primary{
+    position: relative;
+    height: 26px;
+    display: flex;
+    top: -1px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    background-color: #173aab;
+    text-align: center;
+    z-index: 10;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 0 8px 0 0;
+    margin: 0;
+    overflow: hidden;
+    padding-left: 34px;
+    line-height: 27px;
+}
+.verified-action-primary:before {
+    content: "\f00c";
+    font-family:FontAwesome;
+    font-size: 16px;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 26px;
+    height: 26px;
+    width: 26px;
+    display: inline-block;
+    background-color: #173aab;
+}
+.verified-action-bronze{
+    position: relative;
+    height: 26px;
+    display: flex;
+    top: -1px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    background-color:  #ab8276;
+    text-align: center;
+    z-index: 10;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 0 8px 0 0;
+    margin: 0;
+    overflow: hidden;
+    padding-left: 34px;
+    line-height: 27px;
+}
+.verified-action-bronze:before {
+    content: "\f00c";
+    font-family:FontAwesome;
+    font-size: 16px;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 26px;
+    height: 26px;
+    width: 26px;
+    display: inline-block;
+    background-color: #ab8276;
+}
+.verified-action-gold{
+    position: relative;
+    height: 26px;
+    display: flex;
+    top: -1px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    background-color: #ab7d17;
+    text-align: center;
+    z-index: 10;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 0 8px 0 0;
+    margin: 0;
+    overflow: hidden;
+    padding-left: 34px;
+    line-height: 27px;
+}
+.verified-action-gold:before {
+    content: "\f00c";
+    font-family:FontAwesome;
+    font-size: 16px;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 26px;
+    height: 26px;
+    width: 26px;
+    display: inline-block;
+    background-color:  #ab7d17;
+}
+
 .header-details {
     margin-top: 20px;
 }
