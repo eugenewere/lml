@@ -34,13 +34,27 @@ class Category(models.Model):
     def __str__(self):
         return '%s' % (self.category)
 
+class CustomerPayments(models.Model):
+    amount = models.FloatField()
+    recipt_no = models.CharField(max_length=200, null=False, blank=False)
+    CUSTOMER_PAYMENT_STATUS = {
+        ('UNPAYED', 'Unpayed'),
+        ('PAYED', 'Payed'),
+    }
+    payment_status = models.CharField(max_length=200, choices=CUSTOMER_PAYMENT_STATUS, default='UNPAYED', null=False,
+                                      blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return '%s' % (self.amount)
 
 class Customer(get_user_model()):
     profile_image = models.ImageField(max_length=200, upload_to='customerImages', null=False, blank=False)
+    regpayment = models.ForeignKey(CustomerPayments, on_delete=models.CASCADE, null=True, blank=True)
     country = models.CharField(max_length=100,null=False, blank=False)
-    county = models.CharField(max_length=100,null=False, blank=False)
-    region = models.CharField(max_length=100,null=False, blank=False)
+    county = models.ForeignKey(County, on_delete=models.CASCADE, null=False, blank=False)
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=False, blank=False)
     gender = models.CharField(max_length=100,null=False, blank=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, max_length=200, null=False, blank=False)
     # skils =  models.CharField(max_length=100,null=True, blank=True)
@@ -83,6 +97,24 @@ class Customer(get_user_model()):
         verbose_name = 'Customer'
         verbose_name_plural = 'Customers'
 
+    @property
+    def skillset(self):
+        skills = []
+        skillz = Skills.objects.filter(customer=self).order_by('?')[:3]
+        for skill in skillz:
+            skills.append(skill)
+
+        return list(set(skills))
+
+    def skillcount(self):
+        skill =  Skills.objects.filter(customer=self).count()
+        if skill > 3:
+            my_skill = skill - 3
+            return my_skill
+        else:
+            return False
+
+
 
 class CustomerRegNo(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -124,9 +156,13 @@ class Skills(models.Model):
     referee = models.CharField(max_length=100,null=False, blank=False)
     referee_phonenumber = models.CharField(max_length=100,null=False, blank=False)
 
+    def __str__(self):
+        return '%s' % (self.skill)
+
 class Social_account(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=False, blank=False)
     account_url = models.CharField(max_length=100,null=False, blank=False)
+
     def __str__(self):
         return '%s %s' % (self.customer.first_name, self.account_url)
 
@@ -219,21 +255,7 @@ class CompanyStatusPayment(models.Model):
     def __str__(self):
         return '%s' % (self.company.company_name)
 
-class CustomerPayments(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=False, blank=False)
-    amount = models.FloatField()
-    recipt_no = models.CharField(max_length=200, null=False, blank=False)
-    CUSTOMER_PAYMENT_STATUS = {
-        ('UNPAYED', 'Unpayed'),
-        ('PAYED', 'Payed'),
-    }
-    payment_status = models.CharField(max_length=200, choices=CUSTOMER_PAYMENT_STATUS, default='UNPAYED', null=False,
-                                      blank=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return '%s %s' % (self.customer, self.amount)
 
 class CompanySocialAccount(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)

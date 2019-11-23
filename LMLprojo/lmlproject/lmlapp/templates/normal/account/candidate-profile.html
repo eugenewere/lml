@@ -20,18 +20,19 @@
 
                         <div class="row">
                             <div class="detail-pic">
-                                <img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img" alt="" />
+                                <img src="{{customer.profile_image.url}}" class="img" alt="" />
                                 <a href="#" class="detail-edit" >
                                     <i class="fa fa-user fa-spin"></i>
                                 </a>
                             </div>
-                            <div class="detail-status"><span>Active Now</span></div>
+{#                            <div class="detail-status"><span>Active Now</span></div>#}
                         </div>
 
                         <div class="row bottom-mrg">
                             <div class="col-md-12 col-sm-12">
                                 <div class="advance-detail detail-desc-caption">
-                                    <h4>Eugene Were</h4><span class="designation">Web Designer</span>
+                                    <h4 class="text-capitalize">{{request.user.first_name}} {{request.user.last_name}}</h4>
+                                    <span class="designation text-capitalize">{% for skill in skills %}{{ skill }},{% endfor %}</span>
                                     <ul class="text-center">
                                         <li><strong class="j-view">0</strong>Shortlisted Times</li>
                                         <li><strong class="j-applied"></strong></li>
@@ -48,7 +49,9 @@
 {#                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>#}
 {#                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>#}
 {#                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>#}
-                                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                        {% if social %}
+                                        <li><a href="{{ social }}"><i class="fab fa-linkedin"></i></a></li>
+                                        {% endif %}
 {#                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>#}
                                     </ul>
                                 </div>
@@ -73,7 +76,7 @@
                                     <li class="active"><a href="#about">About</a></li>
                                     <li><a href="#address">Address</a></li>
 {#                                    <li><a href="#matches-job">Matches MatchesJob</a></li>#}
-                                    <li><a href="#friends">Mutual Friends</a></li>
+{#                                    <li><a href="#friends">Mutual Friends</a></li>#}
 {#                                    <li><a href="#messages">Messages <span class="info-bar">6</span></a></li>#}
                                     <li><a href="#settings">Settings</a></li>
                                 </ul>
@@ -81,10 +84,8 @@
                                 <!-- Start All Sec -->
                                 <div class="tab-content">
                                     <div id="about" class="tab-pane fade in active">
-                                        <h3>About Eugene Were</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla interdum sed diam ac fermentum. Mauris nec pellentesque neque. Cras nec diam euismod, congue sapien eu, fermentum libero. Vestibulum quis sem.</p>
+                                        <h3 class="text-capitalize">About {{request.user.first_name}} {{request.user.last_name}}</h3>
+                                        <p>{{ customer.biography }}</p>
                                     </div>
                                     <!-- End About Sec -->
 
@@ -92,14 +93,13 @@
                                     <div id="address" class="tab-pane fade">
                                         <h3>Address Info</h3>
                                         <ul class="job-detail-des">
-                                            <li><span>Address:</span>SCO 210, Neez Plaza</li>
-                                            <li><span>Country:</span>Kenya</li>
-                                            <li><span>County:</span>Nairobi</li>
-                                            <li><span>Region:</span>Kahawa</li>
+                                            <li><span>Country:</span>{{customer.country}}</li>
+                                            <li><span>County:</span>{{customer.county.county}}</li>
+                                            <li><span>Region:</span>{{ customer.region.region }}->{{ customer.region.ward }}</li>
 {#                                            <li><span>Zip:</span>520 548</li>#}
-                                            <li><span>Telephone:</span>+91 123 456 7854</li>
+                                            <li><span>Telephone:</span>{{customer.phone_number}}</li>
 {#                                            <li><span>Fax:</span>(622) 123 456</li>#}
-                                            <li><span>Email:</span>youremail@gmail.com</li>
+                                            <li><span>Email:</span>{{request.user.email}}</li>
                                         </ul>
                                     </div>
                                     <!-- End Address Sec -->

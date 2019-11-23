@@ -13,8 +13,9 @@
 			</section>
 
     <div class="clearfix"></div>
-    <!-- Header Title End --
-    <form action="{% url 'LML:signup' %}" method="POST" enctype="multipart/form-data">
+    <!-- Header Title End -->
+    <form action="{% url 'LML:signup' %}" method="POST" enctype="multipart/form-data" role="form">
+
         {% csrf_token %}
         <! -- General Detail Start -->
         <div class="section detail-desc">
@@ -135,7 +136,7 @@
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group" style="margin-bottom: 8px">
-                                    <select required name="marital_status" id="" class="marital form-control input-lg"
+                                    <select required name="marital_status"  class="marital form-control input-lg"
                                             style="margin-bottom: 0">
                                         <option selected>Marital status</option>
                                         <option value="Single">Single</option>
@@ -151,7 +152,7 @@
                             </div>
                             <div class="col-md-12 col-sm-12">
                                 <div class="input-group" style="margin-bottom: 8px">
-                                    <select required name="job_type" id="" class="marital2 form-control input-lg"
+                                    <select required name="job_type"  class="marital2 form-control input-lg"
                                             style="margin-bottom: 0">
                                         <option selected>Choose Job Type</option>
                                         <option value="Full Time">Full Time</option>
@@ -230,7 +231,7 @@
                         <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
                             <div class="input-group" style="margin-bottom: 0;">
                                 <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                <select required name="country" id="" class="choose-city form-control input-lg">
+                                <select required name="country" class="choose-city form-control input-lg">
                                     <option  disabled>Country</option>
                                     <option selected value="Kenya">Kenya</option>
                                 </select>
@@ -292,8 +293,9 @@
                             <div class="dublicat-box" >
                                 <div class="col-md-12 col-sm-12 row duplicate">
                                     <h4 style="margin: 20px 0;" class="text-muted">Choose your qualification</h4>
+
                                         <div class=" me" style="padding: 0;" >
-                                            <select id="0" required name="qualifications[]" onchange="showEducation(this);" class=" qualifications form-control input-lg">
+                                            <select id="0" required name="qualifications" onchange="showEducation(this);" class=" qualifications form-control input-lg">
                                                 <option selected disabled="disabled">Qualifications</option>
                                                 <option value="Phd">Phd</option>
                                                 <option value="Masters">Masters</option>
@@ -304,7 +306,7 @@
                                              <div style=" display:none; padding: 0; margin-top: 10px; " class="uni col-md-12 col-sm-12">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                                                    <select name="school[]" class="choose-university form-control input-lg">
+                                                    <select name="school" class="choose-university form-control input-lg">
                                                         <option selected disabled="disabled">School</option>
                                                         {% for university in unis %}
                                                             <option value="{{ university }}">{{ university }}</option>
@@ -315,7 +317,7 @@
                                              <div style=" display:none; padding: 0; margin-top: 10px; " class="phd col-md-12 col-sm-12">
                                                 <div class="input-group col-md-4 col-sm-12">
                                                     <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select name="course[]" class="choose-phd form-control input-lg">
+                                                    <select name="course" class="choose-phd form-control input-lg">
                                                         <option selected disabled="disabled">Qualification, e.g. Phd in Arts</option>
                                                         {% for phd in phds %}
                                                             <option value="{{ phd }}">{{ phd }}</option>
@@ -326,7 +328,7 @@
                                              <div style=" display:none; padding: 0; margin-top: 10px; " class="masters col-md-12 col-sm-12">
                                                 <div class="input-group col-md-4 col-sm-12">
                                                     <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select name="course[]" class="choose-masters form-control input-lg">
+                                                    <select name="course" class="choose-masters form-control input-lg">
                                                         <option selected disabled="disabled">Qualification, e.g. Masters in
                                                             Arts
                                                         </option>
@@ -339,7 +341,7 @@
                                              <div style=" display:none; padding: 0; margin-top: 10px; " class="bachelor col-md-12 col-sm-12">
                                                 <div class="input-group col-md-4 col-sm-12">
                                                     <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select name="course[]" class="choose-bachelor form-control input-lg">
+                                                    <select name="course" class="choose-bachelor form-control input-lg">
                                                         <option selected disabled="disabled">Qualification, e.g. Bachelor in
                                                             Arts
                                                         </option>
@@ -353,7 +355,7 @@
                                              <div style=" display:none; padding: 0; margin-top: 10px; " class="diploma col-md-12 col-sm-12">
                                                 <div class="input-group col-md-4 col-sm-12">
                                                     <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select name="course[]" class="choose-diploma form-control input-lg">
+                                                    <select name="course" class="choose-diploma form-control input-lg">
                                                         <option selected disabled="disabled">Qualification, e.g. Diploma in
                                                             Arts
                                                         </option>
@@ -366,7 +368,7 @@
                                              <div style=" display:none; padding: 0; margin-top: 10px; " class="certificate col-md-12 col-sm-12">
                                                 <div class="input-group col-md-4 col-sm-12">
                                                     <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <select name="course[]" class="choose-certificate form-control input-lg">
+                                                    <select name="course" class="choose-certificate form-control input-lg">
                                                         <option selected disabled="disabled">Qualification, e.g. Certificate in Arts </option>
                                                         {% for cert in certificates %}
                                                             <option value="{{ cert }}">{{ cert }}</option>
@@ -377,13 +379,13 @@
                                              <div style=" display:none; padding: 0; margin-top: 10px; " class="date col-md-12 col-sm-12">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Year of graduation</span>
-                                                    <input name="graduation_date[]" type="date" class="form-control edu-start">
+                                                    <input name="graduation_date" type="date" class="form-control edu-start">
                                                 </div>
                                             </div>
                                              <div style=" display:none; padding: 0; margin-top: 10px; " class="reg_no col-md-12 col-sm-12">
                                              <div class="input-group">
                                             <span class="input-group-addon">Registration number</span>
-                                            <input name="reg_number[]" type="text" class="form-control regno">
+                                            <input name="reg_number" type="text" class="form-control regno">
                                         </div>
                                          </div>
 
@@ -400,7 +402,9 @@
                     <div class="row bottom-mrg extra-mrg">
                         <h2 class="detail-title">Brief description about yourself</h2>
                         <div class="col-md-12 col-sm-12">
-                            <textarea required name="biography" class="form-control textarea" maxlength="2000" rows="30" placeholder="About Yourself"></textarea>
+                            <label style="width: 100%;">
+                                <textarea required name="biography" class="form-control textarea" maxlength="2000" rows="30" placeholder="About Yourself"></textarea>
+                            </label>
                         </div>
                     </div>
 
@@ -425,7 +429,7 @@
                                         <div style="margin-top:8px; display: none;" id="employer"
                                              class="employerwrapper col-md-12 col-sm-12">
                                             <label for="emplo">Company Employer Name</label>
-                                            <input name="employer_name[]" style="margin-bottom: 0;" id="emplo" type="text" class="form-control" placeholder="Employer's Name">
+                                            <input name="employer_name" style="margin-bottom: 0;" id="emplo" type="text" class="form-control" placeholder="Employer's Name">
                                             <small id="lastname" class="form-text text-muted">
                                                 eg John doe.
                                             </small>
@@ -433,7 +437,7 @@
                                         <div style="margin-top: 8px; display: none;" id="employercompany"
                                              class="employerwrapper col-md-12 col-sm-12">
                                             <label for="emplocomp">Company Name</label>
-                                            <input name="company_name[]" style="margin-bottom: 0;" id="emplocomp" type="text" class="form-control" placeholder="Employer's Company">
+                                            <input name="company_name" style="margin-bottom: 0;" id="emplocomp" type="text" class="form-control" placeholder="Employer's Company">
                                             <small id="lastname" class="form-text text-muted">
                                                 eg abc company.
                                             </small>
@@ -441,7 +445,7 @@
                                         <div style="margin-top: 8px; display: none;" id="employercompany"
                                              class="employerwrapper col-md-12 col-sm-12">
                                             <label for="emplocompemail">Company email</label>
-                                            <input name="company_email[]" style="margin-bottom: 0;" id="emplocompemail" type="email" class="form-control" placeholder="Employer's email">
+                                            <input name="company_email" style="margin-bottom: 0;" id="emplocompemail" type="email" class="form-control" placeholder="Employer's email">
                                             <small id="lastname" class="form-text text-muted">
                                                 eg abc.example.org abc.example.com .
                                             </small>
@@ -449,7 +453,7 @@
                                         <div style="margin-top: 8px; display: none;" id="employercompany"
                                              class="employerwrapper col-md-12 col-sm-12">
                                             <label for="emplocomp4n">Company Phone</label>
-                                            <input name="company_phone[]" style="margin-bottom: 0;" id="emplocomp4n" type="text" class="form-control" placeholder="Employer's Phonenumber">
+                                            <input name="company_phone" style="margin-bottom: 0;" id="emplocomp4n" type="text" class="form-control" placeholder="Employer's Phonenumber">
                                             <small id="lastname" class="form-text text-muted">
                                                 eg 07********.
                                             </small>
@@ -457,7 +461,7 @@
                                         <div class="employerwrapper col-md-12 col-sm-12"
                                              style="margin-top:8px; display: none;">
                                             <label for="kke">Position Held</label>
-                                            <input name="position_held[]" id="kke" type="text" class="form-control" placeholder="Position, e.g. Web Designer">
+                                            <input name="position_held" id="kke" type="text" class="form-control" placeholder="Position, e.g. Web Designer">
                                         </div>
                                         <div class="employerwrapper col-md-12 col-sm-12"
                                              style="margin-top:8px; display: none;">
@@ -465,7 +469,7 @@
                                             <div class="col-md-6 col-sm-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Date From</span>
-                                                    <input name="date_from[]" type="date" id="exp-start" class="exp-start form-control">
+                                                    <input name="date_from" type="date" id="exp-start" class="exp-start form-control">
                                                 </div>
                                             </div>
 
@@ -473,14 +477,14 @@
                                                  style="margin-top:8px; display: none;">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Date To</span>
-                                                    <input name="date_to[]" type="date" id="exp-end" class="exp-end form-control">
+                                                    <input name="date_to" type="date" id="exp-end" class="exp-end form-control">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="employerwrapper col-md-12 col-sm-12"
                                              style="margin-top:8px; display: none;">
                                             <label for="emplomsg"></label>
-                                            <textarea name="experience[]" id="emplomsg" class="form-control textarea" placeholder="Optional notes on the experience"></textarea>
+                                            <textarea name="experience" id="emplomsg" class="form-control textarea" placeholder="Optional notes on the experience"></textarea>
                                         </div>
                                     </div>
                                     <button style="display: none;" id="clonebutton1" type="button" class="employer btn remove-field">Remove</button>
@@ -499,7 +503,7 @@
                                     <div class="col-md-12 col-sm-12 " style="margin-bottom: 2px;">
                                         <div class="input-group" style="margin-bottom: 2px;">
                                             <span class="input-group-addon"><i class="fas fa-hand-paper"></i></span>
-                                            <input required name="skill[]" type="text" class="form-control"
+                                            <input required name="skill" type="text" class="form-control"
                                                    placeholder="Skills, e.g. Css, Html...">
                                         </div>
                                         <small id="lastname" class="form-text text-muted">
@@ -510,7 +514,7 @@
                                     <div class="col-md-12 col-sm-12 ">
                                         <div class="input-group" style="margin-bottom: 8px;">
                                             <span class="input-group-addon"><i class="fas fa-user"></i></span>
-                                            <input required name="referee[]" id="ref" type="text" class="form-control"
+                                            <input required name="referee" id="ref" type="text" class="form-control"
                                                    placeholder="Referee Name">
                                         </div>
                                         <small id="lastname" class="form-text text-muted">
@@ -520,7 +524,7 @@
                                     <div class="col-md-12 col-sm-12 ">
                                         <div class="input-group" style="margin-bottom: 8px;">
                                             <span class="input-group-addon"><i class="fas fa-mobile-phone"></i></span>
-                                            <input required name="referee_phonenumber[]" id="refh" type="text"
+                                            <input required name="referee_phonenumber" id="refh" type="text"
                                                    class="form-control" placeholder="Referee Phone Number">
                                         </div>
                                         <small id="lastnamehh" class="form-text text-muted">

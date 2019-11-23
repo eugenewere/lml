@@ -18,7 +18,8 @@ from django.utils.crypto import get_random_string
 from lmlapp.forms import *
 from .models import *
 import base64
-
+from django.forms import formset_factory
+from django.forms import modelformset_factory
 # Create your views here.
 
 # # Base method with no type specified
@@ -32,10 +33,9 @@ import base64
 import json
 
 def home(request):
-
-
-
+    customers = Customer.objects.all()
     context = {
+        'customers':customers,
         'title': 'home',
         'counties': County.objects.all(),
         'categories':Category.objects.all(),
@@ -46,25 +46,29 @@ def home(request):
 def signup(request):
 
     if request.method=='POST':
-        qualifications = request.POST.getlist('qualifications[]')
-        schools = request.POST.getlist('school[]')
-        courses = request.POST.getlist('course[]')
-        graduation_dates = request.POST.getlist('graduation_date[]')
-        regnos = request.POST.getlist('reg_number[]')
+        qualifications = request.POST.getlist('qualifications')
+        schools = request.POST.getlist('school')
+        courses = request.POST.getlist('course')
+        graduation_dates = request.POST.getlist('graduation_date')
+        regnos = request.POST.getlist('reg_number')
+        print(qualifications)
+        print(schools)
+        print(courses)
+        print(graduation_dates)
+        print(regnos)
 
+        employer_names = request.POST.getlist('employer_name')
+        company_names = request.POST.getlist('company_name')
+        company_emails = request.POST.getlist('company_email')
+        company_phones = request.POST.getlist('company_phone')
+        position_helds = request.POST.getlist('position_held')
+        date_froms = request.POST.getlist('date_from')
+        date_tos = request.POST.getlist('date_to')
+        experiences = request.POST.getlist('experience')
 
-        employer_names = request.POST.getlist('employer_name[]')
-        company_names = request.POST.getlist('company_name[]')
-        company_emails = request.POST.getlist('company_email[]')
-        company_phones = request.POST.getlist('company_phone[]')
-        position_helds = request.POST.getlist('position_held[]')
-        date_froms = request.POST.getlist('date_from[]')
-        date_tos = request.POST.getlist('date_to[]')
-        experiences = request.POST.getlist('experience[]')
-
-        skills = request.POST.getlist('skill[]')
-        referees = request.POST.getlist('referee[]')
-        referee_phonenumbers= request.POST.getlist('referee_phonenumber[]')
+        skills = request.POST.getlist('skill')
+        referees = request.POST.getlist('referee')
+        referee_phonenumbers= request.POST.getlist('referee_phonenumber')
 
         account_url= request.POST['account_url']
 
@@ -76,74 +80,98 @@ def signup(request):
             new_user= form.save()
             CustomerRegNo.objects.create(
                 customer=new_user,
-                personel_reg_no=get_random_string(length=7, allowed_chars='PERS123456789'),
+                personel_reg_no=('PERS' + get_random_string(length=7, allowed_chars='ABCDFGHIJKLMNPQRSTUVWXYZ123456789')),
             )
             Social_account.objects.create(
                 customer=new_user,
                 account_url=account_url
             )
-            for skill in skills:
-                for referee in referees:
-                    for referee_phonenumber in referee_phonenumbers:
-                        if skills.index(skill) == referees.index(referee) and skills.index(skill) == referee_phonenumbers.index(referee_phonenumber):
-                            Skills.objects.create(
-                                customer=new_user,
-                                skill= skill,
-                                referee=referee,
-                                referee_phonenumber=referee_phonenumber
-                            )
-            # print(qualifications)
-            # print(schools)
-            # print(courses)
-            # print(regnos)
-            # print(graduation_dates)
-            for qualification in qualifications:
-                for school in schools:
-                    for course in courses:
-                        for graduation_date in graduation_dates:
-                            for regno in regnos:
-                                if qualifications.index(qualification) == schools.index(school) and qualifications.index(qualification) == courses.index(course) \
-                                        and qualifications.index(qualification) == graduation_dates.index(graduation_date) and qualifications.index(qualification) == regnos.index(regno):
-                                    Education.objects.create(
-                                        customer=new_user,
-                                        qualifications=qualification,
-                                        school=school,
-                                        course=course,
-                                        graduation_date=graduation_date,
-                                        reg_number=regno,
-                                    )
-                                    print(qualification)
-
-            for employer_name in employer_names:
-                for company_name in company_names:
-                    for company_email in company_emails:
-                        for company_phone in company_phones:
-                            for position_held in position_helds:
-                                for date_from in date_froms:
-                                    for date_to in date_tos:
-                                        for experience in experiences:
-                                            if employer_names.index(employer_name) == company_names.index(company_name) and employer_names.index(employer_name) == company_emails.index(company_email) \
-                                                and employer_names.index(employer_name) == company_phones.index(company_phone) and employer_names.index(employer_name) == position_helds.index(position_held)\
-                                                and employer_names.index(employer_name) == date_froms.index(date_from) and employer_names.index(employer_name) == date_tos.index(date_to) \
-                                                and employer_names.index(employer_name) == experiences.index(experience):
-                                                Experience.objects.create(
-                                                    customer=new_user,
-                                                    employer_name=employer_name,
-                                                    company_name=company_name,
-                                                    comapny_email=company_email,
-                                                    company_phone=company_phone,
-                                                    position_held = position_held,
-                                                    date_from=date_from,
-                                                    date_to=date_to,
-                                                    experience=experience,
-                                                )
 
 
-            sweetify.success(request, 'You did it', text='Good job! You successfully Registered', persistent='Continue')
+            for skill, referee, referee_phonenumber in zip(skills, referees, referee_phonenumbers):
+                Skills.objects.create(
+                    customer=new_user,
+                    skill=skill,
+                    referee=referee,
+                    referee_phonenumber=referee_phonenumber
+                )
+
+            for qualification, school, course, graduation_date, regno in zip(qualifications, schools, courses, graduation_dates, regnos):
+                Education.objects.create(
+                    customer=new_user,
+                    qualifications=qualification,
+                    school=school,
+                    course=course,
+                    graduation_date=graduation_date,
+                    reg_number=regno,
+                )
+
+            for employer_name, company_name, company_email, company_phone, position_held, date_from, date_to, experience in zip(employer_names,company_names,company_emails,company_phones,position_helds,date_froms,date_tos,experiences):
+                Experience.objects.create(
+                    customer=new_user,
+                    employer_name=employer_name,
+                    company_name=company_name,
+                    comapny_email=company_email,
+                    company_phone=company_phone,
+                    position_held=position_held,
+                    date_from=date_from,
+                    date_to=date_to,
+                    experience=experience,
+                )
+
+
+
+
+            sweetify.success(request, 'You did it', text='Good job! You successfully Registered, just login', persistent='Continue')
+
         else:
             form1 = PersonelRegisterForm(request.POST,request.FILES)
+            Skill_formset = modelformset_factory(Skills, fields=['skill', 'customer', 'referee_phonenumber', 'referee', ])
+            Qualification_formset = modelformset_factory(Education, fields=['qualifications', 'school', 'course', 'graduation_date', 'reg_number'])
+            Experience_formset = modelformset_factory(Experience, fields=['employer_name', 'company_name', 'company_phone', 'customer', 'comapny_email', 'experience', 'date_to', 'date_from', 'position_held'])
+
+            skillform = Skill_formset(request.POST)
+            qualiForm = Qualification_formset(request.POST)
+            exeriencForm = Experience_formset(request.POST)
+
+            module_dir = os.path.dirname(__file__)  # get current directory
+            file_path1 = os.path.join(module_dir, 'Bachelorcourses')
+            file_path2 = os.path.join(module_dir, 'course_certificate')
+            file_path3 = os.path.join(module_dir, 'DiplomaCourses')
+            file_path4 = os.path.join(module_dir, 'phdcourses')
+            file_path5 = os.path.join(module_dir, 'Masterscourses')
+            file_path6 = os.path.join(module_dir, 'university')
+            # file_path6 = os.path.join(module_dir, 'categories')
+            qbfile = open(file_path1, "r")
+            qbfile2 = open(file_path2, "r")
+            qbfile3 = open(file_path3, "r")
+            qbfile4 = open(file_path4, "r")
+            qbfile5 = open(file_path5, "r")
+            qbfile6 = open(file_path6, "r")
+
+            contexty = {
+                'title': 'Create an account',
+                'bachelors': qbfile.readlines(),
+                'certificates': qbfile2.readlines(),
+                'diplomas': qbfile3.readlines(),
+                'phds': qbfile4.readlines(),
+                'masters': qbfile5.readlines(),
+                'unis': qbfile6.readlines(),
+                'counties': County.objects.all(),
+                'regions': Region.objects.all(),
+                'categories': Category.objects.all(),
+                'form': form1,
+                'skillf':skillform,
+                'e':exeriencForm,
+                'ed':qualiForm,
+                # 'universities':qbfile6.readlines(),
+
+            }
+
+
+
             sweetify.error(request, 'Error', text='Error Registering your account', persistent='Retry')
-            return render(request, 'normal/signup/signup.html',{'form':form1})
+            return render(request, 'normal/signup/signup.html',contexty)
 
 
 
@@ -177,6 +205,7 @@ def signup(request):
         'counties':County.objects.all(),
         'regions':Region.objects.all(),
         'categories':Category.objects.all(),
+
         # 'universities':qbfile6.readlines(),
 
 
@@ -187,26 +216,6 @@ def signup(request):
 
 def company_signupform_handling(request):
 
-    # company_name = request.POST.get('company_name')
-    # company_email = request.POST.get('company_email')
-    # company_motto = request.POST.get('company_motto')
-    # category = request.POST.get('category')
-    # bizness_entity_type = request.POST.get('bizness_entity_type')
-    # website = request.POST.get('website')
-    # bussiness_reg_no = request.POST.get('bussiness_reg_no')
-    # county = request.POST.get('county')
-    # description = request.POST.get('description')
-    # region = request.POST.get('region')
-    # landmark = request.POST.get('landmark')
-    # brief_details = request.POST.get('brief_details')
-    # kra_number = request.POST.get('kra_number')
-    # date_created = request.POST.get('date_created')
-    # logo = request.FILES.get('logo')
-    #
-    # first_name = request.POST.get('first_name')
-    # last_name = request.POST.get('last_name')
-    # email = request.POST.get('email')
-    # username = request.POST.get('username')
 
 
         return redirect('LML:companysignup' )
@@ -256,32 +265,6 @@ def update_employers_profile(request):
         return redirect('LML:employersprofile')
 
 
-    # context = {
-    #     'logo': logo,
-    #     'company_name': company_name,
-    #     'company_email': company_email,
-    #     'company_motto': company_motto,
-    #     'categoryy': category,
-    #     'bizness_entity_type': bizness_entity_type,
-    #     'website': website,
-    #     'bussiness_reg_no': bussiness_reg_no,
-    #     'county': county,
-    #     'regiont': region,
-    #     'landmark': landmark,
-    #     'brief_details': brief_details,
-    #     'date_created': date_created,
-    #     'first_name': first_name,
-    #     'last_name': last_name,
-    #     'email': email,
-    #     'facebook': facebook,
-    #     'googlr_plus': googlr_plus,
-    #     'twitter': twitter,
-    #     'instagram': instagram,
-    #     'linkedin': linkedin,
-    #     'description': description,
-    #     'kra_number': kra_number,
-    #     'username': username,
-    # }
 
 
 
@@ -422,14 +405,39 @@ def employersprofile(request):
 
 
 def employeeprofile(request):
+    user = request.user.id
+    customer = Customer.objects.filter(user_ptr_id=user).first()
+    educations = Education.objects.filter(customer=customer)
+    experiences = Experience.objects.filter(customer=customer)
+    skills = Skills.objects.filter(customer=customer)
+    social = Social_account.objects.filter(customer=customer)
     context = {
         'title': 'Your Profile',
+        'customer': customer,
+        'skills': skills,
+        'educations': educations,
+        'experiences': experiences,
+        'social': social,
     }
+
     return render(request, 'normal/account/candidate-profile.html', context)
 
 
 def employeedetails(request):
-    return render(request, 'normal/account/candidate-detail.html')
+    user=request.user.id
+    customer = Customer.objects.filter(user_ptr_id= user).first()
+    educations = Education.objects.filter(customer=customer)
+    experiences = Experience.objects.filter(customer=customer)
+    skills = Skills.objects.filter(customer=customer)
+    social = Social_account.objects.filter(customer=customer)
+    context = {
+        'customer':customer,
+        'skills':skills,
+        'educations':educations,
+        'experiences':experiences,
+        'social':social,
+    }
+    return render(request, 'normal/account/candidate-detail.html', context)
 
 
 def companysignup(request):
@@ -457,22 +465,30 @@ def companysignup(request):
             )
             CompanyRegNo.objects.create(
                 company=new_user,
-                company_reg_no=get_random_string(length=7, allowed_chars='COMP123456789'),
+                company_reg_no=('CMP'+get_random_string(length=4, allowed_chars='ABDEFGHIJKLNPQRSTUVWXYZ123456789')),
             )
             sweetify.success(request, 'You did it', text='Good job! You successfully registered', persistent='Ok')
-            return redirect('LML:signin')
+            return redirect('LML:payment')
         else:
             # formr = CompanyRegisterForm()
             # print(formr.errors)
             sweetify.error(request, 'Error', text='Ensure you fill all fields correctly', persistent='Retry')
-            return render(request, 'normal/signup/create-company.html', {'form': form, 'social': form2})
+            context3 = {
+                'title': 'Create an account',
+                'counties': County.objects.all(),
+                'regions': Region.objects.all(),
+                'categories': Category.objects.all(),
+                'form': form,
+                'social': form2,
+
+            }
+            return render(request, 'normal/signup/create-company.html', context3)
             # return redirect('LML:companysignup',{'form':form, 'social':form2})
 
     else:
 
         form = CompanyRegisterForm()
         form2 = CompanySocialsForm()
-        categories = Category.objects.all()
 
 
 
@@ -482,7 +498,7 @@ def companysignup(request):
         'title': 'Create an account',
          'counties':County.objects.all(),
         'regions':Region.objects.all(),
-        'categories': categories,
+        'categories': Category.objects.all(),
         'form': form,
         'social': form2,
 

@@ -7,6 +7,16 @@ from django.utils.crypto import get_random_string
 from lmlappadmin.models import *
 from django import forms
 
+
+class SkillsForm(forms.ModelForm):
+    class Meta:
+        model = Skills
+        fields = ['skill','customer','referee_phonenumber', 'referee']
+
+
+
+
+
 class CompanyUserupdateForm(forms.ModelForm):
     class Meta:
         model = Company
@@ -51,6 +61,7 @@ class PersonelRegisterForm(forms.Form, UserCreationForm):
             'marital_status',
             'biography',
             'disability_status',
+
 
         ]
 

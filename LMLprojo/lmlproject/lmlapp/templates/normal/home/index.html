@@ -159,7 +159,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 col-sm-6">
+                    {% for customer in customers %}
+                        <div class="col-md-4 col-sm-6">
                         <div class="paid-candidate-container">
                             <div class="paid-candidate-box">
                                 <div class="dropdown">
@@ -171,146 +172,24 @@
                                     </div>
                                 </div>
                                 <div class="paid-candidate-inner--box">
-                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
+                                    <div class="paid-candidate-box-thumb"><img src="{{customer.profile_image.url}}" class="img-responsive img-circle" alt="" /></div>
                                     <div class="paid-candidate-box-detail">
-                                        <h4>Daniel Disroyer</h4><span class="desination">App Designer</span></div>
+                                        <h4 class="text-capitalize">{{request.user.first_name}} {{request.user.last_name}}</h4><span class="desination text-capitalize">{{customer.category.category}}</span></div>
                                 </div>
                                 <div class="paid-candidate-box-extra">
                                     <ul>
-                                        <li>Php</li>
-                                        <li>Android</li>
-                                        <li>Html</li>
-                                        <li class="more-skill bg-primary">+3</li>
+                                        {% for skill in customer.skillset %}
+                                        <li>{{skill.skill}}</li>
+                                        {% endfor %}
+                                        {% if customer.skillcount %}
+                                            <li class="more-skill bg-primary">+{{customer.skillcount}}</li>
+                                        {% endif %}
                                     </ul>
-                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+                                    <p>{{customer.biography|truncatechars:67}}.</p>
                                 </div>
                             </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
                     </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="paid-candidate-container">
-                            <div class="paid-candidate-box">
-                                <div class="dropdown">
-                                    <div class="btn-group fl-right">
-                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                    </div>
-                                </div>
-                                <div class="paid-candidate-inner--box">
-                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                    <div class="paid-candidate-box-detail">
-                                        <h4>Agustin L. Smith</h4><span class="desination">App Designer</span></div>
-                                </div>
-                                <div class="paid-candidate-box-extra">
-                                    <ul>
-                                        <li>Php</li>
-                                        <li>Android</li>
-                                        <li>Html</li>
-                                        <li class="more-skill bg-primary">+3</li>
-                                    </ul>
-                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                </div>
-                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="paid-candidate-container">
-                            <div class="paid-candidate-box">
-                                <div class="dropdown">
-                                    <div class="btn-group fl-right">
-                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                    </div>
-                                </div>
-                                <div class="paid-candidate-inner--box">
-                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                    <div class="paid-candidate-box-detail">
-                                        <h4>Delores R. Williams</h4><span class="desination">Software Developer</span></div>
-                                </div>
-                                <div class="paid-candidate-box-extra">
-                                    <ul>
-                                        <li>Php</li>
-                                        <li>Android</li>
-                                        <li>Html</li>
-                                        <li class="more-skill bg-primary">+3</li>
-                                    </ul>
-                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                </div>
-                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="paid-candidate-container">
-                            <div class="paid-candidate-box">
-                                <div class="dropdown">
-                                    <div class="btn-group fl-right">
-                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                    </div>
-                                </div>
-                                <div class="paid-candidate-inner--box">
-                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                    <div class="paid-candidate-box-detail">
-                                        <h4>Nancy D. Walker</h4><span class="desination">PHP Developer</span></div>
-                                </div>
-                                <div class="paid-candidate-box-extra">
-                                    <ul>
-                                        <li>Php</li>
-                                        <li>Android</li>
-                                        <li>Html</li>
-                                        <li class="more-skill bg-primary">+3</li>
-                                    </ul>
-                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                </div>
-                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="paid-candidate-container">
-                            <div class="paid-candidate-box">
-                                <div class="dropdown">
-                                    <div class="btn-group fl-right">
-                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                    </div>
-                                </div>
-                                <div class="paid-candidate-inner--box">
-                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                    <div class="paid-candidate-box-detail">
-                                        <h4>Larry A. Sherrod</h4><span class="desination">Data Analytics</span></div>
-                                </div>
-                                <div class="paid-candidate-box-extra">
-                                    <ul>
-                                        <li>Php</li>
-                                        <li>Android</li>
-                                        <li>Html</li>
-                                        <li class="more-skill bg-primary">+3</li>
-                                    </ul>
-                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                </div>
-                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="paid-candidate-container">
-                            <div class="paid-candidate-box">
-                                <div class="dropdown">
-                                    <div class="btn-group fl-right">
-                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                        <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                    </div>
-                                </div>
-                                <div class="paid-candidate-inner--box">
-                                    <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                    <div class="paid-candidate-box-detail">
-                                        <h4>George M. Johnson</h4><span class="desination">Project Manager</span></div>
-                                </div>
-                                <div class="paid-candidate-box-extra">
-                                    <ul>
-                                        <li>Php</li>
-                                        <li>Android</li>
-                                        <li>Html</li>
-                                        <li class="more-skill bg-primary">+3</li>
-                                    </ul>
-                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                </div>
-                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                    </div>
+                    {% endfor %}
                     <div class="col-md-12 col-sm-12">
                         <div class="text-center"><a href="{% url 'LML:advancesearch' %}" class="btn btn-primary">Load More</a></div>
                     </div>
