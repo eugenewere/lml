@@ -75,10 +75,12 @@
                                 <ul class="nav simple nav-tabs" id="simple-design-tab">
                                     <li class="active"><a href="#about">About</a></li>
                                     <li><a href="#address">Address</a></li>
-{#                                    <li><a href="#matches-job">Matches MatchesJob</a></li>#}
-{#                                    <li><a href="#friends">Mutual Friends</a></li>#}
+                                    <li><a href="#settings">Personal Details</a></li>
+                                    <li><a href="#education">Educations</a></li>
+                                    <li><a href="#experience">Experiences</a></li>
+                                    <li><a href="#skills">Skills</a></li>
 {#                                    <li><a href="#messages">Messages <span class="info-bar">6</span></a></li>#}
-                                    <li><a href="#settings">Settings</a></li>
+
                                 </ul>
 
                                 <!-- Start All Sec -->
@@ -105,113 +107,210 @@
                                     <!-- End Address Sec -->
 
                                     <!-- Start Friend List -->
-                                    <div id="friends" class="tab-pane fade">
+                                    <div id="education" class="tab-pane fade">
                                         <div class="row">
-                                            <div class="col-md-4 col-sm-4">
-                                                <div class="manage-cndt">
-                                                    <div class="cndt-status pending">Pending</div>
-                                                    <div class="cndt-caption">
-                                                        <div class="cndt-pic"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive" alt=""></div>
-                                                        <h4>Charles Hopman</h4><span>Web designer</span>
-                                                        <p>Our analysis team at Megriosft use end to end innovation proces</p>
-                                                    </div>{% comment %}<a href="#" title="" class="cndt-profile-btn">View Profile</a>{% endcomment %}</div>
-                                            </div>
+                                            <form action="">
+                                                {% for education in educations %}
+                                                    <div class="col-md-12">
+                                                    <h2 class="detail-title mrg-top-20" style="padding: 15px 5px;">Education {{ education.qualifications }} <a class="btn-danger btn" style="float:right; border-radius: 12px; padding: 8px 12px;" href="">Delete</a></h2>
+                                                    <div class="extra-field-box">
+                                                        <div class="multi-box">
+                                                            <div class="dublicat-box">
+                        {#                                        university ,course,regno#}
+                                                                <div class="col-md-4 col-sm-12" hidden>
+{#                                                                    <label for="kswq">Qualifications</label>#}
+                                                                    <select hidden disabled id="kswq" class="form-control input-lg">
+{#                                                                        <option disabled="disabled">Qualifications</option>#}
+{#                                                                        <option selected value="Phd">Phd</option>#}
+{#                                                                        <option value="Masters">Masters</option>#}
+{#                                                                        <option value="Masters">Bachelor</option>#}
+{#                                                                        <option value="Diploma">Diploma</option>#}
+                                                                        <option value="{{education.qualifications}}">{{ education.qualifications }}</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div  class="col-md-4 col-sm-12 row">
+                                                                    <label for="ksww">University</label>
+                                                                    <select id="ksww" name="school" class="choose-university form-control input-lg">
+                                                                        <option disabled="disabled">School</option>
+                                                                        {% for university in unis %}
+                                                                            <option {% if education.school == university %} selected {% endif %} value="{{ university }}">{{ university }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
 
-                                            <div class="col-md-4 col-sm-4">
-                                                <div class="manage-cndt">
-                                                    <div class="cndt-status available">Available</div>
-                                                    <div class="cndt-caption">
-                                                        <div class="cndt-pic"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive" alt=""></div>
-                                                        <h4>Ethan Marion</h4><span>IOS designer</span>
-                                                        <p>Our analysis team at Megriosft use end to end innovation proces</p>
-                                                    </div>{% comment %}<a href="#" title="" class="cndt-profile-btn">View Profile</a>{% endcomment %}</div>
-                                            </div>
+                                                                    </div>
+                                                                     {% if education.qualifications == 'Phd' %}
+                                                                        <div  id=""  class=" col-md-4 col-sm-12">
+                                                                            <label for="ksw">Phd</label>
+                                                                           <select id="ksw" name="course" class="choose-phd form-control input-lg">
+                                                                                <option  disabled="disabled">Qualification, e.g. Phd in Arts</option>
+                                                                                {% for phd in phds %}
+                                                                                    <option {% if education.course == phd %} selected {% endif %} value="{{ phd }}">{{ phd }}</option>
+                                                                                {% endfor %}
+                                                                            </select>
+                                                                        </div>
+                                                                     {% endif %}
+                                                                     {% if education.qualifications == 'Masters' %}
+                                                                        <div  id=""  class=" col-md-4 col-sm-12">
+                                                                            <label for="ksw">Masters</label>
+                                                                            <select name="course" class="choose-masters form-control input-lg">
+                                                                                <option selected disabled="disabled">Qualification, e.g. Masters in
+                                                                                    Arts
+                                                                                </option>
+                                                                                {% for master in masters %}
+                                                                                    <option {% if education.course == masters %} selected {% endif %} value="{{ master }}">{{ master }}</option>
+                                                                                {% endfor %}
+                                                                            </select>
+                                                                        </div>
+                                                                     {% endif %}
+                                                                     {% if education.qualifications == 'Bachelor' %}
+                                                                        <div  id=""  class=" col-md-4 col-sm-12">
+                                                                            <label for="ksw3">Bachelors</label>
+                                                                            <select id="ksw3" name="course" class="choose-bachelor form-control input-lg">
+                                                                                <option selected disabled="disabled">Qualification, e.g. Bachelor in
+                                                                                    Arts
+                                                                                </option>
+                                                                                {% for bachelor in bachelors %}
+                                                                                    <option {% if education.course == bachelor %} selected {% endif %} value="{{ bachelor }}">{{ bachelor }}</option>
+                                                                                {% endfor %}
+                                                                            </select>
+                                                                        </div>
+                                                                     {% endif %}
+                                                                     {% if education.qualifications == 'Diploma' %}
+                                                                        <div  id=""  class=" col-md-4 col-sm-12">
+                                                                            <label for="ksw9">Diploma</label>
+                                                                            <select id="ksw9" name="course" class="choose-diploma form-control input-lg">
+                                                                                <option selected disabled="disabled">Qualification, e.g. Diploma in
+                                                                                    Arts
+                                                                                </option>
+                                                                                {% for diploma in diplomas %}
+                                                                                    <option {% if education.course == diploma %} selected {% endif %} value="{{ diploma }}">{{ diploma }}</option>
+                                                                                {% endfor %}
+                                                                            </select>
+                                                                        </div>
+                                                                     {% endif %}
+                                                                     {% if education.qualifications == 'Certificate' %}
+                                                                        <div  id=""  class=" col-md-4 col-sm-12">
+                                                                            <label for="ksw5">Certificate</label>
+                                                                            <select id="ksw5" name="course" class="choose-certificate form-control input-lg">
+                                                                                <option selected disabled="disabled">Qualification, e.g. Certificate in Arts </option>
+                                                                                {% for cert in certificates %}
+                                                                                    <option {% if education.course == cert %} selected {% endif %} value="{{ cert }}">{{ cert }}</option>
+                                                                                {% endfor %}
+                                                                            </select>
+                                                                        </div>
+                                                                     {% endif %}
 
-                                            <div class="col-md-4 col-sm-4">
-                                                <div class="manage-cndt">
-                                                    <div class="cndt-status pending">Pending</div>
-                                                    <div class="cndt-caption">
-                                                        <div class="cndt-pic"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive" alt=""></div>
-                                                        <h4>Zara Clow</h4><span>UI/UX designer</span>
-                                                        <p>Our analysis team at Megriosft use end to end innovation proces</p>
-                                                    </div>{% comment %}<a href="#" title="" class="cndt-profile-btn">View Profile</a>{% endcomment %}</div>
-                                            </div>
 
-                                            <div class="col-md-4 col-sm-4">
-                                                <div class="manage-cndt">
-                                                    <div class="cndt-status pending">Pending</div>
-                                                    <div class="cndt-caption">
-                                                        <div class="cndt-pic"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive" alt=""></div>
-                                                        <h4>Henry Crooks</h4><span>PHP Developer</span>
-                                                        <p>Our analysis team at Megriosft use end to end innovation proces</p>
-                                                    </div>{% comment %}<a href="#" title="" class="cndt-profile-btn">View Profile</a>{% endcomment %}</div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-4">
-                                                <div class="manage-cndt">
-                                                    <div class="cndt-status available">Available</div>
-                                                    <div class="cndt-caption">
-                                                        <div class="cndt-pic"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive" alt=""></div>
-                                                        <h4>Joseph Macfarlan</h4><span>App Developer</span>
-                                                        <p>Our analysis team at Megriosft use end to end innovation proces</p>
-                                                    </div>{% comment %}<a href="#" title="" class="cndt-profile-btn">View Profile</a>{% endcomment %}</div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-4">
-                                                <div class="manage-cndt">
-                                                    <div class="cndt-status pending">Pending</div>
-                                                    <div class="cndt-caption">
-                                                        <div class="cndt-pic"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive" alt=""></div>
-                                                        <h4>Zane Joyner</h4><span>Html Expert</span>
-                                                        <p>Our analysis team at Megriosft use end to end innovation proces</p>
-                                                    </div>{% comment %}<a href="#" title="" class="cndt-profile-btn">View Profile</a>{% endcomment %}</div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-4">
-                                                <div class="manage-cndt">
-                                                    <div class="cndt-status pending">Pending</div>
-                                                    <div class="cndt-caption">
-                                                        <div class="cndt-pic"><img src="{% static 'assets/img/avatar/avatar1.png' %}../../static/assets/img/can-3.png" class="img-responsive" alt=""></div>
-                                                        <h4>Anna Hoysted</h4><span>UI/UX Designer</span>
-                                                        <p>Our analysis team at Megriosft use end to end innovation proces</p>
-                                                    </div>{% comment %}<a href="#" title="" class="cndt-profile-btn">View Profile</a>{% endcomment %}</div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-4">
-                                                <div class="manage-cndt">
-                                                    <div class="cndt-status available">Available</div>
-                                                    <div class="cndt-caption">
-                                                        <div class="cndt-pic"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive" alt=""></div>
-                                                        <h4>Spencer Birdseye</h4><span>SEO Expert</span>
-                                                        <p>Our analysis team at Megriosft use end to end innovation proces</p>
-                                                    </div>{% comment %}<a href="#" title="" class="cndt-profile-btn">View Profile</a>{% endcomment %}</div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-4">
-                                                <div class="manage-cndt">
-                                                    <div class="cndt-status pending">Pending</div>
-                                                    <div class="cndt-caption">
-                                                        <div class="cndt-pic"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive" alt=""></div>
-                                                        <h4>Eden Macaulay</h4><span>Web designer</span>
-                                                        <p>Our analysis team at Megriosft use end to end innovation proces</p>
+                                                                    <div id="" class="graduation col-md-12 col-sm-12">
+                                                                        <label for="edu-start">Year of graduation</label>
+{#                                                                            <span class="input-group-addon"></span>#}
+                                                                        <input value="{{ education.graduation_date|date:'d-m-Y' }}" type="text" id="edu-start" data-dd-theme="vanilla" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" class="form-control" readonly="">
+                                                                    </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
                                                     </div>
-{#                                                        <a href="#" title="" class="cndt-profile-btn">View Profile</a>#}
-                                                    </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <ul class="pagination">
-                                                <li><a href="#">«</a></li>
-                                                <li class="active"><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li><a href="#">4</a></li>
-                                                <li><a href="#"><i class="fa fa-ellipsis-h"></i></a></li>
-                                                <li><a href="#">»</a></li>
-                                            </ul>
+                                                {% endfor %}
+                                            </form>
                                         </div>
                                     </div>
                                     <!-- End Friend List -->
+
+                                    <!-- Start Friend List -->
+                                    <div id="experience" class="tab-pane fade">
+                                        <div class="row">
+                                            <form action="">
+                                                {% for experience in experiences %}
+                                                    <div class="col-md-12 col-sm-12">
+                                                    <h2 class="detail-title mrg-top-20" style="padding: 15px 5px;">Experience {{ forloop.counter }} <a class="btn-danger btn" style="float:right; border-radius: 12px; padding: 8px 12px;" href="">Delete</a></h2>
+                                                    <div class="extra-field-box">
+                                                        <div class="multi-box">
+                                                            <div class="dublicat-box">
+                                                                <div class="col-md-12 col-sm-12">
+                                                                    <div id="employer" class="employer col-md-4 col-sm-12" >
+                                                                        <label for="emplo">Company Employer Name</label>
+                                                                        <input  value="{{experience.employer_name}}" type="text" class="form-control" placeholder="Employer's Name">
+                                                                    </div>
+                                                                    <div  id="employercompany" class=" employer col-md-4 col-sm-12" >
+                                                                        <label for="emplocomp">Company Name</label>
+                                                                        <input value="{{experience.company_name}}" id="emplocomp" type="text" class="form-control" placeholder="Employer's Company">
+                                                                    </div>
+                                                                    <div  class=" employer col-md-4 col-sm-12" >
+                                                                        <label for="emplocompemail">Company email</label>
+                                                                        <input value="{{experience.comapny_email}}" id="emplocompemail" type="email" class="form-control" placeholder="Employer's email">
+                                                                    </div>
+
+                                                                    <div class="col-md-6 col-sm-12" id="employercompany"  >
+                                                                        <label for="emplocomp4n">Company Phone</label>
+                                                                        <input value="{{experience.company_phone}}" id="emplocomp4n" type="tel" class="form-control" placeholder="Employer's Phonenumber">
+                                                                    </div>
+
+                                                                    <div class="employer col-md-6 col-sm-12" >
+                                                                        <label for="kke">Position Held</label>
+                                                                        <input value="{{experience.position_held}}" id="kke" type="text" class="form-control" placeholder="Position, e.g. Web Designer">
+                                                                    </div>
+
+                                                                    <div class="employer col-md-12 col-sm-12 row">
+
+                                                                        <div class="col-md-6 col-sm-12" >
+                                                                            <label for="exp-start" class="">Date From</label>
+                                                                            <input value="{{experience.date_from|date:'d-m-Y'}}" type="text" id="exp-start" data-lang="en" data-dd-theme="vanilla" data-large-mode="true" data-min-year="1950"  data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
+
+                                                                        </div>
+
+                                                                        <div class="employer col-md-6 col-sm-12">
+                                                                            <label for="exp-end" class="">Date To</label>
+                                                                            <input value="{{experience.date_to|date:'d-m-Y'}}" type="text" id="exp-end" data-lang="en" data-dd-theme="vanilla"  data-large-mode="true" data-min-year="2017" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="employer col-md-12 col-sm-12" >
+                                                                        <label for="emplomsg">Notes on the Experience</label>
+                                                                        <textarea id="emplomsg" class="form-control textarea" placeholder="Optional notes on the experience">{{experience.experience}}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- End Friend List -->
+
+                                    <!-- Start Friend List -->
+                                    <div id="skills" class="tab-pane fade">
+                                        <div class="row">
+                                            <form action="">
+                                                {% for skill in skills %}
+                                                 <div class="col-sm-12">
+                                                   <h2 class="detail-title mrg-top-20" style="padding: 15px 5px;">Skill {{ skill.skill }} <a class="btn-danger btn" style="float:right; border-radius: 12px; padding: 8px 12px;" href="">Delete</a></h2>
+                                                   <div class="extra-field-box">
+                                                        <div class="multi-box">
+                                                            <div class="dublicat-box">
+                                                                <div class="col-md-4 col-sm-12 ">
+                                                                    <label for="skill">Skill</label>
+                                                                    <input id="skill" value="{{skill.skill}}" type="text" class="form-control" placeholder="Skills, e.g. Css, Html...">
+                                                                </div>
+                                                                <div class="col-md-4 col-sm-12 ">
+                                                                    <label for="ref">Referee Name</label>
+                                                                    <input id="ref" value="{{skill.referee}}" type="text" class="form-control" placeholder="Referee Name">
+                                                                </div>
+                                                                <div class="col-md-4 col-sm-12 ">
+                                                                    <label for="ref">Referee Phone Number</label>
+                                                                    <input id="ref" value="{{skill.referee_phonenumber}}" type="text" class="form-control" placeholder="Referee Phone Number">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                   </div>
+                                                </div>
+                                                {% endfor %}
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- End Friend List -->
+
 
 
                                     <!-- Start Settings -->
@@ -307,206 +406,29 @@
                                                         <option>Langata</option>
                                                     </select>
                                                 </div>
-
-{#                                                <div class="col-md-4 col-sm-6">#}
-{#                                                    <label>Zip / Postal</label>#}
-{#                                                    <input type="text" class="form-control" placeholder="258 457 528">#}
-{#                                                </div>#}
                                                 <div class="col-md-4 col-sm-6">
                                                     <label>LandMark</label>
                                                     <input type="text" class="form-control" placeholder="Tuskeys">
                                                 </div>
 
-{#                                                <div class="col-md-4 col-sm-6">#}
-{#                                                    <label>Address</label>#}
-{#                                                    <input type="text" class="form-control" placeholder="204 Lowes Alley">#}
-{#                                                </div>#}
-{#                                                <div class="col-md-4 col-sm-6">#}
-{#                                                    <label>Address 2</label>#}
-{#                                                    <input type="text" class="form-control" placeholder="Software Developer">#}
-{#                                                </div>#}
-{#                                                <div class="col-md-4 col-sm-6">#}
-{#                                                    <label>Organization</label>#}
-{#                                                    <input type="text" class="form-control" placeholder="Software Developer">#}
-{#                                                </div>#}
-{#                                                <div class="col-md-4 col-sm-6">#}
-{#                                                    <label>City</label>#}
-{#                                                    <input type="text" class="form-control" placeholder="Chandigarh">#}
-{#                                                </div>#}
-{#                                                <div class="col-md-4 col-sm-6">#}
-{#                                                    <label>State</label>#}
-{#                                                    <input type="text" class="form-control" placeholder="Punjab">#}
-{#                                                </div>#}
-{#                                                <div class="col-md-4 col-sm-6">#}
-{#                                                    <label>Country</label>#}
-{#                                                    <input type="text" class="form-control" placeholder="India">#}
-{#                                                </div>#}
-{#                                                <div class="col-md-4 col-sm-6">#}
-{#                                                    <label>Old Password</label>#}
-{#                                                    <input type="password" class="form-control" placeholder="*********">#}
-{#                                                </div>#}
-{#                                                <div class="col-md-4 col-sm-6">#}
-{#                                                    <label>New Password</label>#}
-{#                                                    <input type="password" class="form-control" placeholder="*********">#}
-{#                                                </div>#}
-{#                                                <div class="col-md-4 col-sm-6">#}
-{#                                                    <label>Old Password</label>#}
-{#                                                    <input type="password" class="form-control" placeholder="*********">#}
-{#                                                </div>#}
-                                                <div class="col-md-12">
-                                                    <h2 class="detail-title mrg-top-20">Education</h2>
-                                                    <div class="extra-field-box">
-                                                        <div class="multi-box">
-                                                            <div class="dublicat-box">
-                        {#                                        university ,course,regno#}
-                                                                <div class="col-md-4 col-sm-12">
 
-                                                                            <label for="kswq">Qualifications</label>
-                                                                            <select  id="kswq" class="form-control input-lg">
-                                                                                <option disabled="disabled">Qualifications</option>
-                                                                                <option selected value="Phd">Phd</option>
-                                                                                <option value="Masters">Masters</option>
-                                                                                <option value="Masters">Bachelor</option>
-                                                                                <option value="Diploma">Diploma</option>
-                                                                                <option value="Certificate">Certificate</option>
-                                                                            </select>
 
-                                                                </div>
-                                                                <div  class="col-md-4 col-sm-12 row">
-
-                                                                        <label for="ksww">University</label>
-                                                                        <select id="ksww" class="form-control input-lg">
-                                                                            <option  disabled="disabled">University</option>
-                                                                            <option selected>Nairobi</option>
-                                                                            <option >JKuat</option>
-                                                                            <option>Etc</option>
-                                                                        </select>
-
-                                                                    </div>
-                                                                    <div  id=""  class=" col-md-4 col-sm-12">
-
-                                                                            <label for="ksw">Qualifications</label>
-                                                                            <select id="ksw" class="form-control input-lg">
-                                                                                <option  disabled="disabled">Qualification, e.g. Phd in Arts</option>
-                                                                                <option selected>Phd in Arts</option>
-                                                                                <option>Phd in Arts</option>
-                                                                                <option>Phd in Arts</option>
-                                                                                <option>Phd in Arts</option>
-                                                                                <option>Phd in Arts</option>
-                                                                                <option>Phd in Arts</option>
-                                                                                <option>Etc</option>
-                                                                            </select>
-
-                                                                    </div>
-                                                                    <div id="" class="graduation col-md-12 col-sm-12">
-                                                                            <label for="edu-start">Year of graduation</label>
-{#                                                                            <span class="input-group-addon"></span>#}
-                                                                            <input type="text" id="edu-start" data-dd-theme="vanilla" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" class="form-control" readonly="">
-                                                                    </div>
-                                                            </div>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <div class="col-md-12 col-sm-12">
                                                     <label>About you</label>
                                                     <textarea rows="10" class="form-control" placeholder="Write Something">{% lorem %}</textarea>
                                                 </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <h2 class="detail-title mrg-top-20">Experience</h2>
-                                                    <div class="extra-field-box">
-                                                        <div class="multi-box">
-                                                            <div class="dublicat-box">
-                                                                <div class="col-md-12 col-sm-12">
-                                                                    <div id="employer" class="employer col-md-4 col-sm-12" >
-                                                                        <label for="emplo">Company Employer Name</label>
-                                                                        <input value="johndoe" type="text" class="form-control" placeholder="Employer's Name">
-                                                                    </div>
-                                                                    <div  id="employercompany" class=" employer col-md-4 col-sm-12" >
-                                                                        <label for="emplocomp">Company Name</label>
-                                                                        <input value="abc" id="emplocomp" type="text" class="form-control" placeholder="Employer's Company">
-                                                                    </div>
-                                                                    <div  class=" employer col-md-4 col-sm-12" >
-                                                                        <label for="emplocompemail">Company email</label>
-                                                                        <input value="abc.example.com" id="emplocompemail" type="email" class="form-control" placeholder="Employer's email">
-                                                                    </div>
+                                            </div>
 
-                                                                    <div class="col-md-6 col-sm-12" id="employercompany"  >
-                                                                        <label for="emplocomp4n">Company Phone</label>
-                                                                        <input value="0700000000" id="emplocomp4n" type="tel" class="form-control" placeholder="Employer's Phonenumber">
-                                                                    </div>
 
-                                                                    <div class="employer col-md-6 col-sm-12" >
-                                                                        <label for="kke">Position Held</label>
-                                                                        <input value="Web Designer" id="kke" type="text" class="form-control" placeholder="Position, e.g. Web Designer">
-                                                                    </div>
 
-                                                                    <div class="employer col-md-12 col-sm-12 row">
-
-                                                                        <div class="col-md-6 col-sm-12" >
-                                                                            <label for="exp-start" class="">Date From</label>
-                                                                            <input type="text" id="exp-start" data-lang="en" data-dd-theme="vanilla" data-large-mode="true" data-min-year="1950" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
-
-                                                                        </div>
-
-                                                                        <div class="employer col-md-6 col-sm-12">
-                                                                            <label for="exp-end" class="">Date To</label>
-                                                                            <input type="text" id="exp-end" data-lang="en" data-dd-theme="vanilla"  data-large-mode="true" data-min-year="2017" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="employer col-md-12 col-sm-12" >
-                                                                        <label for="emplomsg">Notes on the Experience</label>
-                                                                        <textarea id="emplomsg" class="form-control textarea" placeholder="Optional notes on the experience">{% lorem %}</textarea>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                <div class="col-sm-12 col-md-12">
+                                                    <h2 class="detail-title mrg-top-20">Social Profile</h2>
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fab fa-linkedin"></i></span>
+                                                            <input value="http:\\www.linkdin.com" type="text" class="form-control" placeholder="Linkedin Link">
                                                         </div>
                                                     </div>
-                                                </div>
-
-                                                <div class="col-sm-12">
-                                                   <h2 class="detail-title mrg-top-20">Skill</h2>
-                                                   <div class="extra-field-box">
-                                                        <div class="multi-box">
-                                                            <div class="dublicat-box">
-                                                                <div class="col-md-4 col-sm-12 ">
-                                                                    <label for="skill">Skill</label>
-                                                                    <input id="skill" value="Html" type="text" class="form-control" placeholder="Skills, e.g. Css, Html...">
-                                                                </div>
-                                                                <div class="col-md-4 col-sm-12 ">
-                                                                    <label for="ref">Referee Name</label>
-                                                                    <input id="ref" value="John Doe" type="text" class="form-control" placeholder="Referee Name">
-                                                                </div>
-                                                                <div class="col-md-4 col-sm-12 ">
-                                                                    <label for="ref">Referee Phone Number</label>
-                                                                    <input id="ref" value="070000000" type="text" class="form-control" placeholder="Referee Phone Number">
-                                                                </div>
-
-{#                                                                <div class="col-md-12 col-sm-12 " style="margin-bottom: 8px;">#}
-{#                                                                    <div class="input-group"style="margin-bottom: 0px;">#}
-{#                                                                        <label for="skillref">Referee</label>#}
-{#                                                                        <textarea class="form-control textarea" placeholder="eg JohnDoe 07*********" name="skillreference[]" id="skillref" ></textarea>#}
-                        {#											    <input type="text" class="form-control" placeholder="Skills, e.g. Css, Html...">#}
-{#                                                                    </div>#}
-{#                                                                    <small id="lastname" class="form-text text-muted">#}
-{#                                                                      Your referee eg eg JohnDoe 07********* to support your statment.#}
-{#                                                                    </small>#}
-{#                    #}
-{#                                                                </div>#}
-                                                            </div>
-                                                        </div>
-                                                   </div>
-                                                </div>
-                                                <div class="col-sm-12 col-md-12">
-                                                        <h2 class="detail-title mrg-top-20">Social Profile</h2>
-                                                        <div class="col-md-12 col-sm-12">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon"><i class="fab fa-linkedin"></i></span>
-                                                                <input value="http:\\www.linkdin.com" type="text" class="form-control" placeholder="Linkedin Link">
-                                                            </div>
-
-                                                        </div>
                                                 </div>
 
                                                 <div class="col-sm-12">
@@ -514,7 +436,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                </div>
                                     <!-- End Settings -->
                                 </div>
                                 <!-- Start All Sec -->

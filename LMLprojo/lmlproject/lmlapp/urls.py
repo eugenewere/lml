@@ -39,4 +39,8 @@ urlpatterns = [
 
     path('payment/',views.payment, name='payment'),
     path('employerdash/',views.employer_dash, name='employer_dash'),
+
+    # employeestatus
+    path('allpremiumemployees/',views.all_premium_employees, name = 'all_premium_employees'),
+    path('premiumemployeedetails/<int:customer_id>', views.premium_employee_details, name='premium_employee_detail')
 ]

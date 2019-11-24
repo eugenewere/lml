@@ -55,3 +55,11 @@ def experience_years(experience_id):
     else:
         return 0
 
+@register.filter(name='confirm_reg_payment')
+def confirm_reg_payment(request):
+    user = request.user.id
+    customer = Customer.objects.filter(user_ptr_id=user, regpayment__isnull=False).first()
+    if customer:
+        return False
+    return True
+

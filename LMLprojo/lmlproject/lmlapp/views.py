@@ -411,6 +411,20 @@ def employeeprofile(request):
     experiences = Experience.objects.filter(customer=customer)
     skills = Skills.objects.filter(customer=customer)
     social = Social_account.objects.filter(customer=customer)
+    module_dir = os.path.dirname(__file__)  # get current directory
+    file_path1 = os.path.join(module_dir, 'Bachelorcourses')
+    file_path2 = os.path.join(module_dir, 'course_certificate')
+    file_path3 = os.path.join(module_dir, 'DiplomaCourses')
+    file_path4 = os.path.join(module_dir, 'phdcourses')
+    file_path5 = os.path.join(module_dir, 'Masterscourses')
+    file_path6 = os.path.join(module_dir, 'university')
+    # file_path6 = os.path.join(module_dir, 'categories')
+    qbfile = open(file_path1, "r")
+    qbfile2 = open(file_path2, "r")
+    qbfile3 = open(file_path3, "r")
+    qbfile4 = open(file_path4, "r")
+    qbfile5 = open(file_path5, "r")
+    qbfile6 = open(file_path6, "r")
     context = {
         'title': 'Your Profile',
         'customer': customer,
@@ -418,6 +432,12 @@ def employeeprofile(request):
         'educations': educations,
         'experiences': experiences,
         'social': social,
+        'bachelors': qbfile.readlines(),
+        'certificates': qbfile2.readlines(),
+        'diplomas': qbfile3.readlines(),
+        'phds': qbfile4.readlines(),
+        'masters': qbfile5.readlines(),
+        'unis': qbfile6.readlines(),
     }
 
     return render(request, 'normal/account/candidate-profile.html', context)
@@ -588,7 +608,13 @@ def company_contact_us(request):
 
 
 def payment(request):
-    return render(request,'normal/payment/payment-method.html')
+    customer = Customer.objects.filter(user_ptr_id=request.user.id).first()
+    customer_reg = CustomerRegNo.objects.filter(customer=customer).first()
+    context = {
+        'regno':customer_reg,
+        'customer':customer,
+    }
+    return render(request,'normal/payment/payment-method.html', context)
 
 
 def employer_dash(request):
@@ -603,3 +629,31 @@ def employer_dash(request):
         'social': social,
     }
     return render(request,'normal/employer-dash/employer-dash.html', context)
+
+
+def premium_employee_details(request, customer_id):
+
+    customer = Customer.objects.filter(user_ptr_id=customer_id).first()
+    educations = Education.objects.filter(customer=customer)
+    experiences = Experience.objects.filter(customer=customer)
+    skills = Skills.objects.filter(customer=customer)
+    social = Social_account.objects.filter(customer=customer)
+    context = {
+        'customer': customer,
+        'skills': skills,
+        'educations': educations,
+        'experiences': experiences,
+        'social': social,
+    }
+
+    return render(request, 'normal/allcandidates/premium-candidate-detail.html', context)
+
+
+def all_premium_employees(request):
+    customers = Customer.objects.all()
+    context = {
+        'customers': customers,
+        'categories': Category.objects.all(),
+
+    }
+    return render(request, 'normal/allcandidates/premium-candidate.html', context)

@@ -174,7 +174,7 @@
                                 <div class="paid-candidate-inner--box">
                                     <div class="paid-candidate-box-thumb"><img src="{{customer.profile_image.url}}" class="img-responsive img-circle" alt="" /></div>
                                     <div class="paid-candidate-box-detail">
-                                        <h4 class="text-capitalize">{{request.user.first_name}} {{request.user.last_name}}</h4><span class="desination text-capitalize">{{customer.category.category}}</span></div>
+                                        <h4 class="text-capitalize">{{customer.first_name}} {{customer.last_name}}</h4><span class="desination text-capitalize">{{customer.category.category}}</span></div>
                                 </div>
                                 <div class="paid-candidate-box-extra">
                                     <ul>
@@ -187,11 +187,11 @@
                                     </ul>
                                     <p>{{customer.biography|truncatechars:67}}.</p>
                                 </div>
-                            </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
+                            </div><a href="{% url 'LML:premium_employee_detail' customer.id %}" class="btn btn-paid-candidate bt-1">View Detail</a></div>
                     </div>
                     {% endfor %}
                     <div class="col-md-12 col-sm-12">
-                        <div class="text-center"><a href="{% url 'LML:advancesearch' %}" class="btn btn-primary">Load More</a></div>
+                        <div class="text-center"><a href="{% url 'LML:all_premium_employees' %}" class="btn btn-primary">Load More</a></div>
                     </div>
                 </div>
             </div>

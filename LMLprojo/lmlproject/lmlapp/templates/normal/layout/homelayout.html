@@ -105,20 +105,46 @@
 
                                         {% if request.user|logged_in_customer %}
                                         <div class="col-menu col-md-3">
-{#												<h6 class="title">For Candidate</h6>#}
+												<h6 class="title">Payments</h6>
                                             <div class="content">
                                                 <ul class="menu-col">
-                                                    <li>#<a href="browse-jobs.html">Pricing</a></li>
-                                                    <li><a href="browse-jobs.html">View profile</a></li>
-                                                    <li>#<a href="browse-jobs.html">Messages</a></li>
-                                                    <li><a href="browse-jobs.html">Settings</a></li>
-                                                    <li>#<a href="browse-jobs.html">Subscription</a></li>
-                                                    <li>#<a href="browse-jobs.html">Dashboard</a></li>
+                                                    <li><a href="browse-jobs.html">Pricing</a></li>
+                                                    {% if request|confirm_reg_payment %}
+                                                    <li><a href="{%  url 'LML:payment' %}">Registration Payment</a></li>
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
+                                        </div><!-- end col-3 -->
+                                         <div class="col-menu col-md-3">
+												<h6 class="title">Account</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="{% url 'LML:employeeprofile' %}">Edit Account</a></li>
+                                                    <li><a href="{% url 'LML:employeeprofile' %}">View profile</a></li>
+                                                    <li><a href="">Dashboard</a></li>
+{#                                                    <li><a href="browse-jobs.html">Messages</a></li>#}
+{#                                                    <li><a href="browse-jobs.html">Settings</a></li>#}
+{#                                                    <li><a href="browse-jobs.html">Subscription</a></li>#}
+{#                                                    <li><a href="browse-jobs.html">Dashboard</a></li>#}
+{#                                                    <li><a href="browse-jobs.html">Logout</a></li>#}
+
+                                                </ul>
+                                            </div>
+                                        </div><!-- end col-3 -->
+                                            <div class="col-menu col-md-3">
+												<h6 class="title">Actions</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+{#                                                    <li><a href="browse-jobs.html">Signin</a></li>#}
+{#                                                    <li><a href="browse-jobs.html">Signup</a></li>#}
+{#                                                    <li><a href="browse-jobs.html">Subscription</a></li>#}
+{#                                                    <li><a href="browse-jobs.html">Dashboard</a></li>#}
                                                     <li><a href="browse-jobs.html">Logout</a></li>
 
                                                 </ul>
                                             </div>
                                         </div><!-- end col-3 -->
+
                                         {% endif %}
                                         {% if request.user|logged_in_company %}
                                         <div class="col-menu col-md-3">

@@ -106,6 +106,7 @@ class Customer(get_user_model()):
 
         return list(set(skills))
 
+    @property
     def skillcount(self):
         skill =  Skills.objects.filter(customer=self).count()
         if skill > 3:
@@ -113,6 +114,14 @@ class Customer(get_user_model()):
             return my_skill
         else:
             return False
+    @property
+    def customer_age(self):
+        today = datetime.date.today().year
+        birth = self.date_of_birth.year
+        if birth:
+            return int(today - birth)
+        else:
+            return 0
 
 
 
