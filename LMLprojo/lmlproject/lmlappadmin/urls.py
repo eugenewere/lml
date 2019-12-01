@@ -9,5 +9,6 @@ urlpatterns = [
     path('messages/company/',views.company_messages, name='C_messages'),
     path('allemployees/',views.employees, name='employees'),
     path('allcompanies/',views.companies, name='companies'),
+    path('companyPricing/',views.companyPricing, name='companyPricing'),
     path('allcategories/',views.categories, name='categories'),
 ]

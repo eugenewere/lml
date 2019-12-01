@@ -81,7 +81,7 @@
                             </ul>
                         {% endif %}
                     </div>
-                    <a href="#" class="btn btn-success">Shortlist</a>
+                    <a onclick="shortlist(this);" data-employer="{{ request.user.id }}" id="{{ customer.id }}" href="javascript:void(0);" class="btn btn-success">Shortlist</a>
                 </div>
 
                 <!-- Similar Jobs -->
@@ -183,7 +183,7 @@
 
                         </div>
                     </div>
-                    <a href="#" class="btn btn-sidebar bt-1 bg-success">Shortlist</a>
+                    <a onclick="shortlist(this);" data-employer="{{ request.user.id }}" id="{{ customer.id }}" href="javascript:void(0);" class="btn btn-sidebar bt-1 bg-success">Shortlist</a>
                 </div>
 
 {#                <!-- Website & Portfolio -->#}

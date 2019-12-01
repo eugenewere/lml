@@ -14,5 +14,9 @@
         </introspection-scope>
       </schema-mapping>
     </data-source>
+    <data-source name="Django default" uuid="56212ab6-9456-487d-b55e-bcb408cf6e5d">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="SQLITE" exact-version="0" />
+      <schema-mapping />
+    </data-source>
   </component>
 </project>

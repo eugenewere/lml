@@ -36,11 +36,18 @@ urlpatterns = [
     path('FAQ/', views.frequentaskedquestions, name="frequentaskedquestions"),
 
     path('companycontactus/',views.company_contact_us, name='company_contact_us'),
+    path('homecontactus/<str:source>',views.home_contact_us, name='home_contact_us'),
 
     path('payment/',views.payment, name='payment'),
+    path('companypayment/',views.companypayment, name='companypayment'),
+    path('companypaymentpackage/<int:pricing_id>',views.companypaymentpackage, name='companypaymentpackage'),
     path('employerdash/',views.employer_dash, name='employer_dash'),
 
     # employeestatus
     path('allpremiumemployees/',views.all_premium_employees, name = 'all_premium_employees'),
-    path('premiumemployeedetails/<int:customer_id>', views.premium_employee_details, name='premium_employee_detail')
+    path('allemployees/',views.all_employees, name = 'all_employees'),
+    path('premiumemployeedetails/<int:customer_id>', views.premium_employee_details, name='premium_employee_detail'),
+
+    path('shortlist/', views.shortlistcustomers, name='shortlistemployees'),
+
 ]

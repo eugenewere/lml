@@ -5,6 +5,9 @@ from datetime import datetime
 import datetime
 
 # # Create your models here.
+from django.db.models import Count
+
+
 class County(models.Model):
     county_number = models.IntegerField(null=False,blank=False)
     county = models.CharField(max_length=200,null=False,blank=False)
@@ -34,6 +37,23 @@ class Category(models.Model):
     def __str__(self):
         return '%s' % (self.category)
 
+    def topcategories(self):
+        customers = Customer.objects.filter(category=self)
+        categories = []
+        category =  self
+
+        for customer in customers:
+            categories.append(customer.customer_categories)
+
+        return list(set(categories))
+
+    # @property
+    # def customer_categories(self):
+    #     category = Customer.objects.filter(category=self).annotate(itemcount=Count('id')).order_by('-itemcount')
+    #     return category.category.category
+
+
+
 class CustomerPayments(models.Model):
     amount = models.FloatField()
     recipt_no = models.CharField(max_length=200, null=False, blank=False)
@@ -50,14 +70,13 @@ class CustomerPayments(models.Model):
         return '%s' % (self.amount)
 
 class Customer(get_user_model()):
-    profile_image = models.ImageField(max_length=200, upload_to='customerImages', null=False, blank=False)
+    profile_image = models.ImageField(max_length=200, upload_to='customerImages', null=True, blank=True)
     regpayment = models.ForeignKey(CustomerPayments, on_delete=models.CASCADE, null=True, blank=True)
     country = models.CharField(max_length=100,null=False, blank=False)
     county = models.ForeignKey(County, on_delete=models.CASCADE, null=False, blank=False)
     region = models.ForeignKey(Region, on_delete=models.CASCADE, null=False, blank=False)
     gender = models.CharField(max_length=100,null=False, blank=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, max_length=200, null=False, blank=False)
-    # skils =  models.CharField(max_length=100,null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     date_of_birth = models.DateField(default=datetime.datetime.now)
     landmark = models.CharField(max_length=100,null=True, blank=True)
@@ -78,12 +97,12 @@ class Customer(get_user_model()):
     }
     status = models.CharField(choices=PERSONNEL_STATUS, default='NEWBIE', max_length=200, null=False, blank=False)
     RANK_STATUS = {
-        ('ORDINARY', 'Ordinary'),
+        ('BASIC', 'Basic'),
         ('PREMIUM', 'Premium'),
         ('ULTIMATE', 'Ultimate'),
 
     }
-    rank_status = models.CharField(choices=RANK_STATUS, default='UNDEFINED', max_length=200, null=False, blank=False)
+    rank_status = models.CharField(choices=RANK_STATUS, default='BASIC', max_length=200, null=False, blank=False)
     DISABILITY_STATUS=[
         ('DISABLED','Disabled'),
         ('NOT_DISABLED','Not_Disabled')
@@ -96,6 +115,9 @@ class Customer(get_user_model()):
     class Meta:
         verbose_name = 'Customer'
         verbose_name_plural = 'Customers'
+
+
+
 
     @property
     def skillset(self):
@@ -175,9 +197,22 @@ class Social_account(models.Model):
     def __str__(self):
         return '%s %s' % (self.customer.first_name, self.account_url)
 
+class CompanyRegistrationPayment(models.Model):
+    recipt_no = models.CharField(max_length=200, null=False, blank=False)
+    amount = models.CharField(max_length=200, null=False, blank=False)
+    PAYMENT_STATUS = {
+        ('UNPAYED', 'Unpayed'),
+        ('PAYED', 'Payed'),
+    }
+    payment_status = models.CharField(max_length=200, choices=PAYMENT_STATUS, default='UNPAYED', null=False, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return '%s' % (self.recipt_no)
 
 class Company(get_user_model()):
     logo = models.ImageField(max_length=200, upload_to='employerlogo', null=True, blank=True)
+    regpayment = models.ForeignKey(CompanyRegistrationPayment, on_delete=models.CASCADE, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, max_length=200, null=False, blank=False)
     company_name = models.CharField(max_length=200, null=False, blank=False)
     county = models.CharField(max_length=100,null=False, blank=False)
@@ -234,19 +269,7 @@ class CompanyRegNo(models.Model):
 
 
 
-class CompanyRegistrationPayment(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    recipt_no = models.CharField(max_length=200, null=False, blank=False)
-    amount = models.CharField(max_length=200, null=False, blank=False)
-    PAYMENT_STATUS = {
-        ('UNPAYED', 'Unpayed'),
-        ('PAYED', 'Payed'),
-    }
-    payment_status = models.CharField(max_length=200, choices=PAYMENT_STATUS, default='UNPAYED', null=False, blank=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    def __str__(self):
-        return '%s' % (self.company.company_name)
+
 
 class CompanyStatusPayment(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
@@ -263,6 +286,19 @@ class CompanyStatusPayment(models.Model):
 
     def __str__(self):
         return '%s' % (self.company.company_name)
+
+
+class CompanyShortlistCustomers(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '%s' % (self.company.company_name)
+
+
+
 
 
 
@@ -343,6 +379,18 @@ class ContactUsCompany(models.Model):
     def _str__(self):
         return '%s (%s) ' % (self.company.company_name, (self.message))
 
+class ContactUsHome(models.Model):
+
+    name = models.CharField(max_length=200,null=False,blank=False)
+    email = models.CharField(max_length=200,null=False,blank=False)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    def _str__(self):
+        return '%s (%s) ' % (self.name, (self.message))
+
 class ContactUsEmployee(models.Model):
     company = models.ForeignKey(Company,on_delete=models.CASCADE)
     name = models.CharField(max_length=200,null=False,blank=False)
@@ -353,8 +401,12 @@ class ContactUsEmployee(models.Model):
 
 
     def _str__(self):
-        return '%s (%s) ' % (self.company.company_name, (self.message))
+        return '%s (%s) ' %(self.company.company_name, (self.message))
 
 class CompanyPricingPlan(models.Model):
-    plan = models.CharField(max_length=200,null=False,blank=False)
-    price = models.CharField(max_length=200,null=False,blank=False)
+    title = models.CharField(max_length=200,null=False,blank=False)
+    price = models.IntegerField(null=False, blank=False)
+    description = models.TextField()
+
+    def _str__(self):
+        return '%s  ' %(self.title)

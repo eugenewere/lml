@@ -7,14 +7,14 @@ import json
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.http import HttpResponse
-from django.shortcuts import render, redirect,HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render, redirect, HttpResponseRedirect, render_to_response
 import os
 # import datetime from datetime
 from datetime import datetime
 import sweetify
 from django.utils.crypto import get_random_string
-
+# from rest_framework.response import Response
 from lmlapp.forms import *
 from .models import *
 import base64
@@ -33,29 +33,27 @@ from django.forms import modelformset_factory
 import json
 
 def home(request):
-    customers = Customer.objects.all()
+    customers = Customer.objects.order_by('-created_at')[:6]
+    all_customers = Customer.objects.all()
     context = {
         'customers':customers,
+        'all_customers':all_customers,
         'title': 'home',
         'counties': County.objects.all(),
         'categories':Category.objects.all(),
+        'regions':Region.objects.all(),
     }
     return render(request, 'normal/home/index.html', context)
 
 
 def signup(request):
 
-    if request.method=='POST':
+    if  request.is_ajax() and request.method=='POST' :
         qualifications = request.POST.getlist('qualifications')
         schools = request.POST.getlist('school')
         courses = request.POST.getlist('course')
         graduation_dates = request.POST.getlist('graduation_date')
         regnos = request.POST.getlist('reg_number')
-        print(qualifications)
-        print(schools)
-        print(courses)
-        print(graduation_dates)
-        print(regnos)
 
         employer_names = request.POST.getlist('employer_name')
         company_names = request.POST.getlist('company_name')
@@ -75,7 +73,7 @@ def signup(request):
 
 
         form = PersonelRegisterForm(request.POST, request.FILES)
-        # print(form)
+        print(form)
         if form.is_valid():
             new_user= form.save()
             CustomerRegNo.objects.create(
@@ -118,60 +116,44 @@ def signup(request):
                     date_to=date_to,
                     experience=experience,
                 )
-
-
-
-
-            sweetify.success(request, 'You did it', text='Good job! You successfully Registered, just login', persistent='Continue')
+            if ('Phd' in qualifications) and ('Masters' in qualifications) and ('Degree' in qualifications):
+                status='ULTIMATE'
+                Customer.objects.filter(user_ptr_id=new_user.id).update(
+                    rank_status=status,
+                )
+            elif('Masters' in qualifications) and ('Degree' in qualifications) and not ('Phd' in qualifications):
+                status = 'PREMIUM'
+                Customer.objects.filter(user_ptr_id=new_user.id).update(
+                    rank_status=status,
+                )
+            elif ('Certificate' in qualifications) and ('Degree' in qualifications) and ('Diploma' in qualifications):
+                status = 'BASIC'
+                Customer.objects.filter(user_ptr_id=new_user.id).update(
+                    rank_status=status,
+                )
+            else:
+                status = 'BASIC'
+                Customer.objects.filter(user_ptr_id=new_user.id).update(
+                    rank_status=status,
+                )
+            # sweetify.success(request, 'You did it', text='Good job! You successfully Registered, just login', persistent='Continue')
+            data = {
+                'results': 'success',
+                'success': 'Good job! You successfully Registered, just login'
+            }
+            return JsonResponse(data, safe=False)
 
         else:
             form1 = PersonelRegisterForm(request.POST,request.FILES)
-            Skill_formset = modelformset_factory(Skills, fields=['skill', 'customer', 'referee_phonenumber', 'referee', ])
-            Qualification_formset = modelformset_factory(Education, fields=['qualifications', 'school', 'course', 'graduation_date', 'reg_number'])
-            Experience_formset = modelformset_factory(Experience, fields=['employer_name', 'company_name', 'company_phone', 'customer', 'comapny_email', 'experience', 'date_to', 'date_from', 'position_held'])
-
-            skillform = Skill_formset(request.POST)
-            qualiForm = Qualification_formset(request.POST)
-            exeriencForm = Experience_formset(request.POST)
-
-            module_dir = os.path.dirname(__file__)  # get current directory
-            file_path1 = os.path.join(module_dir, 'Bachelorcourses')
-            file_path2 = os.path.join(module_dir, 'course_certificate')
-            file_path3 = os.path.join(module_dir, 'DiplomaCourses')
-            file_path4 = os.path.join(module_dir, 'phdcourses')
-            file_path5 = os.path.join(module_dir, 'Masterscourses')
-            file_path6 = os.path.join(module_dir, 'university')
-            # file_path6 = os.path.join(module_dir, 'categories')
-            qbfile = open(file_path1, "r")
-            qbfile2 = open(file_path2, "r")
-            qbfile3 = open(file_path3, "r")
-            qbfile4 = open(file_path4, "r")
-            qbfile5 = open(file_path5, "r")
-            qbfile6 = open(file_path6, "r")
-
-            contexty = {
-                'title': 'Create an account',
-                'bachelors': qbfile.readlines(),
-                'certificates': qbfile2.readlines(),
-                'diplomas': qbfile3.readlines(),
-                'phds': qbfile4.readlines(),
-                'masters': qbfile5.readlines(),
-                'unis': qbfile6.readlines(),
-                'counties': County.objects.all(),
-                'regions': Region.objects.all(),
-                'categories': Category.objects.all(),
-                'form': form1,
-                'skillf':skillform,
-                'e':exeriencForm,
-                'ed':qualiForm,
-                # 'universities':qbfile6.readlines(),
-
+            #
+            data = {
+                'results':'error',
+                'form':form1,
             }
-
-
-
-            sweetify.error(request, 'Error', text='Error Registering your account', persistent='Retry')
-            return render(request, 'normal/signup/signup.html',contexty)
+            # sweetify.error(request, 'Error', text='Error Registering your account', persistent='Retry')
+            # lst=list(data)
+            print(data)
+            return JsonResponse(data, safe=False)
 
 
 
@@ -205,20 +187,13 @@ def signup(request):
         'counties':County.objects.all(),
         'regions':Region.objects.all(),
         'categories':Category.objects.all(),
-
-        # 'universities':qbfile6.readlines(),
-
-
-
-
     }
-    return render(request, 'normal/signup/signup.html',context)
+    return render(request,'normal/signup/signup.html',context)
 
 def company_signupform_handling(request):
 
 
-
-        return redirect('LML:companysignup' )
+    return redirect('LML:companysignup' )
         # return redirect('LML:companysignup')
 
 def update_employers_profile(request):
@@ -485,10 +460,10 @@ def companysignup(request):
             )
             CompanyRegNo.objects.create(
                 company=new_user,
-                company_reg_no=('CMP'+get_random_string(length=4, allowed_chars='ABDEFGHIJKLNPQRSTUVWXYZ123456789')),
+                company_reg_no=('CMP'+get_random_string(length=8, allowed_chars='ABDEFGHIJKLNPQRSTUVWXYZ123456789')),
             )
             sweetify.success(request, 'You did it', text='Good job! You successfully registered', persistent='Ok')
-            return redirect('LML:payment')
+            return redirect('LML:companypayment')
         else:
             # formr = CompanyRegisterForm()
             # print(formr.errors)
@@ -529,9 +504,32 @@ def companysignup(request):
 
 
 def advancesearch(request):
+    # customers = Customer.objects.order_by('?')
+    from datetime import datetime
+    todayy = datetime.today()
+    yr = todayy.year
+    if request.method == 'POST':
+        cat = request.POST.get('category')
+        cou = request.POST.get('county')
+        reg = request.POST.get('region')
+        # exp = request.POST.get('experience')
+        # qual = request.POST.get('qualification')
+        # jt = request.POST.get('job_type')
+
+        category = Category.objects.filter(id=cat).first()
+        county = County.objects.filter(id=cou).first()
+        region = Region.objects.filter(id=reg).first()
+
+        customers = Customer.objects.filter(category=category, county=county, region=region)
+        print(customers)
+    else:
+        customers = Customer.objects.order_by('?')
     context={
         'title':"Advance search",
         'categories': Category.objects.all(),
+        "customers": customers,
+        'counties': County.objects.all(),
+        "regions":Region.objects.all(),
     }
     return render(request, 'normal/advancedsearch/advancedsearch.html', context)
 
@@ -541,6 +539,7 @@ def advancesearch(request):
 def companypricing(request):
     context={
         'title':'Company Pricing',
+        'pricing':CompanyPricingPlan.objects.order_by('price')
     }
     return render(request,'normal/companypricing/companypricing.html', context)
 
@@ -606,6 +605,25 @@ def company_contact_us(request):
         sweetify.success(request, 'Error', text='Message not sent', persistent='Ok')
     return redirect('LML:employerdetails')
 
+def home_contact_us(request, source):
+
+    name = request.POST['name']
+    email = request.POST['email']
+    message = request.POST['message']
+    if request.method =='POST':
+        ContactUsHome.objects.create(
+            name=name,
+            email=email,
+            message=message,
+        )
+        sweetify.success(request, 'Success', text='Message sent', persistent='Ok')
+        source = source.replace('____', '/')
+        return redirect(source)
+    else:
+        sweetify.success(request, 'Error', text='Message not sent', persistent='Ok')
+        source = source.replace('____', '/')
+    return redirect(source)
+
 
 def payment(request):
     customer = Customer.objects.filter(user_ptr_id=request.user.id).first()
@@ -616,17 +634,34 @@ def payment(request):
     }
     return render(request,'normal/payment/payment-method.html', context)
 
+def companypayment(request):
+    company = Company.objects.filter(user_ptr_id=request.user.id).first()
+    customer_reg = CompanyRegNo.objects.filter(company=company).first()
+    # CompanyRegNo
+    context = {
+        'regno':customer_reg,
+        'customer':company,
+    }
+    return render(request,'normal/payment/companympesapayment.html', context)
+
+def companypaymentpackage(request, pricing_id):
+    pricing = CompanyPricingPlan.objects.filter(id=pricing_id).first()
+    # CompanyRegNo
+    context = {
+        'pricing':pricing,
+    }
+    return render(request,'normal/companypricing/subscribetoplan.html', context)
+
 
 def employer_dash(request):
     user = request.user
     company = Company.objects.filter(id=user.id).first()
     social = CompanySocialAccount.objects.filter(company=company.id).first()
-    # start_yr = Company.objects.filter(id=user.id).first()
-    # current_year = datetime.now().year
-    # print(current_year)
+    customers = CompanyShortlistCustomers.objects.filter(company=company)
     context={
         'company': company,
         'social': social,
+        'customers':customers,
     }
     return render(request,'normal/employer-dash/employer-dash.html', context)
 
@@ -650,10 +685,76 @@ def premium_employee_details(request, customer_id):
 
 
 def all_premium_employees(request):
-    customers = Customer.objects.all()
+
+    if request.method == 'POST':
+        county = request.POST['county']
+        region = request.POST['region']
+        category = request.POST['category']
+        cat = Category.objects.filter(id=int(category)).first()
+        reg =Region.objects.filter(id=int(region)).first()
+        count = County.objects.filter(id=int(county)).first()
+        customers = Customer.objects.filter(category=cat, region=reg, county=count)
+    else:
+        customers = Customer.objects.order_by('?')
+
     context = {
         'customers': customers,
+        'counties': County.objects.all(),
+        'regions':Region.objects.all(),
         'categories': Category.objects.all(),
 
     }
     return render(request, 'normal/allcandidates/premium-candidate.html', context)
+
+
+def shortlistcustomers(request):
+
+    if request.method == 'POST':
+        customer= request.POST['customer_id']
+        company= request.POST['company_id']
+
+        customer_user = Customer.objects.filter(user_ptr_id=customer).first()
+        company_user = Company.objects.filter(user_ptr_id=company).first()
+        if not CompanyShortlistCustomers.objects.filter(customer=customer, company=company).exists():
+            CompanyShortlistCustomers.objects.create(
+                customer=customer_user,
+                company=company_user,
+            )
+            data = {
+                'shortlisted': 'Successfully shortlisted',
+            }
+            if data['shortlisted']:
+                data['success_message'] ='Successfully Shortlisted'
+
+        else:
+            data = {
+                'is_shortlisted': 'You have already shortlisted this user',
+            }
+            if data['is_shortlisted']:
+                data['error_message'] = 'You have already shortlisted this user'
+
+
+
+        return JsonResponse(data)
+
+
+def all_employees(request):
+    if request.method == 'POST':
+        county = request.POST['county']
+        region = request.POST['region']
+        category = request.POST['category']
+        cat = Category.objects.filter(id=int(category)).first()
+        reg =Region.objects.filter(id=int(region)).first()
+        count = County.objects.filter(id=int(county)).first()
+        customers = Customer.objects.filter(category=cat, region=reg, county=count)
+    else:
+        customers = Customer.objects.order_by('?')
+
+    context = {
+        'customers': customers,
+        'counties': County.objects.all(),
+        'regions':Region.objects.all(),
+        'categories': Category.objects.all(),
+
+    }
+    return render(request, 'normal/allcandidates/all-candidates.html', context)

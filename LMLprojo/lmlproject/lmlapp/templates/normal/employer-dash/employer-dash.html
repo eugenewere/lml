@@ -1,6 +1,6 @@
 {% extends 'normal/layout/homelayout.html' %}
 {% load static %}
-{% load call_method %}
+{% load call_methods %}
 {% block links %}
 
 {% endblock links %}
@@ -43,7 +43,7 @@
             <div class="col-md-4 bl-1 br-gary">
                 <div class="right-side-detail">
                     <ul>
-                        <li><span class="detail-info">Experience</span>{{request|today|date:'Y' - c }} Year</li>
+                        <li><span class="detail-info">Experience</span>{{ company.id|company_experience_years }} </li>
                     </ul>
                     <ul class="social-info">
                         {% if social.facebook %}
@@ -85,7 +85,7 @@
                                 <li><a href="">
 
                                     All Candidate
-                                    <span class="pull-right">0</span></a>
+                                    <span class="pull-right">{{customers.count}}</span></a>
                                 </li>
                                 <li><a href="">
 
@@ -170,282 +170,51 @@
                     <div class="card-body">
                         <article class="advance-search-job">
                             <div class="row no-mrg">
-                                 <div class="col-md-4 col-sm-6">
-                                      <div class="paid-candidate-container">
-                                    <div class="paid-candidate-box">
-                                        <div class="dropdown">
-                                            <div class="btn-group fl-right">
-                                                <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                                <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+                                 {% for customer in customers %}
+                                    <div class="col-md-4 col-sm-6">
+                                    <div class="paid-candidate-container">
+                                        <div class="paid-candidate-box">
+                                            <div class="dropdown">
+                                                <div class="btn-group fl-right">
+                                                    {% if request.user|logged_in_company %}
+                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                        <div class="dropdown-menu pull-right animated flipInX">
+                                                            {% csrf_token %}
+                                                            {% if request|shortlisted:customer.customer.id %}
+                                                               <a onclick="shortlist(this);" data-employer="{{ request.user.id }}" id="{{ customer.customer.id }}" href="javascript:void(0)">Shortlist</a>
+                                                            {% else %}
+                                                               <a onclick="shortlistmessage();" href="javascript:void(0)">Shortlisted</a>
+                                                            {% endif %}
+                                                            <a onclick="" id="{{ customer.id }}" href="#">Send Message</a>
+                {#                                            <a href="#">Dislike</a>#}
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="paid-candidate-inner--box">
+                                                <div class="paid-candidate-box-thumb"><img src="{{customer.customer.profile_image.url}}" class="img-responsive img-circle" alt="" /></div>
+                                                <div class="paid-candidate-box-detail">
+                                                    <h4 class="text-capitalize">{{customer.customer.first_name}} {{customer.customer.last_name}}</h4>
+                                                    <span class="desination text-capitalize">{{customer.customer.category.category}}</span></div>
+                                            </div>
+                                            <div class="paid-candidate-box-extra">
+                                                <ul>
+                                                    {% for skill in customer.customer.skillset %}
+                                                    <li>{{skill.skill}}</li>
+                                                    {% endfor %}
+                                                    {% if customer.skillcount %}
+                                                        <li class="more-skill bg-primary">+{{customer.customer.skillcount}}</li>
+                                                    {% endif %}
+                                                </ul>
+                                                <p>{{customer.customer.biography|truncatechars:67}}.</p>
                                             </div>
                                         </div>
-                                        <div class="paid-candidate-inner--box">
-                                            <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                            <div class="paid-candidate-box-detail">
-                                                <h4>Agustin L. Smith</h4><span class="desination">App Designer</span></div>
-                                        </div>
-                                        <div class="paid-candidate-box-extra">
-                                            <ul>
-                                                <li>Php</li>
-                                                <li>Android</li>
-                                                <li>Html</li>
-                                                <li class="more-skill bg-primary">+3</li>
-                                            </ul>
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                        </div>
-                                    </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                                 </div>
-                                 <div class="col-md-4 col-sm-6">
-                                      <div class="paid-candidate-container">
-                                    <div class="paid-candidate-box">
-                                        <div class="dropdown">
-                                            <div class="btn-group fl-right">
-                                                <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                                <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="paid-candidate-inner--box">
-                                            <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                            <div class="paid-candidate-box-detail">
-                                                <h4>Agustin L. Smith</h4><span class="desination">App Designer</span></div>
-                                        </div>
-                                        <div class="paid-candidate-box-extra">
-                                            <ul>
-                                                <li>Php</li>
-                                                <li>Android</li>
-                                                <li>Html</li>
-                                                <li class="more-skill bg-primary">+3</li>
-                                            </ul>
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                        </div>
-                                    </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                                 </div>
-                                 <div class="col-md-4 col-sm-6">
-                                      <div class="paid-candidate-container">
-                                    <div class="paid-candidate-box">
-                                        <div class="dropdown">
-                                            <div class="btn-group fl-right">
-                                                <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                                <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="paid-candidate-inner--box">
-                                            <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                            <div class="paid-candidate-box-detail">
-                                                <h4>Agustin L. Smith</h4><span class="desination">App Designer</span></div>
-                                        </div>
-                                        <div class="paid-candidate-box-extra">
-                                            <ul>
-                                                <li>Php</li>
-                                                <li>Android</li>
-                                                <li>Html</li>
-                                                <li class="more-skill bg-primary">+3</li>
-                                            </ul>
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                        </div>
-                                    </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                                 </div>
-                                 <div class="col-md-4 col-sm-6">
-                                      <div class="paid-candidate-container">
-                                    <div class="paid-candidate-box">
-                                        <div class="dropdown">
-                                            <div class="btn-group fl-right">
-                                                <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                                <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="paid-candidate-inner--box">
-                                            <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                            <div class="paid-candidate-box-detail">
-                                                <h4>Agustin L. Smith</h4><span class="desination">App Designer</span></div>
-                                        </div>
-                                        <div class="paid-candidate-box-extra">
-                                            <ul>
-                                                <li>Php</li>
-                                                <li>Android</li>
-                                                <li>Html</li>
-                                                <li class="more-skill bg-primary">+3</li>
-                                            </ul>
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                        </div>
-                                    </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                                 </div>
-                                 <div class="col-md-4 col-sm-6">
-                                      <div class="paid-candidate-container">
-                                    <div class="paid-candidate-box">
-                                        <div class="dropdown">
-                                            <div class="btn-group fl-right">
-                                                <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                                <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="paid-candidate-inner--box">
-                                            <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                            <div class="paid-candidate-box-detail">
-                                                <h4>Agustin L. Smith</h4><span class="desination">App Designer</span></div>
-                                        </div>
-                                        <div class="paid-candidate-box-extra">
-                                            <ul>
-                                                <li>Php</li>
-                                                <li>Android</li>
-                                                <li>Html</li>
-                                                <li class="more-skill bg-primary">+3</li>
-                                            </ul>
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                        </div>
-                                    </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                                 </div>
-                                 <div class="col-md-4 col-sm-6">
-                                      <div class="paid-candidate-container">
-                                    <div class="paid-candidate-box">
-                                        <div class="dropdown">
-                                            <div class="btn-group fl-right">
-                                                <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                                <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="paid-candidate-inner--box">
-                                            <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                            <div class="paid-candidate-box-detail">
-                                                <h4>Agustin L. Smith</h4><span class="desination">App Designer</span></div>
-                                        </div>
-                                        <div class="paid-candidate-box-extra">
-                                            <ul>
-                                                <li>Php</li>
-                                                <li>Android</li>
-                                                <li>Html</li>
-                                                <li class="more-skill bg-primary">+3</li>
-                                            </ul>
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                        </div>
-                                    </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                                 </div>
-                                 <div class="col-md-4 col-sm-6">
-                                      <div class="paid-candidate-container">
-                                    <div class="paid-candidate-box">
-                                        <div class="dropdown">
-                                            <div class="btn-group fl-right">
-                                                <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                                <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="paid-candidate-inner--box">
-                                            <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                            <div class="paid-candidate-box-detail">
-                                                <h4>Agustin L. Smith</h4><span class="desination">App Designer</span></div>
-                                        </div>
-                                        <div class="paid-candidate-box-extra">
-                                            <ul>
-                                                <li>Php</li>
-                                                <li>Android</li>
-                                                <li>Html</li>
-                                                <li class="more-skill bg-primary">+3</li>
-                                            </ul>
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                        </div>
-                                    </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                                 </div>
-                                 <div class="col-md-4 col-sm-6">
-                                      <div class="paid-candidate-container">
-                                    <div class="paid-candidate-box">
-                                        <div class="dropdown">
-                                            <div class="btn-group fl-right">
-                                                <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                                <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="paid-candidate-inner--box">
-                                            <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                            <div class="paid-candidate-box-detail">
-                                                <h4>Agustin L. Smith</h4><span class="desination">App Designer</span></div>
-                                        </div>
-                                        <div class="paid-candidate-box-extra">
-                                            <ul>
-                                                <li>Php</li>
-                                                <li>Android</li>
-                                                <li>Html</li>
-                                                <li class="more-skill bg-primary">+3</li>
-                                            </ul>
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                        </div>
-                                    </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                                 </div>
-                                 <div class="col-md-4 col-sm-6">
-                                      <div class="paid-candidate-container">
-                                    <div class="paid-candidate-box">
-                                        <div class="dropdown">
-                                            <div class="btn-group fl-right">
-                                                <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                                <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="paid-candidate-inner--box">
-                                            <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                            <div class="paid-candidate-box-detail">
-                                                <h4>Agustin L. Smith</h4><span class="desination">App Designer</span></div>
-                                        </div>
-                                        <div class="paid-candidate-box-extra">
-                                            <ul>
-                                                <li>Php</li>
-                                                <li>Android</li>
-                                                <li>Html</li>
-                                                <li class="more-skill bg-primary">+3</li>
-                                            </ul>
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                        </div>
-                                    </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                                 </div>
-                                 <div class="col-md-4 col-sm-6">
-                                      <div class="paid-candidate-container">
-                                    <div class="paid-candidate-box">
-                                        <div class="dropdown">
-                                            <div class="btn-group fl-right">
-                                                <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                                <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="paid-candidate-inner--box">
-                                            <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                            <div class="paid-candidate-box-detail">
-                                                <h4>Agustin L. Smith</h4><span class="desination">App Designer</span></div>
-                                        </div>
-                                        <div class="paid-candidate-box-extra">
-                                            <ul>
-                                                <li>Php</li>
-                                                <li>Android</li>
-                                                <li>Html</li>
-                                                <li class="more-skill bg-primary">+3</li>
-                                            </ul>
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                        </div>
-                                    </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                                 </div>
-                                 <div class="col-md-4 col-sm-6">
-                                      <div class="paid-candidate-container">
-                                    <div class="paid-candidate-box">
-                                        <div class="dropdown">
-                                            <div class="btn-group fl-right">
-                                                <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                                <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="paid-candidate-inner--box">
-                                            <div class="paid-candidate-box-thumb"><img src="{% static 'assets/img/avatar/avatar1.png' %}" class="img-responsive img-circle" alt="" /></div>
-                                            <div class="paid-candidate-box-detail">
-                                                <h4>Agustin L. Smith</h4><span class="desination">App Designer</span></div>
-                                        </div>
-                                        <div class="paid-candidate-box-extra">
-                                            <ul>
-                                                <li>Php</li>
-                                                <li>Android</li>
-                                                <li>Html</li>
-                                                <li class="more-skill bg-primary">+3</li>
-                                            </ul>
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-                                        </div>
-                                    </div><a href="premium-candidate-detail.html" class="btn btn-paid-candidate bt-1">View Detail</a></div>
-                                 </div>
-
+                                        {% if request.user|logged_in_company %}
+                                            <a href="{% url 'LML:premium_employee_detail' customer.customer.id %}" class="btn btn-paid-candidate bt-1">View Detail</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endfor %}
                             </div>
                         </article>
 

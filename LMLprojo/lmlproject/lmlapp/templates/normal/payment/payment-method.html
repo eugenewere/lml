@@ -8,7 +8,7 @@
         <!-- Title Header Start -->
         <section  class="inner-header-title" style="background-image:url({% static 'assets/img/blog/banner-19.jpg' %});">
             <div class="container">
-                <h2 class=" " style="color: white;">Payment</h2>
+                <h3 class=" " style="color: white;">Kindly complete payment to proceed</h3>
             </div>
         </section>
         <div class="clearfix"></div>
@@ -18,7 +18,38 @@
         <section class="accordion">
             <div class="container">
                 <div class="row">
+                    <!-- Payment Detail -->
+                    <div class="col-md-6 col-sm-6">
+                        <div class="sidebar-wrapper">
 
+                        <div class="sidebar-box-header bb-1">
+                            <h4>Account Number</h4>
+                        </div>
+
+                        <form class="billing-form">
+                            <div class="row">
+                                <div class="pr-header active" style="display: flex; flex-direction: column; justify-content: center;align-items: center; margin-bottom: 15px;">
+                                    <div class="pr-plan">
+                                        <h4>Use this as your account payment:</h4>
+                                    </div>
+                                    <div class="pr-price">
+                                        <h3 style="font-size: 3.4em;"><sup>Account Number.</sup>{{regno.personel_reg_no}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="pr-header " style="display: flex; flex-direction: column; justify-content: center;align-items: center; margin-bottom: 15px;">
+                                    <div class="pr-plan">
+                                        <h4>Registration Amount</h4>
+                                    </div>
+                                    <div class="pr-price">
+                                        <h3><sup>ksh.</sup>500</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
                     <!-- Billing Address -->
                     <div class="col-md-6 col-sm-6">
                         <div class="sidebar-wrapper">
@@ -47,40 +78,6 @@
 
                         </div>
                     </div>
-
-                    <!-- Payment Detail -->
-                    <div class="col-md-6 col-sm-6">
-                        <div class="sidebar-wrapper">
-
-                        <div class="sidebar-box-header bb-1">
-                            <h4>Account Number</h4>
-                        </div>
-
-                        <form class="billing-form">
-                            <div class="row">
-                                <div class="pr-header active" style="display: flex; flex-direction: column; justify-content: center;align-items: center; margin-bottom: 15px;">
-                                    <div class="pr-plan">
-                                        <h4>Use this as your account payment:</h4>
-                                    </div>
-                                    <div class="pr-price">
-                                        <h3 style="font-size: 3.4em;"><sup>Account Number.</sup>{{regno.personel_reg_no}}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="pr-header " style="display: flex; flex-direction: column; justify-content: center;align-items: center; margin-bottom: 15px;">
-                                    <div class="pr-plan">
-                                        <h4>Registration Amount</h4>
-                                    </div>
-                                    <div class="pr-price">
-                                        <h3><sup>ksh.</sup>1500</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        </div>
-                    </div>
-
                 </div>
 
                 <div class="row">

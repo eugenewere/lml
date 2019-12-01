@@ -55,6 +55,25 @@ def experience_years(experience_id):
     else:
         return 0
 
+
+@register.filter(name='company_experience_years')
+def company_experience_years(company_id):
+    company = Company.objects.filter(user_ptr_id= company_id).first()
+    datex = company.date_created
+    todayz = date.today()
+    diff = todayz - datex
+    if diff.days > 365:
+        day = str(int(diff.days/365)) + str(' Years')
+        return day
+    elif diff.days < 365:
+        day = str(int(diff.days/30)) + str(' Monthes')
+        return day
+    else:
+        return 0
+
+
+
+
 @register.filter(name='confirm_reg_payment')
 def confirm_reg_payment(request):
     user = request.user.id
@@ -63,3 +82,23 @@ def confirm_reg_payment(request):
         return False
     return True
 
+@register.filter(name='confirm_company_reg_payment')
+def confirm_company_reg_payment(request):
+    user = request.user.id
+    company = Company.objects.filter(user_ptr_id=user, regpayment__isnull=False).first()
+    if company:
+        return False
+    return True
+
+@register.filter(name='shortlisted')
+def shortlisted(request, customer_id):
+    customer = Customer.objects.filter(user_ptr_id=customer_id).first()
+    is_shortlisted = CompanyShortlistCustomers.objects.filter(customer_id=customer.id, company_id=request.user.id).exists()
+    if is_shortlisted:
+        return False
+    return True
+
+@register.filter(name='top_customer_categories')
+def top_customer_categories(request):
+    category = Customer.objects.annotate(itemcount=Count('id')).order_by('-itemcount')[:7]
+    return category

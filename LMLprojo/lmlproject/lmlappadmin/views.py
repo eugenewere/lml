@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-
+import sweetify
 # Create your views here.
 # from lmlappadmin.models import *
 from .models import *
@@ -36,12 +36,37 @@ def employees(request):
 @login_required()
 def companies(request):
     company = Company.objects.all()
-    print(company)
+
     context = {
         'title': 'Companies',
         'companies': company,
     }
     return render(request, 'company/company.html', context)
+
+
+def companyPricing(request):
+    pricing = CompanyPricingPlan.objects.all()
+    if request.method == 'POST':
+        title = request.POST['title']
+        price = request.POST['price']
+        description = request.POST['description']
+        CompanyPricingPlan.objects.create(
+            title=title,
+            price=price,
+            description=description
+        )
+        sweetify.success(request, 'Success', text='Price Added', persistent='Ok')
+    else:
+        pricing = CompanyPricingPlan.objects.all()
+
+
+    context = {
+        'title': 'Companies Pricing',
+        'pricings': pricing
+
+    }
+    return render(request, 'company/companypricing.html', context)
+
 
 @login_required()
 def categories(request):
