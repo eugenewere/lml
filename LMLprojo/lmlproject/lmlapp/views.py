@@ -360,12 +360,7 @@ def employersprofile(request):
     social = CompanySocialAccount.objects.filter(company=company.id).first()
     # similar_company = Company.objects.filter(category=company.category).exclude(id=user.id)
     categories = Category.objects.all()
-    # social = CompanySocialAccount.objects.filter(company=company.id).first()
-    kenyan_county_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/counties.geojson"
-    kenyan_constituencies_api_url = "https://raw.githubusercontent.com/mikelmaron/kenya-election-data/master/data/constituencies.geojson"
 
-    data = requests.get(kenyan_county_api_url).json()
-    data2 = requests.get(kenyan_constituencies_api_url).json()
     context = {
         'title': 'Company profile',
         'user': request.user,
@@ -373,8 +368,8 @@ def employersprofile(request):
         'social':social,
         # 'scompany':similar_company,
         'categories':categories,
-        'counties': data['features'],
-        'regions': data2['features'],
+        'counties': County.objects.all(),
+        'regions': Region.objects.all(),
     }
     return render(request, 'normal/account/employer-profile.html',context)
 
@@ -758,3 +753,15 @@ def all_employees(request):
 
     }
     return render(request, 'normal/allcandidates/all-candidates.html', context)
+
+
+def categories(request):
+    if request.method == 'POST':
+        category = request.POST['category']
+        categories =Category.objects.filter(id=category)
+    else:
+        categories= Category.objects.all()
+    context = {
+        'categories': categories
+    }
+    return render(request,'normal/categories/category.html', context)

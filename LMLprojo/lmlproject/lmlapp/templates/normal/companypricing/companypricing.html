@@ -6,11 +6,9 @@
             <!-- Title Header Start -->
 			<section class="inner-header-title" style="background-image:url({% static 'assets/img/blog/banner-19.jpg' %}); color: white;">
 				<div class="container">
-<<<<<<< HEAD
-					<h2 style="color:white;">SUBSCRIPTION PLANS</h2>
-=======
-					<h2>SUBSCRIPTION PLANS</h2>
->>>>>>> d20926c5d20e5a5f8ed746182533353406a23cd0
+
+					<h2 style="color: white;">SUBSCRIPTION PLANS</h2>
+
 				</div>
 			</section>
 			<div class="clearfix"></div>
@@ -18,110 +16,7 @@
             <!-- pricing Section Start -->
 			<section class="pricing">
 				<div class="container">
-<<<<<<< HEAD
-=======
-{#                            basic#}
-					<div class="col-lg-4 col-xl-4 col-md-6 col-sm-12">
-						<div class="pr-table">
-							<div class="pr-header">
-								<div class="pr-plan">
-									<h4>Basic</h4>
-								</div>
-								<div class="pr-price">
-									<h3><sup>ksh.</sup>500</h3>
-								</div>
-							</div>
-							<div class="pr-features">
-								<ul>
-                                    <p>view 10 profiles</p>
-{#									<li> 10 profiles</li>#}
-{#									<li></li>#}
-{#									<li>1 Core Processor</li>#}
-{#									<li>32 GB SSD Disk</li>#}
-{#									<li>1 TB Transfer</li>#}
-								</ul>
-							</div>
-							<div class="pr-buy-button">
-								<a href="#" class="pr-btn" title="Price Button">select</a>
-							</div>
-						</div>
-					</div>
-                    {#                                pro basic#}
-					<div class="col-lg-4 col-xl-4 col-md-6 col-sm-12">
-						<div class="pr-table">
-							<div class="pr-header active">
-								<div class="pr-plan">
-									<h4>Pro Basic</h4>
-								</div>
-								<div class="pr-price">
-									<h3><sup>Ksh.</sup>1000<sub></sub></h3>
-								</div>
-							</div>
-							<div class="pr-features">
-								<ul>
-									<li>10 profiles</li>
-									<li>customer care support</li>
-{#									<li>1 Core Processor</li>#}
-{#									<li>32 GB SSD Disk</li>#}
-{#									<li>1 TB Transfer</li>#}
-								</ul>
-							</div>
-							<div class="pr-buy-button">
-								<a href="#" class="pr-btn" title="Price Button">select</a>
-							</div>
-						</div>
-					</div>
-{#                        premium#}
-					<div class="col-lg-4 col-xl-4 col-md-6 col-sm-12">
-						<div class="pr-table">
-							<div class="pr-header ">
-								<div class="pr-plan">
-									<h4>Premium</h4>
-								</div>
-								<div class="pr-price">
-									<h3><sup>Ksh.</sup>1700</h3>
-								</div>
-							</div>
-							<div class="pr-features">
-								<ul>
-									<li>view 80 profiles</li>
-{#									<li>2 GB Memory</li>#}
-{#									<li>1 Core Processor</li>#}
-{#									<li>32 GB SSD Disk</li>#}
-{#									<li>1 TB Transfer</li>#}
-								</ul>
-							</div>
-							<div class="pr-buy-button">
-								<a href="#" class="pr-btn active" title="Price Button">select</a>
-							</div>
-						</div>
-					</div>
-{#                            ultimate#}
-					<div class="col-lg-4 col-xl-4 col-md-6 col-sm-12">
-						<div class="pr-table">
-							<div class="pr-header">
-								<div class="pr-plan">
-									<h4>Ultimate</h4>
-								</div>
-								<div class="pr-price">
-									<h3><sup>Ksh.</sup>2000<sub></sub></h3>
-								</div>
-							</div>
-							<div class="pr-features">
-								<ul>
-									<li>view 100 profiles</li>
-{#									<li>2 GB Memory</li>#}
-{#									<li>1 Core Processor</li>#}
-{#									<li>32 GB SSD Disk</li>#}
-{#									<li>1 TB Transfer</li>#}
-								</ul>
-							</div>
-							<div class="pr-buy-button">
-								<a href="#" class="pr-btn" title="Price Button">select</a>
-							</div>
-						</div>
-					</div>
->>>>>>> d20926c5d20e5a5f8ed746182533353406a23cd0
+
 
                     {% for price in pricing %}
                     <div class="col-lg-4 col-xl-4 col-md-6 col-sm-12">
@@ -140,44 +35,12 @@
 								</ul>
 							</div>
 							<div class="pr-buy-button">
-<<<<<<< HEAD
 								<a href="{% url 'LML:companypaymentpackage' price.id  %}" class="pr-btn {% if forloop.counter|divisibleby:2 %}active{% endif %}" title="Price Button">select</a>
 							</div>
 						</div>
 					</div>
                     {% endfor %}
-=======
-								<a href="#" class="pr-btn active" title="Price Button">select</a>
-							</div>
-						</div>
-					</div>
-{#                                    platinum#}
-					<div class="col-lg-4 col-xl-4 col-md-6 col-sm-12">
-						<div class="pr-table">
-							<div class="pr-header">
-								<div class="pr-plan">
-									<h4>Platinum</h4>
-								</div>
-								<div class="pr-price">
-									<h3><sup>Ksh.</sup>500000<sub></sub></h3>
-								</div>
-							</div>
-							<div class="pr-features">
-								<ul>
-									<li>complete access</li>
-									<li>Dedicated customer support</li>
-									<li>Faster responce</li>
-									<li>Get top verified employees</li>
-{#									<li>1 TB Transfer</li>#}
-								</ul>
-							</div>
-							<div class="pr-buy-button">
-								<a href="#" class="pr-btn" title="Price Button">select</a>
-							</div>
-						</div>
-					</div>
 
->>>>>>> d20926c5d20e5a5f8ed746182533353406a23cd0
 				</div>
 			</section>
 			<!-- End Pricing Section -->

@@ -2,7 +2,7 @@
 {% load static %}
 {% load call_methods %}
 <html lang="en">
-<head>
+<head style="scroll-behavior: smooth;">
     <!-- Basic Page Needs==================================================-->
     <title>{{title|title}}</title>
     <meta charset="utf-8">
@@ -60,13 +60,11 @@
                                                          {% if request.user|logged_in_company %}
                                                              <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:employerdetails' %}">Account</a></li>
                                                              <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:employersprofile' %}">Profile</a></li>
-                                                             <li><a href="{% url 'LML:companypricing' %}">Pricing</a></li>
                                                              <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:log_out_user' %}">Logout</a></li>
                                                          {% endif %}
                                                          {% if request.user|logged_in_customer %}
                                                              <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:employeedetails' %}">Account</a></li>
                                                              <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;"><a href="{% url 'LML:employeeprofile' %}"> Profile</a></li>
-                                                             <li style="margin-bottom: 10px; border-bottom: 1px solid #fff;" >####<a href="{% url 'LML:companypricing' %}">Pricing</a></li>
                                                              <li style="margin-top: 10px; border-bottom: 1px solid #fff;"><a class="signin" href="{% url 'LML:log_out_user' %}">Logout</a></li>
 
                                                          {% endif %}
@@ -175,7 +173,6 @@
                                             <div class="content">
                                                 <ul class="menu-col">
                                                     <li><a href="create-company.html">Terms</a></li>
-                                                    <li><a href="manage-company.html">Conditions</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -267,7 +264,7 @@
                                     <ul class="footer-navigation">
                                         <li><a href="{% url 'LML:home' %}" title="">Home</a></li>
 
-                                        <li><a href="manage-company.html" title="">Categories</a></li>
+                                        <li><a href="{% url 'LML:viewcategories' %}" title="">Categories</a></li>
                                         <li><a href="{% url 'LML:companypricing' %}">Pricing</a></li>
                                         {% if request.user.is_authenticated %}
                                             <li><a href="{% url 'LML:log_out_user' %}">Logout</a></li>

@@ -2,7 +2,13 @@
 {% load static %}
 {% load call_methods %}
 {% block links %}
+    <style>
+        .customer{
+            display: none;
+        }
 
+    </style>
+    <link rel="stylesheet" href="{% static 'assets/css/chatpannel.css' %}">
 {% endblock links %}
 {% block search %}
         {% if request.user.is_authenticated %}
@@ -89,17 +95,17 @@
                                 </li>
                                 <li><a href="">
 
+                                    Ultimate Candidate
+                                    <span class="pull-right">0</span></a>
+                                </li>
+                                <li><a href="">
+
                                     Premium Candidate
                                     <span class="pull-right">0</span></a>
                                 </li>
                                 <li><a href="">
 
-                                    Ordinary
-                                    <span class="pull-right">0</span></a>
-                                </li>
-                                <li><a href="">
-
-                                    Ultimate
+                                    Basic Candidate
                                     <span class="pull-right">0</span></a>
                                 </li>
                             </ul>
@@ -151,7 +157,7 @@
                 </div>
             </div>
             <!-- Sidebar End -->
-            <div class="col-md-9 col-sm-12">
+            <div class="col-md-9 col-sm-12 " style="margin-bottom: 30px;">
                 <div class="full-card">
 
                     <div class="card-header">
@@ -171,71 +177,192 @@
                         <article class="advance-search-job">
                             <div class="row no-mrg">
                                  {% for customer in customers %}
-                                    <div class="col-md-4 col-sm-6">
-                                    <div class="paid-candidate-container">
-                                        <div class="paid-candidate-box">
-                                            <div class="dropdown">
-                                                <div class="btn-group fl-right">
-                                                    {% if request.user|logged_in_company %}
-                                                        <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
-                                                        <div class="dropdown-menu pull-right animated flipInX">
-                                                            {% csrf_token %}
-                                                            {% if request|shortlisted:customer.customer.id %}
-                                                               <a onclick="shortlist(this);" data-employer="{{ request.user.id }}" id="{{ customer.customer.id }}" href="javascript:void(0)">Shortlist</a>
-                                                            {% else %}
-                                                               <a onclick="shortlistmessage();" href="javascript:void(0)">Shortlisted</a>
-                                                            {% endif %}
-                                                            <a onclick="" id="{{ customer.id }}" href="#">Send Message</a>
-                {#                                            <a href="#">Dislike</a>#}
-                                                        </div>
-                                                    {% endif %}
+                                    <div class="col-md-4 col-sm-6 customer">
+                                        <div class="paid-candidate-container">
+                                            <div class="paid-candidate-box">
+                                                <div class="dropdown">
+                                                    <div class="btn-group fl-right">
+                                                        {% if request.user|logged_in_company %}
+                                                            <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></button>
+                                                            <div class="dropdown-menu pull-right animated flipInX">
+                                                                {% csrf_token %}
+                                                                {% if request|shortlisted:customer.customer.id %}
+                                                                   <a onclick="shortlist(this);" data-employer="{{ request.user.id }}" id="{{ customer.customer.id }}" href="javascript:void(0)">Shortlist</a>
+                                                                {% else %}
+                                                                   <a onclick="shortlistmessage();" href="javascript:void(0)">Shortlisted</a>
+                                                                {% endif %}
+                                                                <a  data-toggle="modal" data-target="#myModal{{ customer.id }}" id="{{ customer.id }}" href="#">Send Message</a>
+                    {#                                            <a href="#">Dislike</a>#}
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="paid-candidate-inner--box">
+                                                    <div class="paid-candidate-box-thumb"><img src="{{customer.customer.profile_image.url}}" class="img-responsive img-circle" alt="" /></div>
+                                                    <div class="paid-candidate-box-detail">
+                                                        <h4 class="text-capitalize">{{customer.customer.first_name}} {{customer.customer.last_name}}</h4>
+                                                        <span class="desination text-capitalize">{{customer.customer.category.category}}</span></div>
+                                                </div>
+                                                <div class="paid-candidate-box-extra">
+                                                    <ul>
+                                                        {% for skill in customer.customer.skillset %}
+                                                        <li>{{skill.skill}}</li>
+                                                        {% endfor %}
+                                                        {% if customer.skillcount %}
+                                                            <li class="more-skill bg-primary">+{{customer.customer.skillcount}}</li>
+                                                        {% endif %}
+                                                    </ul>
+                                                    <p>{{customer.customer.biography|truncatechars:67}}.</p>
                                                 </div>
                                             </div>
-                                            <div class="paid-candidate-inner--box">
-                                                <div class="paid-candidate-box-thumb"><img src="{{customer.customer.profile_image.url}}" class="img-responsive img-circle" alt="" /></div>
-                                                <div class="paid-candidate-box-detail">
-                                                    <h4 class="text-capitalize">{{customer.customer.first_name}} {{customer.customer.last_name}}</h4>
-                                                    <span class="desination text-capitalize">{{customer.customer.category.category}}</span></div>
-                                            </div>
-                                            <div class="paid-candidate-box-extra">
-                                                <ul>
-                                                    {% for skill in customer.customer.skillset %}
-                                                    <li>{{skill.skill}}</li>
-                                                    {% endfor %}
-                                                    {% if customer.skillcount %}
-                                                        <li class="more-skill bg-primary">+{{customer.customer.skillcount}}</li>
-                                                    {% endif %}
-                                                </ul>
-                                                <p>{{customer.customer.biography|truncatechars:67}}.</p>
-                                            </div>
+                                            {% if request.user|logged_in_company %}
+                                                <a href="{% url 'LML:premium_employee_detail' customer.customer.id %}" class="btn btn-paid-candidate bt-1">View Detail</a>
+                                            {% endif %}
                                         </div>
-                                        {% if request.user|logged_in_company %}
-                                            <a href="{% url 'LML:premium_employee_detail' customer.customer.id %}" class="btn btn-paid-candidate bt-1">View Detail</a>
-                                        {% endif %}
                                     </div>
-                                </div>
-                                {% endfor %}
+                                 {% endfor %}
                             </div>
                         </article>
-
-
-
-
-
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="text-center">
+                                    <a id="load" href="#" class="btn btn-primary">Load More</a>
+                                    <a href="#top" class="btn btn-primary">Back to top</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <ul class="pagination">
-                        <li><a href="#">&laquo;</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#"><i class="fa fa-ellipsis-h"></i></a></li>
-                        <li><a href="#">&raquo;</a></li>
-                    </ul>
-                </div>
+
+                {% for customer in customers  %}
+                    <!-- The Chat Modal -->
+                  <div class="modal fade" id="myModal{{ customer.id }}">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content" style="padding-bottom: 0;">
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12" style="height: 400px;" >
+                                    <div class="panel panel-primary" style="margin-bottom: 0;  border-color: #06d15b;">
+                                        <div class="panel-heading "  style="background: #06d15b;">
+                                            <span class="fa fa-comment"></span> {{customer.customer.first_name|title }} {{customer.customer.last_name|title }}
+                                            <div class="btn-group pull-right" style="transform: translate(10px, -15px); color: white;">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body" style="height: 400px;">
+                                            <ul class="chat">
+                                                <li class="left clearfix"><span class="chat-img pull-left">
+                                                    <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                                                </span>
+                                                    <div class="chat-body clearfix">
+                                                        <div class="header">
+                                                            <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
+                                                                <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
+                                                        </div>
+                                                        <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                                            dolor, quis ullamcorper ligula sodales.
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="right clearfix"><span class="chat-img pull-right">
+                                                    <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
+                                                </span>
+                                                    <div class="chat-body clearfix">
+                                                        <div class="header">
+                                                            <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
+                                                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                                        </div>
+                                                        <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                                            dolor, quis ullamcorper ligula sodales.
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="left clearfix"><span class="chat-img pull-left">
+                                                    <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                                                </span>
+                                                    <div class="chat-body clearfix">
+                                                        <div class="header">
+                                                            <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
+                                                                <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
+                                                        </div>
+                                                        <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                                            dolor, quis ullamcorper ligula sodales.
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="right clearfix"><span class="chat-img pull-right">
+                                                    <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
+                                                </span>
+                                                    <div class="chat-body clearfix">
+                                                        <div class="header">
+                                                            <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins ago</small>
+                                                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                                        </div>
+                                                        <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                                            dolor, quis ullamcorper ligula sodales.
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="right clearfix"><span class="chat-img pull-right">
+                                                    <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
+                                                </span>
+                                                    <div class="chat-body clearfix">
+                                                        <div class="header">
+                                                            <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins ago</small>
+                                                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                                        </div>
+                                                        <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                                            dolor, quis ullamcorper ligula sodales.
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="right clearfix"><span class="chat-img pull-right">
+                                                    <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
+                                                </span>
+                                                    <div class="chat-body clearfix">
+                                                        <div class="header">
+                                                            <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins ago</small>
+                                                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                                        </div>
+                                                        <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                                            dolor, quis ullamcorper ligula sodales.
+                                                        </p>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                        <form action="" method="post">
+                                            <div class="panel-footer" style="padding: 0px 35px;">
+                                                <div class="row" style="display: flex;">
+
+                                                    <input id="btn-input" type="text" class="form-control input-sm col-sm-8 col-md-8col-lg-8" placeholder="Type your message here..." />
+
+                                                    <div class=" col-sm-12 col-md-2 col-lg-2" style="padding: 0;">
+                                                        <button  style="width: 100%;" type="button" class="btn orangebg " id="btn-chat">Send</button>
+                                                    </div>
+                                                    <div class=" col-sm-12 col-md-2 col-lg-2" style="padding: 0;">
+                                                        <button  style="width: 100%;" type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
 
                 <!-- Ad banner -->
                 <div class="row">
@@ -252,5 +379,36 @@
     <!-- ========== Begin: Brows job Category End ===============  -->
 {% endblock content %}
 {% block script %}
+     <script>
+        $(function(){
+            $(".customer").slice(0, 6).show(); // select the first ten
+            $("#load").click(function(e){ // click event for load more
+                e.preventDefault();
+                $(".customer:hidden").slice(0, 6).show(); // select next 10 hidden divs and show them
+                if($(".customer:hidden").length == 0){ // check if any hidden divs still exist
+                    spinner.hide();
+                    swal.fire({
+                        title: "Error!",
+                        text: "No more categories to load",
+                        type: "error",
+                        confirmButtonText: "Retry"
+                    });
+                }
+            });
+            $('a[href=#top]').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 600);
+                return false;
+            });
 
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 50) {
+                    $('.totop a').fadeIn();
+                } else {
+                    $('.totop a').fadeOut();
+                }
+            });
+        });
+    </script>
 {% endblock script %}

@@ -110,7 +110,7 @@ Fonts
 @import url('https://fonts.googleapis.com/css?family=Muli:300,400,600,700,800,900');
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,500,600,700');
 @import url('https://fonts.googleapis.com/css?family=Josefin+Slab:400,600,700');
-
+@import url('https://kit.fontawesome.com/16d33ecbbb.js');
 /*---------- Loader -----------*/
 .no-js #loader {
     display: none;
