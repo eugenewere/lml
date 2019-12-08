@@ -664,11 +664,18 @@
 
                 var serial_image = "&profile_image=" + image;
                 var csrfmiddleware = '&csrfmiddlewaretoken='+ csrf;
+
+                var new_form_data = new FormData(this);
+                console.log(new_form_data);
+
                 $.ajax({
-                    type : 'POST',
+                    method : 'POST',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data : new_form_data,
+                    enctype: 'multipart/form-data',
                     url :  $("#employeeform").attr('action'),
-                    data : serializedData + '&profile_image=' + image,
-                    dataType : "json",
                     success : function(response){
 
                         if (response.results === 'success') {

@@ -42,6 +42,7 @@ urlpatterns = [
     path('companypayment/',views.companypayment, name='companypayment'),
     path('companypaymentpackage/<int:pricing_id>',views.companypaymentpackage, name='companypaymentpackage'),
     path('employerdash/',views.employer_dash, name='employer_dash'),
+    path('employeedash/',views.employee_dash, name='employee_dash'),
 
     # employeestatus
     path('allpremiumemployees/',views.all_premium_employees, name = 'all_premium_employees'),
@@ -50,5 +51,7 @@ urlpatterns = [
 
     path('shortlist/', views.shortlistcustomers, name='shortlistemployees'),
     path('categories/', views.categories, name='viewcategories'),
+
+    path('dumb/', views.dumb, name='dumb')
 
 ]

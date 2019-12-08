@@ -58,7 +58,7 @@ def experience_years(experience_id):
 
 @register.filter(name='company_experience_years')
 def company_experience_years(company_id):
-    company = Company.objects.filter(user_ptr_id= company_id).first()
+    company = Company.objects.filter(id=int(company_id)).first()
     datex = company.date_created
     todayz = date.today()
     diff = todayz - datex

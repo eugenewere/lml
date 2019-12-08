@@ -1,6 +1,6 @@
 {% extends 'normal/layout/homelayout.html' %}
 {% load static %}
-{% load call_method %}
+{% load call_methods %}
 {% block links %}
 
 
@@ -27,7 +27,7 @@
 								<img src="{{customer.profile_image.url}}" class="img-responsive" alt="" />
 							</div>
 							<div class="ur-caption">
-								<h4 class="ur-title">{{request.user.first_name}} {{request.user.last_name}} </h4>
+								<h4 class="ur-title text-capitalize">{{request.user.first_name}} {{request.user.last_name}} </h4>
                                 <p class="ur-location"><i class="ti-location-pin mrg-r-5"></i>{{customer.county.county}}</p>
 								<p class="ur-location"><i class="ti-location-pin mrg-r-5"></i>{{ customer.region.region }}->{{ customer.region.ward }} </p>
 								<span class="ur-designation " style=" text-transform: capitalize;">{% for skill in skills %}{{ skill }},{% endfor %}</span>
@@ -35,18 +35,14 @@
                                     {% if social %}
 									    <a href="{{social}}"><i style="font-size: 20px;" class="fab fa-linkedin"></i></a>
                                     {% endif %}
-{#									<i class="fa fa-star filled"></i>#}
-{#									<i class="fa fa-star filled"></i>#}
-{#									<i class="fa fa-star filled"></i>#}
-{#									<i class="fa fa-star"></i>#}
 								</div>
 							</div>
 
 						</div>
 
 						<div class="ur-detail-btn">
-							<a  href="{% url 'LML:employeeprofile' %}#settings" class="btn btn-warning mrg-bot-10 full-width"><i class="ti-thumb-up mrg-r-5"></i>Edit Account</a><br>
-{#							<a href="#" class="btn btn-info full-width"><i class="ti-download mrg-r-5"></i>Download CV</a>#}
+							<a  href="{% url 'LML:employeeprofile' %}#settings" class="custom-button btn btn-warning mrg-bot-10 full-width"><i class="ti-thumb-up mrg-r-5"></i>Edit Account</a><br>
+							<a href="{% url 'LML:employee_dash' %}" class="custom-button btn btn-info full-width"><i class="ti-dashboard mrg-r-5"></i>Dashboard</a>
 						</div>
 
 					</div>

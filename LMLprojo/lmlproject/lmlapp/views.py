@@ -15,6 +15,9 @@ from datetime import datetime
 import sweetify
 from django.utils.crypto import get_random_string
 # from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.response import Response
+
 from lmlapp.forms import *
 from .models import *
 import base64
@@ -116,21 +119,37 @@ def signup(request):
                     date_to=date_to,
                     experience=experience,
                 )
-            if ('Phd' in qualifications) and ('Masters' in qualifications) and ('Degree' in qualifications):
+            if ('Phd' in qualifications) and ('Masters' in qualifications) and ('Degree' in qualifications) and ('Certificate' in qualifications) and ('Degree' in qualifications) and ('Diploma' in qualifications):
                 status='ULTIMATE'
                 Customer.objects.filter(user_ptr_id=new_user.id).update(
                     rank_status=status,
                 )
-            elif('Masters' in qualifications) and ('Degree' in qualifications) and not ('Phd' in qualifications):
-                status = 'PREMIUM'
-                Customer.objects.filter(user_ptr_id=new_user.id).update(
-                    rank_status=status,
-                )
-            elif ('Certificate' in qualifications) and ('Degree' in qualifications) and ('Diploma' in qualifications):
+            elif ('Diploma' in qualifications):
                 status = 'BASIC'
                 Customer.objects.filter(user_ptr_id=new_user.id).update(
                     rank_status=status,
                 )
+            elif ('Degree' in qualifications) and ('Diploma' in qualifications):
+                status = 'BASIC'
+                Customer.objects.filter(user_ptr_id=new_user.id).update(
+                    rank_status=status,
+                )
+
+            elif('Masters' in qualifications) and ('Degree' in qualifications) :
+                status = 'PREMIUM'
+                Customer.objects.filter(user_ptr_id=new_user.id).update(
+                    rank_status=status,
+                )
+            elif('Certificate' in qualifications) and ('Degree' in qualifications) and ('Diploma' in qualifications):
+                status = 'BASIC'
+                Customer.objects.filter(user_ptr_id=new_user.id).update(
+                    rank_status=status,
+                )
+            # elif():
+            #     status = 'BASIC'
+            #     Customer.objects.filter(user_ptr_id=new_user.id).update(
+            #         rank_status=status,
+            #     )
             else:
                 status = 'BASIC'
                 Customer.objects.filter(user_ptr_id=new_user.id).update(
@@ -649,16 +668,28 @@ def companypaymentpackage(request, pricing_id):
 
 
 def employer_dash(request):
-    user = request.user
-    company = Company.objects.filter(id=user.id).first()
-    social = CompanySocialAccount.objects.filter(company=company.id).first()
+    user = request.user.id
+    company = Company.objects.filter(user_ptr_id=user).first()
+    social = CompanySocialAccount.objects.filter(company=company).first()
     customers = CompanyShortlistCustomers.objects.filter(company=company)
     context={
         'company': company,
         'social': social,
         'customers':customers,
     }
-    return render(request,'normal/employer-dash/employer-dash.html', context)
+    return render(request, 'normal/dashboard/employer-dash.html', context)
+
+def employee_dash(request):
+    user = request.user.id
+    customer = Customer.objects.filter(user_ptr_id=user).first()
+    social = Social_account.objects.filter(customer=customer).first()
+    # customers = CompanyShortlistCustomers.objects.filter(company=company)
+    context={
+        'customer': customer,
+        'social': social,
+        # 'customers':customers,
+    }
+    return render(request, 'normal/dashboard/employee-dash.html', context)
 
 
 def premium_employee_details(request, customer_id):
@@ -765,3 +796,17 @@ def categories(request):
         'categories': categories
     }
     return render(request,'normal/categories/category.html', context)
+
+
+def dumb(request):
+    if request.method == 'POST':
+        file = request.FILES.get('fileupload')
+        print(file)
+        context = {
+
+        }
+        return JsonResponse(context, status=status.HTTP_200_OK)
+    context={
+
+    }
+    return render(request, 'normal/signup/dumb.html', context)
