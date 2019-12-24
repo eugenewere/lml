@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.db import models
 from datetime import datetime
@@ -37,6 +38,7 @@ class Category(models.Model):
     def __str__(self):
         return '%s' % (self.category)
 
+    @property
     def topcategories(self):
         customers = Customer.objects.filter(category=self)
         categories = []
@@ -144,6 +146,14 @@ class Customer(get_user_model()):
             return int(today - birth)
         else:
             return 0
+
+    @property
+    def customer_reg_no(self):
+        regno = CustomerRegNo.objects.filter(customer=self).first()
+        if regno:
+            return regno.personel_reg_no
+        else:
+            return 'NO_REGNO_ON_THIS_GUY'
 
 
 
@@ -386,7 +396,12 @@ class ContactUsHome(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    HOMEMESSAGECHOICES = {
+        ('READ', 'Read'),
+        ('UNREAD', 'Unread'),
+        ('TRASH', 'Trash'),
+    }
+    status = models.CharField(max_length=200, null=True, blank=True, choices=HOMEMESSAGECHOICES, default='UNREAD')
 
     def _str__(self):
         return '%s (%s) ' % (self.name, (self.message))
@@ -410,3 +425,44 @@ class CompanyPricingPlan(models.Model):
 
     def _str__(self):
         return '%s  ' %(self.title)
+
+class Message(models.Model):
+     sender = models.ForeignKey(User, related_name="sender", on_delete=models.CASCADE,null=False, blank=False)
+     reciever = models.ForeignKey(User, related_name="reciever",on_delete=models.CASCADE, null=False, blank=False)
+     msg_content = models.TextField()
+     created_at = models.DateTimeField(auto_now_add=True)
+     updated_at = models.DateTimeField(auto_now=True)
+     MESSAGECHOICES = {
+         ('READ', 'Read'),
+         ('UNREAD', 'Unread'),
+         ('TRASH', 'Trash'),
+     }
+     status = models.CharField(max_length=200, null=True, blank=True, choices=MESSAGECHOICES, default='UNREAD')
+     def _str__(self):
+         return '%s  ' % (self.sender)
+
+     @property
+     def company_message_to_customer(self):
+         customer = Customer.objects.filter(user_ptr_id=self.reciever.id).first()
+         return customer
+     @property
+     def customer_message_to_company(self):
+         company = Company.objects.filter(user_ptr_id=self.sender.id).first()
+         return company
+
+
+class Newsletter(models.Model):
+    email = models.CharField(max_length=200, null=False, blank=False )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '%s' % (self.email)
+
+class AdvertCarousel(models.Model):
+    carousel_image = models.ImageField(upload_to='home_couresel',max_length=250,null=False, blank=False  ) #height_field=None, width_field=None,
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '%s' % (self.carousel_image)

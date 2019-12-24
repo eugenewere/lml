@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
@@ -41,7 +41,10 @@ urlpatterns = [
     path('payment/',views.payment, name='payment'),
     path('companypayment/',views.companypayment, name='companypayment'),
     path('companypaymentpackage/<int:pricing_id>',views.companypaymentpackage, name='companypaymentpackage'),
+
     path('employerdash/',views.employer_dash, name='employer_dash'),
+    path('employerdash_message/',views.employer_dash_message, name='employer_dash_message'),
+
     path('employeedash/',views.employee_dash, name='employee_dash'),
 
     # employeestatus
@@ -52,6 +55,13 @@ urlpatterns = [
     path('shortlist/', views.shortlistcustomers, name='shortlistemployees'),
     path('categories/', views.categories, name='viewcategories'),
 
-    path('dumb/', views.dumb, name='dumb')
+    path('dumb/', views.dumb, name='dumb'),
+
+    path('sendmessages/', views.messages, name='messages'),
+    path('fetchmessages/<int:customer_id>', views.fetch_data_messages, name='fetch_data_messages'),
+
+
+    # path('li/<str:room_name>/', views.room, name='room'),
+    re_path(r'^(?P<room_name>[^/]+)/$', views.room, name='room'),
 
 ]

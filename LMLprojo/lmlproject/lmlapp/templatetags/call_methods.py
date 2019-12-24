@@ -102,3 +102,19 @@ def shortlisted(request, customer_id):
 def top_customer_categories(request):
     category = Customer.objects.annotate(itemcount=Count('id')).order_by('-itemcount')[:7]
     return category
+
+@register.filter(name='contactushome')
+def comments(request):
+    contactushome = ContactUsHome.objects.filter(status="UNREAD").order_by("-created_at")
+    if contactushome is not None:
+        return contactushome
+    return False
+
+@register.filter(name='contactushomecount')
+def commentscount(request):
+    contactushomecount = ContactUsHome.objects.count()
+    if contactushomecount > 0:
+        return contactushomecount
+    return False
+
+

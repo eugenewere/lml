@@ -658,15 +658,10 @@
                 e.preventDefault();
 
                 spinner.show();
-                var csrf = $("input[name=csrfmiddlewaretoken]").val();
-                var image    = $('input[type="file"]')[0].files[0];
-                var serializedData = $(this).serialize();
 
-                var serial_image = "&profile_image=" + image;
-                var csrfmiddleware = '&csrfmiddlewaretoken='+ csrf;
 
                 var new_form_data = new FormData(this);
-                console.log(new_form_data);
+
 
                 $.ajax({
                     method : 'POST',
@@ -679,7 +674,7 @@
                     success : function(response){
 
                         if (response.results === 'success') {
-                            spinner.hide();
+
                             swal.fire({
                                 title: "Success!",
                                 text: response.success,
@@ -689,7 +684,7 @@
                             $("#employeeform")[0].reset();
                         }
                         if(response.results === 'error') {
-                            spinner.hide();
+
                             swal.fire({
                                 title: "Error!",
                                 text: "Form Is Invalid",

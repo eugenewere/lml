@@ -1,0 +1,26 @@
+ {% for  message in messages %}
+    <li class="{% if not sender == message.sender %} left {% else %} right {% endif %} clearfix">
+        <span class="chat-img {% if not message.sender == sender %} pull-left {% else %} pull-right {% endif %}">
+            {% if not message.sender == sender %}
+                <img src="{{ message.company_message_to_customer.logo.url }}" alt="User Avatar" class="img-circle" />
+            {% else %}
+                <img src="{{ message.customer_message_to_company.profile_image.url }}" alt="User Avatar" class="img-circle" />
+            {% endif %}
+        </span>
+        <div class="chat-body clearfix">
+            <div class="header">
+                <strong class="primary-font">
+                    {% if message.company_message_to_customer %}
+                        {{ message.company_message_to_customer.company_name }}
+                    {% else %}
+                         {{ message.customer_message_to_company.first_name }} {{ message.customer_message_to_company.last_name }}
+                    {% endif %}
+                </strong> <small class="pull-right text-muted">
+                    <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
+            </div>
+            <p>
+                {{ message.msg_content }}
+            </p>
+        </div>
+    </li>
+{% endfor %}

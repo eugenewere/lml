@@ -4,24 +4,15 @@
 {% block content %}
         <section class="slide-banner scroll-con-sec hero-section" data-scrollax-parent="true" id="sec1">
             <div class="slideshow-container">
-                <div class="slideshow-item">
-                    <div class="bg" data-bg="{% static 'assets/img/blog/banner-10.jpg' %}"></div>
-                </div>
-                <div class="slideshow-item">
-                    <div class="bg" data-bg="{% static 'assets/img/blog/banner-17.jpg' %}"></div>
-                </div>
-                <div class="slideshow-item">
-                    <div class="bg" data-bg="{% static 'assets/img/blog/banner-14.jpg' %}"></div>
-                </div>
-                <div class="slideshow-item">
-                    <div class="bg" data-bg="{% static 'assets/img/blog/banner-13.jpg' %}"></div>
-                </div>
-                <div class="slideshow-item">
-                    <div class="bg" data-bg="{% static 'assets/img/blog/banner-12.jpg' %}"></div>
-                </div>
-                <div class="slideshow-item">
-                    <div class="bg" data-bg="{% static 'assets/img/blog/banner-11.jpg' %}"></div>
-                </div>
+                {% for image in images %}
+                    <div class="slideshow-item">
+                        <div class="bg" data-bg="{{ image.carousel_image.url }}"></div>
+                    </div>
+                {% endfor %}
+{#               / <div class="slideshow-item">#}
+{#                    <div class="bg" data-bg="{% static 'assets/img/blog/banner-17.jpg' %}"></div>#}
+{#                </div>#}
+
             </div>
             <div class="overlay"></div>
             <div class="hero-section-wrap fl-wrap">

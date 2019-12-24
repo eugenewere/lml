@@ -1,5 +1,6 @@
 <!doctype html>
 {% load static %}
+{% load call_methods %}
 <html lang="en">
 
 <head>
@@ -44,49 +45,33 @@
 {#                            </div>#}
 {#                        </li>#}
                         <li class="nav-item dropdown notification">
-                            <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>
+                            <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-fw fa-bell"></i>
+                                {% if request|contactushomecount %}
+                                    <span class="indicator"></span>
+                                {% endif %}
+                            </a>
                             <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
                                 <li>
                                     <div class="notification-title"> Messages</div>
                                     <div class="notification-list">
                                         <div class="list-group">
-                                            <a href="#" class="list-group-item list-group-item-action active">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="assets/images/avatar-2.jpg" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Jeremy Rakestraw</span>accepted your invitation to join the team.
-                                                        <div class="notification-date">2 min ago</div>
+                                            {% for comment in request|contactushome %}
+                                                <a href="#" class="list-group-item list-group-item-action active">
+                                                    <div class="notification-info">
+                                                        <div class="notification-list-user-img"><img src="assets/images/avatar-2.jpg" alt="" class="user-avatar-md rounded-circle"></div>
+                                                        <div class="notification-list-user-block">
+                                                            <span class="notification-list-user-name text-capitalize">{{comment.name}}</span><span >{{comment.message|title|truncatechars:20}}</span>
+                                                            <div class="notification-date">{{comment.created_at|date:'d-M'}}</div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="assets/images/avatar-3.jpg" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">John Abraham </span>is now following you
-                                                        <div class="notification-date">2 days ago</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="assets/images/avatar-4.jpg" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Monaan Pechi</span> is watching your main repository
-                                                        <div class="notification-date">2 min ago</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="assets/images/avatar-5.jpg" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Jessica Caruso</span>accepted your invitation to join the team.
-                                                        <div class="notification-date">2 min ago</div>
-                                                    </div>
-                                                </div>
-                                            </a>
+                                                </a>
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="list-footer"> <a href="#">View all notifications</a></div>
+                                    <div class="list-footer"> <a href="{% url 'LMLAdmin:R_messages' %}">View all notifications</a></div>
                                 </li>
                             </ul>
                         </li>
@@ -137,17 +122,17 @@
                                             <a class="nav-link" href="{% url 'LMLAdmin:employees' %}">All Employees</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/cards.html">Premium Employees</a>
+                                            <a class="nav-link" href="{% url 'LMLAdmin:premiumemployees' %}">Premium Employees</a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/cards.html">Shortlisted</a>
+                                            <a class="nav-link" href="{% url 'LMLAdmin:shortlistedemployees' %}">Shortlisted</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/general.html">Registration</a>
+                                            <a class="nav-link" href="{% url 'LMLAdmin:registeredemployees' %}">Registration</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/carousel.html">Deactivated Employee</a>
+                                            <a class="nav-link" href="{% url 'LMLAdmin:deactivatedemployees' %}">Deactivated Employee</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -156,18 +141,37 @@
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Companies</a>
                                 <div id="submenu-5" class="collapse submenu" style="">
                                    <ul class="nav flex-column">
+                                       <li class="dropdown-divider"></li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{% url 'LMLAdmin:companies' %}">All Companies</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/cards.html">Premium Company</a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="pages/general.html">Registration</a>
+                                            <a class="nav-link" href="{% url 'LMLAdmin:platinumcompanies' %}">Platinum Companies</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/carousel.html">Deactivated Company</a>
+                                            <a class="nav-link" href="{% url 'LMLAdmin:premiumcompanies' %}">Premium Company</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'LMLAdmin:ultimatecompanies' %}">Ultimate Company</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'LMLAdmin:proultimatecompanies' %}">Pro-ultimate Company</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'LMLAdmin:probasiccompanies' %}">Pro-basic Company</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'LMLAdmin:basiccompanies' %}">Basic Company</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'LMLAdmin:undefinedcompanies' %}">Undefined Company</a>
+                                        </li>
+                                       <li class="dropdown-divider"></li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'LMLAdmin:companiesregpayment' %}">Registration</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'LMLAdmin:deactivatedemployers' %}">Deactivated Company</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{% url 'LMLAdmin:companyPricing' %}">Company Pricing</a>
@@ -180,6 +184,7 @@
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-51" aria-controls="submenu-5"><i class="fas fa-fw fa-money-bill-alt"></i>Payments</a>
                                 <div id="submenu-51" class="collapse submenu" style="">
                                    <ul class="nav flex-column">
+
                                         <li class="nav-item">
                                             <a class="nav-link" href="pages/cards.html">Company</a>
                                         </li>
@@ -191,56 +196,6 @@
                                 </div>
                             </li>
 
-
-{#                            <li class="nav-item">#}
-{#                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i> Pages </a>#}
-{#                                <div id="submenu-6" class="collapse submenu" style="">#}
-{#                                    <ul class="nav flex-column">#}
-{#                                        <li class="nav-item">#}
-{#                                            <a class="nav-link" href="pages/blank-page.html">Blank Page</a>#}
-{#                                        </li>#}
-{#                                        <li class="nav-item">#}
-{#                                            <a class="nav-link" href="pages/blank-page-header.html">Blank Page Header</a>#}
-{#                                        </li>#}
-{#                                        <li class="nav-item">#}
-{#                                            <a class="nav-link" href="pages/login.html">Login</a>#}
-{#                                        </li>#}
-{#                                        <li class="nav-item">#}
-{#                                            <a class="nav-link" href="pages/404-page.html">404 page</a>#}
-{#                                        </li>#}
-{#                                        <li class="nav-item">#}
-{#                                            <a class="nav-link" href="pages/sign-up.html">Sign up Page</a>#}
-{#                                        </li>#}
-{#                                        <li class="nav-item">#}
-{#                                            <a class="nav-link" href="pages/forgot-password.html">Forgot Password</a>#}
-{#                                        </li>#}
-{#                                        <li class="nav-item">#}
-{#                                            <a class="nav-link" href="pages/pricing.html">Pricing Tables</a>#}
-{#                                        </li>#}
-{#                                        <li class="nav-item">#}
-{#                                            <a class="nav-link" href="pages/timeline.html">Timeline</a>#}
-{#                                        </li>#}
-{#                                        <li class="nav-item">#}
-{#                                            <a class="nav-link" href="pages/calendar.html">Calendar</a>#}
-{#                                        </li>#}
-{#                                        <li class="nav-item">#}
-{#                                            <a class="nav-link" href="pages/sortable-nestable-lists.html">Sortable/Nestable List</a>#}
-{#                                        </li>#}
-{#                                        <li class="nav-item">#}
-{#                                            <a class="nav-link" href="pages/widgets.html">Widgets</a>#}
-{#                                        </li>#}
-{#                                        <li class="nav-item">#}
-{#                                            <a class="nav-link" href="pages/media-object.html">Media Objects</a>#}
-{#                                        </li>#}
-{#                                        <li class="nav-item">#}
-{#                                            <a class="nav-link" href="pages/cropper-image.html">Cropper</a>#}
-{#                                        </li>#}
-{#                                        <li class="nav-item">#}
-{#                                            <a class="nav-link" href="pages/color-picker.html">Color Picker</a>#}
-{#                                        </li>#}
-{#                                    </ul>#}
-{#                                </div>#}
-{#                            </li>#}
                             <li class="nav-divider">
                                 Other
                             </li>
@@ -248,7 +203,7 @@
                                 <a class="nav-link" href="{% url 'LMLAdmin:categories' %}" ><i class="fas fa-fw fa-inbox"></i>Categories <span class="badge badge-secondary">New</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" ><i class="fas fa-fw fa-inbox"></i>Home Images <span class="badge badge-secondary">New</span></a>
+                                <a class="nav-link" href="{% url 'LMLAdmin:carouselImages' %}" ><i class="fas fa-fw fa-inbox"></i>Home Images <span class="badge badge-secondary">New</span></a>
                             </li>
 
 
@@ -256,6 +211,9 @@
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-9" aria-controls="submenu-9"><i class="fas fa-fw fa-map-marker-alt"></i>Messages</a>
                                 <div id="submenu-9" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'LMLAdmin:R_messages' %}">Other Home Messages</a>
+                                        </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{% url 'LMLAdmin:E_messages' %}">Employee Messages</a>
                                         </li>

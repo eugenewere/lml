@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-
+    'channels',
     'lmlappadmin.apps.LmlappadminConfig',
     'lmlapp.apps.LmlappConfig',
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sweetify',
+
     'django.contrib.humanize',
 
 
@@ -81,6 +82,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'lmlproject.wsgi.application'
 
 
+CHANNEL_LAYERS = {
+    'default': {
+         # "BACKEND": "asgi_redis.RedisChannelLayer",
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+            # "hosts": [('localhost', 6379)],
+        },
+    },
+}
+ASGI_APPLICATION = 'lmlproject.routing.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -149,3 +161,6 @@ sweetify.DEFAULT_OPTS = {
 }
 
 LOGIN_REDIRECT_URL = 'LML:singin'
+
+# mysite/settings.py
+# Channels

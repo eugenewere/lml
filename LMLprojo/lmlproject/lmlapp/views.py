@@ -10,19 +10,16 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, HttpResponseRedirect, render_to_response
 import os
-# import datetime from datetime
 from datetime import datetime
 import sweetify
-from django.utils.crypto import get_random_string
-# from rest_framework.response import Response
+
 from rest_framework import status
-from rest_framework.response import Response
 
 from lmlapp.forms import *
-from .models import *
-import base64
-from django.forms import formset_factory
-from django.forms import modelformset_factory
+
+from django.shortcuts import render
+from django.utils.safestring import mark_safe
+import json
 # Create your views here.
 
 # # Base method with no type specified
@@ -45,6 +42,7 @@ def home(request):
         'counties': County.objects.all(),
         'categories':Category.objects.all(),
         'regions':Region.objects.all(),
+        'images': AdvertCarousel.objects.order_by('-created_at'),
     }
     return render(request, 'normal/home/index.html', context)
 
@@ -284,7 +282,7 @@ def login_user(request, source):
 
                 user=authenticate(request, username=username, password=password)
                 if user is not None:
-                    if user.is_staff and user.is_active:
+                    if  user.is_active and user.is_superuser:
                         login(request, user)
                         sweetify.success(request, title='Welcome Admin', text='Welcome Back', persistent='Continue')
                         return redirect('LMLAdmin:home')
@@ -307,7 +305,7 @@ def login_user(request, source):
 
                 user = authenticate(request, username=usernamel(username), password=password)
                 if user is not None:
-                    if user.is_staff and user.is_active:
+                    if  user.is_active and user.is_superuser:
                         login(request, user)
                         sweetify.success(request, title='Welcome Admin', text='Welcome Back', persistent='Continue')
                         return redirect('LMLAdmin:home')
@@ -679,6 +677,19 @@ def employer_dash(request):
     }
     return render(request, 'normal/dashboard/employer-dash.html', context)
 
+def employer_dash_message(request):
+    user = request.user.id
+    company = Company.objects.filter(user_ptr_id=user).first()
+    social = CompanySocialAccount.objects.filter(company=company).first()
+    customers = CompanyShortlistCustomers.objects.filter(company=company)
+    context={
+        'company': company,
+        'social': social,
+        'customers':customers,
+    }
+    return render(request, 'normal/dashboard/employeer-message-chat.html', context)
+
+
 def employee_dash(request):
     user = request.user.id
     customer = Customer.objects.filter(user_ptr_id=user).first()
@@ -810,3 +821,82 @@ def dumb(request):
 
     }
     return render(request, 'normal/signup/dumb.html', context)
+
+
+def messages(request):
+    if request.is_ajax() and request.method == 'POST':
+        message= request.POST['message']
+        sender= request.POST['sender']
+        reciever = request.POST['reciever']
+        # customer = Customer.objects.filter(user_ptr_id=reciever).first()
+        user_sender = User.objects.filter(id=int(sender)).first()
+        user_reciever = User.objects.filter(id=int(reciever)).first()
+        print(message,sender,reciever,user_reciever,user_sender)
+        Message.objects.create(
+            msg_content=message,
+            sender=user_sender,
+            reciever=user_reciever,
+        )
+        context = {
+            'results':'success',
+            'msg': message,
+            'cmpny' : Company.objects.filter(user_ptr_id = int(sender))
+        }
+        return JsonResponse(context)
+    context = {
+        'results': 'error'
+    }
+    return JsonResponse(context)
+
+
+def fetch_data_messages(request, customer_id):
+    # customer = Customer.objects.filter(id=int(customer_id)).first()
+    userr =User.objects.filter(id=customer_id).first()
+    messg = Message.objects.filter(reciever=userr, sender_id=request.user.id).order_by('created_at')
+
+    context = {
+        'messages': messg,
+        'sender': request.user.id
+    }
+    # content = loader.render_to_string('normal/dashboard/chatb.html', context )
+
+    # html_data = render_to_string('normal/dashboard/employer-dash.html',context, request=request,)
+    return render_to_response('normal/dashboard/chatb.html', context)
+    # return JsonResponse(content)
+    # return render(request, 'normal/dashboard/employer-dash.html', context)
+
+
+
+
+# def index(request):
+#     return render(request, 'chat/index.html', {})
+
+def room(request, room_name):
+    user = request.user.id
+    company = Company.objects.filter(user_ptr_id=user).first()
+    social = CompanySocialAccount.objects.filter(company=company).first()
+    customers = CompanyShortlistCustomers.objects.filter(company=company)
+    context={
+        'room_name_json': mark_safe(json.dumps(room_name)),
+        'company': company,
+        'social': social,
+        'customers': customers,
+    }
+    return render(request, 'room_name.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1369,7 +1369,7 @@ Top Header
     padding: 10px 0px;
     line-height: 1.5;
     font-weight: 700;
-    background-color: #5969ff;
+    background-color: #21ae41;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
@@ -1469,7 +1469,7 @@ Top Header
 .nav-user-name {}
 
 .nav-user-info {
-    background-color: #5969ff;
+    background-color: #21ae41;
     line-height: 1.4;
     padding: 12px;
     color: #fff;

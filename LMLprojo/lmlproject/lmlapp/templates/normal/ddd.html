@@ -1,153 +1,25 @@
-<div id="cornel">
-    <div class="qualification_block" id="template">
-        <select name="" onchange="getCourses(this)">
-            <option value="">Select </option>
-            <option value="phd">PHD</option>
-            <option value="masters">MASTERS</option>
-            <option value="bachelors">BACHELORS</option>
-        </select>
-        <BR>
-        <select name="uni">
-            <option value="">Select</option>
-            <option value="moi">Moi</option>
-            <option value="moi">mku</option>
-            <option value="moi">uon</option>
-        </select>
-        <br>
-        <input name="course_selections" id="1" class="course_options">
-        </input>
-        <br>
-    </div>
-</div>
-<span class="btn-primary btn" onclick="AddBlock()">Add new</span>
-
-<script>
-    var qualifications = {
-        "phd": ['part', 'pscience', 'pkiswahili'],
-        "masters": ['mart', 'mscience', 'mkiswahili'],
-        "bachelors": ['bart', 'bscience', 'bkiswahili'],
-    };
-    var container = document.getElementById('cornel');
-
-    function getCourses(qualification_dom) {
-        var courses = qualifications[qualification_dom.value];
-        qualification_dom.parentNode.children[4].value = courses;
-    }
-
-    function AddBlock() {
-
-        var container = document.getElementById('cornel');
-        var template = document.getElementById('template');
-        var itm = template;
-        var cln = itm.cloneNode(true);
-        cln.getElementsByTagName('input').value = '';
-        cln.getElementsByTagName('select').value = '';
-        new_id = container.children.length +1;
-        var input_course = cln.children[4];
-
-        console.log(input_course);
-        input_course.id = new_id;
-        container.appendChild(cln);
-    }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div style="padding:0; display: none; margin-bottom: 20px;" class="uni col-md-12 col-sm-12">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                                            <select name="school[]" class="choose-university form-control input-lg">
-                                                <option selected disabled="disabled">University</option>
-                                                <option>Nairobi</option>
-                                                <option>Etc</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div style="padding:0; display: none; margin-bottom: 20px;" class="phd col-md-12 col-sm-12">
-                                        <div class="input-group col-md-4 col-sm-12">
-                                            <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                            <select name="course[]" class="choose-phd form-control input-lg">
-                                                <option selected disabled="disabled">Qualification, e.g. Phd in Arts
-                                                </option>
-                                                <option>Phd in Arts</option>
-                                                <option>Phd in Arts</option>
-                                                <option>Phd in Arts</option>
-                                                <option>Phd in Arts</option>
-                                                <option>Phd in Arts</option>
-                                                <option>Phd in Arts</option>
-                                                <option>Etc</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div style="padding:0; display: none; margin-bottom: 20px;"
-                                         class="bachelor col-md-12 col-sm-12">
-                                        <div class="input-group col-md-4 col-sm-12">
-                                            <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                            <select name="course[]" class="choose-bachelor form-control input-lg">
-                                                <option selected disabled="disabled">Qualification, e.g. Bachelor in
-                                                    Arts
-                                                </option>
-                                                {% for bachelor in bachelors %}
-                                                    <option value="{{ bachelor }}">{{ bachelor }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div style="padding:0; display: none; margin-bottom: 20px;"
-                                         class="diploma col-md-12 col-sm-12">
-                                        <div class="input-group col-md-4 col-sm-12">
-                                            <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                            <select name="course[]" class="choose-diploma form-control input-lg">
-                                                <option selected disabled="disabled">Qualification, e.g. Diploma in
-                                                    Arts
-                                                </option>
-                                                {% for diploma in diplomas %}
-                                                    <option value="{{ diploma }}">{{ diploma }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div style="padding:0; display: none; margin-bottom: 20px;"
-                                         class="certificate col-md-12 col-sm-12">
-                                        <div class="input-group col-md-4 col-sm-12">
-                                            <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                            <select name="course[]" class="choose-certificate form-control input-lg">
-                                                <option selected disabled="disabled">Qualification, e.g. Certificate in
-                                                    Arts
-                                                </option>
-
-                                                {% for cert in certificates %}
-                                                    <option value="{{ cert }}">{{ cert }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div style="padding:0; display: none; margin-bottom: 20px;" class="date col-md-12 col-sm-12">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Year of graduation</span>
-                                            <input name="graduation_date[]" type="date" id="edu-start"
-                                                   class="form-control edu-start">
-                                        </div>
-                                    </div>
-                                    <div style="padding:0; display: none; margin-bottom: 20px;" class="reg_no col-md-12 col-sm-12">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Registration number</span>
-                                            <input name="reg_number[]" type="text" class="form-control regno">
-                                        </div>
-                                    </div>
+ $('#messagebox').append(
+   '<li class="{% if message.company_message_to_customer %} left {% else %} right {% endif %} clearfix">'+
+   ' <span class="chat-img {% if message.company_message_to_customer %} pull-left {% else %} pull-right {% endif %}">'+
+        {% if message.company_message_to_customer %}
+           ' <img src="{{ message.company_message_to_customer.logo.url }}" alt="User Avatar" class="img-circle" />'+
+        {% else %}
+            '<img src="{{ message.customer_message_to_company.profile_image.url }}" alt="User Avatar" class="img-circle" />'+
+        {% endif %}
+    '</span>'+
+    '<div class="chat-body clearfix">'+
+        '<div class="header">'+
+            '<strong class="primary-font">'+
+                {% if message.company_message_to_customer %}
+                    {{ message.company_message_to_customer.company_name }}
+                {% else %}
+                     {{ message.customer_message_to_company.first_name }} {{ message.customer_message_to_company.last_name }}
+                {% endif %}
+            '</strong> <small class="pull-right text-muted">'+
+                '<span class="glyphicon glyphicon-time"></span>12 mins ago</small>'+
+       ' </div>'+
+        '<p>'+
+            data['msg'] +
+        '</p>'+
+    '</div>'+
+'</li>');
