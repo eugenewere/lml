@@ -15,7 +15,7 @@ constantly==15.1.0
 cryptography==2.7
 daphne==2.3.0
 defusedxml==0.6.0
-Django==2.1.11
+Django==2.1.15
 django-allauth==0.39.1
 django-crispy-forms==1.7.2
 django-humanize==0.1.2
