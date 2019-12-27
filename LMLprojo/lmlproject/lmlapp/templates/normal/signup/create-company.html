@@ -1,10 +1,22 @@
 {% extends 'normal/layout/homelayout.html' %}
 {% load static %}
 {% block links %}
-
+    <style type="text/css">
+        #signuploader {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          background: rgba(0,0,0,0.75) url({% static 'assets/img/avatar/CorruptOldfashionedGuineapig-small.gif' %}) no-repeat center center;
+          z-index: 10000;
+        }
+    </style>
 {% endblock links %}
 {% block content %}
-
+        <div id="signuploader"></div>
            <!-- Header Title Start -->
 {#			<section class="inner-header-title blank" >#}
 {#				<div class="container">#}
@@ -23,181 +35,160 @@
 			</section>
 			<div class="clearfix"></div>
 			<!-- Header Title End -->
-        <form action="{% url 'LML:companysignup' %}" method="post" enctype="multipart/form-data">
+        <form id="employeeform" action="{% url 'LML:companysignup' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-                <div>
-                <!-- General Detail Start -->
-                <div class="section detail-desc">
-                    <div class="container">
-                        <div class="ur-detail-wrap create-kit padd-bot-0">
-                            <div class="row">
-                                <div class="detail-pic js">
-                                    <div class="box companybox">
-                                        <input autofocus value="{% if form.logo.value %}{{ form.logo.value }}{% endif %}" required style="position: relative;" onchange="readURL(this)" type="file" name="logo" id="upload-pic" class="inputfile" />
-                                        <label  for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:34px; color: white; text-align: center;">Upload Logo</span></label>
-                                        <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% if form.logo.value %}{{ form.logo.value.url }}{% else %}{% static 'assets/img/client-1.jpg' %}{% endif %}" alt="">
-                                    </div>
-                                    <div id="disclaimer" class="disclaimer disclaimer-animated ">
-                                        Upload Logo
-                                    </div>
+            <div>
+
+            <!-- General Detail Start -->
+            <div class="section detail-desc">
+                <div class="container">
+                    <div class="ur-detail-wrap create-kit padd-bot-0">
+                        <div class="row">
+                            <div class="detail-pic js">
+                                <div class="box companybox">
+                                    <input autofocus value="{% if form.logo.value %}{{ form.logo.value }}{% endif %}" required style="position: relative;" onchange="readURL(this)" type="file" name="logo" id="upload-pic" class="inputfile" />
+                                    <label  for="upload-pic"><i class="fa fa-picture-o" aria-hidden="true"></i><span style="margin-left:34px; color: white; text-align: center;">Upload Logo</span></label>
+                                    <img class="blah" id="blah" style="position: absolute;top: 0; left: 0; bottom: 0; right: 0; visibility:hidden;width: 167px; height: 174px" src="{% if form.logo.value %}{{ form.logo.value.url }}{% else %}{% static 'assets/img/client-1.jpg' %}{% endif %}" alt="">
+                                </div>
+                                <div id="disclaimer" class="disclaimer disclaimer-animated ">
+                                    Upload Logo
                                 </div>
                             </div>
+                        </div>
 
 
-                                {% if form.errors %}
-                                    <div class="alert alert-danger alert-dismissable">
-                                      <h4>Please fix the following errors</h4>
-                                      <ul>
-                                        {% for field in form %}
-                                          {% if field.errors %}
-                                            {% for error in field.errors %}
-                                              <li><a href="{{ field.name }}" class="error">{{ error|escape }}</a></li>
-                                            {% endfor %}
-                                          {% endif %}
-                                        {% endfor %}
-                                      </ul>
-                                      {% if form.non_field_errors %}
-                                        {{ form.non_field_errors }}
-                                      {% endif %}
-                                    </div>
-                                {% endif %}
-                            <div class="row bottom-mrg">
-                                <form class="add-feild">
-                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
-                                        <div style=" margin-bottom:0px;display: block !important;" class="input-group" >
-                                            <label for="firstname"></label>
-                                            <input autofocus required value="{% if form.logo.value %}{{ form.company_name.value }}{% endif %}" name="company_name" type="text" class="form-control" id="firstname" placeholder="Company Name" >
+                         <div id="error_div" class="w-100 row">
+                            {% include 'normal/signup/errors.html' %}
+                         </div>
+                        <div class="row bottom-mrg">
+                            <form class="add-feild">
+                                <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                    <div style=" margin-bottom:0px;display: block !important;" class="input-group" >
+                                        <label for="firstname"></label>
+                                        <input autofocus required value="{% if form.logo.value %}{{ form.company_name.value }}{% endif %}" name="company_name" type="text" class="form-control" id="firstname" placeholder="Company Name" >
 {#                                            {{ form.first_name }}#}
-                                        </div >
-                                        <small id="passwordHelpBlock" class="form-text text-muted">
-                                          Company Name.
+                                    </div >
+                                    <small id="passwordHelpBlock" class="form-text text-muted">
+                                      Company Name.
 
-                                        </small>
-                                    </div>
+                                    </small>
+                                </div>
 
-                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
-                                        <div style=" margin-bottom:0px;display: block !important;" class="input-group">
-                                            <label for="firstname2"></label>
-                                            <input required value="{% if form.logo.value %}{{ form.company_motto.value }}{% endif %}" name="company_motto" id="firstname2" type="text" class="form-control" placeholder="Company Motto" >
-                                        </div >
-                                        <small id="passwordHelpBlock" class="form-text text-muted">
-                                          Company Motto.
-                                        </small>
-                                    </div>
+                                <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                    <div style=" margin-bottom:0px;display: block !important;" class="input-group">
+                                        <label for="firstname2"></label>
+                                        <input required value="{% if form.logo.value %}{{ form.company_motto.value }}{% endif %}" name="company_motto" id="firstname2" type="text" class="form-control" placeholder="Company Motto" >
+                                    </div >
+                                    <small id="passwordHelpBlock" class="form-text text-muted">
+                                      Company Motto.
+                                    </small>
+                                </div>
 
 {#                                    <input hidden name="company_reg_no" type="text">#}
 
-                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
-                                        <div style=" display: block !important;" class="input-group">
-                                            <select required  name="category" id="choose-category" class="form-control input-lg">
-                                                <option {% if not form.category.value %} selected {% else %}disabled{% endif %} >Company Categories</option>
-                                                {% for category in categories %}
-                                                    <option {% if form.category.value == category.id %} selected {% endif %} value="{{ category.id }}">{{ category.category }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div >
-                                        <small id="passwordHelpBlock" class="form-text text-muted">
-                                          Company Category.
-                                        </small>
+                                <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                    <div style=" display: block !important;" class="input-group">
+                                        <select required  name="category" id="choose-category" class="form-control input-lg">
+                                            <option {% if not form.category.value %} selected {% else %}disabled{% endif %} >Company Categories</option>
+                                            {% for category in categories %}
+                                                <option {% if form.category.value == category.id %} selected {% endif %} value="{{ category.id }}">{{ category.category }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div >
+                                    <small id="passwordHelpBlock" class="form-text text-muted">
+                                      Company Category.
+                                    </small>
+                                </div>
+                                <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                    <div style="margin-top: 0px; display: block !important;" class="input-group" >
+                                        <select required name="bizness_entity_type" id="choose-entity" class="form-control input-lg">
+                                            <option {% if form.bizness_entity_type.value %} disabled {% else %} selected disabled{% endif %}>Type of Business Entity</option>
+                                            <option{% if form.buzness_entity_type.value == 'Limited Liability Company' %} selected {% endif %}>Limited Liability Company</option>
+                                            <option{% if form.buzness_entity_type.value == 'Partnership' %} selected {% endif %}>Partnership</option>
+                                            <option{% if form.buzness_entity_type.value == 'Corporation' %} selected {% endif %}>Corporation</option>
+                                            <option{% if form.buzness_entity_type.value == 'Proprietorship' %} selected {% endif %}>Proprietorship</option>
+                                            <option{% if form.buzness_entity_type.value == 'Trust' %} selected {% endif %}>Trust</option>
+                                            <option{% if form.buzness_entity_type.value == 'sole' %} selected {% endif %}>sole</option>
+                                            <option{% if form.buzness_entity_type.value == 'other' %} selected {% endif %}>other</option>
+
+                                        </select>
                                     </div>
-                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
-                                        <div style="margin-top: 0px; display: block !important;" class="input-group" >
-                                            <select required name="bizness_entity_type" id="choose-entity" class="form-control input-lg">
-                                                <option {% if form.bizness_entity_type.value %} disabled {% else %} selected disabled{% endif %}>Type of Business Entity</option>
-                                                <option{% if form.buzness_entity_type.value == 'Limited Liability Company' %} selected {% endif %}>Limited Liability Company</option>
-                                                <option{% if form.buzness_entity_type.value == 'Partnership' %} selected {% endif %}>Partnership</option>
-                                                <option{% if form.buzness_entity_type.value == 'Corporation' %} selected {% endif %}>Corporation</option>
-                                                <option{% if form.buzness_entity_type.value == 'Proprietorship' %} selected {% endif %}>Proprietorship</option>
-                                                <option{% if form.buzness_entity_type.value == 'Trust' %} selected {% endif %}>Trust</option>
-                                                <option{% if form.buzness_entity_type.value == 'sole' %} selected {% endif %}>sole</option>
-                                                <option{% if form.buzness_entity_type.value == 'other' %} selected {% endif %}>other</option>
+                                    <small id="passwordHelpBlock" class="form-text text-muted">
+                                      Company Business Entity.
+                                    </small>
+                                </div>
 
-                                            </select>
-                                        </div>
-                                        <small id="passwordHelpBlock" class="form-text text-muted">
-                                          Company Business Entity.
-                                        </small>
+                                <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                    <div style="margin-top: 0px; display: block !important;" class="input-group">
+                                        <label for="kk1"></label>
+                                        <input required value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" name="first_name" id="kk1" type="text" class="form-control" placeholder="First Name">
                                     </div>
+                                    <small id="passwordHelpBlock" class="form-text text-muted">
+                                      Representative First Name.
+                                      <br>
+                                        {{ form.first_name.errors }}
+                                    </small>
 
-                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
-                                        <div style="margin-top: 0px; display: block !important;" class="input-group">
-                                            <label for="kk1"></label>
-                                            <input required value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" name="first_name" id="kk1" type="text" class="form-control" placeholder="First Name">
-                                        </div>
-                                        <small id="passwordHelpBlock" class="form-text text-muted">
-                                          Representative First Name.
-                                          <br>
-                                            {{ form.first_name.errors }}
-                                        </small>
-
+                                </div>
+                                <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                    <div style="margin-top: 0px; display: block !important;" class="input-group">
+                                        <label for="kk2"></label>
+                                        <input required value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}" name="last_name" id="kk2" type="text" class="form-control" placeholder="Last Name">
                                     </div>
-                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
-                                        <div style="margin-top: 0px; display: block !important;" class="input-group">
-                                            <label for="kk2"></label>
-                                            <input required value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}" name="last_name" id="kk2" type="text" class="form-control" placeholder="Last Name">
-                                        </div>
-                                        <small id="passwordHelpBlock" class="form-text text-muted">
-                                          Representative Last Name.
+                                    <small id="passwordHelpBlock" class="form-text text-muted">
+                                      Representative Last Name.
 
-                                        </small>
+                                    </small>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                    <div style="margin-top: 0px; display: block !important;" class="input-group">
+                                        <input required value="{% if form.email.value %}{{ form.email.value }}{% endif %}" name="email" type="email" class="form-control" placeholder="Email">
                                     </div>
+                                    <small id="passwordHelpBlock" class="form-text text-muted">
+                                      Your Email.
+                                    </small>
+                                    {% if form.email.errors %}
+                                        <div class="alert alert-danger">{{form.email.errors}}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                    <div style=" margin-bottom:0px;display: block !important;" class="input-group">
+                                        <label for="firstname3"></label>
+                                        <input required value="{% if form.username.value %}{{ form.username.value }}{% endif %}" name="username" id="firstname3" type="text" class="form-control" placeholder="Username" >
+                                    </div >
+                                    <small id="passwordHelpBlock" class="form-text text-muted">
+                                        Username.
+                                    </small>
+                                    {% if form.username.errors %}
+                                        <div class="alert alert-danger">{{form.username.errors}}</div>
+                                    {% endif %}
+                                </div>
 
-                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
-                                        <div style="margin-top: 0px; display: block !important;" class="input-group">
-                                            <input required value="{% if form.email.value %}{{ form.email.value }}{% endif %}" name="email" type="email" class="form-control" placeholder="Email">
-                                        </div>
-                                        <small id="passwordHelpBlock" class="form-text text-muted">
-                                          Your Email.
-                                        </small>
-                                        {% if form.email.errors %}
-                                            <div class="alert alert-danger">{{form.email.errors}}</div>
-                                        {% endif %}
-                                    </div>
-                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
-                                        <div style=" margin-bottom:0px;display: block !important;" class="input-group">
-                                            <label for="firstname3"></label>
-                                            <input required value="{% if form.username.value %}{{ form.username.value }}{% endif %}" name="username" id="firstname3" type="text" class="form-control" placeholder="Username" >
-                                        </div >
-                                        <small id="passwordHelpBlock" class="form-text text-muted">
-                                            Username.
-                                        </small>
-                                        {% if form.username.errors %}
-                                            <div class="alert alert-danger">{{form.username.errors}}</div>
-                                        {% endif %}
-                                    </div>
+                                <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                    <div style="margin-top: 0px; " class="input-group">
+                                        <span class="input-group-addon orangebg"> Date Created</span>
+                                       <input required  name="date_created" style="margin-bottom:0" type="date" class="form-control" >
+                                    </div><small id="passwordHelpBlock" class="form-text text-muted">
+                                      Date created.
+                                    </small>
+                                </div>
+                                <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
+                                    <input value="{% if form.description.value %}{{ form.description.value }}{% endif %}" name="description" type="text" class="form-control" placeholder="Company Description eg.Construction Company">
+                                </div>
 
-                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
-                                        <div style="margin-top: 0px; " class="input-group">
-                                            <span class="input-group-addon orangebg"> Date Created</span>
-                                           <input required value="{% if form.form.date_created.value %}{{ form.date_created.value|date:'Y-m-d' }}{% endif %}" name="date_created" style="margin-bottom:0" data-dd-theme="vanilla" placeholder="date of incorporation" type="text" id="dob" data-lang="en" data-large-mode="true" data-min-year="1900" data-max-year="<script>var date = new Date; var year = date.getFullYear();document.write(year);</script>" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"  class="form-control" readonly="">
-                                        </div><small id="passwordHelpBlock" class="form-text text-muted">
-                                          Date created.
-                                        </small>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6" style="margin-top: 10px;">
-                                        <input value="{% if form.description.value %}{{ form.description.value }}{% endif %}" name="description" type="text" class="form-control" placeholder="Company Description eg.Construction Company">
-                                    </div>
-
-                                </form>
-                            </div>
-
-{#                            <div class="row no-padd">#}
-{#                                <div class="detail pannel-footer">#}
-{#                                    <div class="col-md-12 col-sm-12">#}
-{#                                        <div class="detail-pannel-footer-btn pull-right">#}
-{#                                            <a href="#" class="footer-btn choose-cover">Choose Cover Image</a>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-
+                            </form>
                         </div>
+
+
+
                     </div>
                 </div>
-                <!-- General Detail End -->
+            </div>
+            <!-- General Detail End -->
 
-                <!-- Basic Full Detail Form Start -->
-                <section class="full-detail">
+            <!-- Basic Full Detail Form Start -->
+            <section class="full-detail">
                     <div class="container">
                         <div class="row bottom-mrg extra-mrg">
                             <h2 class="detail-title">Company Information</h2>
@@ -349,7 +340,7 @@
 {#                                         <input   type="checkbox" class="custom-control-input customRadio" id="termscheck" name="example" value="">#}
 {#                                         Agree to terms and conditions <a href="#">Terms</a>#}
 
-                                         <input  onchange="openSubmit2();" type="checkbox" class="custom-control-input customRadio" id="termschecks2" name="example" value="">
+                                         <input  type="checkbox" class="custom-control-input customRadio" id="termschecks2" name="example" value="">
                                          By checking this box you agree to our <a href="{% url 'LML:termsandconditons' %}">Terms and conditions</a>
                                      </span>
                                 </div>
@@ -357,7 +348,7 @@
                         </div>
                         </div>
                         <div class="col-md-12 col-sm-12 row">
-                            <button id="submitbutton" type="submit"  class="submitbutton btn btn-success btn-primary small-btn">Submit your company</button>
+                            <button  type="submit"  class=" btn btn-success btn-primary small-btn">Submit your company</button>
                         </div>
                         <div class="col-md-12">
                             <div class="row text-right" style="">
@@ -367,11 +358,68 @@
                         <!-- Basic Full Detail Form End -->
                     </div>
                 </section>
-                </div>
+            </div>
         </form>
 
 {% endblock content %}
 {% block script %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <script>
+
+        $(document).ready(function(){
+           var spinner = $('#signuploader');
+           $("#employeeform").submit(function(e){
+                e.preventDefault();
+                spinner.show();
+                var new_form_data = new FormData(this);
+                $.ajax({
+                    method : 'POST',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data : new_form_data,
+                    enctype: 'multipart/form-data',
+                    url :  $("#employeeform").attr('action'),
+                    success : function(response){
+
+                        spinner.hide();
+                        if (response.results === 'success') {
+                            $("#employeeform")[0].reset();
+                            swal.fire({
+                                title: "Success!",
+                                text: response.success,
+                                type: "success",
+                                confirmButtonText: "Continue",
+                            });
+                            setTimeout(function () {
+                                window.location = {% url 'LML:home' %};
+                            }, 5000);
+                        }
+                        else {
+                            $('#error_div').html(response);
+                            swal.fire({
+                                title: "Error!",
+                                text: "Form Is Invalid. Correct the errors above",
+                                type: "error",
+                                confirmButtonText: "Retry"
+                        });
+
+
+
+
+                        }
+
+                    },
+                    error : function(response){
+                        console.log(response);
+                        spinner.hide();
+
+                    }
+                });
+           });
+        });
+    </script>
     <script>
          $('#dob').dateDropper();
 

@@ -11,19 +11,7 @@ var disability = document.getElementsByClassName('des')[0];
     }
 
 
-// function openSubmit() {
-//     var submitbutton = document.getElementsByClassName('submitbutton')[0];
-//     var termscheck = document.getElementsByClassName('termscheck')[0];
-//     var attr = submitbutton.getAttributeNode("disabled");
-//
-//
-//     if(termscheck.checked === true){
-//         submitbutton.removeAttribute("disabled");
-//     }else {
-//         submitbutton.setAttribute("disabled", "disabled");
-//
-//     }
-// }
+
 
 function showEducation(data) {
         var y = document.getElementById(data.id);

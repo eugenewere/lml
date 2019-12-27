@@ -116,7 +116,7 @@
                         <h2 class="side-widget-title">Messages <span class="badge badge-danger badge-pill">0</span></h2>
                         <div class="widget-text padd-0">
                             <ul>
-                                <li><a href="{% url 'LML:employer_dash_message' %}">
+                                <li><a href="{% url 'LML:employer_dash_message' request.user.username %}">
                                     All Messages
                                     <span class="pull-right">0</span></a>
                                 </li>

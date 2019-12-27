@@ -74,7 +74,7 @@ def signup(request):
 
 
         form = PersonelRegisterForm(request.POST, request.FILES)
-        print(form)
+
         if form.is_valid():
             new_user= form.save()
             CustomerRegNo.objects.create(
@@ -143,17 +143,15 @@ def signup(request):
                 Customer.objects.filter(user_ptr_id=new_user.id).update(
                     rank_status=status,
                 )
-            # elif():
-            #     status = 'BASIC'
-            #     Customer.objects.filter(user_ptr_id=new_user.id).update(
-            #         rank_status=status,
-            #     )
+
             else:
                 status = 'BASIC'
                 Customer.objects.filter(user_ptr_id=new_user.id).update(
                     rank_status=status,
                 )
-            # sweetify.success(request, 'You did it', text='Good job! You successfully Registered, just login', persistent='Continue')
+            new_user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'],)
+            login(request, new_user)
+            sweetify.success(request, 'You did it', text='Good job! You successfully Registered, just login', persistent='Continue')
             data = {
                 'results': 'success',
                 'success': 'Good job! You successfully Registered, just login'
@@ -167,10 +165,7 @@ def signup(request):
                 'results':'error',
                 'form':form1,
             }
-            # sweetify.error(request, 'Error', text='Error Registering your account', persistent='Retry')
-            # lst=list(data)
-            print(data)
-            return JsonResponse(data, safe=False)
+            return render_to_response('normal/signup/errors.html', data)
 
 
 
@@ -454,7 +449,7 @@ def companysignup(request):
     instagram = request.POST.get('instagram')
     linkedin = request.POST.get('linkedin')
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.is_ajax():
         # form = CompanyUserSignUpForm(request.POST)
         form = CompanyRegisterForm(request.POST, request.FILES)
         form2 = CompanySocialsForm(request.POST)
@@ -474,22 +469,27 @@ def companysignup(request):
                 company=new_user,
                 company_reg_no=('CMP'+get_random_string(length=8, allowed_chars='ABDEFGHIJKLNPQRSTUVWXYZ123456789')),
             )
-            sweetify.success(request, 'You did it', text='Good job! You successfully registered', persistent='Ok')
-            return redirect('LML:companypayment')
+            # sweetify.success(request, 'You did it', text='Good job! You successfully registered', persistent='Ok')
+            data = {
+                'results': 'success',
+                'success': 'Good job! You successfully Registered, just login'
+            }
+            return JsonResponse(data, safe=False, status=status.HTTP_200_OK)
         else:
-            # formr = CompanyRegisterForm()
+            formr = CompanyRegisterForm(request.POST, request.FILES)
+
             # print(formr.errors)
-            sweetify.error(request, 'Error', text='Ensure you fill all fields correctly', persistent='Retry')
+            # sweetify.error(request, 'Error', text='Ensure you fill all fields correctly', persistent='Retry')
             context3 = {
+                'results': 'error',
                 'title': 'Create an account',
-                'counties': County.objects.all(),
-                'regions': Region.objects.all(),
-                'categories': Category.objects.all(),
-                'form': form,
-                'social': form2,
+                'form': formr
 
             }
-            return render(request, 'normal/signup/create-company.html', context3)
+            # return JsonResponse(context3, safe=False)
+            # return render_to_response('normal/signup/errors.html', context)
+            return render_to_response('normal/signup/errors.html', context3)
+
             # return redirect('LML:companysignup',{'form':form, 'social':form2})
 
     else:
@@ -503,7 +503,7 @@ def companysignup(request):
 
     context = {
         'title': 'Create an account',
-         'counties':County.objects.all(),
+        'counties':County.objects.all(),
         'regions':Region.objects.all(),
         'categories': Category.objects.all(),
         'form': form,
@@ -677,7 +677,7 @@ def employer_dash(request):
     }
     return render(request, 'normal/dashboard/employer-dash.html', context)
 
-def employer_dash_message(request):
+def employer_dash_message(request, username):
     user = request.user.id
     company = Company.objects.filter(user_ptr_id=user).first()
     social = CompanySocialAccount.objects.filter(company=company).first()
@@ -686,6 +686,8 @@ def employer_dash_message(request):
         'company': company,
         'social': social,
         'customers':customers,
+        'room_name_json': mark_safe(json.dumps(username))
+
     }
     return render(request, 'normal/dashboard/employeer-message-chat.html', context)
 
@@ -871,18 +873,19 @@ def fetch_data_messages(request, customer_id):
 # def index(request):
 #     return render(request, 'chat/index.html', {})
 
-def room(request, room_name):
-    user = request.user.id
-    company = Company.objects.filter(user_ptr_id=user).first()
-    social = CompanySocialAccount.objects.filter(company=company).first()
-    customers = CompanyShortlistCustomers.objects.filter(company=company)
-    context={
-        'room_name_json': mark_safe(json.dumps(room_name)),
-        'company': company,
-        'social': social,
-        'customers': customers,
-    }
-    return render(request, 'room_name.html', context)
+# def room(request, room_name):
+#     user = request.user.id
+#     company = Company.objects.filter(user_ptr_id=user).first()
+#     social = CompanySocialAccount.objects.filter(company=company).first()
+#     customers = CompanyShortlistCustomers.objects.filter(company=company)
+#
+#     context={
+#         'room_name_json': mark_safe(json.dumps(room_name)),
+#         'company': company,
+#         'social': social,
+#         'customers': customers,
+#     }
+#     return render(request, 'normal/dashboard/employeer-message-chat.html', context)
 
 
 

@@ -6,6 +6,12 @@ from . import views
 app_name = 'LML'
 urlpatterns = [
     path('', views.home, name="home"),
+
+    # path('li/<str:room_name>/', views.room, name='room'),
+    # re_path(r'^(?P<room_name>[^/]+)/$', views.room, name='room'),
+    # re_path(r"^employerdash_message/(?P<username>[\w.@+-]+)/$", views.employer_dash_message),
+
+
     path('signup/', views.signup_initial, name="signup_initial"),
     path('signupcompany/', views.signup_company_initial, name="signup_company_initial"),
     path('signupemployee/', views.signup_employee_initial, name="signup_employee_initial"),
@@ -43,7 +49,7 @@ urlpatterns = [
     path('companypaymentpackage/<int:pricing_id>',views.companypaymentpackage, name='companypaymentpackage'),
 
     path('employerdash/',views.employer_dash, name='employer_dash'),
-    path('employerdash_message/',views.employer_dash_message, name='employer_dash_message'),
+    path('employerdash_message/<str:username>/',views.employer_dash_message, name='employer_dash_message'),
 
     path('employeedash/',views.employee_dash, name='employee_dash'),
 
@@ -61,7 +67,5 @@ urlpatterns = [
     path('fetchmessages/<int:customer_id>', views.fetch_data_messages, name='fetch_data_messages'),
 
 
-    # path('li/<str:room_name>/', views.room, name='room'),
-    re_path(r'^(?P<room_name>[^/]+)/$', views.room, name='room'),
 
 ]

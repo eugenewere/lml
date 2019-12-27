@@ -51,23 +51,7 @@
                         </div>
                     </div>
                 <div id="error_div">
-                    {% if form.errors %}
-                        <div class="alert alert-danger alert-dismissable">
-                            <h4>Please fix the following errors</h4>
-                            <ul>
-                                {% for field in form %}
-                                    {% if field.errors %}
-                                        {% for error in field.errors %}
-                                            <li><a href="{{ field.name }}" class="error">{{ error|escape }}</a></li>
-                                        {% endfor %}
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                            {% if form.non_field_errors %}
-                                {{ form.non_field_errors }}
-                            {% endif %}
-                        </div>
-                    {% endif %}
+                        {% include 'normal/signup/errors.html' %}
                 </div>
 
                     <div class="row bottom-mrg">
@@ -202,7 +186,7 @@
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input onclick="closeDisability()" type="radio" class="disability_choice custom-control-input"
-                                               id="no customRadio2" name="disability_status" value="NOTDISABLED">
+                                               id="no customRadio2" name="disability_status" value="NOT_DISABLED">
                                         <label class="custom-control-label" for="customRadio2">No</label>
                                     </div>
                                 </div>
@@ -672,34 +656,28 @@
                     enctype: 'multipart/form-data',
                     url :  $("#employeeform").attr('action'),
                     success : function(response){
-
+                        spinner.hide();
                         if (response.results === 'success') {
-
+                            $("#employeeform")[0].reset();
                             swal.fire({
                                 title: "Success!",
                                 text: response.success,
                                 type: "success",
                                 confirmButtonText: "Continue",
                             });
-                            $("#employeeform")[0].reset();
+                            setTimeout(function () {
+                                window.location = {% url 'LML:payment' %};
+                            }, 5000)
                         }
-                        if(response.results === 'error') {
-
+                        else {
+                            $('#error_div').html(response);
                             swal.fire({
                                 title: "Error!",
-                                text: "Form Is Invalid",
+                                text: "Form Is Invalid. Please fix the above errors",
                                 type: "error",
                                 confirmButtonText: "Retry"
                             });
 
-                            for(x in response['form']){
-                               $("#error_div").load(" #error_div").html(
-                                   '<div class="alert alert-danger alert-dismissable"> <br> <h4>Please fix the following errors</h4>' +
-                                   response["form"][x]
-                                   + '</div>'
-
-                               );
-                            }
 
 
                         }

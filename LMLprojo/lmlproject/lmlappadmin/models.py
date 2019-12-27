@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
@@ -6,7 +7,7 @@ from datetime import datetime
 import datetime
 
 # # Create your models here.
-from django.db.models import Count
+from django.db.models import Count, Q
 
 
 class County(models.Model):
@@ -84,7 +85,7 @@ class Customer(get_user_model()):
     landmark = models.CharField(max_length=100,null=True, blank=True)
     huduma_no = models.CharField(max_length=100,null=True, blank=True)
     job_type = models.CharField(max_length=200, null=False, blank=False)
-    disability = models.TextField()
+    disability = models.TextField(null=True)
 
     marital_status = models.CharField(max_length=100,null=True, blank=True)
     # driver_licence = models.CharField(max_length=100,null=True, blank=True)
@@ -425,6 +426,8 @@ class CompanyPricingPlan(models.Model):
 
     def _str__(self):
         return '%s  ' %(self.title)
+
+
 
 class Message(models.Model):
      sender = models.ForeignKey(User, related_name="sender", on_delete=models.CASCADE,null=False, blank=False)

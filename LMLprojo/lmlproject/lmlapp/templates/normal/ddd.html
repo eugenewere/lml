@@ -1,25 +1,48 @@
- $('#messagebox').append(
-   '<li class="{% if message.company_message_to_customer %} left {% else %} right {% endif %} clearfix">'+
-   ' <span class="chat-img {% if message.company_message_to_customer %} pull-left {% else %} pull-right {% endif %}">'+
-        {% if message.company_message_to_customer %}
-           ' <img src="{{ message.company_message_to_customer.logo.url }}" alt="User Avatar" class="img-circle" />'+
-        {% else %}
-            '<img src="{{ message.customer_message_to_company.profile_image.url }}" alt="User Avatar" class="img-circle" />'+
-        {% endif %}
-    '</span>'+
-    '<div class="chat-body clearfix">'+
-        '<div class="header">'+
-            '<strong class="primary-font">'+
-                {% if message.company_message_to_customer %}
-                    {{ message.company_message_to_customer.company_name }}
-                {% else %}
-                     {{ message.customer_message_to_company.first_name }} {{ message.customer_message_to_company.last_name }}
-                {% endif %}
-            '</strong> <small class="pull-right text-muted">'+
-                '<span class="glyphicon glyphicon-time"></span>12 mins ago</small>'+
-       ' </div>'+
-        '<p>'+
-            data['msg'] +
-        '</p>'+
-    '</div>'+
-'</li>');
+    <script>
+        var endpoint, socket, wsStart, loc,  msgInput;
+
+        var charform1 = document.getElementById('chatformee{{ customer.customer.id }}');
+        var chat_message_input = $('#chat-message-input');
+        var customer_id = $('#customer_id');
+        var chat_log = $('#chat-log');
+        loc = window.location;
+        wsStart ='ws://';
+        if(loc.protocol === 'https:'){
+            wsStart = 'wss://'
+        }
+        endpoint = wsStart + loc.host + loc.pathname;
+        socket = new WebSocket(endpoint);
+
+        socket.onmessage = function (e) {
+            console.log('message', e);
+            var  chat_Data = JSON.parse(e.data);
+
+            var image_url = chat_Data.image;
+            var image_url = '{{ company.logo.url }}';
+            console.log(chat_Data);
+
+            chat_log.append("<li class='sent'><img src='"+ image_url +"' alt='' /><p>"+ chat_Data.message +"</p><li>");
+
+        };
+        socket.onopen = function (e) {
+            console.log('open', e);
+            charform1.addEventListener('submit', function(event) {
+                event.preventDefault();
+                var finalData = {
+                    'message': chat_message_input.val(),
+                    'customer':customer_id.val(),
+                };
+                socket.send(JSON.stringify(finalData));
+                charform1.reset();
+
+            })
+
+        };
+        socket.onerror = function (e) {
+            console.log('error', e);
+        };
+        socket.onclose = function (e) {
+            console.log('close', e);
+            alert('closed', e)
+        };
+ </script>
