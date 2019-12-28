@@ -4,5 +4,5 @@ from .consumer import ChatConsumer
 
 websocket_urlpatterns = [
     # re_path(r'ws/chat/(?P<room_name>\w+)/$', ChatConsumer),
-    re_path(r"^lml/employerdash_message/(?P<username>[\w.@+-]+)/$", ChatConsumer),
+    re_path(r"^employerdash_message/(?P<room_name>[\w.@+-]+)/$", ChatConsumer),
 ]

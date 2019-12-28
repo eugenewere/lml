@@ -430,8 +430,8 @@ class CompanyPricingPlan(models.Model):
 
 
 class Message(models.Model):
-     sender = models.ForeignKey(User, related_name="sender", on_delete=models.CASCADE,null=False, blank=False)
-     reciever = models.ForeignKey(User, related_name="reciever",on_delete=models.CASCADE, null=False, blank=False)
+     author = models.ForeignKey(User, related_name="author_messages", on_delete=models.CASCADE,null=False, blank=False)
+     # reciever = models.ForeignKey(User, related_name="reciever",on_delete=models.CASCADE, null=False, blank=False)
      msg_content = models.TextField()
      created_at = models.DateTimeField(auto_now_add=True)
      updated_at = models.DateTimeField(auto_now=True)
@@ -442,16 +442,13 @@ class Message(models.Model):
      }
      status = models.CharField(max_length=200, null=True, blank=True, choices=MESSAGECHOICES, default='UNREAD')
      def _str__(self):
-         return '%s  ' % (self.sender)
+         return self.author.username
 
-     @property
-     def company_message_to_customer(self):
-         customer = Customer.objects.filter(user_ptr_id=self.reciever.id).first()
-         return customer
-     @property
-     def customer_message_to_company(self):
-         company = Company.objects.filter(user_ptr_id=self.sender.id).first()
-         return company
+
+     def last_50_messages(self):
+         return Message.objects.order_by('-created_at').all()[:50]
+
+
 
 
 class Newsletter(models.Model):

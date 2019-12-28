@@ -45,4 +45,99 @@
             console.log('close', e);
             alert('closed', e)
         };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function createMessage(data) {
+                                                            for (x in data) {
+                                                                for (y in data[x]) {
+                                                                    for (z in data[x][y]) {
+                                                                        var message = data[x][y]['message'];
+                                                                        var sender = data[x][y]['sender'];
+                                                                        var msgList = document.createElement('li');
+                                                                        var imgTag = document.createElement('img');
+                                                                        var pTag = document.createElement('p');
+
+                                                                        pTag.textContent = message;
+
+
+                                                                        if (sender === roomName) {
+                                                                            msgList.className === 'sent';
+                                                                            imgTag.src = data[x][y]['sImage'];
+                                                                        } else {
+                                                                            msgList.className === 'replies';
+                                                                            imgTag.src = data[x][y]['rImage'];
+                                                                        }
+
+
+                                                                    }
+
+                                                                }
+                                                            }
+                                                            msgList.appendChild(imgTag);
+                                                            msgList.appendChild(pTag);
+                                                            document.querySelector('#chat-log').appendChild(msgList);
+                                                        }
+
+
+
+
+
+                                                        var data = JSON.parse(e.data);
+                                                        if (data['command'] === 'messages') {
+                                                            for (let i = 0; i < data['message'].length; i++) {
+                                                                createMessage(data['messages'][i]);
+                                                            }
+                                                        } else if (data['command'] === 'new_messages') {
+                                                            createMessage(data['message']);
+                                                        }
+
+
+
+
+                                                        var message = data['message']['message'];
+                                                        var author = data['message']['author'];
+                                                        var msgList = document.createElement('li');
+                                                        var imgTag = document.createElement('img');
+                                                        var pTag = document.createElement('p');
+
+                                                        pTag.textContent = message;
+                                                        imgTag.src = data['message']['aImage'];
+
+
+                                                        if (author === username) {
+                                                            msgList.classList.add("sent");
+                                                        } else {
+                                                            msgList.classList.add("replies");
+                                                        }
+
+                                                        msgList.appendChild(imgTag);
+                                                        msgList.appendChild(pTag);
+                                                        document.querySelector('#chat-log').appendChild(msgList);
+                                                        console.log(msgList);
+
+
+
  </script>

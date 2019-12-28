@@ -49,7 +49,7 @@ urlpatterns = [
     path('companypaymentpackage/<int:pricing_id>',views.companypaymentpackage, name='companypaymentpackage'),
 
     path('employerdash/',views.employer_dash, name='employer_dash'),
-    path('employerdash_message/<str:username>/',views.employer_dash_message, name='employer_dash_message'),
+    path('employerdash_message/<str:room_name>/',views.employer_dash_message, name='employer_dash_message'),
 
     path('employeedash/',views.employee_dash, name='employee_dash'),
 

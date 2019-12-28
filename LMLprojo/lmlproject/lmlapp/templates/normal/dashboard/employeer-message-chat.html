@@ -251,141 +251,131 @@
                                                 </div>
                                             </div>
                                             <div class="messages">
+                                                <div id="kew{{ customer.customer.id }}" class="text-center" style="margin-top: 40px;">
+                                                    Start Chat With {{ customer.customer.first_name|title }} {{ customer.customer.last_name|title }}<br/>
+{#                                                    <input style="display: none;" class="form-control" hidden id="room-name-input" type="text" value="{{ customer.customer.username }}"/><br/>#}
+                                                    <input class="btn btn-success" id="room-name-submit" type="button" value="Start Chat"/>
+                                                    <script>
+
+                                                        document.querySelector('#kew{{ customer.customer.id }}').onclick = function(e) {
+                                                            var roomName = document.querySelector('#kew{{ customer.customer.id }}');
+                                                            roomName.style.display = 'none';
+                                                        };
+                                                    </script>
+                                                </div>
                                                 <ul id="chat-log">
-{#                                                    <li class="sent">#}
-{#                                                        <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />#}
-{#                                                        <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>#}
-{#                                                    </li>#}
-{#                                                    <li class="replies">#}
-{#                                                        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />#}
-{#                                                        <p>When you're backed against the wall, break the god damn thing down.</p>#}
-{#                                                    </li>#}
+                                                    <li class="sent">
+                                                        <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                                                        <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
+                                                    </li>
+                                                    <li class="replies">
+                                                        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                                                        <p>When you're backed against the wall, break the god damn thing down.</p>
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <div class="message-input">
+                                                <div class="wrap">
+                                                    <form  id="chatformee{{ customer.customer.id }}" method="POST">
+                                                        {% csrf_token %}
+                                                        <input name="from" id="from" type="text" hidden value="{{ request.user.username }}">
+                                                        <input name="message" type="text" id="chat-message-input" placeholder="Write your message..." />
+                                                        <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+                                                        <button type="submit"  id="chat-message-submit"><i class="fa fa-paper-plane" ></i></button>
+                                                    </form>
 
-                                                    <div class="wrap">
-                                                        <form  id="chatformee{{ customer.customer.id }}" method="POST">
-                                                            {% csrf_token %}
-                                                            <input name="customer" id="receiver_id" type="text" hidden value="{{ customer.customer.id }}">
-                                                            <input name="sender" id="sender_id" type="text" hidden value="{{ request.user.id }}">
-                                                            <input name="message" type="text" id="chat-message-input" placeholder="Write your message..." />
-                                                            <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-                                                            <button type="submit"  id="chat-message-submit"><i class="fa fa-paper-plane" ></i></button>
-                                                        </form>
-
-                                                    </div>
+                                                </div>
 
                                                 <script>
-                                                    var roomName = {{ room_name_json }};
-                                                    var endpoint, socket, wsStart, loc,  msgInput;
+                                                    var roomName = {{ room_name_json|safe|escape }};
+                                                    var username = "{{ request.user.username }}";
+                                                    var endpoint, wsStart, loc;
 
-                                                    {#loc = window.location;#}
-                                                    {#wsStart ='ws://';#}
-                                                    {#if(loc.protocol === 'https:'){#}
-                                                    {#    wsStart = 'wss://'#}
-                                                    //}
-                                                    {#endpoint = wsStart + loc.host + loc.pathname;#}
-                                                    {#socket = new WebSocket(endpoint);#}
-
-                                                     var chatSocket = new ReconnectingWebSocket(
-                                                            'ws://' + window.location.host +
-                                                            '/ws/chat/' + roomName + '/');
-                                                    {#var chatSocket = new ReconnectingWebSocket(endpoint);#}
-
-
-
-                                                    chatSocket.onmessage = function(e) {
-                                                        var data = JSON.parse(e.data);
-                                                        if (data['command'] === 'messages') {
-                                                            for (let i = 0; i < data['message'].length; i++) {
-                                                                createMessage(data['messages'][i]);
-                                                            }
-                                                        } else if (data['command'] === 'new_messages') {
-                                                            createMessage(data['message']);
-                                                        }
-                                                    };
-
-
-
-
-                                                    chatSocket.onopen = function(e){
-                                                        fetchMessages();
-                                                    };
-                                                    function fetchMessages(){
-                                                        chatSocket.send(JSON.stringify(({'command':'fetch_messages'})));
+                                                    loc = window.location;
+                                                    wsStart ='ws://';
+                                                    if(loc.protocol === 'https:'){
+                                                        wsStart = 'wss://';
                                                     }
-                                                    chatSocket.onclose = function(e) {
-                                                        console.error('Chat socket closed unexpectedly');
-                                                    };
+                                                    else{
+                                                        wsStart = 'ws://';
+                                                    }
+
+                                                    endpoint = wsStart + loc.host + loc.pathname;
+                                                    var chatSocket = new ReconnectingWebSocket(endpoint);
 
 
                                                     document.querySelector('#chat-message-input').focus();
-                                                    document.querySelector('#chat-message-input').onkeyup = function(e) {
-                                                        e.preventDefault();
-                                                        if (e.keyCode === 13) {  // enter, return
-                                                            document.querySelector('#chat-message-submit').click();
-                                                        }
-                                                    };
 
-                                                    document.querySelector('#chat-message-submit').onclick = function(e) {
+
+                                                    document.querySelector('#chat-message-submit').onclick = function (e) {
                                                         e.preventDefault();
+
                                                         var messageInputDom = document.querySelector('#chat-message-input');
-                                                        var receiver_id = document.querySelector('#receiver_id');
-                                                        var sender_id = document.querySelector('#sender_id');
+                                                        var author = document.querySelector('#from');
 
                                                         var message = messageInputDom.value;
-                                                        var receiver = receiver_id.value;
-                                                        var sender = sender_id.value;
+                                                        var from = author.value;
 
                                                         chatSocket.send(JSON.stringify({
-                                                            'command':'new_messages',
+                                                            'command': 'new_messages',
                                                             'message': message,
-                                                            'receiver':receiver,
-                                                            'sender': sender,
+                                                            'from': from,
                                                         }));
                                                         messageInputDom.value = '';
                                                     };
 
-                                                    function createMessage(data) {
-                                                        for(x in data) {
-                                                            for (y in data[x]) {
-                                                                for (z in data[x][y]) {
-                                                                    var message = data[x][y]['message'];
-                                                                    var sender = data[x][y]['sender'];
-                                                                    var msgList = document.createElement('li');
-                                                                    var imgTag = document.createElement('img');
-                                                                    var pTag = document.createElement('p');
 
-                                                                    pTag.textContent = message;
+                                                    chatSocket.onmessage = function (e) {
+                                                        //var data = JSON.parse(e.data);
+                                                        var data = JSON.parse(e.data);
 
-
-                                                                    if (sender === roomName) {
-                                                                        msgList.className === 'sent';
-                                                                        imgTag.src = data[x][y]['sImage'];
-                                                                    } else {
-                                                                        msgList.className === 'replies';
-                                                                        imgTag.src = data[x][y]['rImage'];
-                                                                    }
-
-
-                                                                }
-
+                                                        if (data['command'] === 'messages') {
+                                                            for (let i = 0; i < data['messages'].length; i++) {
+                                                                createMessage(data['messages'][i]);
+                                                                console.log(data['messages'][i])
                                                             }
+                                                        } else if (data['command'] === 'new_messages') {
+                                                            createMessage(data['message']);
                                                         }
+
+                                                    };
+
+                                                    function createMessage(data){
+
+                                                        var message = data['message'];
+                                                        var author = data['message'];
+                                                        var msgList = document.createElement('li');
+                                                        var imgTag = document.createElement('img');
+                                                        var pTag = document.createElement('p');
+
+                                                        pTag.textContent = message;
+                                                        imgTag.src = data['aImage'];
+
+
+                                                        if (author === username) {
+                                                            msgList.classList.add("sent");
+                                                        } else {
+                                                            msgList.classList.add("replies");
+                                                        }
+
                                                         msgList.appendChild(imgTag);
                                                         msgList.appendChild(pTag);
                                                         document.querySelector('#chat-log').appendChild(msgList);
+
+
                                                     }
 
+                                                    chatSocket.onclose = function (e) {
+                                                        console.error('Chat socket closed unexpectedly');
+                                                    };
 
+                                                    chatSocket.onopen = function (e) {
+                                                        fetchMessages();
+                                                    };
 
-
-
-
-
-
-
+                                                    function fetchMessages() {
+                                                        chatSocket.send(JSON.stringify(({'command': 'fetch_messages'})));
+                                                    }
 
                                                 </script>
                                             </div>

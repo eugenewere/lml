@@ -677,7 +677,7 @@ def employer_dash(request):
     }
     return render(request, 'normal/dashboard/employer-dash.html', context)
 
-def employer_dash_message(request, username):
+def employer_dash_message(request, room_name):
     user = request.user.id
     company = Company.objects.filter(user_ptr_id=user).first()
     social = CompanySocialAccount.objects.filter(company=company).first()
@@ -686,7 +686,7 @@ def employer_dash_message(request, username):
         'company': company,
         'social': social,
         'customers':customers,
-        'room_name_json': mark_safe(json.dumps(username))
+        'room_name_json': mark_safe(json.dumps(room_name))
 
     }
     return render(request, 'normal/dashboard/employeer-message-chat.html', context)

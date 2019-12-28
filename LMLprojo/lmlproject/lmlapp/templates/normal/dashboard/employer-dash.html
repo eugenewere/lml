@@ -185,8 +185,15 @@
                                                                 {% else %}
                                                                    <a onclick="shortlistmessage();" href="javascript:void(0)">Shortlisted</a>
                                                                 {% endif %}
-                                                                <a  data-toggle="modal"  data-target="#myModal{{ customer.id }}" id="kk{{ customer.id }}" href="#">Send Message</a>
-                    {#                                            <a href="#">Dislike</a>#}
+                                                                <a  data-customer="{{ customer.customer.username }}" id="kk{{ customer.customer.id }}" href="#">Chat</a>
+{#
+                                                                <script>
+
+                                                                    document.querySelector('#kk{{ customer.customer.id }}').onclick = function(e) {
+                                                                        var roomName = document.getElementById('kk{{ customer.customer.id }}').getAttribute('data-customer');
+                                                                        window.location.pathname = 'employerdash_message/' + roomName + '/';
+                                                                    };
+                                                                </script>
                                                             </div>
                                                         {% endif %}
                                                     </div>
