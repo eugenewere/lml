@@ -203,6 +203,15 @@
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                    <input required  name="phone_number" type="text" class="form-control" placeholder="Company Phone Number">
+                                </div>
+                                {% if form.company_email.errors %}
+                                    <div class="alert alert-danger">{{form.company_email.errors}}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-globe"></i></span>
                                     <input  value="{% if form.website.value %}{{ form.website.value }}{% endif %}" name="website" type="text" class="form-control" placeholder="Website">
                                 </div>
@@ -251,7 +260,7 @@
                                   eg Langata.
                                 </small>
                             </div>
-                            <div class="col-md-12 col-sm-12 " style="margin-bottom: 8px;">
+                            <div class="col-md-6 col-sm-6 " style="margin-bottom: 8px;">
                                 <div class="input-group" style="margin-bottom: 0;">
                                     <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                     <input value="{% if form.landmark.value %}{{ form.landmark.value }}{% endif %}" name="landmark" id="landmark" type="text" class="form-control" placeholder="Landmark" >
@@ -260,6 +269,7 @@
                                    eg Nearest road/School/Market/.
                                 </small>
                             </div>
+
                         </div>
                         <div class="row bottom-mrg extra-mrg">
                             <h2 class="detail-title">Social Profile</h2>
@@ -393,7 +403,7 @@
                                 confirmButtonText: "Continue",
                             });
                             setTimeout(function () {
-                                window.location = {% url 'LML:home' %};
+                                window.location = {% url 'LML:companypayment' %};
                             }, 5000);
                         }
                         else {

@@ -33,4 +33,9 @@ urlpatterns = [
 
     path('companyPricing/',views.companyPricing, name='companyPricing'),
     path('allcategories/',views.categories, name='categories'),
+
+    # graph
+    path('customer_graph/', views.customer_graph, name='customer_graph'),
+    path('company_graph/', views.company_graph, name='company_graph'),
+    path('messages_graph/', views.messages_graph, name='messages_graph'),
 ]

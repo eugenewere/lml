@@ -39,11 +39,10 @@
                                                 <th scope="col">Image</th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Email</th>
-                                                <th scope="col">Category</th>
                                                 <th scope="col">Business No</th>
-                                                <th scope="col">KRA</th>
-                                                <th scope="col">Type</th>
-                                                <th scope="col">county</th>
+                                                <th scope="col">Phone Number</th>
+                                                <th scope="col">Receipt</th>
+                                                <th scope="col">Amount</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -57,11 +56,10 @@
                                                 </td>
                                                 <td>{{company.company_name}}</td>
                                                 <td><a href="mailto:{{company.email}}">{{company.email}}</a></td>
-                                                <td>{{company.category}}</td>
                                                 <td>{{ company.bussiness_reg_no }}</td>
-                                                <td>{{ company.kra_number }}</td>
-                                                <td>{{ company.bizness_entity_type }}</td>
-                                                <td>{{ company.county }}</td>
+                                                <td>{{ company.phone_number }}</td>
+                                                <td>{{ company.reg_payment_details.recipt_no }}</td>
+                                                <td>{{ company.reg_payment_details.amount }}</td>
                                             </tr>
                                              {% endfor %}
 

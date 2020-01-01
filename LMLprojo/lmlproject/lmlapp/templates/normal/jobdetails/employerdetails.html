@@ -146,13 +146,13 @@
                                                 <li>
 													<i class="ti-location-arrow"></i>
 													<h5>County</h5>
-													<span style="">{{ company.county|title }}</span>
+													<span style="">{{ company.county.county|title }}</span>
 												</li>
 
                                                 <li>
 													<i class="ti-location-pin"></i>
 													<h5>Sub county</h5>
-													<span style="">{{company.region|title}}</span>
+													<span style="">{{company.region.region}}->({{company.region.ward}})</span>
 												</li>
 											</ul>
 										</div>

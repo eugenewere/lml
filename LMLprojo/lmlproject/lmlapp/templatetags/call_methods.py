@@ -118,3 +118,28 @@ def commentscount(request):
     return False
 
 
+@register.filter(name='if_company_has_shortlisted_the_customer')
+def if_company_has_shortlisted_the_customer(customer_id, company_id):
+     custShortlist =  CompanyShortlistCustomers.objects.filter(company_id=company_id,customer_id=customer_id).exists()
+     if custShortlist:
+         return False
+     return True
+
+@register.filter(name='average_ratings')
+def average_ratings(customer_id):
+    customer= Customer.objects.filter(user_ptr_id=customer_id).first()
+    if customer is None:
+        return False
+    else:
+        data = []
+        ratings=CustomerReviews.objects.filter(customer=customer)
+        for rating in ratings:
+            data.append(rating.ratings)
+        print(data)
+        if data:
+            average_ratings = statistics.mean(data)
+            return average_ratings
+        else:
+            return 0
+
+

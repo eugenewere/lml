@@ -119,7 +119,12 @@ class Customer(get_user_model()):
         verbose_name = 'Customer'
         verbose_name_plural = 'Customers'
 
-
+    @property
+    def customer_reg_payment_details(self):
+        if self.regpayment:
+            return self.regpayment
+        else:
+            return 'Not Paid'
 
 
     @property
@@ -226,8 +231,9 @@ class Company(get_user_model()):
     regpayment = models.ForeignKey(CompanyRegistrationPayment, on_delete=models.CASCADE, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, max_length=200, null=False, blank=False)
     company_name = models.CharField(max_length=200, null=False, blank=False)
-    county = models.CharField(max_length=100,null=False, blank=False)
-    region = models.CharField(max_length=100,null=False, blank=False)
+    phone_number = models.CharField(max_length=200, null=False, blank=False, default='0700000000')
+    county = models.ForeignKey(County, on_delete=models.CASCADE, null=False, blank=False)
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=False, blank=False)
     landmark = models.CharField(max_length=100,null=False, blank=False)
     company_motto =models.CharField(max_length=100,null=False, blank=False)
     brief_details = models.TextField()
@@ -268,6 +274,21 @@ class Company(get_user_model()):
     class Meta:
         verbose_name = 'Employer'
         verbose_name_plural = 'Employers'
+
+    @property
+    def reg_payment_details(self):
+        if self.regpayment:
+            return self.regpayment
+        else:
+            return 'Not Paid'
+
+    @property
+    def companyregno(self):
+        reg_no = CompanyRegNo.objects.filter(company=self).first()
+        print(reg_no)
+        if reg_no:
+            return reg_no.company_reg_no
+        return 'N/A'
 
 class CompanyRegNo(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
@@ -408,7 +429,7 @@ class ContactUsHome(models.Model):
         return '%s (%s) ' % (self.name, (self.message))
 
 class ContactUsEmployee(models.Model):
-    company = models.ForeignKey(Company,on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
     name = models.CharField(max_length=200,null=False,blank=False)
     email = models.CharField(max_length=200,null=False,blank=False)
     message = models.TextField()
@@ -417,7 +438,7 @@ class ContactUsEmployee(models.Model):
 
 
     def _str__(self):
-        return '%s (%s) ' %(self.company.company_name, (self.message))
+        return '%s (%s) ' %(self.customer, (self.message))
 
 class CompanyPricingPlan(models.Model):
     title = models.CharField(max_length=200,null=False,blank=False)
@@ -430,8 +451,8 @@ class CompanyPricingPlan(models.Model):
 
 
 class Message(models.Model):
-     author = models.ForeignKey(User, related_name="author_messages", on_delete=models.CASCADE,null=False, blank=False)
-     # reciever = models.ForeignKey(User, related_name="reciever",on_delete=models.CASCADE, null=False, blank=False)
+     sender = models.ForeignKey(User, related_name="sender", on_delete=models.CASCADE,null=False, blank=False)
+     reciever = models.ForeignKey(User, related_name="reciever",on_delete=models.CASCADE, null=False, blank=False)
      msg_content = models.TextField()
      created_at = models.DateTimeField(auto_now_add=True)
      updated_at = models.DateTimeField(auto_now=True)
@@ -442,12 +463,9 @@ class Message(models.Model):
      }
      status = models.CharField(max_length=200, null=True, blank=True, choices=MESSAGECHOICES, default='UNREAD')
      def _str__(self):
-         return self.author.username
+         return '%s  ' % (self.sender)
 
-
-     def last_50_messages(self):
-         return Message.objects.order_by('-created_at').all()[:50]
-
+     # def chat_room_messages(self, sender, receiver):
 
 
 
@@ -466,3 +484,16 @@ class AdvertCarousel(models.Model):
 
     def __str__(self):
         return '%s' % (self.carousel_image)
+
+class CustomerReviews(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, blank=False, null=False)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, blank=False, null=False)
+    message = models.TextField()
+    ratings = models.IntegerField(blank=True, null=True, default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '%s' % (self.company.company_name)
+    # def customer_rating_average(self):
+

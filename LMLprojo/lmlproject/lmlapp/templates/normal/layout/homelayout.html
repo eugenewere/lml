@@ -111,7 +111,7 @@
                                                     <li><a href="browse-jobs.html">Pricing</a></li>
 
                                                     {% if request|confirm_reg_payment %}
-                                                        <li><a href="{%  url 'LML:payment' %}">Registration Payment</a></li>
+                                                        <li style="color: red;"><a href="{%  url 'LML:payment' %}">Registration Payment</a></li>
                                                     {% endif %}
                                                 </ul>
                                             </div>
@@ -182,7 +182,7 @@
                                                 <ul class="menu-col">
                                                     <li><a href="create-company.html">Manage Subscription</a></li>
                                                    {% if request|confirm_company_reg_payment %}
-                                                        <li><a href="{% url 'LML:companypayment' %}">Registration
+                                                        <li style="color: red;"><a href="{% url 'LML:companypayment' %}">Registration
                                                             Payment</a>
                                                         </li>
                                                     {% endif %}
@@ -466,6 +466,7 @@
 
 
         </script>
+
         {% block script %}
 
         {% endblock script %}

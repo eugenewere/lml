@@ -387,3 +387,52 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu{
 .selection__rendered{
     height: 100% !important;
 }
+
+
+/*star*/
+.card-ratings-wrapper{
+    width: 100%;
+    display: flex;
+    align-self: end;
+    padding: 0;
+}
+.rating-count i{
+   font-size:20px;
+}
+/*starrating*/
+.rate {
+    float: left;
+    height: 45px;
+    padding: 9px 1px
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 28px;
+    color: #ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color:#FFDF00;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color:#FFDF00;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color:#FFDF00;
+}
+/*star*/

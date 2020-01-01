@@ -14,6 +14,9 @@ from datetime import datetime
 import sweetify
 
 from rest_framework import status
+from rest_framework.generics import ListCreateAPIView
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from lmlapp.forms import *
 
@@ -70,6 +73,9 @@ def signup(request):
         referee_phonenumbers= request.POST.getlist('referee_phonenumber')
 
         account_url= request.POST['account_url']
+
+        password1= request.POST['password1']
+        username= request.POST['username']
 
 
 
@@ -149,9 +155,10 @@ def signup(request):
                 Customer.objects.filter(user_ptr_id=new_user.id).update(
                     rank_status=status,
                 )
-            new_user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'],)
-            login(request, new_user)
-            sweetify.success(request, 'You did it', text='Good job! You successfully Registered, just login', persistent='Continue')
+            new_userrr = authenticate(username=username, password=password1)
+            print(new_user)
+            login(request, new_userrr)
+            sweetify.success(request, 'You did it', text='Good job! You successfully Registered, Make Payment to Continue', persistent='Continue')
             data = {
                 'results': 'success',
                 'success': 'Good job! You successfully Registered, just login'
@@ -202,10 +209,10 @@ def signup(request):
     }
     return render(request,'normal/signup/signup.html',context)
 
-def company_signupform_handling(request):
-
-
-    return redirect('LML:companysignup' )
+# def company_signupform_handling(request):
+#
+#
+#     return redirect('LML:companysignup' )
         # return redirect('LML:companysignup')
 
 def update_employers_profile(request):
@@ -242,7 +249,7 @@ def update_employers_profile(request):
                 username=username
             )
             sweetify.success(request, 'Success', text='Good job! You successfully Updated Your Account', persistent='Ok')
-            return redirect('LML:employerdetails')
+            return redirect('LML:employersprofile')
         else:
 
             sweetify.error(request, 'Error', text='Error updating your account', persistent='Retry')
@@ -392,7 +399,10 @@ def employeeprofile(request):
     educations = Education.objects.filter(customer=customer)
     experiences = Experience.objects.filter(customer=customer)
     skills = Skills.objects.filter(customer=customer)
-    social = Social_account.objects.filter(customer=customer)
+    social = Social_account.objects.filter(customer=customer).first()
+
+    emShortlist = CompanyShortlistCustomers.objects.filter(customer=customer).count()
+    unreadMessages = Message.objects.filter(reciever_id=user, status='UNREAD').count()
     module_dir = os.path.dirname(__file__)  # get current directory
     file_path1 = os.path.join(module_dir, 'Bachelorcourses')
     file_path2 = os.path.join(module_dir, 'course_certificate')
@@ -408,6 +418,7 @@ def employeeprofile(request):
     qbfile5 = open(file_path5, "r")
     qbfile6 = open(file_path6, "r")
     context = {
+        'shortlist_count':emShortlist,
         'title': 'Your Profile',
         'customer': customer,
         'skills': skills,
@@ -420,9 +431,136 @@ def employeeprofile(request):
         'phds': qbfile4.readlines(),
         'masters': qbfile5.readlines(),
         'unis': qbfile6.readlines(),
+        'unreadMessages':unreadMessages,
+        'counties':County.objects.all(),
+        'regions':Region.objects.all(),
+        'categories':Category.objects.all(),
     }
 
     return render(request, 'normal/account/candidate-profile.html', context)
+
+def employee_personal_details_update(request):
+    user = request.user.id
+    customer = Customer.objects.filter(user_ptr_id=user).first()
+    account_url = request.POST['account_url']
+    emailix = request.POST['emailix']
+    usernme = request.POST['usernme']
+    if request.method == 'POST':
+        form = PersonelUpdateForm(request.POST, request.FILES, instance=customer)
+        print(form.errors)
+        if form.is_valid():
+            form.save()
+            Social_account.objects.filter(customer=customer).update_or_create(
+                account_url=account_url,
+            )
+            sweetify.success(request, title='Success', text='Personal Account Updated Successfully.', persistent='Continue')
+            return redirect('LML:employeeprofile')
+        else:
+            sweetify.error(request, 'Error', text='Details Not Updated', persistent='Retry')
+            return redirect('LML:employeeprofile')
+    return redirect('LML:employeeprofile')
+
+def employee_skills_update(request):
+    if request.method == 'POST' and request.is_ajax():
+        skill_id =  request.POST['skill_id']
+        skill = Skills.objects.filter(id=int(skill_id)).first()
+        print(skill)
+        if skill:
+            skill.delete()
+            data = {
+                'results': 'success',
+                'success': 'Skill deleted'
+            }
+            return JsonResponse(data, safe=False)
+        else:
+            data = {
+                'results': 'error',
+                'success': 'Error deleting skill'
+            }
+            return JsonResponse(data, safe=False)
+    data = {
+
+    }
+    return JsonResponse(data, safe=False)
+
+def employee_skills_detail_update(request):
+    customer =  Customer.objects.filter(user_ptr_id = request.user.id).first()
+    if request.method == 'POST':
+        skills = request.POST.getlist('skill')
+        skill_ids = request.POST.getlist('skill_id')
+        referees = request.POST.getlist('referee')
+        referee_phonenumbers = request.POST.getlist('referee_phonenumber')
+
+        # form =  SkillsForm(request.POST, instance=customer)
+
+        for skill, referee, referee_phonenumber, skill_id in zip(skills, referees, referee_phonenumbers, skill_ids):
+            Skills.objects.filter(id=int(skill_id)).update(
+                customer_id=customer.id,
+                skill=skill,
+                referee=referee,
+                referee_phonenumber=referee_phonenumber
+            )
+        sweetify.success(request, title='Success', text='Skills Updated Successfully.', persistent='Continue')
+        return redirect('LML:employeeprofile')
+    else:
+        sweetify.error(request, 'Error', text='Skills Not Updated', persistent='Retry')
+        return redirect('LML:employeeprofile')
+
+def employee_experience_detail_update(request):
+    customer = Customer.objects.filter(user_ptr_id=request.user.id).first()
+    exp_ids = request.POST.getlist('experience_id')
+    employer_names = request.POST.getlist('employer_name')
+    company_names = request.POST.getlist('company_name')
+    company_emails = request.POST.getlist('compny_email')
+    company_phones = request.POST.getlist('company_phone')
+    position_helds = request.POST.getlist('position_held')
+    date_froms = request.POST.getlist('date_from')
+    date_tos = request.POST.getlist('date_to')
+    experiences = request.POST.getlist('experience')
+    if request.method == 'POST':
+        # print(employer_names,company_names,company_emails,company_phones,position_helds,date_froms,date_tos,experiences)
+        for  employer_name, company_name, company_email, company_phone, position_held, date_from, date_to, experience, exp_id in zip(employer_names, company_names, company_emails, company_phones, position_helds, date_froms, date_tos, experiences, exp_ids):
+            print(exp_ids, employer_name)
+            Experience.objects.filter(id=int(exp_id)).update(
+                customer_id=customer.id,
+                employer_name=employer_name,
+                company_name=company_name,
+                comapny_email=company_email,
+                company_phone=company_phone,
+                position_held=position_held,
+                date_from=date_from,
+                date_to=date_to,
+                experience=experience,
+            )
+
+        sweetify.success(request, title='Success', text='Experiences Updated Successfully.', persistent='Continue')
+        return redirect('LML:employeeprofile')
+    else:
+        sweetify.error(request, 'Error', text='Experiences Not Updated', persistent='Retry')
+        return redirect('LML:employeeprofile')
+
+def employee_experience_detail_delete(request):
+    if request.method == 'POST' and request.is_ajax():
+        experience_id =  request.POST['experience_id']
+        experience = Experience.objects.filter(id=int(experience_id)).first()
+        print(experience)
+        if experience:
+            experience.delete()
+            data = {
+                'results': 'success',
+                'success': 'Experience deleted'
+            }
+            return JsonResponse(data, safe=False)
+        else:
+            data = {
+                'results': 'error',
+                'success': 'Error deleting Experience'
+            }
+            return JsonResponse(data, safe=False)
+    data = {
+
+    }
+    return JsonResponse(data, safe=False)
 
 
 def employeedetails(request):
@@ -448,6 +586,8 @@ def companysignup(request):
     twitter = request.POST.get('twitter')
     instagram = request.POST.get('instagram')
     linkedin = request.POST.get('linkedin')
+    password1 = request.POST.get('password1')
+    username = request.POST.get('username')
 
     if request.method == 'POST' and request.is_ajax():
         # form = CompanyUserSignUpForm(request.POST)
@@ -470,11 +610,15 @@ def companysignup(request):
                 company_reg_no=('CMP'+get_random_string(length=8, allowed_chars='ABDEFGHIJKLNPQRSTUVWXYZ123456789')),
             )
             # sweetify.success(request, 'You did it', text='Good job! You successfully registered', persistent='Ok')
+            new_userrr = authenticate(username=username, password=password1)
+            print(new_user)
+            login(request, new_userrr)
             data = {
                 'results': 'success',
                 'success': 'Good job! You successfully Registered, just login'
             }
             return JsonResponse(data, safe=False, status=status.HTTP_200_OK)
+
         else:
             formr = CompanyRegisterForm(request.POST, request.FILES)
 
@@ -617,6 +761,26 @@ def company_contact_us(request):
         sweetify.success(request, 'Error', text='Message not sent', persistent='Ok')
     return redirect('LML:employerdetails')
 
+def customer_contact_us(request):
+    user = request.user.id
+    customer = Customer.objects.filter(user_ptr_id = user).first()
+    name = request.POST['name']
+    email = request.POST['email']
+    message = request.POST['message']
+    if request.method =='POST':
+        ContactUsEmployee.objects.create(
+          name=name,
+          customer=customer,
+          email=email,
+          message=message,
+        )
+        sweetify.success(request, 'Success', text='Message sent', persistent='Ok')
+        return redirect('LML:employeedetails')
+    else:
+        sweetify.success(request, 'Error', text='Message not sent', persistent='Ok')
+    return redirect('LML:employeedetails')
+
+
 def home_contact_us(request, source):
 
     name = request.POST['name']
@@ -697,10 +861,19 @@ def employee_dash(request):
     customer = Customer.objects.filter(user_ptr_id=user).first()
     social = Social_account.objects.filter(customer=customer).first()
     # customers = CompanyShortlistCustomers.objects.filter(company=company)
+    companies_list = []
+    userr = User.objects.filter(id=user).first()
+    companies = Message.objects.filter(reciever=userr)
+    for company in companies:
+        cmpn =  Company.objects.filter(user_ptr_id = company.sender.id).first()
+        companies_list.append(cmpn)
+    msg_companies= list(set(companies_list))
+
     context={
         'customer': customer,
         'social': social,
         # 'customers':customers,
+        'msg_comapanies':msg_companies
     }
     return render(request, 'normal/dashboard/employee-dash.html', context)
 
@@ -712,12 +885,18 @@ def premium_employee_details(request, customer_id):
     experiences = Experience.objects.filter(customer=customer)
     skills = Skills.objects.filter(customer=customer)
     social = Social_account.objects.filter(customer=customer)
+    reviews = CustomerReviews.objects.filter(customer=customer).order_by('-created_at')
+    all_customers = Customer.objects.filter(category_id=customer.category.id)
+    print(reviews)
     context = {
         'customer': customer,
         'skills': skills,
         'educations': educations,
         'experiences': experiences,
         'social': social,
+        'reviews':reviews,
+        'all_customers':all_customers,
+
     }
 
     return render(request, 'normal/allcandidates/premium-candidate-detail.html', context)
@@ -775,6 +954,34 @@ def shortlistcustomers(request):
 
 
         return JsonResponse(data)
+def unshortlistcustomers(request):
+
+    if request.method == 'POST':
+        customer_id= request.POST.get('customer_id')
+        company_id= request.POST.get('company_id')
+        print(company_id, customer_id)
+        if CompanyShortlistCustomers.objects.filter(customer_id=customer_id, company_id=company_id).exists():
+            relation = CompanyShortlistCustomers.objects.filter(customer_id=customer_id, company_id=company_id).first()
+            customer =  relation.customer.first_name + relation.customer.last_name
+            relation.delete()
+            data = {
+                'shortlisted':  customer + 'Unshortlisted Successfully',
+            }
+            if data['shortlisted']:
+                data['success_message'] =customer + 'Unshortlisted Successfully'
+
+        else:
+
+            data = {
+                'is_shortlisted': 'Error Deleting',
+            }
+            if data['is_shortlisted']:
+                data['error_message'] = 'Error Deleting'
+
+
+
+        return JsonResponse(data)
+
 
 
 def all_employees(request):
@@ -870,36 +1077,58 @@ def fetch_data_messages(request, customer_id):
 
 
 
-# def index(request):
-#     return render(request, 'chat/index.html', {})
 
-# def room(request, room_name):
-#     user = request.user.id
-#     company = Company.objects.filter(user_ptr_id=user).first()
-#     social = CompanySocialAccount.objects.filter(company=company).first()
-#     customers = CompanyShortlistCustomers.objects.filter(company=company)
-#
-#     context={
-#         'room_name_json': mark_safe(json.dumps(room_name)),
-#         'company': company,
-#         'social': social,
-#         'customers': customers,
-#     }
-#     return render(request, 'normal/dashboard/employeer-message-chat.html', context)
+def EmployerCustomerShortlist(request):
+    user=request.user.id
+    company =  Company.objects.filter(user_ptr_id=user).first()
+    print(company)
+    month_data = []
+    months_choices=[]
+    months_choices_int=[]
+    for i in range(1,13):
+        months_choices.append(( datetime.date(2008, i, 1).strftime('%B')[0:3]))
+    labels2 = months_choices
+    for z in range(1,13):
+        months_choices_int.append((datetime.date(2008, z, 1).strftime('%m')))
+    for months_choice in months_choices_int:
+        month_data.append(CompanyShortlistCustomers.objects.filter(company_id=company.id, created_at__month=months_choice).count())
+    defaultData2 = month_data
+    context2={
+        'labels2':labels2,
+        'defaultData2':defaultData2,
+
+    }
+
+    return JsonResponse(context2)
+
+def EmployerCustomerShortlistTemplate(request):
+    user = request.user.id
+    company = Company.objects.filter(user_ptr_id=user).first()
+    social = CompanySocialAccount.objects.filter(company=company).first()
+    customers = CompanyShortlistCustomers.objects.filter(company=company)
+    context = {
+        'title': 'Employee Shortlist Graph',
+        'company': company,
+        'social': social,
+        'customers': customers,
+    }
+
+    return render(request, 'normal/dashboard/shortlistgraph.html', context)
 
 
+def review_shortlisted_customer(request):
+    if request.method == 'POST':
+        # message =  request.POST.get('message')
+        # ratings =  request.POST.get('ratings')
+        # customer =  request.POST.get('customer')
+        # company =  request.POST.get('company')
+        form = CustomerReviewsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, 'Success', text='Customer Rated Successfully', persistent='Ok')
+            return redirect('LML:employer_dash')
+        else:
+            sweetify.success(request, 'Error', text='Customer Not Rated', persistent='Ok')
+        return redirect('LML:employer_dash')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return

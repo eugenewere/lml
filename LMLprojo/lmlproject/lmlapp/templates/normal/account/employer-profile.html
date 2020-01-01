@@ -174,29 +174,29 @@
                                         <form action="{% url 'LML:update_employers_profile' %}" method="post" enctype="multipart/form-data">
                                             {% csrf_token %}
                                             <div class="edit-pro">
-                                                    <div class="row">
-                                                        <div class="detail-pic">
-                                                            {% if request.user.is_authenticated %}
-                                                                <img class="blah img" id="blah" style="max-width: 100%; position: absolute; top: -7px;" src="{{company.logo.url}}"  alt="" />
-                                                                <a style="bottom: -22px;" href="#"  class="detail-edit" title="edit">
-                                                                    <label class="detail-edit" for="upload-pic"><i class="fa fa-upload fa-spin"></i></label>
-                                                                </a>
-                                                                <input value="{{ company.logo }}" style="position: relative; visibility: hidden" onchange="readURL(this)" type="file" name="logo" id="upload-pic" class="inputfile" />
+                                                <div class="row">
+                                                    <div class="detail-pic">
+                                                        {% if request.user.is_authenticated %}
+                                                            <img class="blah img" id="blah" style="max-width: 100%; position: absolute; top: -7px;" src="{{company.logo.url}}"  alt="" />
+                                                            <a style="bottom: -22px;" href="#"  class="detail-edit" title="edit">
+                                                                <label class="detail-edit" for="upload-pic"><i class="fa fa-upload fa-spin"></i></label>
+                                                            </a>
+                                                            <input value="{{ company.logo }}" style="position: relative; visibility: hidden" onchange="readURL(this)" type="file" name="logo" id="upload-pic" class="inputfile" />
 
-                                                            {% else %}
-                                                                <img src="{% static 'assets/img/avatar/avatar2.png' %}" class="img" alt="" />
-                                                                <a  style="max-width: 100%; position: absolute; top: -7px; bottom: -22px;" href="#" class="detail-edit" title="edit"><i class="fa fa-user fa-spin"></i></a>
-                                                            {% endif %}
-                                                        </div>
+                                                        {% else %}
+                                                            <img src="{% static 'assets/img/avatar/avatar2.png' %}" class="img" alt="" />
+                                                            <a  style="max-width: 100%; position: absolute; top: -7px; bottom: -22px;" href="#" class="detail-edit" title="edit"><i class="fa fa-user fa-spin"></i></a>
+                                                        {% endif %}
                                                     </div>
+                                                </div>
 
                                                 <div class="col-md-4 col-sm-6">
-                                                    <label>Ceo First Name</label>
-                                                    <input value="{{ company.first_name }}" name="first_name" type="text" class="form-control" placeholder="First name">
+                                                    <label>Representative  First Name</label>
+                                                    <input value="{{ company.first_name }}" name="first_name" type="text" class="form-control" placeholder="Representative First name">
                                                 </div>
                                                 <div class="col-md-4 col-sm-6">
-                                                    <label>Ceo Last Name</label>
-                                                    <input value="{{ company.last_name }}" name="last_name" type="text" class="form-control" placeholder="Last Name">
+                                                    <label>Representative  Last Name</label>
+                                                    <input value="{{ company.last_name }}" name="last_name" type="text" class="form-control" placeholder="Representative Last Name">
                                                 </div>
                                                 <div class="col-md-4 col-sm-6">
                                                     <label>Company Name</label>
@@ -220,10 +220,15 @@
                                                         {% endfor %}
                                                     </select>
                                                 </div>
-                                                <div class="col-md-12 col-sm-12">
+                                                <div class="col-md-6 col-sm-6">
                                                     <label>Company Username</label>
-                                                    <input value="{{ company.username }}" name="username" type="text" class="form-control" placeholder="Ceo Usernanme">
+                                                    <input value="{{ company.username }}" name="username" type="text" class="form-control" placeholder="Representative Usernanme">
                                                 </div>
+                                                 <div class="col-md-6 col-sm-6">
+                                                    <label>Company Phone Number</label>
+                                                    <input value="{{ company.phone_number }}" name="phone_number" type="text" class="form-control" placeholder="Comapany Phone Number">
+                                                </div>
+
                                                 <div class="col-md-12 col-sm-12">
                                                     <label>Company Email</label>
                                                     <input value="{{ company.email }}" name="email" type="text" class="form-control" placeholder="Ceo Email">
@@ -279,7 +284,7 @@
                                                     <label>Region</label>
                                                     <select name="region" required id="choose-region" class="form-control input-lg">
                                                         {% for region in regions %}
-                                                            <option {% if region.id == company.region.id %} selected {% endif %}  value="{{ region.id }}">{{ region.region }}</option>
+                                                            <option {% if region.id == company.region.id %} selected {% endif %}  value="{{ region.id }}">{{ region.region }} -> ({{ region.ward }})</option>
                                                         {% endfor %}
                                                     </select>
                                                 </div>
@@ -368,8 +373,8 @@
 
                                             <div class="col-md-12 mb-3">
                                               <label for="validationCustom05">Retype Password</label>
-                                              <input name="new_password2" type="password" class="form-control" id="validationCustom05" placeholder="Retype Your Password" required>
-                                                <small id="passwordHelpBlock" class="form-text text-muted">
+                                              <input name="new_password2" type="password" class="form-control" id="validationCustom09" placeholder="Retype Your Password" required>
+                                                <small id="passwordHelpBlocks" class="form-text text-muted">
                                                   Your password must be 8-20 characters long, contain letters and numbers.
                                                      <br>
                                                     {{ form.new_password2.errors }}

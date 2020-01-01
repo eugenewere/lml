@@ -1,14 +1,43 @@
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 import sweetify
 # Create your views here.
 # from lmlappadmin.models import *
 from .models import *
-
 @login_required()
 def home(request):
+    customer_count = Customer.objects.all().count()
+    company_count = Company.objects.all().count()
+    from datetime import datetime, timedelta
+
+    one_week_ago = datetime.today() - timedelta(days=7)
+    two_week_ago = datetime.today() - timedelta(days=14)
+
+    customer_count_this_week = Customer.objects.filter(created_at__gte=one_week_ago).count()
+    company_count_this_week = Company.objects.filter(created_at__gte=one_week_ago).count()
+    company_count_two_week_ago= Company.objects.filter(created_at__gte=two_week_ago).count()
+    customer_count_two_week_ago = Customer.objects.filter(created_at__gte=two_week_ago).count()
+    recent_companies = Company.objects.order_by('-created_at')
+    recent_employees = Customer.objects.order_by('-created_at')
+
+    commpany_messages_count =  ContactUsCompany.objects.all().count()
+    customer_messages_count =  ContactUsEmployee.objects.all().count()
+    random_messages = ContactUsHome.objects.all().count()
+
     context={
         'title': 'Dash',
+        'customer_count':customer_count,
+        'company_count':company_count,
+        'customer_count_this_week':customer_count_this_week,
+        'company_count_this_week':company_count_this_week,
+        'customer_count_two_week_ago':customer_count_two_week_ago,
+        'company_count_two_week_ago':company_count_two_week_ago,
+        'recent_companies':recent_companies,
+        'recent_employees': recent_employees,
+        'commpany_messages_count':commpany_messages_count,
+        'customer_messages_count':customer_messages_count,
+        'random_messages':random_messages,
     }
     return render(request,'admin/index.html', context)
 
@@ -245,3 +274,68 @@ def carouselImages(request):
         'images': AdvertCarousel.objects.order_by('-created_at'),
     }
     return render(request, 'advertimages/carouselimages.html', context)
+
+
+def customer_graph(request):
+    month_data = []
+    months_choices = []
+    months_choices_int = []
+    for i in range(1, 13):
+        months_choices.append((datetime.date(2008, i, 1).strftime('%B')[0:3]))
+    labels2 = months_choices
+    for z in range(1, 13):
+        months_choices_int.append((datetime.date(2008, z, 1).strftime('%m')))
+    for months_choice in months_choices_int:
+        month_data.append(
+            Customer.objects.filter(created_at__month=months_choice).count())
+    defaultData2 = month_data
+    context2 = {
+        'labels2': labels2,
+        'defaultData2': defaultData2,
+
+    }
+
+    return JsonResponse(context2)
+
+
+def company_graph(request):
+    month_data = []
+    months_choices = []
+    months_choices_int = []
+    for i in range(1, 13):
+        months_choices.append((datetime.date(2008, i, 1).strftime('%B')[0:3]))
+    labels3 = months_choices
+
+    for z in range(1, 13):
+        months_choices_int.append((datetime.date(2008, z, 1).strftime('%m')))
+    for months_choice in months_choices_int:
+        month_data.append(Company.objects.filter(created_at__month=months_choice).count())
+    defaultData3 = month_data
+    context2 = {
+        'labels3': labels3,
+        'defaultData3': defaultData3,
+
+    }
+    return JsonResponse(context2)
+
+def messages_graph(request):
+    month_data = []
+    months_choices = []
+    months_choices_int = []
+    for i in range(1, 13):
+        months_choices.append((datetime.date(2008, i, 1).strftime('%B')[0:3]))
+    labels4 = months_choices
+
+    for z in range(1, 13):
+        months_choices_int.append((datetime.date(2008, z, 1).strftime('%m')))
+    for months_choice in months_choices_int:
+        month_data.append(ContactUsHome.objects.filter(created_at__month=months_choice).count())
+    defaultData4 = month_data
+
+    context2 = {
+        'labels4': labels4,
+        'defaultData4': defaultData4,
+
+    }
+    return JsonResponse(context2)
+

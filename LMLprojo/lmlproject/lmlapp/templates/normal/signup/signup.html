@@ -163,7 +163,7 @@
                                 <div style=" display: block !important;" class="input-group">
                                     <select required name="category" id="category"  class="choose-category form-control input-lg">
                                         <option {% if not form.category.value %} selected{% else %}disabled{% endif %} >
-                                            Company Categories
+                                            Work Categories
                                         </option>
                                         {% for category in categories %}
                                             <option  {% if form.category.value == category.id %} selected {% endif %} value="{{ category.id }}"><span class="text-capitalize">{{ category.category }}</span></option>
@@ -640,13 +640,8 @@
            var spinner = $('#signuploader');
            $("#employeeform").submit(function(e){
                 e.preventDefault();
-
                 spinner.show();
-
-
                 var new_form_data = new FormData(this);
-
-
                 $.ajax({
                     method : 'POST',
                     processData: false,

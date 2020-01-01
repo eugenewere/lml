@@ -20,7 +20,7 @@ class SkillsForm(forms.ModelForm):
 class CompanyUserupdateForm(forms.ModelForm):
     class Meta:
         model = Company
-        fields = ['email','first_name','last_name','username','logo','company_name', 'company_email', 'company_motto', 'category', 'bizness_entity_type', 'website','bussiness_reg_no','county', 'region','landmark','brief_details', 'date_created', 'description', 'kra_number',]
+        fields = ['email','first_name','last_name','username','logo','company_name', 'company_email', 'company_motto', 'category', 'bizness_entity_type', 'website','bussiness_reg_no','county', 'region','landmark','brief_details', 'date_created', 'description', 'kra_number','phone_number',]
 
 class CompanyOtherDetailForm(forms.ModelForm):
     class Meta:
@@ -32,10 +32,67 @@ class CompanySocialsForm(forms.ModelForm):
         model = CompanySocialAccount
         fields = ['facebook','linkedin', 'googlr_plus', 'instagram', 'twitter', 'company', ]
 
-# class CompanyContactUsForm(forms.ModelForm):
-#     class Meta:
-#         model = ContactUsCompany
-#         fields=['company','email','message','name',]
+
+class CustomerReviewsForm(forms.ModelForm):
+    class Meta:
+        model = CustomerReviews
+        fields = ['customer', 'company', 'ratings', 'message']
+
+class PersonelUpdateForm(forms.ModelForm):
+    class Meta:
+        model= Customer
+        fields = [
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+            'profile_image',
+            'county',
+            'region',
+            'country',
+            'gender',
+            'category',
+            'phone_number',
+            'date_of_birth',
+            'landmark',
+            'job_type',
+            'marital_status',
+            'biography',
+
+        ]
+    # def clean_username(self):
+    #     super(PersonelUpdateForm, self).clean()
+    #     username = self.cleaned_data.get('username')
+    #     usernme = self.cleaned_data.get('usernme')
+    #     if username == usernme:
+    #         return username
+    #     elif User.objects.filter(username__iexact=username).exists():
+    #         raise forms.ValidationError('Username already exists')
+    #     return username
+    #
+    # def clean_email(self):
+    #     super(PersonelUpdateForm, self).clean()
+    #     email = self.cleaned_data.get('email')
+    #     emailix = self.cleaned_data.get('emailix')
+    #     if email ==emailix:
+    #         return email
+    #     elif User.objects.filter(email__iexact=email).exists():
+    #         raise forms.ValidationError('A user has already registered using this email')
+    #     return email
+
+
+
+    def clean_date_of_birth(self):
+        '''
+        Only accept users aged 13 and above
+        '''
+        userAge = 13
+        dob = self.cleaned_data.get('date_of_birth')
+        today = date.today()
+        if (dob.year + userAge, dob.month, dob.day) > (today.year, today.month, today.day):
+            raise forms.ValidationError('Users must be aged 18 years old and above.'.format(userAge))
+        return dob
+
 
 class PersonelRegisterForm(forms.Form, UserCreationForm):
     class Meta:
@@ -64,6 +121,7 @@ class PersonelRegisterForm(forms.Form, UserCreationForm):
 
 
         ]
+
 
     def clean_username(self):
         super(PersonelRegisterForm, self).clean()
@@ -125,6 +183,7 @@ class CompanyRegisterForm(forms.Form, UserCreationForm):
             'date_created',
             'description',
             'kra_number',
+            'phone_number',
         ]
 
     def clean_username(self):
@@ -148,5 +207,4 @@ class CompanyRegisterForm(forms.Form, UserCreationForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError('Passwords must match')
         return password2
-
 

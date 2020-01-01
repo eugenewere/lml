@@ -3,14 +3,23 @@ from channels.generic.websocket import AsyncWebsocketConsumer, WebsocketConsumer
 import json
 from asgiref.sync import async_to_sync
 from lmlappadmin.models import *
+from django.db.models import Q
 
 
 class ChatConsumer(WebsocketConsumer):
 
 
     def fetch_messages(self, data):
+        s1 = json.dumps(data)
+        data = json.loads(s1)
+        d = data['text']
+        e = json.loads(d)
+        suser = User.objects.filter(username__exact=e['sender']).first()
+        ruser = User.objects.filter(username__exact=e['receiver']).first()
 
-        messages= Message.objects.order_by('-created_at')
+        # messages = Message.objects.filter(sender__username=e['sender']).filter(reciever__username=e['receiver'])
+        messages = Message.objects.filter(Q(sender=suser) | Q(sender=ruser)).order_by('created_at')
+        # messages = Message.objects.order_by('created_at')
         content={
             'command':'messages',
             'messages':self.messages_to_json(messages)
@@ -24,12 +33,17 @@ class ChatConsumer(WebsocketConsumer):
         return results
 
     def message_to_json(self, message):
-        comany = Company.objects.filter(user_ptr_id=message.author.id).first()
+        suser = User.objects.filter(id=message.sender.id).first()
+        ruser = User.objects.filter(id=message.reciever.id).first()
+        company = Company.objects.filter(user_ptr_id=suser.id).first()
+        reciever = Customer.objects.filter(user_ptr_id=ruser.id).first()
         return {
-            'author': message.author.username,
+            'sender': message.sender.id,
+            'reciever': message.reciever.id,
             'message': message.msg_content,
             'created_at': str(message.created_at),
-            'aImage': comany.logo.url,
+            'sImage': 'tttttttttttt',
+            'rImage': 'tttttttttttt',
         }
 
     def send_message(self, message):
@@ -42,14 +56,16 @@ class ChatConsumer(WebsocketConsumer):
         d = data['text']
         e = json.loads(d)
 
-        sender = e['from']
+        sender = e['sender']
+        receiver = e['receiver']
         message_content = e['message']
 
         sender_user = User.objects.filter(username=sender).first()
+        receiver_user = User.objects.filter(username=receiver).first()
         message = Message.objects.create(
-            author=sender_user,
+            sender=sender_user,
+            reciever=receiver_user,
             msg_content=message_content,
-
         )
         content ={
             'command':'new_messages',
@@ -99,11 +115,6 @@ class ChatConsumer(WebsocketConsumer):
             self.room_group_name,
             self.channel_name
         )
-
-
-
-
-
     # Receive message from WebSocket
     def websocket_receive(self, text_data):
 
@@ -119,7 +130,119 @@ class ChatConsumer(WebsocketConsumer):
 
 
 
+class ChatConsumerCustomer(WebsocketConsumer):
 
+    def fetch_messages(self, data):
+        s1 = json.dumps(data)
+        data = json.loads(s1)
+        d = data['text']
+        e = json.loads(d)
+        suser = User.objects.filter(username__exact=e['sender']).first()
+        ruser = User.objects.filter(username__exact=e['receiver']).first()
+
+        # messages = Message.objects.filter(sender__username=e['sender']).filter(reciever__username=e['receiver'])
+        messages =  Message.objects.filter(Q(sender=suser) | Q(sender=ruser)).order_by('created_at')
+        # messages = Message.objects.order_by('created_at')
+        # print(messages)
+
+        content = {
+            'command': 'messages',
+            'messages': self.messages_to_json(messages)
+        }
+        self.send_message(content)
+
+    def messages_to_json(self, messages):
+        results = []
+        for message in messages:
+            results.append(self.message_to_json(message))
+        return results
+
+    def message_to_json(self, message):
+        company = Company.objects.filter(id=message.sender.id).first()
+        reciever = Customer.objects.filter(id=message.reciever.id).first()
+        return {
+            'sender': message.sender.id,
+            'reciever': message.reciever.id,
+            'message': message.msg_content,
+            'created_at': str(message.created_at),
+            'sImage':'tttttttttttt',
+            'rImage': 'tttttttttttt',
+        }
+
+    def send_message(self, message):
+        self.send(text_data=json.dumps(message))
+
+    def new_messages(self, data):
+        s1 = json.dumps(data)
+        data = json.loads(s1)
+        d = data['text']
+        e = json.loads(d)
+
+        sender = e['sender']
+        receiver = e['receiver']
+        message_content = e['message']
+
+        sender_user = User.objects.filter(username=sender).first()
+        receiver_user = User.objects.filter(username=receiver).first()
+        message = Message.objects.create(
+            sender=sender_user,
+            reciever=receiver_user,
+            msg_content=message_content,
+        )
+        content = {
+            'command': 'new_messages',
+            'message': self.message_to_json(message)
+        }
+        return self.send_chat_message(content)
+
+    def send_chat_message(self, message):
+        # Send message to room group
+        async_to_sync(self.channel_layer.group_send)(
+            self.room_group_name,
+            {
+                'type': 'chat_message',
+                'message': message
+            }
+        )
+
+        # Receive message from room group
+
+    def chat_message(self, event):
+        message = event['message']
+        # Send message to WebSocket
+        self.send(text_data=json.dumps(message))
+
+    commands = {
+        'fetch_messages': fetch_messages,
+        'new_messages': new_messages,
+    }
+
+    def connect(self):
+        self.room_name = self.scope['url_route']['kwargs']['room_name']
+        self.room_group_name = 'chat_%s' % self.room_name
+
+        # Join room group
+        async_to_sync(self.channel_layer.group_add)(
+            self.room_group_name,
+            self.channel_name
+        )
+        self.accept()
+
+    def disconnect(self, close_code):
+        # Leave room group
+        async_to_sync(self.channel_layer.group_discard)(
+            self.room_group_name,
+            self.channel_name
+        )
+
+    # Receive message from WebSocket
+    def websocket_receive(self, text_data):
+        s1 = json.dumps(text_data)
+        data = json.loads(s1)
+        d = data['text']
+        e = json.loads(d)
+
+        self.commands[e['command']](self, data)
 
 
 

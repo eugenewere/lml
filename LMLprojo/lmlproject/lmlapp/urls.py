@@ -2,6 +2,7 @@ from django.conf.urls import url
 from django.urls import path, re_path
 
 from . import views
+# from .views import EmployerCustomerShortlist
 
 app_name = 'LML'
 urlpatterns = [
@@ -10,7 +11,8 @@ urlpatterns = [
     # path('li/<str:room_name>/', views.room, name='room'),
     # re_path(r'^(?P<room_name>[^/]+)/$', views.room, name='room'),
     # re_path(r"^employerdash_message/(?P<username>[\w.@+-]+)/$", views.employer_dash_message),
-
+    path('employeeShortlistGraph/', views.EmployerCustomerShortlist, name='employee_shortlist_graph'),
+    path('employeeShortlistGraphtemplate/', views.EmployerCustomerShortlistTemplate, name='employee_shortlist_graph_template'),
 
     path('signup/', views.signup_initial, name="signup_initial"),
     path('signupcompany/', views.signup_company_initial, name="signup_company_initial"),
@@ -21,11 +23,16 @@ urlpatterns = [
 
     path('personelsignup/', views.signup, name="signup"),
     path('companysignup/', views.companysignup, name="companysignup"),
-    path('companysignup/formhandling/', views.company_signupform_handling, name="company_signup_formhandling"),
+    # path('companysignup/formhandling/', views.company_signupform_handling, name="company_signup_formhandling"),
 
     path('signin/', views.signin, name="signin"),
 
     path('employeeprofile/', views.employeeprofile, name="employeeprofile"),
+    path('updateemployeepersonaldetails', views.employee_personal_details_update, name='employee_personal_details_update'),
+    path('updateemployeeskills', views.employee_skills_update, name='employee_skills_update'),
+    path('updateemployeeskillsupdate', views.employee_skills_detail_update, name='employee_skills_detail_update'),
+    path('updateemployeexperiencesupdate', views.employee_experience_detail_update, name='employee_experience_detail_update'),
+    path('updateemployeexperiencesdelete', views.employee_experience_detail_delete, name='employee_experience_detail_delete'),
     path('employeedetails/', views.employeedetails, name="employeedetails"),
     path('advancesearch/', views.advancesearch, name="advancesearch"),
 
@@ -43,6 +50,7 @@ urlpatterns = [
 
     path('companycontactus/',views.company_contact_us, name='company_contact_us'),
     path('homecontactus/<str:source>',views.home_contact_us, name='home_contact_us'),
+    path('customercontactus/', views.customer_contact_us, name='customer_contact_us'),
 
     path('payment/',views.payment, name='payment'),
     path('companypayment/',views.companypayment, name='companypayment'),
@@ -59,12 +67,18 @@ urlpatterns = [
     path('premiumemployeedetails/<int:customer_id>', views.premium_employee_details, name='premium_employee_detail'),
 
     path('shortlist/', views.shortlistcustomers, name='shortlistemployees'),
+    path('unshortlist/', views.unshortlistcustomers, name='unshortlistemployees'),
     path('categories/', views.categories, name='viewcategories'),
 
     path('dumb/', views.dumb, name='dumb'),
 
     path('sendmessages/', views.messages, name='messages'),
     path('fetchmessages/<int:customer_id>', views.fetch_data_messages, name='fetch_data_messages'),
+
+
+    path('reviewshortlistedcustomer', views.review_shortlisted_customer, name='review_shortlisted_customer'),
+
+
 
 
 

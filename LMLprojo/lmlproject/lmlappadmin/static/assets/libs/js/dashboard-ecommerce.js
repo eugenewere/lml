@@ -126,67 +126,60 @@
     // ============================================================== 
     // Revenue Cards
     // ============================================================== 
-    $("#sparkline-revenue").sparkline([5, 5, 7, 7, 9, 5, 3, 5, 2, 4, 6, 7], {
-        type: 'line',
-        width: '99.5%',
-        height: '100',
-        lineColor: '#06d15b',
-        fillColor: '#dbdeff',
-        lineWidth: 2,
-        spotColor: undefined,
-        minSpotColor: undefined,
-        maxSpotColor: undefined,
-        highlightSpotColor: undefined,
-        highlightLineColor: undefined,
-        resize: true
-    });
+    // $("#sparkline-revenue").sparkline([5, 5, 7, 7, 9, 5, 3, 5, 2, 4, 6, 7], {
+    //     type: 'line',
+    //     width: '99.5%',
+    //     height: '100',
+    //     lineColor: '#06d15b',
+    //     fillColor: '#dbdeff',
+    //     lineWidth: 2,
+    //     spotColor: undefined,
+    //     minSpotColor: undefined,
+    //     maxSpotColor: undefined,
+    //     highlightSpotColor: undefined,
+    //     highlightLineColor: undefined,
+    //     resize: true
+    // });
 
 
 
-    $("#sparkline-revenue2").sparkline([3, 7, 6, 4, 5, 4, 3, 5, 5, 2, 3, 1], {
-        type: 'line',
-        width: '99.5%',
-        height: '100',
-        lineColor: '#ff407b',
-        fillColor: '#ffdbe6',
-        lineWidth: 2,
-        spotColor: undefined,
-        minSpotColor: undefined,
-        maxSpotColor: undefined,
-        highlightSpotColor: undefined,
-        highlightLineColor: undefined,
-        resize: true,
-        xAxis: {
-                labels: {
-                    enabled: true
-                },
-                title: {
-                    text: 'month'
-                },
-                startOnTick: true,
-                endOnTick: true,
-                tickPositions: []
+        var endpoint = '/lmladmin/customer_graph/';
+        var defaultData =  [];
+        var labels = [];
+        $.ajax({
+            method: "GET",
+            url : endpoint,
+            success : function (data) {
+                labels = data.labels2;
+                defaultData= data.defaultData2;
+                setCustomerSpikeLine();
+                setCustomerBarGraph(data);
             },
-            yAxis: {
-                endOnTick: true,
-                startOnTick: true,
-                labels: {
-                    enabled: true
-                },
-                title: {
-                    text: true
-                },
-                tickPositions: [0]
+            error : function (error_data) {
+                console.log(error);
+                console.log(error_data);
             },
-            legend: {
-                enabled: true
-            },
-            tooltip: {
-                hideDelay: 0,
-                outside: true,
-                shared: true
-            },
-    });
+        });
+        function setCustomerSpikeLine(){
+         $("#sparkline-revenue").sparkline(defaultData, {
+            type: 'line',
+            labels:labels,
+            width: '99.5%',
+            height: '100',
+            lineColor: '#dbdeff',
+            fillColor: '#06D15B',
+            lineWidth: 2,
+            spotColor: undefined,
+            minSpotColor: undefined,
+            maxSpotColor: undefined,
+            highlightSpotColor: undefined,
+            highlightLineColor: undefined,
+            resize: true
+
+        });
+
+        }
+
 
 
 
@@ -207,20 +200,7 @@
 
 
 
-    $("#sparkline-revenue4").sparkline([6, 5, 3, 4, 2, 5, 3, 8, 6, 4, 5, 1], {
-        type: 'line',
-        width: '99.5%',
-        height: '100',
-        lineColor: '#fec957',
-        fillColor: '#fff2d5',
-        lineWidth: 2,
-        spotColor: undefined,
-        minSpotColor: undefined,
-        maxSpotColor: undefined,
-        highlightSpotColor: undefined,
-        highlightLineColor: undefined,
-        resize: true,
-    });
+
 
 
 
@@ -266,7 +246,7 @@
                 ['Apperal', 20],
 
             ],
-            type: 'donut',
+            type: 'bar',
 
             onclick: function(d, i) { console.log("onclick", d, i); },
             onmouseover: function(d, i) { console.log("onmouseover", d, i); },

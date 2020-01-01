@@ -21,7 +21,7 @@
 
                     <!-- Payment Detail -->
                     <div class="col-md-6 col-sm-6">
-                        <div class="sidebar-wrapper">
+                        <div class="sidebar-wrapper" style="margin-bottom: 20px; height: 520px;">
 
                         <div class="sidebar-box-header bb-1">
                             <h4>Account Number</h4>
@@ -34,7 +34,7 @@
                                         <h4>Use this as your account payment:</h4>
                                     </div>
                                     <div class="pr-price">
-                                        <h3 style="font-size: 3.4em;"><sup>Account Number.</sup>{{regno.company_reg_no}}</h3>
+                                        <h3 style="font-size: 3.1em;"><sup>Account Number.</sup>{{regno.company_reg_no}}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                     </div>
                     <!-- Billing Address -->
                     <div class="col-md-6 col-sm-6">
-                        <div class="sidebar-wrapper">
+                        <div class="sidebar-wrapper" style="margin-bottom: 20px; height: 520px;">
 
                         <div class="sidebar-box-header bb-1">
                             <h4>Payment Information</h4>
@@ -62,6 +62,10 @@
                         <form class="billing-form">
                             <div style="width: 100%; height: 205px;">
                                 <img style="width: 100%; height: 100%" src="{% static 'assets/img/MPESA-Logo.png' %}" alt="">
+                            </div>
+                            <div class="row w-100 text-center py-2">
+                                <small style="text-decoration: underline" class="text-capitalize text-muted ">
+                                    Please enter the payment details you received to validate payment</small>
                             </div>
                             <div class="row">
                                 <div class="col-xs-12">
