@@ -186,7 +186,7 @@
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input onclick="closeDisability()" type="radio" class="disability_choice custom-control-input"
-                                               id="no customRadio2" name="disability_status" value="NOT_DISABLED">
+                                               id="customRadio2" name="disability_status" value="NOT_DISABLED">
                                         <label class="custom-control-label" for="customRadio2">No</label>
                                     </div>
                                 </div>
@@ -373,12 +373,12 @@
                                                     <input name="graduation_date" type="date" class="form-control edu-start">
                                                 </div>
                                             </div>
-                                             <div style=" display:none; padding: 0; margin-top: 10px; " class="reg_no col-md-12 col-sm-12">
-                                             <div class="input-group">
-                                            <span class="input-group-addon">Registration number</span>
-                                            <input name="reg_number" type="text" class="form-control regno">
-                                        </div>
-                                         </div>
+                                            <div style=" display:none; padding: 0; margin-top: 10px; " class="reg_no col-md-12 col-sm-12">
+                                                 <div class="input-group">
+                                                    <span class="input-group-addon">Registration number</span>
+                                                    <input name="reg_number" type="text" class="form-control regno">
+                                                 </div>
+                                             </div>
 
                                     </div>
                                 </div>
@@ -666,13 +666,17 @@
                         }
                         else {
                             $('#error_div').html(response);
-                            swal.fire({
-                                title: "Error!",
-                                text: "Form Is Invalid. Please fix the above errors",
-                                type: "error",
-                                confirmButtonText: "Retry"
-                            });
                             $('html, body').animate({ scrollTop: 0 }, 'slow');
+                            setTimeout(function () {
+                                swal.fire({
+                                    title: "Error!",
+                                    text: "Form Is Invalid. Please fix the above errors",
+                                    type: "error",
+                                    confirmButtonText: "Retry"
+                                });
+                            },2000);
+
+
                         }
 
                     },

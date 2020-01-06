@@ -408,13 +408,17 @@
                         }
                         else {
                             $('#error_div').html(response);
-                            swal.fire({
-                                title: "Error!",
-                                text: "Form Is Invalid. Correct the errors above",
-                                type: "error",
-                                confirmButtonText: "Retry"
-                            });
                             $('html, body').animate({ scrollTop: 0 }, 'slow');
+                            setTimeout(function () {
+                                swal.fire({
+                                    title: "Error!",
+                                    text: "Form Is Invalid. Correct the errors above",
+                                    type: "error",
+                                    confirmButtonText: "Retry"
+                                });
+                            }, 2000);
+
+
 
                         }
 

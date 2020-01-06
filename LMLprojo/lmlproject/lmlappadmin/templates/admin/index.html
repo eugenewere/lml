@@ -78,7 +78,7 @@
                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="text-muted">Messages</h5>
+                                    <h5 class="text-muted">Random Messages</h5>
                                     <div class="metric-value d-inline-block">
                                         <h1 class="mb-1">{{random_messages}}</h1>
                                     </div>
@@ -153,7 +153,7 @@
                                         <h1 class="mb-1">{{commpany_messages_count}}</h1>
                                     </div>
                                     <div class="metric-label d-inline-block float-right text-success font-weight-bold">
-                                        <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1">Weekly</span>
+{#                                        <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1">Weekly</span>#}
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                                         <h1 class="mb-1">{{customer_messages_count}}</h1>
                                     </div>
                                     <div class="metric-label d-inline-block float-right text-danger font-weight-bold">
-                                        <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span class="ml-1">Weekly</span>
+{#                                        <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span class="ml-1">Weekly</span>#}
                                     </div>
                                 </div>
                             </div>
@@ -192,7 +192,7 @@
                             <div class="card">
                                 <h5 class="card-header">Recent Companies</h5>
                                 <div class="card-body p-0">
-                                    <div class="table-responsive">
+                                    <div class="table-responsive" style="padding: 10px;">
                                         <table class="table" id="table1" >
                                             <thead class="bg-light">
                                                 <tr class="border-0">
@@ -263,7 +263,7 @@
                             <div class="card">
                                 <h5 class="card-header">Recent Employees</h5>
                                 <div class="card-body p-0">
-                                    <div class="table-responsive">
+                                    <div class="table-responsive" style="padding: 10px;">
                                         <table class="table">
                                             <thead class="bg-light">
                                                 <tr class="border-0">
@@ -366,6 +366,8 @@
                                 <div class="card-body">
                                     <canvas id="c3chart_category2" style="height: 420px;"></canvas>
                                 </div>
+                                <div class="card-footer">
+                                </div>
                             </div>
                         </div>
 
@@ -376,7 +378,6 @@
                                     <canvas id="morris_totalrevenue23" style="height: 420px;"></canvas>
                                 </div>
                                 <div class="card-footer">
-                                    <p class="display-7 font-weight-bold"><span class="text-primary d-inline-block">$26,000</span><span class="text-success float-right">+9.45%</span></p>
                                 </div>
                             </div>
                         </div>

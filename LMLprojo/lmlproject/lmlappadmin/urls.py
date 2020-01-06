@@ -38,4 +38,7 @@ urlpatterns = [
     path('customer_graph/', views.customer_graph, name='customer_graph'),
     path('company_graph/', views.company_graph, name='company_graph'),
     path('messages_graph/', views.messages_graph, name='messages_graph'),
+
+    # emails
+    path('replytorandommessagesviaemail/<str:source>', views.reply_to_random_messages_via_email, name='reply_to_random_messages_via_email'),
 ]

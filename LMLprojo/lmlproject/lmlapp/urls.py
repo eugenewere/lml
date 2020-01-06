@@ -32,7 +32,9 @@ urlpatterns = [
     path('updateemployeeskills', views.employee_skills_update, name='employee_skills_update'),
     path('updateemployeeskillsupdate', views.employee_skills_detail_update, name='employee_skills_detail_update'),
     path('updateemployeexperiencesupdate', views.employee_experience_detail_update, name='employee_experience_detail_update'),
+    path('updateemployeeducationsupdate', views.employee_education_detail_update, name='employee_education_detail_update'),
     path('updateemployeexperiencesdelete', views.employee_experience_detail_delete, name='employee_experience_detail_delete'),
+    path('updateemployeeducationsdelete', views.employee_education_detail_delete, name='employee_education_detail_delete'),
     path('employeedetails/', views.employeedetails, name="employeedetails"),
     path('advancesearch/', views.advancesearch, name="advancesearch"),
 
@@ -78,6 +80,9 @@ urlpatterns = [
 
     path('reviewshortlistedcustomer', views.review_shortlisted_customer, name='review_shortlisted_customer'),
 
+
+    # pdf
+    path('customer/resume/<int:customer_id>', views.generate_PDF, name='customer_resume_pdf'),
 
 
 

@@ -1,13 +1,17 @@
 
-var disability = document.getElementsByClassName('des')[0];
     function openDisability() {
+    var disability = document.getElementsByClassName('des')[0];
 
         disability.style.display="block";
         disability.setAttribute('required','required');
     }
     function closeDisability() {
+     var disability = document.getElementsByClassName('des')[0];
         disability.style.display="none";
-        disability.removeAttribute('required');
+        if (disability.hasAttribute('required')){
+            disability.removeAttribute('required');
+        }
+
     }
 
 
@@ -117,16 +121,16 @@ function showEducation(data) {
 
 function readURL(input) {
 
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-         var disclaimer= document.getElementById("disclaimer");
-            reader.onload = function (element) {
-                $('.blah').attr('src', element.target.result).css('visibility', 'visible');
-                disclaimer.style.visibility = "hidden";
-            };
-            reader.readAsDataURL(input.files[0]);
-            }
+if (input.files && input.files[0]) {
+    var reader = new FileReader();
+     var disclaimer= document.getElementById("disclaimer");
+        reader.onload = function (element) {
+            $('.blah').attr('src', element.target.result).css('visibility', 'visible');
+            disclaimer.style.visibility = "hidden";
+        };
+        reader.readAsDataURL(input.files[0]);
         }
+    }
 
 
 

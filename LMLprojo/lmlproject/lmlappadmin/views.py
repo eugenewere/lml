@@ -339,3 +339,30 @@ def messages_graph(request):
     }
     return JsonResponse(context2)
 
+
+def reply_to_random_messages_via_email(request, source):
+    sourcez = source.replace('____', '/')
+    if request.method == "POST":
+        body = request.POST['message']
+        subject = request.POST['subject']
+        emails = Newsletter.objects.all()
+
+        # NewsletterMessage.objects.create(
+        #     subject=subject,
+        #     message=body,
+        #     email_count=emails.count()
+        # )
+        #
+        # messages.success(request, 'Messages Saved')
+        # for email in emails:
+        #     email_from = settings.EMAIL_HOST_USER
+        #     recipient_list = [email.email, ]
+        #     send_mail(
+        #         subject=subject,
+        #         message=body,
+        #         from_email=email_from,
+        #         recipient_list=recipient_list
+        #     )
+        # messages.success(request, 'Emails sent')
+        # return redirect('CCSBADMIN:newsLetter')
+    return redirect(sourcez)

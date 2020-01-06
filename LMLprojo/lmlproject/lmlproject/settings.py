@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
 
+
 ]
 
 MIDDLEWARE = [
@@ -160,7 +161,14 @@ sweetify.DEFAULT_OPTS = {
     }
 }
 
-LOGIN_REDIRECT_URL = 'LML:singin'
+LOGIN_REDIRECT_URL = 'LML:home'
 
 # mysite/settings.py
 # Channels
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'Climatechangebasicske@gmail.com'
+EMAIL_HOST_PASSWORD = 'Brandoxvilla7123'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL: False

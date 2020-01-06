@@ -114,7 +114,7 @@
                         <h2 class="side-widget-title">Documents </h2>
                         <div class="widget-text padd-0">
                             <ul>
-                                <li><a href="">
+                                <li><a href="{% url 'LML:customer_resume_pdf' request.user.id %}">
                                     {{ customer.first_name|title }} CV
                                     <span class="pull-right"></span></a>
                                 </li>

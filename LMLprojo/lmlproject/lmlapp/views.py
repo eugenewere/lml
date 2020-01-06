@@ -1,22 +1,15 @@
-import csv
 
-import io
-import requests
-import urllib3
-import json
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404
 from django.shortcuts import render, redirect, HttpResponseRedirect, render_to_response
 import os
 from datetime import datetime
 import sweetify
 
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView
-from rest_framework.views import APIView
-from rest_framework.response import Response
+
 
 from lmlapp.forms import *
 
@@ -34,6 +27,9 @@ import json
 # sweetify.error(self.request, 'Some error happened here - reload the site', persistent=':(')
 # sweetify.warning(self.request, 'This is a warning... I guess')
 import json
+
+from lmlapp.pdf_util import render_to_pdf
+
 
 def home(request):
     customers = Customer.objects.order_by('-created_at')[:6]
@@ -85,7 +81,7 @@ def signup(request):
             new_user= form.save()
             CustomerRegNo.objects.create(
                 customer=new_user,
-                personel_reg_no=('PERS' + get_random_string(length=7, allowed_chars='ABCDFGHIJKLMNPQRSTUVWXYZ123456789')),
+                personel_reg_no=('PERS' + get_random_string(length=5, allowed_chars='ABCDFGHIJKLMNPQRSTUVWXYZ123456789')),
             )
             Social_account.objects.create(
                 customer=new_user,
@@ -511,27 +507,41 @@ def employee_experience_detail_update(request):
     exp_ids = request.POST.getlist('experience_id')
     employer_names = request.POST.getlist('employer_name')
     company_names = request.POST.getlist('company_name')
-    company_emails = request.POST.getlist('compny_email')
+    company_emails = request.POST.getlist('comapny_email')
     company_phones = request.POST.getlist('company_phone')
     position_helds = request.POST.getlist('position_held')
     date_froms = request.POST.getlist('date_from')
     date_tos = request.POST.getlist('date_to')
     experiences = request.POST.getlist('experience')
     if request.method == 'POST':
-        # print(employer_names,company_names,company_emails,company_phones,position_helds,date_froms,date_tos,experiences)
-        for  employer_name, company_name, company_email, company_phone, position_held, date_from, date_to, experience, exp_id in zip(employer_names, company_names, company_emails, company_phones, position_helds, date_froms, date_tos, experiences, exp_ids):
-            print(exp_ids, employer_name)
-            Experience.objects.filter(id=int(exp_id)).update(
-                customer_id=customer.id,
-                employer_name=employer_name,
-                company_name=company_name,
-                comapny_email=company_email,
-                company_phone=company_phone,
-                position_held=position_held,
-                date_from=date_from,
-                date_to=date_to,
-                experience=experience,
-            )
+        # print(employer_names,company_names,company_emails,company_phones,position_helds,date_froms,date_tos,experiences, exp_ids)
+        for employer_name, company_name, company_email, company_phone, position_held, date_from, date_to, experience, exp_id in\
+            zip(employer_names, company_names, company_emails, company_phones, position_helds, date_froms, date_tos, experiences, exp_ids):
+            # print(exp_ids, employer_name)
+            if Experience.objects.filter(id=int(exp_id)).exists() or exp_id is not None:
+                Experience.objects.filter(id=int(exp_id)).update(
+                    customer_id=customer.id,
+                    employer_name=employer_name,
+                    company_name=company_name,
+                    comapny_email=company_email,
+                    company_phone=company_phone,
+                    position_held=position_held,
+                    date_from=date_from,
+                    date_to=date_to,
+                    experience=experience,
+                )
+            else:
+                Experience.objects.create(
+                    customer_id=customer.id,
+                    employer_name=employer_name,
+                    company_name=company_name,
+                    comapny_email=company_email,
+                    company_phone=company_phone,
+                    position_held=position_held,
+                    date_from=date_from,
+                    date_to=date_to,
+                    experience=experience,
+                )
 
         sweetify.success(request, title='Success', text='Experiences Updated Successfully.', persistent='Continue')
         return redirect('LML:employeeprofile')
@@ -562,7 +572,28 @@ def employee_experience_detail_delete(request):
     }
     return JsonResponse(data, safe=False)
 
+def employee_education_detail_delete(request):
+    if request.method == 'POST' and request.is_ajax():
+        education_id =  request.POST['education_id']
+        education = Education.objects.filter(id=int(education_id)).first()
+        print(education)
+        if education:
+            # education.delete()
+            data = {
+                'results': 'success',
+                'success': 'Education deleted'
+            }
+            return JsonResponse(data, safe=False)
+        else:
+            data = {
+                'results': 'error',
+                'success': 'Error deleting Education'
+            }
+            return JsonResponse(data, safe=False)
+    data = {
 
+    }
+    return JsonResponse(data, safe=False)
 def employeedetails(request):
     user=request.user.id
     customer = Customer.objects.filter(user_ptr_id= user).first()
@@ -1077,7 +1108,7 @@ def fetch_data_messages(request, customer_id):
 
 
 
-
+login_required()
 def EmployerCustomerShortlist(request):
     user=request.user.id
     company =  Company.objects.filter(user_ptr_id=user).first()
@@ -1132,3 +1163,51 @@ def review_shortlisted_customer(request):
         return redirect('LML:employer_dash')
 
     return
+
+
+def generate_PDF(request, customer_id):
+
+   employee = Customer.objects.filter(id=int(customer_id)).first()
+   experiences = Experience.objects.filter(customer=employee)
+   educations = Education.objects.filter(customer=employee)
+   skills = Skills.objects.filter(customer=employee)
+   social = Social_account.objects.filter(customer=employee).first()
+   download = request.GET.get("download")
+
+   filename = "Invoice_%s.pdf" % ("12341231")
+   if download:
+       content = "attachment; filename='%s'" % (filename)
+
+   context = {
+     'employee':employee,
+     'experiences':experiences,
+     'educations':educations,
+     'skills':skills,
+     'social':social,
+   }
+   return render(request, 'normal/Pdf_resume/employee_resume.html', context)
+
+
+def employee_education_detail_update(request):
+    education_ids = request.POST.getlist('education_id')
+
+    schools = request.POST.getlist('school')
+    courses = request.POST.getlist('course')
+    graduation_dates = request.POST.getlist('graduation_date')
+    regnos = request.POST.getlist('reg_number')
+
+    if request.method == 'POST':
+        customer = Customer.objects.filter(user_ptr_id=request.user.id).first()
+        for education_id, school, course, graduation_date, regno in zip(education_ids, schools, courses, graduation_dates, regnos):
+            Education.objects.filter(id=int(education_id)).update(
+                customer=customer,
+                school=school,
+                course=course,
+                graduation_date=graduation_date,
+                reg_number=regno,
+            )
+        sweetify.success(request, title='Success', text='Education Updated Successfully.', persistent='Continue')
+        return redirect('LML:employeeprofile')
+    else:
+        sweetify.error(request, 'Error', text='Eeducation Not Updated', persistent='Retry')
+        return redirect('LML:employeeprofile')

@@ -85,7 +85,7 @@ class Customer(get_user_model()):
     landmark = models.CharField(max_length=100,null=True, blank=True)
     huduma_no = models.CharField(max_length=100,null=True, blank=True)
     job_type = models.CharField(max_length=200, null=False, blank=False)
-    disability = models.TextField(null=True)
+    disability = models.TextField(null=True, blank=True)
 
     marital_status = models.CharField(max_length=100,null=True, blank=True)
     # driver_licence = models.CharField(max_length=100,null=True, blank=True)
@@ -110,7 +110,7 @@ class Customer(get_user_model()):
         ('DISABLED','Disabled'),
         ('NOT_DISABLED','Not_Disabled')
     ]
-    disability_status =models.CharField(choices=DISABILITY_STATUS, default='NOT_DISABLED', max_length=200, null=False, blank=False)
+    disability_status =models.CharField(choices=DISABILITY_STATUS, default='NOT_DISABLED', max_length=200, null=True, blank=False)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
