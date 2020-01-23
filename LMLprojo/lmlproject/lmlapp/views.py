@@ -877,15 +877,39 @@ def employer_dash_message(request, room_name):
     company = Company.objects.filter(user_ptr_id=user).first()
     social = CompanySocialAccount.objects.filter(company=company).first()
     customers = CompanyShortlistCustomers.objects.filter(company=company)
+    username_of_user = request.user.first_name + "" + request.user.last_name + " messsages"
     context={
+        'title': username_of_user,
         'company': company,
         'social': social,
         'customers':customers,
         'room_name_json': mark_safe(json.dumps(room_name))
 
     }
-    return render(request, 'normal/dashboard/employeer-message-chat.html', context)
+    return render(request, 'normal/dashboard/employerchatpage.html', context)
 
+def employee_dash_message(request, room_name):
+    user = request.user.id
+    customer = Customer.objects.filter(user_ptr_id=user).first()
+    username_of_user = request.user.first_name + "" + request.user.last_name + " messsages"
+
+    companies_list = []
+    userr = User.objects.filter(id=user).first()
+    companies = Message.objects.filter(reciever=userr)
+    for company in companies:
+        cmpn = Company.objects.filter(user_ptr_id=company.sender.id).first()
+        companies_list.append(cmpn)
+    msg_companies = list(set(companies_list))
+    context = {
+        'title': username_of_user,
+        # 'company': company,
+        # 'social': social,
+        'customer': customer,
+        'msg_comapanies': msg_companies,
+        'room_name_json': mark_safe(json.dumps(room_name))
+
+    }
+    return render(request, 'normal/dashboard/employee-message-chat.html', context)
 
 def employee_dash(request):
     user = request.user.id
@@ -1017,15 +1041,33 @@ def unshortlistcustomers(request):
 
 def all_employees(request):
     if request.method == 'POST':
-        county = request.POST['county']
-        region = request.POST['region']
-        category = request.POST['category']
-        cat = Category.objects.filter(id=int(category)).first()
-        reg =Region.objects.filter(id=int(region)).first()
-        count = County.objects.filter(id=int(county)).first()
-        customers = Customer.objects.filter(category=cat, region=reg, county=count)
-    else:
-        customers = Customer.objects.order_by('?')
+
+        county = request.POST.get('county')
+        region = request.POST.get('region')
+        category = request.POST.get('category')
+
+        if (category is not None) and (region is not None) and (county is not None):
+            cat = Category.objects.filter(id=int(category)).first()
+            reg = Region.objects.filter(id=int(region)).first()
+            count = County.objects.filter(id=int(county)).first()
+            customers = Customer.objects.filter(Q(category_id=cat.id), Q(region_id=reg.id), Q(county_id=count.id))
+        elif (category is not None):
+            cat = Category.objects.filter(id=int(category)).first()
+
+            customers = Customer.objects.filter(Q(category_id=cat.id))
+        elif (region is not None):
+            reg = Region.objects.filter(id=int(region)).first()
+            customers = Customer.objects.filter(Q(region_id=reg.id))
+        elif (county is not None):
+            count = County.objects.filter(id=int(county)).first()
+            customers = Customer.objects.filter(Q(county_id=count.id))
+        else:
+            customers = Customer.objects.order_by('?')
+
+
+
+
+
 
     context = {
         'customers': customers,

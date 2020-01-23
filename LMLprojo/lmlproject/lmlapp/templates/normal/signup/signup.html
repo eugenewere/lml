@@ -3,20 +3,25 @@
 {% block links %}
     <style type="text/css">
         #signuploader {
-          display: none;
-          position: fixed;
+            display: none;
+            position: fixed;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
           width: 100%;
-          background: rgba(0,0,0,0.75) url({% static 'assets/img/avatar/CorruptOldfashionedGuineapig-small.gif' %}) no-repeat center center;
+          background: rgba(0,0,0,0.75) ;
           z-index: 10000;
+
+
+          
         }
     </style>
 {% endblock links %}
 {% block content %}
-    <div id="signuploader"></div>
+    <div id="signuploader">
+        <img style="height: 152px; top: 50%; left: 50%; position: absolute;transform: translate(-50%, -50%);" src="{% static 'assets/img/avatar/CorruptOldfashionedGuineapig-small.gif' %}" alt="">
+    </div>
            <section class="inner-header-title" style="background-image:url({% static 'assets/img/blog/banner-19.jpg' %});">
 				<div class="container">
 					<h1>Sign up</h1>

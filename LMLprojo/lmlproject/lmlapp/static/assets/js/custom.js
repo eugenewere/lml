@@ -58,7 +58,7 @@ All custom js files contents are below
 		  settings: {
 			arrows:false,
 			centerMode: true,
-			slidesToShow:2
+			slidesToShow:1
 		  }
 		},
 		{

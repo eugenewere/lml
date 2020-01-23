@@ -10,13 +10,16 @@
           right: 0;
           bottom: 0;
           width: 100%;
-          background: rgba(0,0,0,0.75) url({% static 'assets/img/avatar/CorruptOldfashionedGuineapig-small.gif' %}) no-repeat center center;
+          background: rgba(0,0,0,0.75) ;
           z-index: 10000;
+
         }
     </style>
 {% endblock links %}
 {% block content %}
-        <div id="signuploader"></div>
+         <div id="signuploader">
+            <img style="height: 152px; top: 50%; left: 50%; position: absolute;transform: translate(-50%, -50%);" src="{% static 'assets/img/avatar/CorruptOldfashionedGuineapig-small.gif' %}" alt="">
+        </div>
            <!-- Header Title Start -->
 {#			<section class="inner-header-title blank" >#}
 {#				<div class="container">#}

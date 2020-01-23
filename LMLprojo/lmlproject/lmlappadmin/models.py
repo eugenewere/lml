@@ -119,6 +119,14 @@ class Customer(get_user_model()):
         verbose_name = 'Customer'
         verbose_name_plural = 'Customers'
 
+
+    @property
+    def customer_linkedin_social(self):
+        social = Social_account.objects.filter(customer=self).first()
+        if social:
+            return social.account_url
+        return False
+
     @property
     def customer_reg_payment_details(self):
         if self.regpayment:
@@ -456,6 +464,7 @@ class Message(models.Model):
      msg_content = models.TextField()
      created_at = models.DateTimeField(auto_now_add=True)
      updated_at = models.DateTimeField(auto_now=True)
+     room = models.IntegerField(null=False, blank=False)
      MESSAGECHOICES = {
          ('READ', 'Read'),
          ('UNREAD', 'Unread'),

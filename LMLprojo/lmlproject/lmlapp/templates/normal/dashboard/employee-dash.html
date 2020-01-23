@@ -110,6 +110,18 @@
                             </ul>
                         </div>
                    </div>
+                   <div class="side-widget">
+                        <h2 class="side-widget-title">Messages <span style="margin-left: auto;" class="badge badge-danger badge-pill">0</span></h2>
+                        <div class="widget-text padd-0">
+                            <ul>
+                                <li><a href="{% url 'LML:employee_dash_message' request.user.username %}">
+                                    Messages
+                                    <span class="pull-right">0</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                   </div>
+
                     <div class="side-widget">
                         <h2 class="side-widget-title">Documents </h2>
                         <div class="widget-text padd-0">
@@ -236,109 +248,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <script>
-                                            //var roomName = {{ room_name_json }};
-                                            var username = "{{ request.user.username }}";
-                                            var username_id = "{{ request.user.id }}";
-                                            var company = "{{ company.username }}" + "/";
-                                            var endpoint, wsStart, loc;
-                                           // var startChatButton =  document.querySelector('#kew');
 
-                                            loc = window.location;
-                                            wsStart ='ws://';
-                                            if(loc.protocol === 'https:'){
-                                                wsStart = 'wss://';
-                                            }
-                                            else{
-                                                wsStart = 'ws://';
-                                            }
-
-                                            endpoint = wsStart + loc.host + loc.pathname + company ;
-                                            console.log(endpoint);
-                                            var chatSocket = new ReconnectingWebSocket(endpoint);
-
-                                            //document.querySelector('#chat-message-input{{ company.id }}').focus();
-
-
-                                            document.querySelector('#chat-message-submit{{ company.id }}').onclick = function (e) {
-                                                e.preventDefault();
-
-                                                var messageInputDom = document.querySelector('#chat-message-input{{ company.id }}');
-                                                var author = document.querySelector('#sender{{ company.id }}');
-                                                var receive = document.querySelector('#receiver{{ company.id }}');
-
-                                                var message = messageInputDom.value;
-                                                var sender = author.value;
-                                                var receiver = receive.value;
-
-                                                chatSocket.send(JSON.stringify({
-                                                    'command': 'new_messages',
-                                                    'message': message,
-                                                    'receiver': receiver,
-                                                    'sender': sender,
-
-                                                }));
-                                                messageInputDom.value = '';
-                                            };
-
-
-                                            chatSocket.onmessage = function (e) {
-                                                //var data = JSON.parse(e.data);
-                                                var data = JSON.parse(e.data);
-
-                                                if (data['command'] === 'messages') {
-                                                    for (let i = 0; i < data['messages'].length; i++) {
-                                                        createMessage(data['messages'][i]);
-                                                        console.log(data['messages'][i])
-                                                    }
-                                                } else if (data['command'] === 'new_messages') {
-                                                    createMessage(data['message']);
-                                                }
-
-                                            };
-
-                                            function createMessage(data){
-
-                                                var message = data['message'];
-                                                var author = data['sender'];
-                                                var msgList = document.createElement('li');
-                                                var imgTag = document.createElement('img');
-                                                var pTag = document.createElement('p');
-
-                                                pTag.textContent = message;
-                                                imgTag.src = data['aImage'];
-
-
-                                                if (author === Number(username_id)) {
-                                                    msgList.classList.add("sent");
-                                                } else {
-                                                    msgList.classList.add("replies");
-                                                }
-
-                                                msgList.appendChild(imgTag);
-                                                msgList.appendChild(pTag);
-                                                document.querySelector('#chat-log{{ company.id }}').appendChild(msgList);
-
-
-                                            }
-
-                                            chatSocket.onclose = function (e) {
-                                                console.error('Chat socket closed unexpectedly');
-                                            };
-
-                                            chatSocket.onopen = function (e) {
-                                                fetchMessages();
-                                            };
-
-                                            function fetchMessages() {
-                                                chatSocket.send(JSON.stringify(({
-                                                    "command" : "fetch_messages",
-                                                    "sender" : "{{request.user.username}}",
-                                                    "receiver" : "{{ company.username }}",
-                                                })));
-                                            }
-
-                                    </script>
                                     {% endfor %}
                                 </div>
                             </div>

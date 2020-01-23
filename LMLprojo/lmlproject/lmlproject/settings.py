@@ -88,11 +88,12 @@ CHANNEL_LAYERS = {
          # "BACKEND": "asgi_redis.RedisChannelLayer",
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-            # "hosts": [('localhost', 6379)],
+            # "hosts": [('127.0.0.1', 6379)],
+            "hosts": [('localhost', 6379)],
         },
     },
-}
+    },
+
 ASGI_APPLICATION = 'lmlproject.routing.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
