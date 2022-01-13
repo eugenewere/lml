@@ -46,7 +46,7 @@ MarkupSafe==1.1.1
 mccabe==0.6.1
 msg==0.7.8
 oauthlib==3.1.0
-Pillow==6.2.0
+Pillow==9.0.0
 pycparser==2.19
 PyHamcrest==1.9.0
 pylint==2.3.1
